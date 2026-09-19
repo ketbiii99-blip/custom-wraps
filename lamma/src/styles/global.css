@@ -1080,6 +1080,18 @@ textarea.field { min-height: 110px; resize: vertical; line-height: 1.7; }
   .board-wrap { height: auto; overflow: visible; }
   .board-col { grid-template-rows: none; }
   .tile { min-height: 56px; }
+
+  /* النتيجة والدور يظلّون ثابتين تحت وأنت تمرّر اللوحة */
+  .board-wrap .team-bar {
+    position: sticky;
+    inset-block-end: 0;
+    z-index: 12;
+    padding: 10px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(to top, rgba(23, 11, 7, 0.97) 60%, rgba(23, 11, 7, 0));
+  }
+  .board-wrap .team-card.compact { padding: 10px 14px; }
+  .board-wrap .team-card.compact .team-score { font-size: 2rem; }
+  .board-wrap .team-card.compact .team-players { display: none; }
 }
 
 @media (max-width: 560px) {
@@ -1091,6 +1103,19 @@ textarea.field { min-height: 110px; resize: vertical; line-height: 1.7; }
 /* شاشات التلفزيون الكبيرة */
 @media (min-width: 1900px) {
   .screen { width: min(1900px, 100%); }
+}
+
+/* احترام حواف الآيفون (النوتش وشريط الإيماءات) */
+@supports (padding: env(safe-area-inset-top)) {
+  .screen {
+    padding-block-start: calc(clamp(16px, 2.4vw, 40px) + env(safe-area-inset-top));
+    padding-block-end: calc(clamp(16px, 2.4vw, 40px) + env(safe-area-inset-bottom));
+    padding-inline: calc(clamp(16px, 2.4vw, 40px) + env(safe-area-inset-left));
+  }
+  .question-screen {
+    padding-block-start: calc(clamp(14px, 2vw, 34px) + env(safe-area-inset-top));
+    padding-block-end: calc(clamp(14px, 2vw, 34px) + env(safe-area-inset-bottom));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
