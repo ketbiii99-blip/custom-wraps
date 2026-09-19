@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm --prefix lamma ci && npm --prefix lamma run build",
+  "outputDirectory": "lamma/dist",
+  "installCommand": "echo skip",
+  "framework": null
+}

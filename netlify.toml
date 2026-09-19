@@ -1,0 +1,7 @@
+# إعدادات النشر على Netlify — تنبني اللعبة من مجلد lamma تلقائياً
+[build]
+  command = "npm --prefix lamma ci && npm --prefix lamma run build"
+  publish = "lamma/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
