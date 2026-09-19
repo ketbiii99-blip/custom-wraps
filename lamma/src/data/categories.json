@@ -1,0 +1,15 @@
+[
+  { "id": "memories",       "name": "ذكريات بيت قنون", "description": "مواقف وذكريات ما تنتسى من البيت",        "icon": "🏡" },
+  { "id": "who_is_this",    "name": "منو هذا؟",         "description": "شوف الصورة واعرف الشخصية",              "icon": "🕵️" },
+  { "id": "who_said_it",    "name": "من قالها؟",        "description": "جملة مشهورة… منو صاحبها؟",              "icon": "💬" },
+  { "id": "uae",            "name": "الإمارات",         "description": "بلدنا: تاريخ، مدن، وإنجازات",           "icon": "🇦🇪" },
+  { "id": "general",        "name": "معلومات عامة",     "description": "أسئلة من كل حدب وصوب",                  "icon": "🌍" },
+  { "id": "football",       "name": "كورة",             "description": "أندية، كؤوس، ولاعيبة",                  "icon": "⚽" },
+  { "id": "anime",          "name": "أنمي",             "description": "شخصيات وأعمال يعرفها الصغار والكبار",   "icon": "🎌" },
+  { "id": "khaleeji_tv",    "name": "مسلسلات خليجية",   "description": "دراما وكوميديا من ديرتنا",              "icon": "📺" },
+  { "id": "songs",          "name": "أغاني",            "description": "كلمات وألحان… كمّل السطر",              "icon": "🎵" },
+  { "id": "old_days",       "name": "أيام زمان",        "description": "أشياء ما يعرفها إلا أهل الأول",         "icon": "📻" },
+  { "id": "food",           "name": "أكلاتنا",          "description": "من الهريس للعصيدة",                     "icon": "🍲" },
+  { "id": "riddles",        "name": "ألغاز",            "description": "شغّل مخّك شوي",                         "icon": "💡" },
+  { "id": "guess_image",    "name": "خمّن الصورة",      "description": "صورة مقرّبة… وش تكون؟",                 "icon": "🖼️" }
+]

@@ -1,0 +1,821 @@
+[
+  {
+    "id": "memories_200_1",
+    "category": "memories",
+    "points": 200,
+    "type": "text",
+    "question": "وش أول شي تشمّه أول ما تدخل بيت قنون؟",
+    "answer": "ريحة القهوة والعود",
+    "hint": "شي يطلع من الدلة وشي يطلع من المبخرة",
+    "media": null
+  },
+  {
+    "id": "memories_200_2",
+    "category": "memories",
+    "points": 200,
+    "type": "text",
+    "question": "منو دايماً آخر واحد يوصل على سفرة العشا؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "غيّر هالسؤال بأسماء عيلتكم",
+    "media": null
+  },
+  {
+    "id": "memories_400_1",
+    "category": "memories",
+    "points": 400,
+    "type": "text",
+    "question": "في أي غرفة عادةً تنعقد جلسة الورق والدومينو؟",
+    "answer": "المجلس",
+    "hint": "مكان الضيوف",
+    "media": null
+  },
+  {
+    "id": "memories_400_2",
+    "category": "memories",
+    "points": 400,
+    "type": "text",
+    "question": "وش الطبق اللي ما يغيب عن غدا الجمعة في بيت قنون؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "شي يتحط بنص السفرة",
+    "media": null
+  },
+  {
+    "id": "memories_600_1",
+    "category": "memories",
+    "points": 600,
+    "type": "text",
+    "question": "وين كانت آخر رحلة سافرت فيها العيلة كاملة؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "فكّر بالصور اللي بالجوال",
+    "media": null
+  },
+  {
+    "id": "memories_600_2",
+    "category": "memories",
+    "points": 600,
+    "type": "text",
+    "question": "منو أول من يصحى في البيت؟ ووش أول شي يسويه؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "غالباً يشغّل شي في المطبخ",
+    "media": null
+  },
+  {
+    "id": "who_is_this_200_1",
+    "category": "who_is_this",
+    "points": 200,
+    "type": "guess_the_person",
+    "question": "مؤسس دولة الإمارات ويُلقّب بـ«والد الأمة» — منو هذا؟",
+    "answer": "الشيخ زايد بن سلطان آل نهيان، طيّب الله ثراه",
+    "hint": "صورته على العملة",
+    "media": null
+  },
+  {
+    "id": "who_is_this_200_2",
+    "category": "who_is_this",
+    "points": 200,
+    "type": "guess_the_person",
+    "question": "أول رائد فضاء إماراتي وصل لمحطة الفضاء الدولية — منو هذا؟",
+    "answer": "هزاع المنصوري",
+    "hint": "سافر سنة 2019",
+    "media": null
+  },
+  {
+    "id": "who_is_this_400_1",
+    "category": "who_is_this",
+    "points": 400,
+    "type": "guess_the_person",
+    "question": "شوفوا الصورة وخمّنوا الشخصية (ارفع صورة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "ارفع الصورة من لوحة التحكم",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "who_is_this_400_2",
+    "category": "who_is_this",
+    "points": 400,
+    "type": "guess_the_person",
+    "question": "رائد فضاء إماراتي نفّذ أول سير في الفضاء لعربي — منو هذا؟",
+    "answer": "سلطان النيادي",
+    "hint": "لقبه «الطموح»",
+    "media": null
+  },
+  {
+    "id": "who_is_this_600_1",
+    "category": "who_is_this",
+    "points": 600,
+    "type": "guess_the_person",
+    "question": "شخصية من ألبوم العائلة… منو هذا؟ (ارفع صورة قديمة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "صورة قديمة بالأبيض والأسود",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "who_is_this_600_2",
+    "category": "who_is_this",
+    "points": 600,
+    "type": "guess_the_person",
+    "question": "الفنان الكويتي الملقّب بـ«ضاحك الخليج» — منو هذا؟",
+    "answer": "عبدالحسين عبدالرضا، رحمه الله",
+    "hint": "نجم «درب الزلق»",
+    "media": null
+  },
+  {
+    "id": "who_said_it_200_1",
+    "category": "who_said_it",
+    "points": 200,
+    "type": "text",
+    "question": "منو يقول في كل لمّة: «يالله بسرعة قبل لا يبرد الأكل»؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "غالباً صاحب/صاحبة المطبخ",
+    "media": null
+  },
+  {
+    "id": "who_said_it_200_2",
+    "category": "who_said_it",
+    "points": 200,
+    "type": "text",
+    "question": "من قال: «من جدّ وجد ومن زرع حصد»؟",
+    "answer": "مثل عربي مشهور",
+    "hint": "مو شخص… هذا نوع من الكلام المتوارث",
+    "media": null
+  },
+  {
+    "id": "who_said_it_400_1",
+    "category": "who_said_it",
+    "points": 400,
+    "type": "text",
+    "question": "منو أكثر شخص في العيلة يقول «باجر إن شاء الله»؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "ما يخلّص وعوده",
+    "media": null
+  },
+  {
+    "id": "who_said_it_400_2",
+    "category": "who_said_it",
+    "points": 400,
+    "type": "text",
+    "question": "من قال العبارة الشهيرة «الإمارات وطن لا يعرف المستحيل»؟",
+    "answer": "الشيخ زايد بن سلطان آل نهيان، طيّب الله ثراه",
+    "hint": "مؤسس الدولة",
+    "media": null
+  },
+  {
+    "id": "who_said_it_600_1",
+    "category": "who_said_it",
+    "points": 600,
+    "type": "text",
+    "question": "منو صاحب الجملة الشهيرة في البيت: «أنا بس أرتاح خمس دقايق»؟",
+    "answer": "(سؤال عائلي — عدّل الإجابة من /admin)",
+    "hint": "وينام ساعتين",
+    "media": null
+  },
+  {
+    "id": "who_said_it_600_2",
+    "category": "who_said_it",
+    "points": 600,
+    "type": "audio",
+    "question": "استمعوا للمقطع… منو قالها؟ (أضف رابط صوت من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "سجّل مقطع صوتي من اللمّة",
+    "media": {
+      "audio": null
+    }
+  },
+  {
+    "id": "uae_200_1",
+    "category": "uae",
+    "points": 200,
+    "type": "text",
+    "question": "ما هي عاصمة دولة الإمارات العربية المتحدة؟",
+    "answer": "أبوظبي",
+    "hint": "تقع على جزيرة",
+    "media": null
+  },
+  {
+    "id": "uae_200_2",
+    "category": "uae",
+    "points": 200,
+    "type": "text",
+    "question": "كم عدد إمارات الدولة؟",
+    "answer": "سبع إمارات",
+    "hint": "أقل من عشرة وأكثر من خمسة",
+    "media": null
+  },
+  {
+    "id": "uae_400_1",
+    "category": "uae",
+    "points": 400,
+    "type": "text",
+    "question": "في أي سنة قام اتحاد دولة الإمارات؟",
+    "answer": "سنة 1971 (الثاني من ديسمبر)",
+    "hint": "نحتفل فيه في عيد الاتحاد",
+    "media": null
+  },
+  {
+    "id": "uae_400_2",
+    "category": "uae",
+    "points": 400,
+    "type": "multiple_choice",
+    "question": "أي إمارة هي الأكبر مساحةً في الدولة؟",
+    "answer": "أبوظبي",
+    "choices": [
+      "دبي",
+      "أبوظبي",
+      "الشارقة",
+      "رأس الخيمة"
+    ],
+    "hint": "نفس إمارة العاصمة",
+    "media": null
+  },
+  {
+    "id": "uae_600_1",
+    "category": "uae",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم المسبار الإماراتي الذي وصل إلى مدار المريخ سنة 2021؟",
+    "answer": "مسبار الأمل",
+    "hint": "اسمه يدل على التفاؤل",
+    "media": null
+  },
+  {
+    "id": "uae_600_2",
+    "category": "uae",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم الجزيرة الشهيرة في أبوظبي التي تضم محمية للحيوانات البرية؟",
+    "answer": "جزيرة صير بني ياس",
+    "hint": "تبدأ بكلمة «صير»",
+    "media": null
+  },
+  {
+    "id": "general_200_1",
+    "category": "general",
+    "points": 200,
+    "type": "text",
+    "question": "كم عدد ألوان قوس قزح؟",
+    "answer": "سبعة ألوان",
+    "hint": "نفس عدد أيام الأسبوع",
+    "media": null
+  },
+  {
+    "id": "general_200_2",
+    "category": "general",
+    "points": 200,
+    "type": "text",
+    "question": "ما هو أكبر محيط في العالم؟",
+    "answer": "المحيط الهادئ",
+    "hint": "اسمه يوحي بالسكون",
+    "media": null
+  },
+  {
+    "id": "general_400_1",
+    "category": "general",
+    "points": 400,
+    "type": "text",
+    "question": "ما العنصر الكيميائي الذي رمزه Fe؟",
+    "answer": "الحديد",
+    "hint": "يُستخدم في البناء",
+    "media": null
+  },
+  {
+    "id": "general_400_2",
+    "category": "general",
+    "points": 400,
+    "type": "text",
+    "question": "ما أكبر كوكب في المجموعة الشمسية؟",
+    "answer": "المشتري",
+    "hint": "فيه بقعة حمراء عملاقة",
+    "media": null
+  },
+  {
+    "id": "general_600_1",
+    "category": "general",
+    "points": 600,
+    "type": "text",
+    "question": "كم عدد عظام جسم الإنسان البالغ؟",
+    "answer": "206 عظمة",
+    "hint": "بين 200 و 210",
+    "media": null
+  },
+  {
+    "id": "general_600_2",
+    "category": "general",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم أعمق نقطة معروفة في المحيطات؟",
+    "answer": "خندق ماريانا",
+    "hint": "في المحيط الهادئ",
+    "media": null
+  },
+  {
+    "id": "football_200_1",
+    "category": "football",
+    "points": 200,
+    "type": "text",
+    "question": "كم لاعباً يلعب كل فريق داخل الملعب في كرة القدم؟",
+    "answer": "أحد عشر لاعباً",
+    "hint": "مع حارس المرمى",
+    "media": null
+  },
+  {
+    "id": "football_200_2",
+    "category": "football",
+    "points": 200,
+    "type": "text",
+    "question": "أي نادٍ إماراتي يُلقّب بـ«الزعيم»؟",
+    "answer": "نادي العين",
+    "hint": "من مدينة الحدائق",
+    "media": null
+  },
+  {
+    "id": "football_400_1",
+    "category": "football",
+    "points": 400,
+    "type": "text",
+    "question": "في أي دولة أقيمت كأس العالم 2022؟",
+    "answer": "قطر",
+    "hint": "أول مونديال في الشرق الأوسط",
+    "media": null
+  },
+  {
+    "id": "football_400_2",
+    "category": "football",
+    "points": 400,
+    "type": "multiple_choice",
+    "question": "كم مرة فاز منتخب البرازيل بكأس العالم؟",
+    "answer": "خمس مرات",
+    "choices": [
+      "ثلاث مرات",
+      "أربع مرات",
+      "خمس مرات",
+      "ست مرات"
+    ],
+    "hint": "أكثر من الجميع",
+    "media": null
+  },
+  {
+    "id": "football_600_1",
+    "category": "football",
+    "points": 600,
+    "type": "text",
+    "question": "من هو هدّاف كأس العالم 2022؟",
+    "answer": "كيليان مبابي (٨ أهداف)",
+    "hint": "فرنسي ولعب النهائي",
+    "media": null
+  },
+  {
+    "id": "football_600_2",
+    "category": "football",
+    "points": 600,
+    "type": "text",
+    "question": "تأهّل منتخب الإمارات لكأس العالم مرة واحدة — في أي سنة؟",
+    "answer": "سنة 1990 في إيطاليا",
+    "hint": "قبل التسعينات بسنة",
+    "media": null
+  },
+  {
+    "id": "anime_200_1",
+    "category": "anime",
+    "points": 200,
+    "type": "text",
+    "question": "ما اسم البطل الذي يحلم بأن يصبح «ملك القراصنة»؟",
+    "answer": "مونكي دي لوفي — من ون بيس",
+    "hint": "يلبس قبعة قش",
+    "media": null
+  },
+  {
+    "id": "anime_200_2",
+    "category": "anime",
+    "points": 200,
+    "type": "text",
+    "question": "ما اسم الأنمي الذي بطله نينجا يحلم بأن يصبح «هوكاجي»؟",
+    "answer": "ناروتو",
+    "hint": "يحب الرامن",
+    "media": null
+  },
+  {
+    "id": "anime_400_1",
+    "category": "anime",
+    "points": 400,
+    "type": "text",
+    "question": "ما اسم القط الآلي الأزرق القادم من المستقبل؟",
+    "answer": "دورايمون",
+    "hint": "عنده جيب سحري",
+    "media": null
+  },
+  {
+    "id": "anime_400_2",
+    "category": "anime",
+    "points": 400,
+    "type": "text",
+    "question": "في «المحقق كونان» ما الاسم الحقيقي لكونان؟",
+    "answer": "شينيتشي كودو",
+    "hint": "محقق ثانوية تحوّل لطفل",
+    "media": null
+  },
+  {
+    "id": "anime_600_1",
+    "category": "anime",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم الدفتر الذي يموت كل من يُكتب اسمه فيه؟",
+    "answer": "مذكرة الموت — ديث نوت",
+    "hint": "صاحبه ياغامي لايت",
+    "media": null
+  },
+  {
+    "id": "anime_600_2",
+    "category": "anime",
+    "points": 600,
+    "type": "text",
+    "question": "في «هجوم العمالقة» من هو بطل القصة؟",
+    "answer": "إيرين ييغر",
+    "hint": "يعيش داخل الأسوار",
+    "media": null
+  },
+  {
+    "id": "khaleeji_tv_200_1",
+    "category": "khaleeji_tv",
+    "points": 200,
+    "type": "text",
+    "question": "ما اسم المسلسل الكرتوني الإماراتي الذي يدور حول أربع جدّات؟",
+    "answer": "فريج",
+    "hint": "اسمه يعني الحي الشعبي",
+    "media": null
+  },
+  {
+    "id": "khaleeji_tv_200_2",
+    "category": "khaleeji_tv",
+    "points": 200,
+    "type": "text",
+    "question": "ما اسم المسلسل الكوميدي السعودي الشهير المكوّن من سكتشات؟",
+    "answer": "طاش ما طاش",
+    "hint": "بطله ناصر القصبي",
+    "media": null
+  },
+  {
+    "id": "khaleeji_tv_400_1",
+    "category": "khaleeji_tv",
+    "points": 400,
+    "type": "text",
+    "question": "المسلسل الكويتي الكلاسيكي الذي جمع عبدالحسين عبدالرضا وسعد الفرج في السبعينات؟",
+    "answer": "درب الزلق",
+    "hint": "عن أربعة أصدقاء وحلم الغنى",
+    "media": null
+  },
+  {
+    "id": "khaleeji_tv_400_2",
+    "category": "khaleeji_tv",
+    "points": 400,
+    "type": "text",
+    "question": "ما اسم المسلسل السعودي الكوميدي الذي قدّمه ناصر القصبي بعد «طاش»؟",
+    "answer": "سيلفي",
+    "hint": "اسمه من عالم الجوالات",
+    "media": null
+  },
+  {
+    "id": "khaleeji_tv_600_1",
+    "category": "khaleeji_tv",
+    "points": 600,
+    "type": "text",
+    "question": "ما المسلسل الخليجي المفضّل عند العيلة؟ (بدّل السؤال من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "خلّه سؤال يخص لمّتكم",
+    "media": null
+  },
+  {
+    "id": "khaleeji_tv_600_2",
+    "category": "khaleeji_tv",
+    "points": 600,
+    "type": "text",
+    "question": "مسلسل كرتوني كويتي شهير للأطفال يحمل اسم «شعبية...»؟",
+    "answer": "شعبية الكرتون",
+    "hint": "كلمة تعني الرسوم المتحركة",
+    "media": null
+  },
+  {
+    "id": "songs_200_1",
+    "category": "songs",
+    "points": 200,
+    "type": "text",
+    "question": "من هي الفنانة الملقّبة بـ«كوكب الشرق»؟",
+    "answer": "أم كلثوم",
+    "hint": "مصرية وصوتها أسطورة",
+    "media": null
+  },
+  {
+    "id": "songs_200_2",
+    "category": "songs",
+    "points": 200,
+    "type": "text",
+    "question": "من هو الفنان الإماراتي صاحب أغنية «بشرة خير»؟",
+    "answer": "حسين الجسمي",
+    "hint": "من الشارقة",
+    "media": null
+  },
+  {
+    "id": "songs_400_1",
+    "category": "songs",
+    "points": 400,
+    "type": "text",
+    "question": "من هو الفنان الملقّب بـ«فنان العرب»؟",
+    "answer": "محمد عبده",
+    "hint": "سعودي وصاحب «الأماكن»",
+    "media": null
+  },
+  {
+    "id": "songs_400_2",
+    "category": "songs",
+    "points": 400,
+    "type": "text",
+    "question": "من هي الفنانة الملقّبة بـ«جارة القمر»؟",
+    "answer": "فيروز",
+    "hint": "لبنانية وصوت الصباح",
+    "media": null
+  },
+  {
+    "id": "songs_600_1",
+    "category": "songs",
+    "points": 600,
+    "type": "text",
+    "question": "من كتب كلمات النشيد الوطني الإماراتي «عيشي بلادي»؟",
+    "answer": "عارف الشيخ عبدالله الحسن",
+    "hint": "شاعر إماراتي",
+    "media": null
+  },
+  {
+    "id": "songs_600_2",
+    "category": "songs",
+    "points": 600,
+    "type": "audio",
+    "question": "اسمعوا المقطع وخمّنوا اسم الأغنية (أضف رابط صوت من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "ارفع مقطع 10 ثواني",
+    "media": {
+      "audio": null
+    }
+  },
+  {
+    "id": "old_days_200_1",
+    "category": "old_days",
+    "points": 200,
+    "type": "text",
+    "question": "ما اسم البيت المصنوع من سعف النخيل قديماً؟",
+    "answer": "العريش",
+    "hint": "بارد في الصيف",
+    "media": null
+  },
+  {
+    "id": "old_days_200_2",
+    "category": "old_days",
+    "points": 200,
+    "type": "text",
+    "question": "ما الجهاز الذي كان أهلنا يسمعون منه الأخبار قبل التلفزيون؟",
+    "answer": "الراديو (المذياع)",
+    "hint": "صوت بلا صورة",
+    "media": null
+  },
+  {
+    "id": "old_days_400_1",
+    "category": "old_days",
+    "points": 400,
+    "type": "text",
+    "question": "ما اسم برج التهوية التقليدي فوق البيوت القديمة؟",
+    "answer": "البراجيل (البارجيل)",
+    "hint": "مكيّف زمان",
+    "media": null
+  },
+  {
+    "id": "old_days_400_2",
+    "category": "old_days",
+    "points": 400,
+    "type": "text",
+    "question": "ما اسم الصندوق الخشبي المزخرف الذي تُحفظ فيه الملابس والأغراض؟",
+    "answer": "المندوس",
+    "hint": "مزيّن بالمسامير النحاسية",
+    "media": null
+  },
+  {
+    "id": "old_days_600_1",
+    "category": "old_days",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم العملة التي كانت متداولة في الساحل قبل الدرهم؟",
+    "answer": "الروبية الخليجية",
+    "hint": "جاية من الهند",
+    "media": null
+  },
+  {
+    "id": "old_days_600_2",
+    "category": "old_days",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم تاجر اللؤلؤ في زمن الغوص؟",
+    "answer": "الطوّاش",
+    "hint": "يشتري من النواخذة",
+    "media": null
+  },
+  {
+    "id": "food_200_1",
+    "category": "food",
+    "points": 200,
+    "type": "text",
+    "question": "أكلة من القمح واللحم تُدقّ حتى تصير ناعمة — وش اسمها؟",
+    "answer": "الهريس",
+    "hint": "نجمة سفرة رمضان",
+    "media": null
+  },
+  {
+    "id": "food_200_2",
+    "category": "food",
+    "points": 200,
+    "type": "text",
+    "question": "حلوى كرات مقليّة تُقدّم بالدبس والسمسم — وش اسمها؟",
+    "answer": "اللقيمات",
+    "hint": "ذهبية ومقرمشة",
+    "media": null
+  },
+  {
+    "id": "food_400_1",
+    "category": "food",
+    "points": 400,
+    "type": "text",
+    "question": "ما اسم الخبز الرقيق الذي يُخبز على الطاوة ويُقدّم مع البيض والجبن؟",
+    "answer": "الرقاق",
+    "hint": "رقيق مثل الورق",
+    "media": null
+  },
+  {
+    "id": "food_400_2",
+    "category": "food",
+    "points": 400,
+    "type": "text",
+    "question": "ما اسم طبق الأرز باللحم أو الدجاج الذي يُقدّم في المناسبات؟",
+    "answer": "المجبوس",
+    "hint": "يتبّل باللومي",
+    "media": null
+  },
+  {
+    "id": "food_600_1",
+    "category": "food",
+    "points": 600,
+    "type": "text",
+    "question": "من أي شيء يُصنع «الدبس»؟",
+    "answer": "من التمر",
+    "hint": "يطلع من تحت المدبسة",
+    "media": null
+  },
+  {
+    "id": "food_600_2",
+    "category": "food",
+    "points": 600,
+    "type": "text",
+    "question": "ما اسم السمك المجفّف والمملّح في المطبخ الإماراتي؟",
+    "answer": "المالح",
+    "hint": "ريحته توصل من بعيد",
+    "media": null
+  },
+  {
+    "id": "riddles_200_1",
+    "category": "riddles",
+    "points": 200,
+    "type": "text",
+    "question": "شيء كلما أخذت منه كبر… وش هو؟",
+    "answer": "الحفرة",
+    "hint": "في الأرض",
+    "media": null
+  },
+  {
+    "id": "riddles_200_2",
+    "category": "riddles",
+    "points": 200,
+    "type": "text",
+    "question": "له أسنان ولا يعض… وش هو؟",
+    "answer": "المشط",
+    "hint": "في جيب أو حقيبة",
+    "media": null
+  },
+  {
+    "id": "riddles_400_1",
+    "category": "riddles",
+    "points": 400,
+    "type": "text",
+    "question": "يمشي بلا رجلين ويبكي بلا عينين… وش هو؟",
+    "answer": "السحاب",
+    "hint": "فوق راسك",
+    "media": null
+  },
+  {
+    "id": "riddles_400_2",
+    "category": "riddles",
+    "points": 400,
+    "type": "text",
+    "question": "بيت ما له باب ولا نافذة، وساكنه أبيض… وش هو؟",
+    "answer": "البيضة",
+    "hint": "على الفطور",
+    "media": null
+  },
+  {
+    "id": "riddles_600_1",
+    "category": "riddles",
+    "points": 600,
+    "type": "text",
+    "question": "ما الشيء الذي يكتب ولا يقرأ؟",
+    "answer": "القلم",
+    "hint": "بيدك الحين تقريباً",
+    "media": null
+  },
+  {
+    "id": "riddles_600_2",
+    "category": "riddles",
+    "points": 600,
+    "type": "text",
+    "question": "خمسة إخوة، كل واحد له اسم، وأطولهم في النص… منو هم؟",
+    "answer": "أصابع اليد",
+    "hint": "شوف يدك",
+    "media": null
+  },
+  {
+    "id": "guess_image_200_1",
+    "category": "guess_image",
+    "points": 200,
+    "type": "guess_the_image",
+    "question": "صورة مقرّبة… وش هذا الشي؟ (ارفع صورة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "قرّب الصورة زيادة عشان تصعب",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "guess_image_200_2",
+    "category": "guess_image",
+    "points": 200,
+    "type": "guess_the_image",
+    "question": "خمّنوا المعلم السياحي من الصورة (ارفع صورة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "معلم مشهور في الدولة",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "guess_image_400_1",
+    "category": "guess_image",
+    "points": 400,
+    "type": "guess_the_image",
+    "question": "شعار مقلوب أو مشوّش… وش الماركة؟ (ارفع صورة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "شعار تشوفه كل يوم",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "guess_image_400_2",
+    "category": "guess_image",
+    "points": 400,
+    "type": "image",
+    "question": "وش المكان اللي في الصورة؟ (ارفع صورة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "مكان زرناه مع بعض",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "guess_image_600_1",
+    "category": "guess_image",
+    "points": 600,
+    "type": "guess_the_image",
+    "question": "صورة من زمان… وش المناسبة؟ (ارفع صورة من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "من ألبوم العيلة",
+    "media": {
+      "image": null,
+      "answerImage": null
+    }
+  },
+  {
+    "id": "guess_image_600_2",
+    "category": "guess_image",
+    "points": 600,
+    "type": "video",
+    "question": "شوفوا المقطع وخمّنوا وش الحدث (أضف رابط فيديو من /admin)",
+    "answer": "(اكتب الإجابة من /admin)",
+    "hint": "مقطع قصير يكفي",
+    "media": {
+      "video": null
+    }
+  }
+]
