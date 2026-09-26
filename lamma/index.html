@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F5EFE4">
+  <meta name="description" content="لَمّة — لعبة جماعية عربية للعائلة والربع. كل سالفة لها ضحية.">
+  <title>لَمّة | LAMMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar" id="topbar" hidden>
+      <button class="icon-btn" data-global="menu" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+      <div class="topbar-mid" id="topbarMid"></div>
+      <button class="icon-btn" data-global="sound" id="soundBtn" aria-label="الصوت"></button>
+    </header>
+    <main id="app"></main>
+  </div>
+  <div id="modalRoot"></div>
+  <div id="toast" class="toast" role="status" aria-live="assertive"></div>
+
+  <noscript>لَمّة تحتاج JavaScript عشان تشتغل.</noscript>
+  <script src="js/content.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
