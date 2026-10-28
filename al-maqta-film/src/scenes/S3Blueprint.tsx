@@ -13,7 +13,7 @@ const SPANS = PIERS.slice(0, -1).map((x, i) => ({ x1: x, x2: PIERS[i + 1] }));
 const draw = (f: number, at: number, len: number, ease = Easing.bezier(0.45, 0, 0.2, 1)) =>
   1 - k(f, [at, at + len], [0, 1], ease);
 
-const BlueprintArt: React.FC<{ f: number; paper: number }> = ({ f, paper }) => {
+export const BlueprintArt: React.FC<{ f: number; paper: number }> = ({ f, paper }) => {
   const ink = interpolateColors(paper, [0, 1], ["#e6eefc", "#6b4a26"]);
   const faint = interpolateColors(paper, [0, 1], ["rgba(200,220,255,0.10)", "rgba(110,80,40,0.10)"]);
   const major = interpolateColors(paper, [0, 1], ["rgba(200,220,255,0.2)", "rgba(110,80,40,0.18)"]);

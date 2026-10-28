@@ -18,3 +18,5 @@ ffmpeg -v error -y -i "$R/scene01-parchment-world.webp" "$O/parchment_world.png"
 python3 scripts/extend.py "$O/paper_main.png" "$O/paper_ext.png" 760
 python3 scripts/textures.py public/tex
 python3 scripts/score.py public/score.wav
+python3 scripts/reel_score.py /tmp/reel_raw.wav
+ffmpeg -v error -y -i /tmp/reel_raw.wav -af loudnorm=I=-12:TP=-1.0:LRA=11 -ar 48000 public/reel.wav

@@ -50,7 +50,7 @@ const INK_PATHS: { d: string; w: number; at: number; len: number }[] = [
   { d: "M 1040 150 L 1040 290 M 970 220 L 1110 220 M 1040 160 L 1052 220 L 1040 280 L 1028 220 Z", w: 1.8, at: 20, len: 30 },
 ];
 
-const InkSketch: React.FC<{ f: number }> = ({ f }) => (
+export const InkSketch: React.FC<{ f: number }> = ({ f }) => (
   <svg width={W} height={H} style={{ position: "absolute", inset: 0 }}>
     <defs>
       <filter id="ink-rough">

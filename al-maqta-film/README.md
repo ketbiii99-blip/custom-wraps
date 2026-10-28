@@ -6,11 +6,32 @@ in Remotion (React), and every frame is rendered from code.
 - 1080 × 1920, 30 fps, 900 frames, H.264 + AAC
 - Composition id: `AlMaqta`
 
+## Two cuts
+
+- **`AlMaqtaReel`**: the fast cut for Reels, TikTok and Shorts. It runs at 120 bpm and every cut, word slam and camera punch lands on the beat grid. Code is in `src/reel/`, and the soundtrack comes from `scripts/reel_score.py`.
+- **`AlMaqta`**: the original slow, cinematic cut, described in the sections below.
+
+### Fast cut, beat by beat
+
+| Frames  | Time  | Shot |
+| ------- | ----- | ---- |
+| 0–64    | 0–2 s | Hook. A crash zoom onto the real bridge as «جسر واحد / غيّر / أبوظبي» slams in word by word, then the promise «58 سنة في 30 ثانية» |
+| 64–100  | 2–3 s | Rewind. VHS tracking and RGB split while the eras flicker past and the year counter runs from 2026 back to 1968 |
+| 100–150 | 3–5 s | The 1968 photograph slams in: «أول جسر يربط جزيرة أبوظبي باليابسة» |
+| 150–240 | 5–8 s | Parchment world: «المقطع — حيث بدأ العبور». The ink sketch draws itself, then a whip pan |
+| 240–330 | 8–11 s | Archive: «قبل 1968 / كان البحر يفصل الجزيرة», beat-cut framings, then the print slams in with «ثم جاء الجسر» and a glitch into blueprint |
+| 330–450 | 11–15 s | Blueprint drafted at 1.4× speed, then an accordion fold |
+| 450–570 | 15–19 s | Paper diorama with speed ramps, then a strobe build-up between paper and reality |
+| 570–660 | 19–22 s | Drop: a shockwave, light sweeps, «من 1968 / إلى اليوم» |
+| 660–750 | 22–25 s | Then / now slider: the 1968 photograph against the bridge today |
+| 750–900 | 25–30 s | Signature: a golden line writes «جسر المقطع», with «حكاية تعبر الزمن · 1968 — 2026» |
+
 ## Run it
 
 ```console
 npm i
 npx remotion studio        # live preview at http://localhost:3000/AlMaqta
+npx remotion render AlMaqtaReel out/al-maqta-reel.mp4 --codec=h264 --crf=16
 npx remotion render AlMaqta out/al-maqta-bridge.mp4 --codec=h264 --crf=16
 ```
 
