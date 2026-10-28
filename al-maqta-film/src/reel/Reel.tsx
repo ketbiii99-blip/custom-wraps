@@ -172,7 +172,8 @@ const Hook: React.FC = () => {
       <Slam at={118} size={64} weight={600} style={{ top: 1450 }}>
         يربط جزيرة أبوظبي باليابسة
       </Slam>
-      <Flash ats={[0, 100]} strength={1} decay={3} />
+      <Flash ats={[0]} strength={0.55} decay={3} />
+      <Flash ats={[100]} strength={1} decay={3} />
       <Flash ats={[10, 20, 45, 55]} strength={0.25} />
       <Flash ats={[64]} color="#9ad7ff" strength={0.5} />
       <Grain opacity={0.18} seed="hook" />
@@ -213,7 +214,7 @@ const Parchment: React.FC = () => {
 
 const Archive: React.FC = () => {
   const f = useCurrentFrame();
-  const x = k(f, [0, 12], [1600, 0], EXPO_OUT);
+  const x = k(f, [0, 12], [900, 0], EXPO_OUT);
   // three framings, cut on the beat
   const framing = f < 30 ? { s: 1.05 + f * 0.003, o: "720px 722px" } : f < 50 ? { s: 1.55, o: "820px 600px" } : { s: 1.2, o: "540px 1100px" };
   const sh = shake(f, [30, 50], 18, "ar");
