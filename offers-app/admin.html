@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OFFERS لوحة الإدارة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{--primary:#5b21b6;--soft:#ede9fe;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--bg:#f6f7fb;--ok:#16a34a;--bad:#dc2626;--warn:#d97706}
+    *{box-sizing:border-box;margin:0}
+    body{font-family:"Cairo",system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+    header{background:var(--primary);color:#fff;padding:14px max(16px,4vw);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    header b{font-size:20px;letter-spacing:1px}
+    main{max-width:1100px;margin:0 auto;padding:16px max(16px,3vw);display:grid;gap:16px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+    h2{font-size:17px;margin-bottom:12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+    label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:12.5px;color:var(--muted)}
+    input,select,textarea{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text)}
+    button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;background:var(--primary);color:#fff}
+    button.ghost{background:#fff;color:var(--primary);border:1px solid var(--primary)}
+    button.ok{background:var(--ok)} button.bad{background:var(--bad)}
+    button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .tabs button{background:#fff;color:var(--text);border:1px solid var(--line)}
+    .tabs button.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .tbl{overflow-x:auto}
+    table{border-collapse:collapse;width:100%;min-width:760px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+    th{font-size:12px;color:var(--muted)}
+    td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+    .pill{display:inline-block;border-radius:20px;padding:1px 9px;font-size:11.5px;font-weight:700;background:var(--soft);color:var(--primary)}
+    .pill.research{background:#fef3c7;color:#92400e}.pill.merchant{background:#dbeafe;color:#1e40af}.pill.demo{background:#f3f4f6;color:#6b7280}
+    .msg{padding:10px 12px;border-radius:10px;margin-top:10px;display:none}
+    .msg.show{display:block}.msg.ok{background:#dcfce7;color:#166534}.msg.err{background:#fee2e2;color:#991b1b}
+    .snip{color:var(--muted);font-size:12px;max-width:280px}
+    a{color:var(--primary)}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <header><b>OFFERS · لوحة الإدارة</b><div class="row"><span id="who"></span><button class="ghost" id="logout" hidden>خروج</button></div></header>
+  <main>
+    <section class="card" id="login">
+      <h2>تسجيل دخول المسؤول</h2>
+      <form id="loginForm" class="grid">
+        <label>البريد الإلكتروني<input id="email" type="email" required autocomplete="username" /></label>
+        <label>كلمة المرور<input id="password" type="password" required autocomplete="current-password" /></label>
+        <div class="row" style="align-items:end"><button type="submit">دخول</button></div>
+      </form>
+      <div class="msg" id="loginMsg"></div>
+    </section>
+
+    <div id="panel" hidden>
+      <section class="card">
+        <h2>إدخال عرض من نشرة أو موقع متجر</h2>
+        <p style="color:var(--muted);margin-bottom:12px">العروض التي يدخلها فريقك تُنشر مباشرة. أرفق رابط المصدر لكل عرض.</p>
+        <form id="offerForm" class="grid">
+          <label>المتجر<select id="store_id" required></select></label>
+          <label>اسم المنتج (عربي)<input id="product_name_ar" required placeholder="أرز بسمتي 5 كيلو" /></label>
+          <label>الاسم كما في المصدر<input id="product_name_en" placeholder="Basmati Rice 5kg" /></label>
+          <label>القسم<select id="category">
+            <option value="grocery">مواد غذائية</option><option value="electronics">إلكترونيات</option><option value="fashion">ملابس</option>
+            <option value="home">المنزل</option><option value="beauty">عطور وتجميل</option><option value="kids">أطفال</option><option value="more">أخرى</option>
+          </select></label>
+          <label>السعر الجديد (درهم)<input id="price" type="number" step="0.01" min="0.01" required /></label>
+          <label>السعر السابق (درهم)<input id="old_price" type="number" step="0.01" min="0.01" /></label>
+          <label>من تاريخ<input id="starts_on" type="date" /></label>
+          <label>إلى تاريخ<input id="ends_on" type="date" required /></label>
+          <label>الإمارة<select id="emirates">
+            <option value="all">جميع الإمارات</option><option>أبوظبي</option><option>دبي</option><option>الشارقة</option>
+            <option>عجمان</option><option>أم القيوين</option><option>رأس الخيمة</option><option>الفجيرة</option>
+          </select></label>
+          <label>نوع المصدر<select id="source_type"><option value="flyer">نشرة عروض</option><option value="admin">موقع المتجر</option><option value="feed">ملف من المتجر</option></select></label>
+          <label style="grid-column:1/-1">رابط المصدر<input id="source_url" type="url" placeholder="https://" /></label>
+          <div class="row"><button type="submit">نشر العرض</button></div>
+        </form>
+        <div class="msg" id="offerMsg"></div>
+      </section>
+
+      <section class="card">
+        <div class="row" style="justify-content:space-between;margin-bottom:12px">
+          <h2 style="margin:0">مراجعة العروض</h2>
+          <div class="row tabs" id="tabs">
+            <button data-status="pending" class="on">بانتظار المراجعة</button>
+            <button data-status="approved">منشورة</button>
+            <button data-status="rejected">مرفوضة</button>
+          </div>
+        </div>
+        <div class="tbl"><table>
+          <thead><tr><th>المنتج</th><th>المتجر</th><th>السعر</th><th>السابق</th><th>الفترة</th><th>المصدر</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table></div>
+        <p id="empty" style="color:var(--muted);padding:16px 0" hidden>لا توجد عروض هنا.</p>
+      </section>
+
+      <section class="card">
+        <h2>استيراد ملف عروض (JSON)</h2>
+        <p style="color:var(--muted);margin-bottom:10px">العروض المستوردة تدخل قائمة المراجعة ولا تُنشر قبل موافقتك.</p>
+        <div class="row"><input id="importFile" type="file" accept="application/json,.json" /><button id="importBtn" class="ghost">استيراد</button></div>
+        <div class="msg" id="importMsg"></div>
+      </section>
+    </div>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

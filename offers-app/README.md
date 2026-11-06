@@ -3,7 +3,20 @@
 A mobile-first, Arabic (RTL) prototype of an app that collects store offers across all
 seven emirates and compares basket prices between stores.
 
-**Run it:** open `index.html` in any browser (no build step). Best viewed at phone width
+**Run it with real data (server):** needs Node.js 22.5 or newer, no packages to install.
+
+```bash
+cd offers-app
+ADMIN_EMAIL=you@example.com ADMIN_PASSWORD='choose-a-strong-one' npm start   # http://localhost:8080
+npm test                                                                      # server tests
+```
+
+- Shopper app: `http://localhost:8080/`  ·  Admin panel: `http://localhost:8080/admin`
+- The first run creates the database (`server/data/offers.db`), the stores, the admin account, and demo offers.
+  Remove the demo offers before launch: `npm run clear-demo`.
+- Import a file of offers into the review queue: `npm run import -- server/seed/researched-offers.json`
+
+**Run it without a server:** open `index.html` (or `offers-preview.html`) in any browser; it uses the built-in demo data. Best viewed at phone width
 or on a phone; it can be added to the home screen (PWA manifest included).
 
 ## Screens
@@ -20,6 +33,23 @@ or on a phone; it can be added to the home screen (PWA manifest included).
 
 State (favourites, basket, merchant offers) is kept in the browser's localStorage.
 
+## Where prices come from
+Every price is an offer row with a store, a date range, the emirates it covers, a source and a status.
+
+| Source | Who enters it | Goes live |
+|---|---|---|
+| Store's own offers (`merchant`) | Stores sign up in the app (حسابي → تسجيل المتاجر) | After an admin approves |
+| Weekly flyers / store websites (`flyer`, `admin`) | Your team, in the admin panel, with the source link | Immediately |
+| Data files from stores (`feed`) | Admin panel | Immediately |
+| Researched offers (`research`) | `npm run import` or the admin panel's import | After an admin approves |
+
+The app only shows offers that are approved, have started, and have not ended, filtered by the shopper's emirate.
+The product page shows the source and last-updated date.
+
+`server/seed/researched-offers.json` holds offers found through web search on 2026-11-06 (IKEA, amazon.ae, Carrefour).
+They come from search snippets, not live pages, so check each one against its source link before approving.
+Most end on 11–12 Nov 2026.
+
 ## Store logos and product photos
 - Stores use their real names. Each store in `data.js` can have a `logo:` path. Carrefour, IKEA and amazon logos are
   included (from the open Simple Icons set); the others show a coloured name badge until you add their logo file.
@@ -34,14 +64,16 @@ State (favourites, basket, merchant offers) is kept in the browser's localStorag
 - `offers-preview.html` – the whole app in one file (open directly)
 - `icons.js` – icon set
 - `assets/` – logos and product photos
+- `admin.html`, `admin.js` – admin panel
+- `server/` – API, database, sign-in, tests, import tool
 - `styles.css` – design (purple/orange theme)
 - `data.js` – **demo data** (sample prices, not real retailer data)
 - `app.js` – screens, routing, compare logic, merchant flow
 
 ## Next steps for a production app
 1. **Native app**: port these screens to Flutter or React Native (iOS + Android).
-2. **Backend**: database + API for stores, branches, products, offers; merchant auth (email/Google/Apple).
-3. **Admin review** of merchant offers before publishing; image upload.
+2. ~~Backend~~ done (`server/`). Still to add: Google/Apple sign-in, password reset, image upload, sign-in rate limiting.
+3. Hosting: deploy the server with HTTPS and daily database backups.
 4. **Data feeds**: partnerships / merchant uploads for prices (scraping retailers usually breaks their terms).
 5. Push notifications, English language toggle, maps for branches, analytics.
 6. Get permission from each retailer before showing their logo in the published app.

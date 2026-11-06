@@ -1,0 +1,12 @@
+{
+  "name": "offers-app",
+  "private": true,
+  "description": "OFFERS UAE offers and price comparison app",
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "start": "node --no-warnings server/server.js",
+    "test": "node --test --no-warnings server/server.test.js",
+    "import": "node --no-warnings server/cli.js import",
+    "clear-demo": "node --no-warnings server/cli.js clear-demo"
+  }
+}
