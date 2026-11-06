@@ -1,0 +1,9 @@
+server/data
+server/*.test.js
+node_modules
+offers-preview.html
+Dockerfile
+.dockerignore
+render.yaml
+*.md
+.git

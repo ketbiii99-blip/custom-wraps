@@ -16,6 +16,7 @@ const log = (level, msg, extra = {}) => console.log(JSON.stringify({ t: new Date
 
 function createServer(db) {
   const routes = [];
+  const attempts = new Map(); // per server, so tests and restarts start clean
   const route = (method, pattern, handler, opts = {}) => routes.push({ method, re: new RegExp(`^${pattern}$`), handler, ...opts });
 
   // ---- public ----
@@ -32,7 +33,8 @@ function createServer(db) {
   });
 
   // ---- accounts ----
-  route("POST", "/api/auth/register", ({ body }) => {
+  route("POST", "/api/auth/register", ({ body, req }) => {
+    checkLoginRate(attempts, req);
     const name = String(body.store_name || "").trim().slice(0, 80), email = String(body.email || "").trim().slice(0, 120);
     const pw = String(body.password || "");
     if (name.length < 2) throw new ValidationError("store_name", "اسم المتجر مطلوب");
@@ -50,7 +52,8 @@ function createServer(db) {
       return { status: 201, body: { token, user: { name, email, role: "merchant", store_id: storeId } } };
     } catch (e) { db.exec("ROLLBACK"); throw e; }
   });
-  route("POST", "/api/auth/login", ({ body }) => {
+  route("POST", "/api/auth/login", ({ body, req }) => {
+    checkLoginRate(attempts, req);
     const u = db.prepare("SELECT * FROM users WHERE email = ?").get(String(body.email || "").trim());
     if (!u || !auth.verifyPassword(String(body.password || ""), u.password_hash)) throw httpError(401, "البريد أو كلمة المرور غير صحيحة");
     return { token: auth.createSession(db, u.id), user: { name: u.name, email: u.email, role: u.role, store_id: u.store_id } };
@@ -82,6 +85,8 @@ function createServer(db) {
     if (!reviewOffer(db, m[1], body.action, user.id, body.note)) throw httpError(409, "العرض ليس بانتظار المراجعة");
     return { ok: true };
   }, { role: "admin" });
+  route("POST", "/api/admin/clear-demo", () => ({ deleted: clearDemo(db) }), { role: "admin" });
+  route("GET", "/api/admin/stats", () => db.prepare("SELECT status, source_type, COUNT(*) n FROM offers GROUP BY 1, 2").all(), { role: "admin" });
   // Bulk import (e.g. researched-offers.json). Everything lands in the review queue.
   route("POST", "/api/admin/import", ({ body, user }) => importOffers(db, body, user.id), { role: "admin" });
 
@@ -132,10 +137,29 @@ function importOffers(db, body, userId) {
   return result;
 }
 
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+  ...(process.env.NODE_ENV === "production" ? { "Strict-Transport-Security": "max-age=31536000; includeSubDomains" } : {}),
+};
+
+// Sign-in attempts: at most 10 per IP per 15 minutes (in memory; fine for one server).
+function checkLoginRate(attempts, req) {
+  const ip = (process.env.TRUST_PROXY === "1" && String(req.headers["x-forwarded-for"] || "").split(",")[0].trim()) || req.socket.remoteAddress;
+  const now = Date.now(), win = 15 * 60e3;
+  const a = (attempts.get(ip) || []).filter((t) => now - t < win);
+  if (a.length >= 10) throw httpError(429, "محاولات كثيرة، حاول بعد 15 دقيقة");
+  a.push(now); attempts.set(ip, a);
+  if (attempts.size > 10000) attempts.clear();
+}
+
 const httpError = (status, message) => Object.assign(new Error(message), { status });
 
 function send(res, status, body) {
-  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
+  res.writeHead(status, { ...SECURITY_HEADERS, "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
   res.end(JSON.stringify(body));
 }
 
@@ -163,14 +187,39 @@ function serveStatic(pathname, res) {
   if (!PUBLIC.test(pathname) || !file.startsWith(ROOT + path.sep) || !fs.existsSync(file)) {
     res.writeHead(404, { "Content-Type": "text/plain" }); return res.end("Not found");
   }
-  res.writeHead(200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream", "X-Content-Type-Options": "nosniff" });
+  const ext = path.extname(file);
+  res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": TYPES[ext] || "application/octet-stream",
+    "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=3600" });
   fs.createReadStream(file).pipe(res);
 }
 
-if (require.main === module) {
-  const db = open();
-  seed(db, { log: (m) => log("info", m) });
-  createServer(db).listen(PORT, () => log("info", `OFFERS running on http://localhost:${PORT}  (admin: /admin)`));
+function clearDemo(db) {
+  const r = db.prepare("DELETE FROM offers WHERE source_type = 'demo'").run();
+  db.prepare("DELETE FROM products WHERE id NOT IN (SELECT product_id FROM offers)").run();
+  return r.changes;
 }
 
-module.exports = { createServer, importOffers };
+// Daily copy of the database next to it (keeps the last 7). Protects against mistakes and corruption;
+// for protection against losing the disk, also download a copy now and then (see DEPLOY.md).
+function backup(db, file) {
+  if (!file || file === ":memory:") return;
+  const dir = path.join(path.dirname(file), "backups");
+  fs.mkdirSync(dir, { recursive: true });
+  const target = path.join(dir, `offers-${new Date().toISOString().slice(0, 10)}.db`);
+  if (!fs.existsSync(target)) { db.exec(`VACUUM INTO '${target.replace(/'/g, "''")}'`); log("info", "backup written", { target }); }
+  fs.readdirSync(dir).filter((f) => f.endsWith(".db")).sort().slice(0, -7).forEach((f) => fs.unlinkSync(path.join(dir, f)));
+}
+
+if (require.main === module) {
+  const { DB_PATH } = require("./db");
+  const db = open();
+  seed(db, { log: (m) => log("info", m) });
+  const server = createServer(db);
+  server.listen(PORT, "0.0.0.0", () => log("info", `OFFERS running on port ${PORT}  (admin: /admin)`));
+  const runBackup = () => { try { backup(db, DB_PATH); } catch (e) { log("error", "backup failed", { err: e.message }); } };
+  runBackup(); setInterval(runBackup, 6 * 3600e3).unref();
+  const stop = (sig) => { log("info", "shutting down", { sig }); server.close(() => { db.close(); process.exit(0); }); setTimeout(() => process.exit(0), 8000).unref(); };
+  process.on("SIGTERM", stop); process.on("SIGINT", stop);
+}
+
+module.exports = { createServer, importOffers, clearDemo, backup };

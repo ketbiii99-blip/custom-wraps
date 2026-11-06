@@ -16,6 +16,8 @@ npm test                                                                      # 
   Remove the demo offers before launch: `npm run clear-demo`.
 - Import a file of offers into the review queue: `npm run import -- server/seed/researched-offers.json`
 
+**Put it online:** see [DEPLOY.md](DEPLOY.md) (Render in about 15 minutes, or any Docker host).
+
 **Run it without a server:** open `index.html` (or `offers-preview.html`) in any browser; it uses the built-in demo data. Best viewed at phone width
 or on a phone; it can be added to the home screen (PWA manifest included).
 
@@ -73,7 +75,7 @@ Most end on 11–12 Nov 2026.
 ## Next steps for a production app
 1. **Native app**: port these screens to Flutter or React Native (iOS + Android).
 2. ~~Backend~~ done (`server/`). Still to add: Google/Apple sign-in, password reset, image upload, sign-in rate limiting.
-3. Hosting: deploy the server with HTTPS and daily database backups.
+3. ~~Hosting~~ ready: Dockerfile + Render blueprint, daily backups (see DEPLOY.md).
 4. **Data feeds**: partnerships / merchant uploads for prices (scraping retailers usually breaks their terms).
 5. Push notifications, English language toggle, maps for branches, analytics.
 6. Get permission from each retailer before showing their logo in the published app.

@@ -123,3 +123,17 @@ test("static server refuses paths outside the app", async (t) => {
   }
   assert.equal((await fetch(`http://127.0.0.1:${port}/`)).status, 200);
 });
+
+test("sign-in is limited to 10 attempts per 15 minutes", async (t) => {
+  const { srv, call } = await setup(); t.after(() => srv.close());
+  let last;
+  for (let i = 0; i < 11; i++) last = await call("/api/auth/login", { body: { email: "nobody@test.local", password: "x" } });
+  assert.equal(last.status, 429);
+});
+
+test("pages are served with security headers", async (t) => {
+  const { srv } = await setup(); t.after(() => srv.close());
+  const res = await fetch(`http://127.0.0.1:${srv.address().port}/`);
+  assert.match(res.headers.get("content-security-policy"), /frame-ancestors 'none'/);
+  assert.equal(res.headers.get("x-frame-options"), "DENY");
+});

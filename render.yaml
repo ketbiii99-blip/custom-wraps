@@ -1,0 +1,23 @@
+# Render Blueprint for the OFFERS app (https://render.com/docs/blueprint-spec).
+# In Render: New + > Blueprint > pick this repository. Render asks for the values marked sync: false.
+services:
+  - type: web
+    name: offers-app
+    runtime: docker
+    rootDir: offers-app
+    dockerfilePath: ./Dockerfile
+    plan: starter            # a paid plan is needed for the disk that keeps the database
+    region: frankfurt        # closest Render region to the UAE
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SEED_DEMO
+        value: "1"           # sample offers so the app isn't empty; remove them from the admin panel before launch
+    disk:
+      name: offers-data
+      mountPath: /data
+      sizeGB: 1

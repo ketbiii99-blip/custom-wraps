@@ -19,7 +19,7 @@
       $("login").hidden = true; $("panel").hidden = false; $("logout").hidden = false; $("who").textContent = me.email;
       const stores = await api("/api/stores");
       $("store_id").innerHTML = stores.map((s) => `<option value="${esc(s.id)}">${esc(s.name)} — ${esc(s.en)}</option>`).join("");
-      loadRows();
+      loadRows(); loadDemo();
     } catch { token = null; $("login").hidden = false; $("panel").hidden = true; $("logout").hidden = true; $("who").textContent = ""; }
   }
 
@@ -82,7 +82,7 @@
     const b = e.target.closest("[data-review]"); if (!b) return;
     b.disabled = true;
     try { await api(`/api/admin/offers/${b.dataset.review}/review`, { method: "POST", body: JSON.stringify({ action: b.dataset.action }) }); loadRows(); }
-    catch (err) { alert(err.message); b.disabled = false; }
+    catch (err) { b.disabled = false; b.textContent = err.message; }
   });
 
   $("importBtn").addEventListener("click", async () => {
@@ -93,6 +93,16 @@
       msg("importMsg", `أضيف ${r.added} عرضاً لقائمة المراجعة` + (r.skipped.length ? `، وتم تخطي ${r.skipped.length} (${r.skipped.slice(0, 3).map((s) => s.reason).join("، ")})` : ""), true);
       if (status === "pending") loadRows();
     } catch (err) { msg("importMsg", err.message); }
+  });
+
+  async function loadDemo() {
+    const n = (await api("/api/admin/stats")).filter((r) => r.source_type === "demo").reduce((s, r) => s + r.n, 0);
+    $("demoCard").hidden = n === 0; $("demoCount").textContent = n;
+  }
+  $("clearDemo").addEventListener("click", () => { $("clearDemoYes").hidden = false; });
+  $("clearDemoYes").addEventListener("click", async () => {
+    try { const r = await api("/api/admin/clear-demo", { method: "POST" }); msg("demoMsg", `حُذف ${r.deleted} عرضاً تجريبياً`, true); $("clearDemoYes").hidden = true; loadDemo(); }
+    catch (err) { msg("demoMsg", err.message); }
   });
 
   const d = new Date(); d.setDate(d.getDate() + 7);

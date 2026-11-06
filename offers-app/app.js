@@ -24,7 +24,7 @@
   const products = () => (S.live ? D.products : D.products.concat(S.custom));
   const store = (id) => D.stores.find((s) => s.id === id) || { id, name: id, en: "?", color: "#64748b" };
   const ic = window.ic;
-  const pimg = (p, size) => `${p.img ? `<img src="${p.img}" alt="" onerror="this.remove()" />` : ""}${ic(p.icon || "tag", size || 40)}`;
+  const pimg = (p, size) => `${p.img ? `<img src="${p.img}" alt="" />` : ""}${ic(p.icon || "tag", size || 40)}`;
   const product = (id) => products().find((p) => p.id === id);
   const best = (p) => {
     let bid = null, bp = Infinity;
@@ -96,7 +96,7 @@
       <div class="pimg">${pimg(p, 34)}<span class="badge">-${pct(p)}%</span></div>
       <h6>${esc(p.name)}</h6><b>${aed(best(p).price)}</b>
     </div>`;
-  const slogo = (s, cls = "") => `<div class="slogo ${cls}" style="--c:${s.color}">${s.logo ? `<img src="${s.logo}" alt="${s.en}" onerror="this.remove()" />` : ""}<span>${esc(s.en)}</span></div>`;
+  const slogo = (s, cls = "") => `<div class="slogo ${cls}" style="--c:${s.color}">${s.logo ? `<img src="${s.logo}" alt="${s.en}" />` : ""}<span>${esc(s.en)}</span></div>`;
 
   // ---------- server ----------
   // When the app is served by server/server.js it loads real offers from /api.
@@ -409,6 +409,8 @@
   }
 
   // ---------- events ----------
+  // Missing logo or product photo: drop the image so the badge/icon underneath shows.
+  document.addEventListener("error", (e) => { if (e.target.tagName === "IMG") e.target.remove(); }, true);
   document.addEventListener("click", (e) => {
     const t = e.target.closest("[data-tab],[data-cat],[data-sub],[data-open],[data-fav],[data-favstore],[data-cart],[data-store],[data-stype],[data-mode],[data-qty],[data-go],[data-act]");
     if (!t) return;

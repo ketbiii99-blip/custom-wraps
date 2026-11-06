@@ -95,6 +95,13 @@
         <p id="empty" style="color:var(--muted);padding:16px 0" hidden>لا توجد عروض هنا.</p>
       </section>
 
+      <section class="card" id="demoCard" hidden>
+        <h2>العروض التجريبية</h2>
+        <p style="color:var(--muted);margin-bottom:10px">يحتوي التطبيق على <b id="demoCount"></b> عرضاً تجريبياً بأسعار غير حقيقية. احذفها قبل الإطلاق.</p>
+        <div class="row"><button class="bad" id="clearDemo">حذف العروض التجريبية</button><button class="ghost" id="clearDemoYes" hidden>تأكيد الحذف</button></div>
+        <div class="msg" id="demoMsg"></div>
+      </section>
+
       <section class="card">
         <h2>استيراد ملف عروض (JSON)</h2>
         <p style="color:var(--muted);margin-bottom:10px">العروض المستوردة تدخل قائمة المراجعة ولا تُنشر قبل موافقتك.</p>

@@ -5,7 +5,7 @@
 const fs = require("node:fs");
 const { open } = require("./db");
 const { seed } = require("./seed");
-const { importOffers } = require("./server");
+const { importOffers, clearDemo } = require("./server");
 
 const [cmd, arg] = process.argv.slice(2);
 const db = open();
@@ -18,9 +18,7 @@ if (cmd === "import") {
   console.log(`Added ${r.added} offers to the review queue. Skipped ${r.skipped.length}.`);
   r.skipped.forEach((s) => console.log(`  - #${s.index} ${s.product}: ${s.reason}`));
 } else if (cmd === "clear-demo") {
-  const r = db.prepare("DELETE FROM offers WHERE source_type = 'demo'").run();
-  db.prepare("DELETE FROM products WHERE id NOT IN (SELECT product_id FROM offers)").run();
-  console.log(`Deleted ${r.changes} demo offers.`);
+  console.log(`Deleted ${clearDemo(db)} demo offers.`);
 } else if (cmd === "stats") {
   console.table(db.prepare("SELECT status, source_type, COUNT(*) n FROM offers GROUP BY 1, 2 ORDER BY 1, 2").all());
 } else {
