@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b21b6" />
+  <title>OFFERS أوفرس</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+:root{
+  --primary:#5b21b6; --primary-2:#7c3aed; --primary-soft:#ede9fe;
+  --accent:#f97316; --sale:#ef4444; --ok:#16a34a;
+  --text:#1f2937; --muted:#6b7280; --line:#eceef3;
+  --bg:#f6f7fb; --card:#ffffff; --radius:16px;
+  --shadow:0 2px 10px rgba(17,24,39,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:"Cairo","Tajawal",system-ui,sans-serif;background:#e9e7f3;color:var(--text);display:flex;justify-content:center}
+button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
+input,select{font:inherit}
+.app{position:relative;width:100%;max-width:430px;height:100dvh;background:var(--bg);overflow:hidden;display:flex;flex-direction:column}
+@media(min-width:500px){.app{height:min(900px,96dvh);margin:auto;border-radius:36px;box-shadow:0 20px 60px rgba(60,30,120,.25);border:8px solid #111}}
+.screen{flex:1;overflow-y:auto;padding:12px 16px 90px}
+.screen::-webkit-scrollbar{display:none}
+
+/* Splash */
+.splash{position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff;
+  background:linear-gradient(180deg,#f97316 0%,#c026d3 50%,#4c1d95 100%);transition:opacity .5s}
+.splash.hide{opacity:0;pointer-events:none}
+.splash .logo-bag{width:110px;height:110px;border-radius:28px;background:#fff;display:grid;place-items:center;font-size:56px;color:var(--accent);font-weight:900;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.splash h1{font-size:44px;font-weight:900;letter-spacing:2px;font-family:system-ui,sans-serif}
+.splash h2{font-size:28px;font-weight:800}
+.splash p{font-size:18px;text-align:center;opacity:.95;line-height:1.6}
+.skyline{position:absolute;bottom:0;left:0;right:0;height:180px;opacity:.35}
+
+/* Header */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 0 12px}
+.topbar h1{font-size:19px;font-weight:800}
+.brand{display:flex;align-items:center;gap:8px}
+.brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#f97316,#c026d3);color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px}
+.brand b{font-size:26px;font-weight:900;color:var(--primary);font-family:system-ui,sans-serif;letter-spacing:1px}
+.icon-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:18px;position:relative}
+.icon-btn .dot{position:absolute;top:8px;left:9px;width:8px;height:8px;border-radius:50%;background:var(--sale)}
+
+.select{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px}
+.select select{border:0;background:none;flex:1;font-weight:700;outline:none}
+.search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.search input{border:0;outline:none;flex:1;background:none}
+
+/* Grid of categories */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px;margin-bottom:18px}
+.cat{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
+.cat .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:26px}
+.cat.active .ic{outline:2px solid var(--primary)}
+
+.section-h{display:flex;justify-content:space-between;align-items:center;margin:6px 0 10px}
+.section-h h3{font-size:17px;font-weight:800}
+.section-h a,.link{color:var(--primary);font-size:13px;font-weight:700}
+
+/* Banner carousel */
+.banner-wrap{overflow:hidden;border-radius:var(--radius)}
+.banners{display:flex;transition:transform .5s ease}
+.banner{min-width:100%;height:150px;border-radius:var(--radius);color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
+.banner h4{font-size:22px;font-weight:900;line-height:1.3}
+.banner small{display:block;opacity:.9;margin:4px 0 10px}
+.banner .btn-w{background:#fff;color:var(--sale);border-radius:10px;padding:6px 14px;font-weight:800;font-size:13px}
+.banner .art{font-size:34px;white-space:nowrap}
+.dots{display:flex;justify-content:center;gap:6px;margin:10px 0 18px}
+.dots i{width:7px;height:7px;border-radius:9px;background:#d4d4d8;transition:.3s}
+.dots i.on{width:20px;background:var(--primary)}
+
+/* Product cards */
+.list{display:flex;flex-direction:column;gap:10px}
+.pcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);display:flex;gap:12px;padding:10px;align-items:center}
+.pimg{position:relative;width:96px;height:86px;border-radius:12px;background:linear-gradient(135deg,#fff7ed,#fef3c7);display:grid;place-items:center;font-size:44px;flex-shrink:0}
+.badge{position:absolute;top:6px;right:6px;background:var(--sale);color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 7px}
+.pinfo{flex:1;min-width:0}
+.pinfo h5{font-size:14.5px;font-weight:800;line-height:1.4}
+.pinfo .store{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.price{display:flex;align-items:baseline;gap:8px}
+.price b{color:var(--sale);font-size:18px;font-weight:900}
+.price s{color:var(--muted);font-size:12.5px}
+.pact{display:flex;flex-direction:column;align-items:center;justify-content:space-between;align-self:stretch}
+.heart{font-size:20px;color:#9ca3af}
+.heart.on{color:var(--sale)}
+.plus{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-size:20px;font-weight:700;display:grid;place-items:center}
+.plus.added{background:var(--ok)}
+
+.hscroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.hscroll::-webkit-scrollbar{display:none}
+.mini{min-width:130px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:8px}
+.mini .pimg{width:100%;height:90px}
+.mini h6{font-size:12.5px;font-weight:700;margin:6px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini b{color:var(--sale);font-size:14px}
+
+/* Chips & toolbar */
+.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px}
+.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;padding:7px 14px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:700}
+.chip.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.toolbar{display:flex;gap:8px;margin-bottom:12px}
+.toolbar select{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.toolbar .icon-btn{background:var(--card);border:1px solid var(--line)}
+
+/* Detail */
+.hero{position:relative;height:250px;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#fde68a);display:grid;place-items:center;font-size:120px;margin-bottom:14px}
+.hero .badge{font-size:15px;padding:6px 14px;border-radius:20px;top:14px;right:14px}
+.detail h2{font-size:22px;font-weight:900}
+.detail .price b{font-size:26px}
+.infobox{background:var(--primary-soft);border-radius:14px;padding:12px 14px;margin:14px 0;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.btn{width:100%;padding:13px;border-radius:14px;background:var(--primary);color:#fff;font-weight:800;font-size:15px;display:flex;justify-content:center;gap:8px}
+.btn.ghost{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+.btn.orange{background:var(--accent)}
+.store-prices{background:var(--card);border-radius:14px;box-shadow:var(--shadow);margin:14px 0;overflow:hidden}
+.store-prices .row{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.store-prices .row:last-child{border:0}
+.store-prices .row.best{background:#f0fdf4}
+.tag{font-size:11px;background:var(--ok);color:#fff;border-radius:6px;padding:1px 6px;margin-inline-start:6px}
+
+/* Stores list */
+.srow{background:var(--card);display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;box-shadow:var(--shadow)}
+.slogo{width:72px;height:44px;border-radius:10px;color:#fff;font-weight:900;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:15px}
+.srow .grow{flex:1}
+.srow h5{font-size:15px;font-weight:800}
+.srow small{color:var(--muted)}
+
+/* Compare */
+.cmp{background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow-x:auto}
+.cmp table{border-collapse:collapse;min-width:100%}
+.cmp th,.cmp td{padding:10px 8px;text-align:center;font-size:13px;border-bottom:1px solid var(--line);white-space:nowrap}
+.cmp th{background:#fafafa;position:sticky;top:0}
+.cmp td.prod{text-align:right;white-space:normal;min-width:120px;position:sticky;right:0;background:#fff;z-index:1}
+.cmp th.prod{position:sticky;right:0;z-index:2}
+.cmp .cheap{background:#fdf2f8;color:#be185d;font-weight:800}
+.cmp .na{color:#cbd5e1}
+.cmp .avail{display:inline-block;background:var(--sale);color:#fff;border-radius:8px;padding:0 6px;font-size:11px;margin-top:3px}
+.cmp tfoot td{font-weight:900;font-size:14px;background:#fafafa}
+.cmp tfoot td.bestcol{background:#dcfce7;color:var(--ok)}
+.qty{display:inline-flex;align-items:center;gap:6px;margin-top:4px}
+.qty button{width:22px;height:22px;border-radius:6px;border:1px solid var(--line);font-weight:800}
+.seg{display:flex;background:#fff;border:1.5px solid #db2777;border-radius:12px;overflow:hidden;margin:12px auto;width:max-content}
+.seg button{padding:7px 16px;font-size:13px;font-weight:700;color:#db2777}
+.seg button.on{background:#db2777;color:#fff}
+.summary{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border-radius:16px;padding:14px;margin-top:12px}
+.summary b{font-size:22px}
+
+/* Forms (merchant) */
+.form{display:flex;flex-direction:column;gap:12px}
+.form label{font-size:13px;font-weight:700;color:var(--muted)}
+.form input,.form select{width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;outline-color:var(--primary)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.upload{border:2px dashed #cbd5e1;border-radius:14px;padding:18px;text-align:center;color:var(--muted)}
+.dash{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dash button{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:16px 10px;font-weight:700;font-size:13.5px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.dash button span{font-size:24px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.steps div{background:#fff;border-radius:12px;padding:10px 4px;text-align:center;font-size:11.5px;font-weight:700;box-shadow:var(--shadow)}
+.steps i{display:grid;place-items:center;width:28px;height:28px;margin:0 auto 6px;border-radius:50%;color:#fff;font-style:normal}
+.card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:14px}
+.feat{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px;border-bottom:1px solid var(--line)}
+.feat:last-child{border:0}
+.feat span{width:34px;height:34px;border-radius:10px;background:var(--primary-soft);display:grid;place-items:center}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+.empty div{font-size:50px;margin-bottom:8px}
+
+/* Bottom nav */
+.nav{position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding-bottom:6px;z-index:10}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;color:#9ca3af;font-weight:700;position:relative}
+.nav button span{font-size:21px;filter:grayscale(1);opacity:.7}
+.nav button.on{color:var(--primary)}
+.nav button.on span{filter:none;opacity:1}
+.nav .count{position:absolute;top:-4px;left:6px;background:var(--sale);color:#fff;border-radius:9px;font-size:10px;padding:0 5px;min-width:16px}
+
+.toast{position:absolute;bottom:86px;left:50%;transform:translateX(-50%) translateY(20px);background:#111827;color:#fff;padding:10px 18px;border-radius:12px;font-size:13.5px;opacity:0;transition:.3s;z-index:60;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.disclaimer{font-size:11px;color:var(--muted);text-align:center;margin-top:16px}
+
+</style>
+</head>
+<body>
+  <div class="app">
+    <div class="splash" id="splash">
+      <div class="logo-bag">%</div>
+      <h1>OFFERS</h1>
+      <h2>أوفرس</h2>
+      <p>كل العروض في الإمارات<br />في مكان واحد</p>
+      <svg class="skyline" viewBox="0 0 400 180" preserveAspectRatio="none" fill="#2e1065">
+        <path d="M0 180V130h20v-20h15v30h18V95h12v45h20v-60h10v60h15V70h8V20l4-20 4 20v50h8v110h20v-80h18v80h15v-55h20v55h18V85h14v95h22v-40h16v40h20v-70h12v70h20v-30h20v50z"/>
+      </svg>
+    </div>
+    <main class="screen" id="screen"></main>
+    <nav class="nav" id="nav"></nav>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script>
+// Demo data only. Prices, stores and offers are sample values for the prototype,
+// not real retailer data. Replace with a backend/API in production.
+window.OFFERS_DATA = {
+  emirates: ["أبوظبي", "دبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة"],
+
+  categories: [
+    { id: "all", name: "الكل", icon: "🟦", bg: "#ede9fe" },
+    { id: "grocery", name: "مواد غذائية", icon: "🥬", bg: "#dcfce7" },
+    { id: "electronics", name: "إلكترونيات", icon: "💻", bg: "#e0f2fe" },
+    { id: "fashion", name: "ملابس", icon: "👕", bg: "#fee2e2" },
+    { id: "home", name: "المنزل", icon: "🏠", bg: "#ffedd5" },
+    { id: "beauty", name: "عطور وتجميل", icon: "🧴", bg: "#fce7f3" },
+    { id: "kids", name: "أطفال", icon: "🧸", bg: "#fef9c3" },
+    { id: "more", name: "أخرى", icon: "✨", bg: "#e0e7ff" }
+  ],
+
+  subCategories: {
+    grocery: [
+      { id: "dairy", name: "ألبان", icon: "🥛" },
+      { id: "meat", name: "لحوم ودواجن", icon: "🥩" },
+      { id: "veg", name: "خضروات وفواكه", icon: "🍎" },
+      { id: "bakery", name: "مخبوزات", icon: "🍞" },
+      { id: "drinks", name: "مشروبات", icon: "🥤" },
+      { id: "canned", name: "معلبات", icon: "🥫" }
+    ]
+  },
+
+  stores: [
+    { id: "lulu", name: "لولو هايبرماركت", short: "Lulu", color: "#d71920", type: "super", offers: 320 },
+    { id: "carrefour", name: "كارفور", short: "C4", color: "#1e4fa3", type: "super", offers: 280 },
+    { id: "spinneys", name: "سبينيس", short: "Sp", color: "#2f7d32", type: "super", offers: 210 },
+    { id: "unioncoop", name: "جمعية الاتحاد", short: "UC", color: "#0b6e99", type: "super", offers: 195 },
+    { id: "sharafdg", name: "شرف دي جي", short: "DG", color: "#f4b400", type: "electronics", offers: 420 },
+    { id: "ikea", name: "إيكيا", short: "IK", color: "#0058a3", type: "home", offers: 150 },
+    { id: "centrepoint", name: "سنتربوينت", short: "CP", color: "#e85d1f", type: "fashion", offers: 175 },
+    { id: "ace", name: "إيس", short: "ACE", color: "#c8102e", type: "home", offers: 90 }
+  ],
+
+  // prices: map of storeId -> current price (AED). "old" is the reference price.
+  products: [
+    { id: "p1", name: "أرز بسمتي 5 كيلو", cat: "grocery", sub: "canned", emoji: "🍚", old: 45,
+      prices: { lulu: 29, carrefour: 32.5, unioncoop: 33, spinneys: 36 }, until: "2026-11-30", featured: true },
+    { id: "p2", name: "مياه معدنية 1.5 لتر (6 عبوات)", cat: "grocery", sub: "drinks", emoji: "💧", old: 16.8,
+      prices: { carrefour: 12, lulu: 12.75, unioncoop: 13.5, spinneys: 14.25 }, until: "2026-11-20" },
+    { id: "p3", name: "زيت دوار الشمس 1.5 لتر", cat: "grocery", sub: "canned", emoji: "🫒", old: 17.5,
+      prices: { unioncoop: 13.5, lulu: 14, carrefour: 14.95 }, until: "2026-11-25" },
+    { id: "p4", name: "حليب طازج 2 لتر", cat: "grocery", sub: "dairy", emoji: "🥛", old: 12,
+      prices: { lulu: 9.5, carrefour: 9.75, spinneys: 10.5, unioncoop: 9.25 }, until: "2026-11-15" },
+    { id: "p5", name: "صدور دجاج 1 كيلو", cat: "grocery", sub: "meat", emoji: "🍗", old: 32,
+      prices: { carrefour: 24.95, lulu: 23.5, spinneys: 27 }, until: "2026-11-18" },
+    { id: "p6", name: "خبز توست أبيض", cat: "grocery", sub: "bakery", emoji: "🍞", old: 7,
+      prices: { lulu: 5.25, carrefour: 5, unioncoop: 5.5 }, until: "2026-11-12" },
+    { id: "p7", name: "تفاح أحمر 1 كيلو", cat: "grocery", sub: "veg", emoji: "🍎", old: 9.5,
+      prices: { spinneys: 7.25, lulu: 6.5, carrefour: 6.95, unioncoop: 6.75 }, until: "2026-11-14" },
+    { id: "p8", name: "منظف غسيل 3 كيلو", cat: "home", sub: null, emoji: "🧺", old: 58,
+      prices: { carrefour: 41.2, lulu: 44, unioncoop: 48.75 }, until: "2026-11-30" },
+    { id: "p9", name: "سماعات لاسلكية", cat: "electronics", sub: null, emoji: "🎧", old: 499,
+      prices: { sharafdg: 349, carrefour: 379, lulu: 369 }, until: "2026-12-05", featured: true },
+    { id: "p10", name: "تلفزيون ذكي 55 بوصة", cat: "electronics", sub: null, emoji: "📺", old: 2299,
+      prices: { sharafdg: 1599, carrefour: 1649, lulu: 1699 }, until: "2026-11-28", featured: true },
+    { id: "p11", name: "هاتف ذكي 128 جيجا", cat: "electronics", sub: null, emoji: "📱", old: 1899,
+      prices: { sharafdg: 1499, carrefour: 1549 }, until: "2026-11-22" },
+    { id: "p12", name: "طاولة جانبية خشب", cat: "home", sub: null, emoji: "🪑", old: 149,
+      prices: { ikea: 99, ace: 115 }, until: "2026-12-10" },
+    { id: "p13", name: "قميص قطني رجالي", cat: "fashion", sub: null, emoji: "👔", old: 89,
+      prices: { centrepoint: 49, lulu: 55 }, until: "2026-11-30" },
+    { id: "p14", name: "عطر نسائي 100 مل", cat: "beauty", sub: null, emoji: "🌸", old: 320,
+      prices: { lulu: 219, carrefour: 239 }, until: "2026-11-30" },
+    { id: "p15", name: "حفاضات أطفال (مقاس 4)", cat: "kids", sub: null, emoji: "👶", old: 75,
+      prices: { carrefour: 52, lulu: 54.5, unioncoop: 49.9 }, until: "2026-11-26" },
+    { id: "p16", name: "شامبو 400 مل", cat: "beauty", sub: null, emoji: "🧴", old: 24,
+      prices: { carrefour: 18.7, unioncoop: 21.9, lulu: 19.5 }, until: "2026-11-21" }
+  ],
+
+  banners: [
+    { title: "عروض المواد الغذائية", sub: "خصومات حتى 40%", cat: "grocery", emoji: "🥕🍅🍋", from: "#f97316", to: "#ef4444" },
+    { title: "أسبوع الإلكترونيات", sub: "أفضل الأسعار في الإمارات", cat: "electronics", emoji: "📺🎧📱", from: "#6d28d9", to: "#2563eb" },
+    { title: "جدّد منزلك", sub: "عروض الأثاث والأدوات", cat: "home", emoji: "🛋️🪑🧺", from: "#0d9488", to: "#16a34a" }
+  ]
+};
+
+</script>
+  <script>
+(function () {
+  const D = window.OFFERS_DATA;
+  const $ = (s) => document.querySelector(s);
+  const screen = $("#screen");
+
+  // ---------- persistent state ----------
+  const load = (k, d) => { try { const v = localStorage.getItem("offers:" + k); return v ? JSON.parse(v) : d; } catch { return d; } };
+  const save = (k, v) => { try { localStorage.setItem("offers:" + k, JSON.stringify(v)); } catch {} };
+
+  const S = {
+    emirate: load("emirate", "أبوظبي"),
+    favs: load("favs", []),          // product ids
+    favStores: load("favStores", []),
+    cart: load("cart", {}),          // productId -> qty
+    custom: load("custom", []),      // merchant-added offers
+    merchant: load("merchant", null),
+    history: [],
+  };
+  const persist = () => { ["emirate", "favs", "favStores", "cart", "custom", "merchant"].forEach((k) => save(k, S[k])); };
+
+  // ---------- helpers ----------
+  const products = () => D.products.concat(S.custom);
+  const store = (id) => D.stores.find((s) => s.id === id) || { id, name: id, short: "?", color: "#64748b" };
+  const product = (id) => products().find((p) => p.id === id);
+  const best = (p) => {
+    let bid = null, bp = Infinity;
+    for (const [sid, v] of Object.entries(p.prices)) if (v < bp) { bp = v; bid = sid; }
+    return { store: bid, price: bp };
+  };
+  const pct = (p) => Math.round((1 - best(p).price / p.old) * 100);
+  const aed = (n) => `${Number(n).toFixed(n % 1 ? 2 : 0)} درهم`;
+  const fmtDate = (s) => new Date(s).toLocaleDateString("ar-AE", { day: "numeric", month: "long", year: "numeric" });
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function toast(msg) {
+    const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1800);
+  }
+
+  // ---------- router ----------
+  let current = { name: "home", params: {} };
+  function go(name, params = {}, push = true) {
+    if (push) S.history.push(current);
+    current = { name, params };
+    render();
+    screen.scrollTop = 0;
+  }
+  function back() { current = S.history.pop() || { name: "home", params: {} }; render(); }
+
+  const tabs = [
+    { id: "home", label: "الرئيسية", icon: "🏠" },
+    { id: "stores", label: "المتاجر", icon: "🏬" },
+    { id: "favs", label: "المفضلة", icon: "❤️" },
+    { id: "compare", label: "قارن", icon: "🛒" },
+    { id: "account", label: "حسابي", icon: "👤" },
+  ];
+  function renderNav() {
+    const n = Object.keys(S.cart).length;
+    $("#nav").innerHTML = tabs.map((t) => `
+      <button class="${current.name === t.id ? "on" : ""}" data-tab="${t.id}">
+        <span>${t.icon}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
+      </button>`).join("");
+  }
+
+  // ---------- components ----------
+  const header = (title, opts = {}) => `
+    <div class="topbar">
+      <button class="icon-btn" data-act="back" aria-label="رجوع">→</button>
+      <h1>${title}</h1>
+      ${opts.right || `<span class="icon-btn"></span>`}
+    </div>`;
+
+  function pcard(p) {
+    const b = best(p);
+    const fav = S.favs.includes(p.id), inCart = !!S.cart[p.id];
+    return `
+    <div class="pcard" data-open="${p.id}">
+      <div class="pimg">${p.emoji}<span class="badge">خصم ${pct(p)}%</span></div>
+      <div class="pinfo">
+        <h5>${esc(p.name)}</h5>
+        <div class="store">${store(b.store).name}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""}</div>
+        <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
+      </div>
+      <div class="pact">
+        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${fav ? "♥" : "♡"}</button>
+        <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${inCart ? "✓" : "+"}</button>
+      </div>
+    </div>`;
+  }
+  const mini = (p) => `
+    <div class="mini" data-open="${p.id}">
+      <div class="pimg">${p.emoji}<span class="badge">-${pct(p)}%</span></div>
+      <h6>${esc(p.name)}</h6><b>${aed(best(p).price)}</b>
+    </div>`;
+  const slogo = (s) => `<div class="slogo" style="background:${s.color}">${s.short}</div>`;
+
+  // ---------- screens ----------
+  const V = {};
+
+  V.home = () => {
+    const featured = products().filter((p) => p.featured).concat(products().slice(0, 4));
+    const uniq = [...new Map(featured.map((p) => [p.id, p])).values()];
+    return `
+    <div class="topbar">
+      <div class="brand"><div class="mark">%</div><b>OFFERS</b></div>
+      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">🔔<i class="dot"></i></button>
+    </div>
+    <label class="select">📍
+      <select id="emirate">${D.emirates.map((e) => `<option ${e === S.emirate ? "selected" : ""}>${e}</option>`).join("")}</select>
+    </label>
+    <div class="search">🔍<input id="q" placeholder="ابحث عن أي منتج أو متجر..." /><span>⌗</span></div>
+    <div class="cats">${D.categories.map((c) => `
+      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${c.icon}</div>${c.name}</button>`).join("")}
+    </div>
+    <div class="section-h"><h3>أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
+    <div class="banner-wrap"><div class="banners" id="banners">${D.banners.map((b) => `
+      <div class="banner" style="background:linear-gradient(120deg,${b.from},${b.to})">
+        <div><h4>${b.title}</h4><small>${b.sub}</small><button class="btn-w" data-cat="${b.cat}">تصفح الآن</button></div>
+        <div class="art">${b.emoji}</div>
+      </div>`).join("")}</div></div>
+    <div class="dots" id="dots">${D.banners.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
+    <div class="section-h"><h3>الأكثر توفيراً</h3></div>
+    <div class="list">${uniq.sort((a, b) => pct(b) - pct(a)).slice(0, 5).map(pcard).join("")}</div>
+    <p class="disclaimer">نسخة تجريبية — جميع الأسعار والعروض بيانات وهمية للعرض فقط.</p>`;
+  };
+
+  V.category = ({ cat = "all", sub = null, q = "", sort = "discount" }) => {
+    const c = D.categories.find((x) => x.id === cat) || D.categories[0];
+    let list = products().filter((p) => (cat === "all" || cat === "more" || p.cat === cat) && (!sub || p.sub === sub));
+    if (q) list = products().filter((p) => p.name.includes(q) || Object.keys(p.prices).some((s) => store(s).name.includes(q)));
+    const sorter = { discount: (a, b) => pct(b) - pct(a), low: (a, b) => best(a).price - best(b).price, high: (a, b) => best(b).price - best(a).price };
+    list.sort(sorter[sort]);
+    const subs = D.subCategories[cat];
+    return `
+    ${header(q ? `نتائج: ${esc(q)}` : c.name)}
+    ${subs ? `<div class="cats">
+      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">🔲</div>الكل</button>
+      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${s.icon}</div>${s.name}</button>`).join("")}
+    </div>` : `<div class="chips">${D.categories.filter((x) => x.id !== "more").map((x) => `<button class="chip ${x.id === cat ? "on" : ""}" data-cat="${x.id}">${x.name}</button>`).join("")}</div>`}
+    <div class="toolbar">
+      <select id="sort">
+        <option value="discount" ${sort === "discount" ? "selected" : ""}>الترتيب: الأعلى خصماً</option>
+        <option value="low" ${sort === "low" ? "selected" : ""}>السعر: من الأقل</option>
+        <option value="high" ${sort === "high" ? "selected" : ""}>السعر: من الأعلى</option>
+      </select>
+    </div>
+    <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>🔎</div>لا توجد عروض مطابقة</div>`}</div>`;
+  };
+
+  V.product = ({ id }) => {
+    const p = product(id); if (!p) return V.home();
+    const b = best(p), fav = S.favs.includes(p.id);
+    const rows = Object.entries(p.prices).sort((a, c) => a[1] - c[1]);
+    const similar = products().filter((x) => x.cat === p.cat && x.id !== p.id).slice(0, 6);
+    return `
+    ${header("", { right: `<button class="icon-btn heart ${fav ? "on" : ""}" data-fav="${p.id}">${fav ? "♥" : "♡"}</button>` })}
+    <div class="detail">
+      <div class="hero">${p.emoji}<span class="badge">خصم ${pct(p)}%</span></div>
+      <h2>${esc(p.name)}</h2>
+      <div class="store" style="color:var(--muted);margin:4px 0 8px">${store(b.store).name}</div>
+      <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
+      <div class="infobox">
+        <div>📅 يسري العرض حتى: ${fmtDate(p.until)}</div>
+        <div>📍 جميع فروع ${S.emirate}</div>
+        <div>🛍️ متوفر في الفروع أو عبر المتجر الإلكتروني</div>
+      </div>
+      <div class="section-h"><h3>الأسعار في المتاجر</h3></div>
+      <div class="store-prices">${rows.map(([sid, v], i) => `
+        <div class="row ${i ? "" : "best"}"><span>${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" data-cart="${p.id}">${S.cart[p.id] ? "✓ في قائمة المقارنة" : "＋ أضف لقائمة المقارنة"}</button>
+        <button class="btn ghost" style="width:auto" data-act="share">↗</button>
+      </div>
+      <button class="btn ghost" style="margin-top:8px" data-store="${b.store}">زيارة صفحة المتجر</button>
+      ${similar.length ? `<div class="section-h" style="margin-top:18px"><h3>منتجات مشابهة</h3></div><div class="hscroll">${similar.map(mini).join("")}</div>` : ""}
+    </div>`;
+  };
+
+  V.stores = ({ type = "all", q = "" }) => {
+    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
+    const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)));
+    return `
+    <div class="topbar"><span class="icon-btn"></span><h1>المتاجر</h1><span class="icon-btn"></span></div>
+    <div class="search">🔍<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
+    <div class="chips">${types.map(([id, n]) => `<button class="chip ${id === type ? "on" : ""}" data-stype="${id}">${n}</button>`).join("")}</div>
+    <div class="list">${list.map((s) => `
+      <div class="srow" data-store="${s.id}">
+        ${slogo(s)}
+        <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض</small></div>
+        <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${S.favStores.includes(s.id) ? "♥" : "♡"}</button>
+        <span style="color:#9ca3af">‹</span>
+      </div>`).join("")}</div>`;
+  };
+
+  V.store = ({ id }) => {
+    const s = store(id);
+    const list = products().filter((p) => p.prices[id] != null);
+    return `
+    ${header(s.name)}
+    <div class="srow" style="margin-bottom:12px">${slogo(s)}<div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض في ${S.emirate}</small></div></div>
+    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>🏷️</div>لا توجد عروض حالياً</div>`}</div>`;
+  };
+
+  V.favs = () => {
+    const list = products().filter((p) => S.favs.includes(p.id));
+    const st = D.stores.filter((s) => S.favStores.includes(s.id));
+    return `
+    <div class="topbar"><span class="icon-btn"></span><h1>المفضلة</h1><span class="icon-btn"></span></div>
+    ${st.length ? `<div class="section-h"><h3>متاجري</h3></div><div class="hscroll" style="margin-bottom:12px">${st.map((s) => `<div data-store="${s.id}">${slogo(s)}</div>`).join("")}</div>` : ""}
+    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>♡</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
+  };
+
+  V.compare = ({ mode = "all" }) => {
+    const ids = Object.keys(S.cart).filter(product);
+    if (!ids.length) return `
+      <div class="topbar"><span class="icon-btn"></span><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
+      <div class="empty"><div>🛒</div>أضف منتجات بالضغط على <b>+</b> لمقارنة سعر سلتك في كل المتاجر</div>
+      <button class="btn" data-cat="all">تصفح العروض</button>`;
+    const items = ids.map(product);
+    const sids = [...new Set(items.flatMap((p) => Object.keys(p.prices)))];
+    const totals = sids.map((sid) => {
+      let sum = 0, have = 0;
+      items.forEach((p) => { if (p.prices[sid] != null) { sum += p.prices[sid] * S.cart[p.id]; have++; } });
+      return { sid, sum, have };
+    }).sort((a, b) => (b.have - a.have) || (a.sum - b.sum));
+    const full = totals.filter((t) => t.have === items.length);
+    const bestT = (full[0] || totals[0]);
+    // multi-select: cheapest store per item
+    let multiSum = 0;
+    items.forEach((p) => { multiSum += best(p).price * S.cart[p.id]; });
+    const worst = Math.max(...full.map((t) => t.sum), bestT.sum);
+
+    return `
+    <div class="topbar"><button class="icon-btn" data-act="clear" title="مسح">🗑️</button><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
+    <div class="cmp"><table>
+      <thead><tr><th class="prod">المنتجات</th>${totals.map((t) => `
+        <th><div class="slogo" style="width:60px;height:30px;font-size:12px;margin:auto;background:${store(t.sid).color}">${store(t.sid).short}</div>
+        <span class="avail">${t.have}/${items.length}</span></th>`).join("")}</tr></thead>
+      <tbody>${items.map((p) => {
+        const cheapest = best(p).store;
+        return `<tr><td class="prod">${p.emoji} ${esc(p.name)}<br/>
+          <span class="qty"><button data-qty="${p.id}" data-d="-1">−</button>${S.cart[p.id]}<button data-qty="${p.id}" data-d="1">+</button></span></td>
+          ${totals.map((t) => {
+            const v = p.prices[t.sid];
+            if (v == null) return `<td class="na">—</td>`;
+            const hl = mode === "multi" ? t.sid === cheapest : t.sid === bestT.sid;
+            return `<td class="${hl ? "cheap" : ""}">${(v * S.cart[p.id]).toFixed(2)}${hl ? " ✓" : ""}</td>`;
+          }).join("")}</tr>`;
+      }).join("")}</tbody>
+      <tfoot><tr><td class="prod">الإجمالي (درهم)</td>${totals.map((t) => `<td class="${t.sid === bestT.sid ? "bestcol" : ""}">${t.sum.toFixed(2)}${t.have < items.length ? "*" : ""}</td>`).join("")}</tr></tfoot>
+    </table></div>
+    <div class="seg"><button class="${mode === "all" ? "on" : ""}" data-mode="all">متجر واحد</button><button class="${mode === "multi" ? "on" : ""}" data-mode="multi">عدة متاجر</button></div>
+    <div class="summary">${mode === "multi"
+      ? `أقل تكلفة بالشراء من عدة متاجر<br/><b>${multiSum.toFixed(2)} درهم</b>`
+      : `أفضل سعر لسلتك: <b>${store(bestT.sid).name}</b><br/><b>${bestT.sum.toFixed(2)} درهم</b>${worst > bestT.sum ? ` — توفير ${(worst - bestT.sum).toFixed(2)} درهم` : ""}`}
+    </div>
+    <p class="disclaimer">* المتجر لا يوفر كل المنتجات في السلة</p>`;
+  };
+
+  V.account = () => `
+    <div class="topbar"><span class="icon-btn"></span><h1>حسابي</h1><span class="icon-btn"></span></div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="section-h" style="margin-top:0"><h3>مميزات التطبيق</h3></div>
+      ${[["🏬", "جميع العروض من جميع المتاجر في مكان واحد"], ["📍", "تغطية جميع الإمارات"], ["🔍", "بحث سهل ومتقدم"], ["%", "عرض نسبة الخصم والسعر السابق"], ["🛒", "مقارنة سعر السلة بين المتاجر"], ["🔔", "إشعارات بالعروض الجديدة"], ["❤️", "مفضلة العروض والمتاجر"], ["↗", "مشاركة العروض مع الآخرين"]]
+        .map(([i, t]) => `<div class="feat"><span>${i}</span>${t}</div>`).join("")}
+    </div>
+    <div class="card">
+      <div class="section-h" style="margin-top:0"><h3>هل تملك متجراً؟</h3></div>
+      <p style="font-size:13.5px;color:var(--muted);margin-bottom:10px">سجّل متجرك وانشر عروضك لآلاف المتسوقين في الإمارات.</p>
+      <button class="btn orange" data-go="${S.merchant ? "dashboard" : "merchantLogin"}">${S.merchant ? "لوحة تحكم المتجر" : "تسجيل المتاجر"}</button>
+    </div>`;
+
+  V.merchantLogin = () => `
+    ${header("تسجيل المتاجر في أوفرس")}
+    <div class="steps">${[["1", "إنشاء حساب تجاري", "#5b21b6"], ["2", "إضافة معلومات المتجر", "#f97316"], ["3", "إضافة العروض والمنتجات", "#16a34a"], ["4", "مراجعة ونشر العروض", "#2563eb"]]
+      .map(([n, t, c]) => `<div><i style="background:${c}">${n}</i>${t}</div>`).join("")}</div>
+    <form class="form card" id="mform">
+      <label>اسم المتجر<input name="name" required placeholder="مثال: متجر تجريبي" /></label>
+      <label>البريد الإلكتروني<input name="email" type="email" required placeholder="store@example.com" /></label>
+      <label>كلمة المرور<input name="pw" type="password" required minlength="6" /></label>
+      <button class="btn" type="submit">تسجيل دخول المتجر</button>
+      <button class="btn ghost" type="submit">إنشاء حساب جديد</button>
+    </form>`;
+
+  V.dashboard = () => {
+    if (!S.merchant) return V.merchantLogin();
+    const mine = S.custom;
+    return `
+    ${header("لوحة تحكم المتجر")}
+    <div class="srow" style="margin-bottom:12px"><div class="slogo" style="background:var(--primary)">🏪</div><div class="grow"><h5>${esc(S.merchant.name)}</h5><small>${mine.length} عرض منشور</small></div></div>
+    <div class="dash">
+      <button data-go="addOffer"><span>➕</span>إضافة عرض جديد</button>
+      <button data-act="myoffers"><span>🏷️</span>إدارة العروض</button>
+      <button data-act="soon"><span>📍</span>الفروع والمواقع</button>
+      <button data-act="soon"><span>🖼️</span>منتجات العروض</button>
+      <button data-act="soon"><span>🗓️</span>المدفوعات</button>
+      <button data-act="soon"><span>📊</span>الإحصائيات</button>
+    </div>
+    <div id="myoffers" style="margin-top:14px" class="list">${mine.map(pcard).join("")}</div>
+    <button class="btn ghost" style="margin-top:14px" data-act="logout">تسجيل الخروج</button>`;
+  };
+
+  V.addOffer = () => `
+    ${header("إضافة عرض جديد")}
+    <form class="form" id="oform">
+      <div class="upload">📷<br/>إضافة صور المنتج<br/><small>(سيتم دعم رفع الصور مع الخادم)</small></div>
+      <label>اسم المنتج *<input name="name" required placeholder="مثل: أرز بسمتي 5 كيلو" /></label>
+      <label>القسم<select name="cat">${D.categories.filter((c) => !["all", "more"].includes(c.id)).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}</select></label>
+      <div class="two">
+        <label>السعر السابق (درهم)<input name="old" type="number" step="0.01" min="0.01" required /></label>
+        <label>السعر الجديد (درهم)<input name="price" type="number" step="0.01" min="0.01" required /></label>
+      </div>
+      <div class="two">
+        <label>تاريخ بداية العرض<input name="from" type="date" required /></label>
+        <label>تاريخ نهاية العرض<input name="until" type="date" required /></label>
+      </div>
+      <label>اختيار الفروع<select name="branches"><option>جميع الفروع</option>${D.emirates.map((e) => `<option>${e}</option>`).join("")}</select></label>
+      <button class="btn" type="submit">حفظ ونشر العرض</button>
+    </form>`;
+
+  // ---------- render ----------
+  let bannerTimer;
+  function render() {
+    clearInterval(bannerTimer);
+    screen.innerHTML = (V[current.name] || V.home)(current.params);
+    renderNav();
+    if (current.name === "home") {
+      let i = 0;
+      bannerTimer = setInterval(() => {
+        const b = $("#banners"); if (!b) return;
+        i = (i + 1) % D.banners.length;
+        b.style.transform = `translateX(${i * 100}%)`; // RTL: positive moves to next
+        document.querySelectorAll("#dots i").forEach((d, k) => d.classList.toggle("on", k === i));
+      }, 3500);
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    const f = $("#oform"); if (f) { f.from.value = today; }
+  }
+
+  // ---------- events ----------
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-tab],[data-cat],[data-sub],[data-open],[data-fav],[data-favstore],[data-cart],[data-store],[data-stype],[data-mode],[data-qty],[data-go],[data-act]");
+    if (!t) return;
+    const ds = t.dataset;
+    if (t.tagName === "A") e.preventDefault();
+
+    if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); i < 0 ? S.favs.push(ds.fav) : S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
+    if (ds.favstore) { e.stopPropagation(); const i = S.favStores.indexOf(ds.favstore); i < 0 ? S.favStores.push(ds.favstore) : S.favStores.splice(i, 1); persist(); return render(); }
+    if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة 🛒"); } persist(); return render(); }
+    if (ds.qty) { const q = (S.cart[ds.qty] || 0) + Number(ds.d); if (q <= 0) delete S.cart[ds.qty]; else S.cart[ds.qty] = q; persist(); return render(); }
+    if (ds.tab) { S.history = []; return go(ds.tab, {}, false); }
+    if (ds.cat !== undefined) { const c = ds.cat === "more" ? "all" : ds.cat; return current.name === "category" ? go("category", { ...current.params, cat: c, sub: null, q: "" }, false) : go("category", { cat: c }); }
+    if (ds.sub !== undefined) return go("category", { ...current.params, sub: ds.sub || null }, false);
+    if (ds.open) return go("product", { id: ds.open });
+    if (ds.store) return go("store", { id: ds.store });
+    if (ds.stype) return go("stores", { type: ds.stype }, false);
+    if (ds.mode) return go("compare", { mode: ds.mode }, false);
+    if (ds.go) return go(ds.go);
+    switch (ds.act) {
+      case "back": return back();
+      case "notify": return toast("ستصلك إشعارات بالعروض الجديدة في " + S.emirate);
+      case "share": {
+        const p = product(current.params.id);
+        const text = `${p.name} بسعر ${aed(best(p).price)} بدلاً من ${aed(p.old)} — عبر تطبيق أوفرس`;
+        if (navigator.share) navigator.share({ title: "OFFERS", text }).catch(() => {});
+        else navigator.clipboard?.writeText(text).then(() => toast("تم نسخ العرض للمشاركة"), () => toast(text));
+        return;
+      }
+      case "clear": S.cart = {}; persist(); return render();
+      case "logout": S.merchant = null; persist(); S.history = []; return go("account", {}, false);
+      case "myoffers": return $("#myoffers")?.scrollIntoView({ behavior: "smooth" });
+      case "soon": return toast("قريباً في النسخة الكاملة");
+    }
+  });
+
+  document.addEventListener("change", (e) => {
+    if (e.target.id === "emirate") { S.emirate = e.target.value; persist(); toast("تم اختيار " + S.emirate); }
+    if (e.target.id === "sort") go("category", { ...current.params, sort: e.target.value }, false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    if (e.target.id === "q" && e.target.value.trim()) go("category", { cat: "all", q: e.target.value.trim() });
+  });
+  document.addEventListener("input", (e) => {
+    if (e.target.id === "sq") {
+      const v = e.target.value; go("stores", { ...current.params, q: v }, false);
+      const el = $("#sq"); el.focus(); el.setSelectionRange(v.length, v.length);
+    }
+  });
+
+  document.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = e.target, fd = Object.fromEntries(new FormData(f));
+    if (f.id === "mform") { S.merchant = { name: fd.name, email: fd.email }; persist(); toast("مرحباً " + fd.name); S.history = [{ name: "account", params: {} }]; return go("dashboard", {}, false); }
+    if (f.id === "oform") {
+      const old = +fd.old, price = +fd.price;
+      if (price >= old) return toast("السعر الجديد يجب أن يكون أقل من السابق");
+      if (fd.until < fd.from) return toast("تاريخ النهاية قبل تاريخ البداية");
+      const sid = "m_" + S.merchant.name;
+      if (!D.stores.find((s) => s.id === sid)) D.stores.push({ id: sid, name: S.merchant.name, short: S.merchant.name.slice(0, 2), color: "#5b21b6", type: "super", offers: 0 });
+      const cat = D.categories.find((c) => c.id === fd.cat);
+      S.custom.push({ id: "c" + Date.now(), name: fd.name, cat: fd.cat, sub: null, emoji: cat ? cat.icon : "🏷️", old, prices: { [sid]: price }, until: fd.until, featured: true });
+      persist(); toast("تم نشر العرض ✅"); back();
+    }
+  });
+
+  // restore merchant store records
+  if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, short: S.merchant.name.slice(0, 2), color: "#5b21b6", type: "super", offers: S.custom.length });
+
+  render();
+  setTimeout(() => $("#splash").classList.add("hide"), 1600);
+})();
+
+</script>
+</body>
+</html>
