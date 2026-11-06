@@ -7,217 +7,363 @@
   <title>OFFERS أوفرس</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet" />
   <style>
+/* OFFERS — "Dusk Souq" theme.
+   Layout: one phone-width column; warm sand by day, deep plum at night; saffron→magenta→violet dusk
+   gradient as the signature, an eight-point star (khatam) pattern as texture. */
 :root{
-  --primary:#5b21b6; --primary-2:#7c3aed; --primary-soft:#ede9fe;
-  --accent:#f97316; --sale:#ef4444; --ok:#16a34a;
-  --text:#1f2937; --muted:#6b7280; --line:#eceef3;
-  --bg:#f6f7fb; --card:#ffffff; --radius:16px;
-  --shadow:0 2px 10px rgba(17,24,39,.06);
+  --bg:#fbf6ef; --surface:#ffffff; --surface-2:#f6efe6; --ink:#23182f; --muted:#7c7088; --line:#efe5d8;
+  --brand:#6d28d9; --brand-2:#8b5cf6; --brand-soft:#f1e9ff; --on-brand:#ffffff;
+  --saffron:#ff8a1f; --sale:#e11d48; --sale-soft:#ffe4ea; --mint:#0f9f6e; --mint-soft:#dcf7ec; --amber-soft:#fff1d6; --amber-ink:#8a4b00;
+  --dusk:linear-gradient(135deg,#ff9a2e 0%,#f2456b 48%,#7c3aed 100%);
+  --pattern:rgba(109,40,217,.045);
+  --shadow:0 1px 2px rgba(35,24,47,.05),0 8px 24px -12px rgba(35,24,47,.18);
+  --shadow-lg:0 20px 50px -18px rgba(76,29,149,.45);
+  --radius:20px; --radius-sm:14px;
+  --f-display:"Reem Kufi","IBM Plex Sans Arabic","Cairo",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic","Cairo",system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
 }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#130b20; --surface:#1d1430; --surface-2:#251a3c; --ink:#f4eefc; --muted:#a698bd; --line:#2f2348;
+    --brand:#a78bfa; --brand-2:#c4b5fd; --brand-soft:#2b1e4a; --on-brand:#1a1029;
+    --saffron:#ffa24d; --sale:#fb7185; --sale-soft:#3a1626; --mint:#34d399; --mint-soft:#0f2d24; --amber-soft:#33240f; --amber-ink:#ffc777;
+    --pattern:rgba(196,181,253,.06);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#130b20; --surface:#1d1430; --surface-2:#251a3c; --ink:#f4eefc; --muted:#a698bd; --line:#2f2348;
+  --brand:#a78bfa; --brand-2:#c4b5fd; --brand-soft:#2b1e4a; --on-brand:#1a1029;
+  --saffron:#ffa24d; --sale:#fb7185; --sale-soft:#3a1626; --mint:#34d399; --mint-soft:#0f2d24; --amber-soft:#33240f; --amber-ink:#ffc777;
+  --pattern:rgba(196,181,253,.06);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+[hidden]{display:none!important}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{font-family:"Cairo","Tajawal",system-ui,sans-serif;background:#e9e7f3;color:var(--text);display:flex;justify-content:center}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);display:flex;justify-content:center;transition:background .4s}
 button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
-input,select{font:inherit}
-.app{position:relative;width:100%;max-width:430px;height:100dvh;background:var(--bg);overflow:hidden;display:flex;flex-direction:column}
-@media(min-width:500px){.app{height:min(900px,96dvh);margin:auto;border-radius:36px;box-shadow:0 20px 60px rgba(60,30,120,.25);border:8px solid #111}}
-.screen{flex:1;overflow-y:auto;padding:12px 16px 90px}
-.screen::-webkit-scrollbar{display:none}
-
-/* Splash */
-.splash{position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff;
-  background:linear-gradient(180deg,#f97316 0%,#c026d3 50%,#4c1d95 100%);transition:opacity .5s}
-.splash.hide{opacity:0;pointer-events:none}
-.splash .logo-bag{width:110px;height:110px;border-radius:28px;background:#fff;display:grid;place-items:center;font-size:56px;color:var(--accent);font-weight:900;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.splash h1{font-size:44px;font-weight:900;letter-spacing:2px;font-family:system-ui,sans-serif}
-.splash h2{font-size:28px;font-weight:800}
-.splash p{font-size:18px;text-align:center;opacity:.95;line-height:1.6}
-.skyline{position:absolute;bottom:0;left:0;right:0;height:180px;opacity:.35}
-
-/* Header */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 0 12px}
-.topbar h1{font-size:19px;font-weight:800}
-.brand{display:flex;align-items:center;gap:8px}
-.brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#f97316,#c026d3);color:#fff;display:grid;place-items:center}
-.brand b{font-size:26px;font-weight:900;color:var(--primary);font-family:system-ui,sans-serif;letter-spacing:1px}
-.icon-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:18px;position:relative}
-.icon-btn .dot{position:absolute;top:8px;left:9px;width:8px;height:8px;border-radius:50%;background:var(--sale)}
-
-.select{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px}
-.select select{border:0;background:none;flex:1;font-weight:700;outline:none}
-.search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px}
-.search input{border:0;outline:none;flex:1;background:none}
-
-/* Grid of categories */
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px;margin-bottom:18px}
-.cat{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
-.cat .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;color:#4c1d95}
-.cat.active .ic{outline:2px solid var(--primary)}
-
-.section-h{display:flex;justify-content:space-between;align-items:center;margin:6px 0 10px}
-.section-h h3{font-size:17px;font-weight:800}
-.section-h a,.link{color:var(--primary);font-size:13px;font-weight:700}
-
-/* Banner carousel */
-.banner-wrap{overflow:hidden;border-radius:var(--radius)}
-.banners{display:flex;transition:transform .5s ease}
-.banner{min-width:100%;height:150px;border-radius:var(--radius);color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
-.banner h4{font-size:22px;font-weight:900;line-height:1.3}
-.banner small{display:block;opacity:.9;margin:4px 0 10px}
-.banner .btn-w{background:#fff;color:var(--sale);border-radius:10px;padding:6px 14px;font-weight:800;font-size:13px}
-.banner .art{opacity:.9;color:#fff}
-.dots{display:flex;justify-content:center;gap:6px;margin:10px 0 18px}
-.dots i{width:7px;height:7px;border-radius:9px;background:#d4d4d8;transition:.3s}
-.dots i.on{width:20px;background:var(--primary)}
-
-/* Product cards */
-.list{display:flex;flex-direction:column;gap:10px}
-.pcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);display:flex;gap:12px;padding:10px;align-items:center}
-.pimg{position:relative;width:96px;height:86px;border-radius:12px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);color:var(--primary-2);display:grid;place-items:center;flex-shrink:0;overflow:hidden}
-.pimg img,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
-.tiny{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--primary-soft);color:var(--primary-2);vertical-align:middle;position:relative;overflow:hidden}
-.tiny img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+input,select{font:inherit;color:var(--ink)}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
 .i{display:block;flex-shrink:0}
-.badge{position:absolute;top:6px;right:6px;background:var(--sale);color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 7px}
+.num,.price,.cmp td,.summary b{font-variant-numeric:tabular-nums}
+
+.app{position:relative;width:100%;max-width:430px;height:100dvh;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;isolation:isolate}
+@media(min-width:500px){.app{height:min(900px,96dvh);margin:auto;border-radius:40px;box-shadow:var(--shadow-lg);border:8px solid #0d0716}}
+.screen{flex:1;overflow-y:auto;padding:10px 16px 150px;scroll-behavior:smooth}
+.screen::-webkit-scrollbar{display:none}
+.screen.enter-fwd{animation:in-fwd .38s var(--ease)}
+.screen.enter-back{animation:in-back .38s var(--ease)}
+@keyframes in-fwd{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes in-back{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+
+/* staggered entrance for lists */
+.rise{animation:rise .5s var(--ease) both;animation-delay:calc(var(--i,0) * 55ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- Splash ---------- */
+.splash{position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;
+  background:linear-gradient(180deg,#ff9a2e 0%,#f2456b 42%,#6d28d9 78%,#2e1065 100%);transition:opacity .6s var(--ease),transform .6s var(--ease);overflow:hidden}
+.splash.hide{opacity:0;transform:scale(1.06);pointer-events:none}
+.splash .sun{position:absolute;top:22%;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#ffe2a8 0%,rgba(255,200,120,.35) 45%,transparent 70%);animation:sunset 2.2s var(--ease) both}
+@keyframes sunset{from{transform:translateY(-60px);opacity:0}to{transform:translateY(40px);opacity:1}}
+.splash .logo-bag{position:relative;width:118px;height:118px;border-radius:32px;background:#fff;display:grid;place-items:center;color:#f2456b;
+  box-shadow:0 18px 40px rgba(46,16,101,.45);animation:drop .9s var(--spring) .15s both}
+.splash .logo-bag::before{content:"";position:absolute;top:-22px;width:46px;height:30px;border:7px solid #fff;border-bottom:0;border-radius:24px 24px 0 0}
+.splash .logo-bag svg{animation:spin-in .8s var(--spring) .7s both}
+@keyframes drop{from{transform:translateY(-140px) rotate(-12deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes spin-in{from{transform:rotate(-180deg) scale(.2);opacity:0}to{transform:none;opacity:1}}
+.splash h1{font-family:system-ui,sans-serif;font-size:46px;font-weight:900;letter-spacing:3px;margin-top:18px;animation:rise .6s var(--ease) .55s both}
+.splash h2{font-family:var(--f-display);font-size:32px;animation:rise .6s var(--ease) .7s both}
+.splash p{font-size:17px;text-align:center;opacity:.95;line-height:1.7;animation:rise .6s var(--ease) .85s both}
+.skyline{position:absolute;bottom:0;left:0;right:0;height:190px;fill:#1e0b45;opacity:.75;animation:skyline 1.2s var(--ease) .2s both}
+@keyframes skyline{from{transform:translateY(100%)}to{transform:none}}
+
+/* ---------- Top area ---------- */
+.hero-top{position:relative;margin:-10px -16px 14px;padding:22px 16px 18px;border-radius:0 0 28px 28px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.hero-top::before{content:"";position:absolute;inset:0;background-color:var(--pattern);pointer-events:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='black' stroke-width='1.4' d='M24 6l5.3 12.7L42 24l-12.7 5.3L24 42l-5.3-12.7L6 24l12.7-5.3z M11.3 11.3h25.4v25.4H11.3z'/%3E%3C/svg%3E") repeat 0 0/48px;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='black' stroke-width='1.4' d='M24 6l5.3 12.7L42 24l-12.7 5.3L24 42l-5.3-12.7L6 24l12.7-5.3z M11.3 11.3h25.4v25.4H11.3z'/%3E%3C/svg%3E") repeat 0 0/48px}
+.hero-top>*{position:relative}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0 12px}
+.topbar h1{font-family:var(--f-display);font-size:21px;font-weight:700}
+.brand{display:flex;align-items:center;gap:9px}
+.brand .mark{width:42px;height:42px;border-radius:14px;background:var(--dusk);color:#fff;display:grid;place-items:center;box-shadow:0 6px 16px -6px #f2456b}
+.brand b{font-family:system-ui,sans-serif;font-size:25px;font-weight:900;letter-spacing:1px;background:var(--dusk);-webkit-background-clip:text;background-clip:text;color:transparent}
+.icon-btn{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;position:relative;background:var(--surface-2);transition:transform .2s var(--spring)}
+.icon-btn:active{transform:scale(.9)}
+.icon-btn .dot{position:absolute;top:9px;left:10px;width:9px;height:9px;border-radius:50%;background:var(--sale);border:2px solid var(--surface);animation:ping 2s infinite}
+@keyframes ping{0%,100%{box-shadow:0 0 0 0 rgba(225,29,72,.5)}60%{box-shadow:0 0 0 7px rgba(225,29,72,0)}}
+.greet{font-size:13px;color:var(--muted)}
+.greet b{display:block;font-family:var(--f-display);font-size:22px;color:var(--ink);line-height:1.3}
+
+.loc-chip{display:flex;align-items:center;gap:8px;width:100%;padding:10px 12px;border-radius:var(--radius-sm);background:var(--brand-soft);color:var(--brand);font-weight:700;margin-bottom:10px;text-align:right}
+.loc-chip .pulse{width:10px;height:10px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 var(--mint);animation:pulse 1.8s infinite;flex-shrink:0}
+.loc-chip small{color:var(--muted);font-weight:500;margin-inline-start:auto;white-space:nowrap}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.55)}80%,100%{box-shadow:0 0 0 10px rgba(16,185,129,0)}}
+
+.select{width:100%;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:10px}
+.select select{border:0;background:none;flex:1;font-weight:700;outline:none}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:4px;color:var(--muted);transition:border-color .2s,box-shadow .2s}
+.search:focus-within{border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
+.search input{border:0;outline:none;flex:1;background:none;min-width:0}
+
+/* ---------- Categories ---------- */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin:16px 0 20px}
+.cat{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:12.5px;font-weight:600}
+.cat .ic{width:60px;height:60px;border-radius:20px;display:grid;place-items:center;color:var(--brand);
+  background:color-mix(in srgb,var(--tint,#ede9fe) 85%,var(--surface));transition:transform .25s var(--spring),box-shadow .25s}
+:root[data-theme="dark"] .cat .ic{background:color-mix(in srgb,var(--tint,#ede9fe) 14%,var(--surface))}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cat .ic{background:color-mix(in srgb,var(--tint,#ede9fe) 14%,var(--surface))}}
+.cat:hover .ic,.cat:focus-visible .ic{transform:translateY(-3px) rotate(-4deg);box-shadow:var(--shadow)}
+.cat:active .ic{transform:scale(.92)}
+.cat.active .ic{outline:2px solid var(--brand);outline-offset:2px}
+
+.section-h{display:flex;justify-content:space-between;align-items:center;margin:8px 0 12px}
+.section-h h3{font-family:var(--f-display);font-size:19px;font-weight:700;display:flex;align-items:center;gap:6px}
+.section-h h3 .i{color:var(--saffron)}
+.section-h a,.link{color:var(--brand);font-size:13px;font-weight:700;text-decoration:none}
+
+/* ---------- Banners ---------- */
+.banner-wrap{overflow:hidden;border-radius:var(--radius);box-shadow:var(--shadow)}
+.banners{display:flex;transition:transform .7s var(--ease)}
+.banner{position:relative;min-width:100%;height:158px;border-radius:var(--radius);color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;overflow:hidden}
+.banner::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;left:-60px;bottom:-110px;background:rgba(255,255,255,.14)}
+.banner h4{font-family:var(--f-display);font-size:24px;font-weight:700;line-height:1.3}
+.banner small{display:block;opacity:.92;margin:4px 0 12px}
+.banner .btn-w{background:#fff;color:#c2185b;border-radius:12px;padding:7px 16px;font-weight:800;font-size:13px;transition:transform .2s var(--spring)}
+.banner .btn-w:active{transform:scale(.94)}
+.banner .art{position:relative;z-index:1;color:#fff;opacity:.95;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+.dots{display:flex;justify-content:center;gap:6px;margin:12px 0 20px}
+.dots i{width:7px;height:7px;border-radius:9px;background:var(--line);transition:.4s var(--ease)}
+.dots i.on{width:22px;background:var(--brand)}
+
+/* ---------- Near me strip ---------- */
+.near-strip{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 8px;margin:0 -2px 14px}
+.near-strip::-webkit-scrollbar{display:none}
+.near-card{min-width:150px;background:var(--surface);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:6px;text-align:right;transition:transform .2s var(--spring)}
+.near-card:active{transform:scale(.96)}
+.near-card b{font-size:13.5px}
+.near-card small{color:var(--muted);font-size:12px}
+.km{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--mint);background:var(--mint-soft);border-radius:20px;padding:2px 8px;width:max-content}
+.km.far{color:var(--amber-ink);background:var(--amber-soft)}
+
+/* ---------- Product cards ---------- */
+.list{display:flex;flex-direction:column;gap:12px}
+.pcard{position:relative;background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);display:flex;gap:12px;padding:10px;align-items:center;transition:transform .2s var(--ease)}
+.pcard:active{transform:scale(.985)}
+.pimg{position:relative;width:98px;height:92px;border-radius:16px;background:radial-gradient(circle at 30% 25%,var(--surface) 0%,var(--brand-soft) 75%);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0;overflow:hidden}
+.pimg img,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
+.badge{position:absolute;top:7px;right:7px;background:var(--sale);color:#fff;font-size:11px;font-weight:800;border-radius:9px;padding:2px 7px;z-index:1;box-shadow:0 4px 10px -4px var(--sale)}
 .pinfo{flex:1;min-width:0}
-.pinfo h5{font-size:14.5px;font-weight:800;line-height:1.4}
-.pinfo .store{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.pinfo h5{font-size:15px;font-weight:700;line-height:1.45}
+.pinfo .store{font-size:12.5px;color:var(--muted);margin:3px 0 7px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .price{display:flex;align-items:baseline;gap:8px}
-.price b{color:var(--sale);font-size:18px;font-weight:900}
+.price b{color:var(--sale);font-size:19px;font-weight:800}
 .price s{color:var(--muted);font-size:12.5px}
 .pact{display:flex;flex-direction:column;align-items:center;justify-content:space-between;align-self:stretch}
-.heart{color:#9ca3af}
+.heart{color:var(--muted);padding:4px;transition:transform .2s var(--spring)}
 .heart.on{color:var(--sale)}
 .heart.on svg{fill:currentColor}
-.plus{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-size:20px;font-weight:700;display:grid;place-items:center}
-.plus.added{background:var(--ok)}
+.heart.pop svg{animation:heart-pop .55s var(--spring)}
+@keyframes heart-pop{0%{transform:scale(.4)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+.plus{width:34px;height:34px;border-radius:12px;background:var(--brand);color:var(--on-brand);display:grid;place-items:center;transition:transform .25s var(--spring),background .25s}
+.plus:active{transform:scale(.85)}
+.plus.added{background:var(--mint);transform:rotate(360deg)}
 
 .hscroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
 .hscroll::-webkit-scrollbar{display:none}
-.mini{min-width:130px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:8px}
-.mini .pimg{width:100%;height:90px}
+.mini{min-width:132px;background:var(--surface);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:8px}
+.mini .pimg{width:100%;height:92px}
 .mini h6{font-size:12.5px;font-weight:700;margin:6px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mini b{color:var(--sale);font-size:14px}
 
-/* Chips & toolbar */
-.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px}
+/* ---------- Chips & toolbar ---------- */
+.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;padding-bottom:2px}
 .chips::-webkit-scrollbar{display:none}
-.chip{white-space:nowrap;padding:7px 14px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:700}
-.chip.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.chip{white-space:nowrap;padding:8px 15px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:700;transition:.2s}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .toolbar{display:flex;gap:8px;margin-bottom:12px}
-.toolbar select{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
-.toolbar .icon-btn{background:var(--card);border:1px solid var(--line)}
+.toolbar select{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 10px}
 
-/* Detail */
-.hero{position:relative;height:250px;border-radius:20px;background:linear-gradient(135deg,#f5f3ff,#ddd6fe);color:var(--primary-2);display:grid;place-items:center;margin-bottom:14px;overflow:hidden}
-.hero .badge{z-index:1}
-.hero .badge{font-size:15px;padding:6px 14px;border-radius:20px;top:14px;right:14px}
-.detail h2{font-size:22px;font-weight:900}
-.detail .price b{font-size:26px}
-.infobox{background:var(--primary-soft);border-radius:14px;padding:12px 14px;margin:14px 0;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+/* ---------- Product detail ---------- */
+.hero{position:relative;height:260px;border-radius:28px;background:var(--dusk);color:#fff;display:grid;place-items:center;margin-bottom:16px;overflow:hidden}
+.hero::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.12);animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.9)}50%{transform:scale(1.05)}}
+.hero>svg{position:relative;filter:drop-shadow(0 12px 20px rgba(0,0,0,.25));animation:float 5s ease-in-out infinite}
+.hero .badge{font-size:15px;padding:6px 14px;border-radius:20px;top:16px;right:16px;background:#fff;color:var(--sale)}
+.detail h2{font-family:var(--f-display);font-size:25px;font-weight:700;line-height:1.35}
+.detail .price b{font-size:30px}
+.save-pill{display:inline-flex;align-items:center;gap:6px;background:var(--mint-soft);color:var(--mint);font-weight:800;font-size:13px;border-radius:20px;padding:4px 12px;margin-top:8px}
+.infobox{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;margin:16px 0;display:flex;flex-direction:column;gap:10px;font-size:13.5px}
 .infobox div{display:flex;align-items:center;gap:8px}
-.infobox svg{color:var(--primary)}
-.btn{width:100%;padding:13px;border-radius:14px;background:var(--primary);color:#fff;font-weight:800;font-size:15px;display:flex;justify-content:center;align-items:center;gap:8px}
-.btn.ghost{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
-.btn.orange{background:var(--accent)}
-.store-prices{background:var(--card);border-radius:14px;box-shadow:var(--shadow);margin:14px 0;overflow:hidden}
-.store-prices .row{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.infobox svg{color:var(--brand)}
+.infobox a{font-weight:700}
+.btn{width:100%;padding:14px;border-radius:16px;background:var(--brand);color:var(--on-brand);font-weight:800;font-size:15px;display:flex;justify-content:center;align-items:center;gap:8px;transition:transform .2s var(--spring),box-shadow .2s;box-shadow:0 10px 24px -12px var(--brand)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand);box-shadow:none}
+.btn.orange{background:var(--dusk);color:#fff}
+.btn.sm{width:auto;padding:8px 12px;font-size:13px;border-radius:12px}
+.store-prices{background:var(--surface);border-radius:var(--radius-sm);box-shadow:var(--shadow);margin:12px 0 16px;overflow:hidden}
+.store-prices .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px}
 .store-prices .row:last-child{border:0}
-.store-prices .row.best{background:#f0fdf4}
-.tag{font-size:11px;background:var(--ok);color:#fff;border-radius:6px;padding:1px 6px;margin-inline-start:6px}
+.store-prices .row.best{background:var(--mint-soft)}
+.store-prices .meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+.store-prices .meta small{color:var(--muted);font-size:12px}
+.store-prices .end{display:flex;align-items:center;gap:8px}
+.go{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand)}
+.tag{font-size:11px;background:var(--mint);color:#fff;border-radius:6px;padding:1px 7px;margin-inline-start:6px}
 
-/* Stores list */
-.srow{background:var(--card);display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;box-shadow:var(--shadow)}
-.slogo{position:relative;width:84px;height:46px;border-radius:10px;background:var(--c,#64748b);color:#fff;font-weight:900;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:13px;text-align:center;line-height:1.1;padding:4px;flex-shrink:0;overflow:hidden}
+/* ---------- Stores ---------- */
+.srow{background:var(--surface);display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--radius-sm);box-shadow:var(--shadow)}
+.slogo{position:relative;width:84px;height:46px;border-radius:12px;background:var(--c,#64748b);color:#fff;font-weight:900;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:13px;text-align:center;line-height:1.1;padding:4px;flex-shrink:0;overflow:hidden}
 .slogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7px;background:var(--c,#64748b)}
 .slogo img[src$=".png"],.slogo img[src$=".jpg"],.slogo img[src$=".webp"]{background:#fff}
 .slogo img+span{visibility:hidden}
-.slogo.sm{width:44px;height:26px;font-size:9px;border-radius:6px;padding:2px}
+.slogo.sm{width:44px;height:26px;font-size:9px;border-radius:7px;padding:2px}
 .slogo.sm img{padding:3px}
 .slogo.th{width:64px;height:32px;font-size:10px;margin:auto}
 .slogo.th img{padding:4px}
 .sname{display:flex;align-items:center;gap:8px}
-.srow .grow{flex:1}
-.srow h5{font-size:15px;font-weight:800}
+.srow .grow{flex:1;min-width:0}
+.srow h5{font-size:15px;font-weight:700}
 .srow small{color:var(--muted)}
 
-/* Compare */
-.cmp{background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow-x:auto}
+/* ---------- Near me: radar ---------- */
+.radar{position:relative;width:100%;aspect-ratio:1;max-width:100%;border-radius:50%;margin:6px auto 18px;overflow:hidden;
+  background:radial-gradient(circle,var(--surface) 0%,var(--brand-soft) 100%);box-shadow:var(--shadow),inset 0 0 0 1px var(--line)}
+.radar .ring{position:absolute;border:1.5px dashed color-mix(in srgb,var(--brand) 30%,transparent);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.radar .ring span{position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--muted);background:var(--surface);padding:0 6px;border-radius:8px}
+.radar .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,color-mix(in srgb,var(--brand) 32%,transparent),transparent 22%);animation:sweep 4s linear infinite}
+@keyframes sweep{to{transform:rotate(360deg)}}
+.radar .me{position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:var(--brand);border:3px solid var(--surface);box-shadow:0 0 0 0 var(--brand);animation:me 2s infinite;z-index:2}
+@keyframes me{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--brand) 55%,transparent)}100%{box-shadow:0 0 0 22px transparent}}
+.pin{position:absolute;transform:translate(-50%,-100%);z-index:1;animation:pin-in .6s var(--spring) both;animation-delay:calc(var(--i,0) * 70ms + .2s)}
+.pin .slogo{width:46px;height:26px;font-size:9px;border-radius:8px;border:2px solid var(--surface);box-shadow:var(--shadow)}
+.pin::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--surface);border-bottom:0}
+@keyframes pin-in{from{opacity:0;transform:translate(-50%,-160%) scale(.5)}to{opacity:1;transform:translate(-50%,-100%)}}
+.pin.dim{opacity:.35}
+
+/* ---------- Location picker ---------- */
+.sheet-note{font-size:13px;color:var(--muted);margin:4px 0 14px;line-height:1.7}
+.area-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.area{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px;text-align:right;display:flex;flex-direction:column;gap:2px;transition:.2s}
+.area small{color:var(--muted);font-size:11.5px}
+.area.on{border-color:var(--brand);background:var(--brand-soft)}
+
+/* ---------- Compare ---------- */
+.cmp{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
 .cmp table{border-collapse:collapse;min-width:100%}
 .cmp th,.cmp td{padding:10px 8px;text-align:center;font-size:13px;border-bottom:1px solid var(--line);white-space:nowrap}
-.cmp th{background:#fafafa;position:sticky;top:0}
-.cmp td.prod{text-align:right;white-space:normal;min-width:120px;position:sticky;right:0;background:#fff;z-index:1}
+.cmp th{background:var(--surface-2);position:sticky;top:0}
+.cmp td.prod{text-align:right;white-space:normal;min-width:120px;position:sticky;right:0;background:var(--surface);z-index:1}
 .cmp th.prod{position:sticky;right:0;z-index:2}
-.cmp .cheap{background:#fdf2f8;color:#be185d;font-weight:800}
-.cmp .na{color:#cbd5e1}
+.cmp .cheap{background:var(--sale-soft);color:var(--sale);font-weight:800}
+.cmp .na{color:var(--muted);opacity:.5}
 .cmp .avail{display:inline-block;background:var(--sale);color:#fff;border-radius:8px;padding:0 6px;font-size:11px;margin-top:3px}
-.cmp tfoot td{font-weight:900;font-size:14px;background:#fafafa}
-.cmp tfoot td.bestcol{background:#dcfce7;color:var(--ok)}
+.cmp tfoot td{font-weight:800;font-size:14px;background:var(--surface-2)}
+.cmp tfoot td.bestcol{background:var(--mint-soft);color:var(--mint)}
 .qty{display:inline-flex;align-items:center;gap:6px;margin-top:4px}
-.qty button{width:22px;height:22px;border-radius:6px;border:1px solid var(--line);font-weight:800}
-.seg{display:flex;background:#fff;border:1.5px solid #db2777;border-radius:12px;overflow:hidden;margin:12px auto;width:max-content}
-.seg button{padding:7px 16px;font-size:13px;font-weight:700;color:#db2777}
-.seg button.on{background:#db2777;color:#fff}
-.summary{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border-radius:16px;padding:14px;margin-top:12px}
+.qty button{width:24px;height:24px;border-radius:7px;border:1px solid var(--line);font-weight:800}
+.tiny{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--brand-soft);color:var(--brand-2);vertical-align:middle;position:relative;overflow:hidden}
+.tiny img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.seg{display:flex;background:var(--surface);border:1.5px solid var(--brand);border-radius:14px;overflow:hidden;margin:14px auto;width:max-content}
+.seg button{padding:8px 18px;font-size:13px;font-weight:700;color:var(--brand)}
+.seg button.on{background:var(--brand);color:var(--on-brand)}
+.summary{position:relative;background:var(--dusk);color:#fff;border-radius:var(--radius);padding:16px;margin-top:12px;overflow:hidden;line-height:1.8}
+.summary::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;left:-40px;top:-60px;background:rgba(255,255,255,.14)}
 .summary b{font-size:22px}
 
-/* Forms (merchant) */
+/* compare bar floating above the nav */
+.cbar{position:absolute;left:12px;right:12px;bottom:84px;z-index:9;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:18px;background:var(--ink);color:var(--bg);box-shadow:var(--shadow-lg);animation:cbar .45s var(--spring)}
+.cbar b{font-size:14px}
+.cbar small{opacity:.75;font-size:12px}
+.cbar .grow{flex:1}
+.cbar .btn{width:auto;padding:9px 14px;font-size:13px;background:var(--dusk);color:#fff;box-shadow:none}
+@keyframes cbar{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- Forms (merchant) ---------- */
 .form{display:flex;flex-direction:column;gap:12px}
 .form label{font-size:13px;font-weight:700;color:var(--muted)}
-.form input,.form select{width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;outline-color:var(--primary)}
+.form input,.form select{width:100%;margin-top:4px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);outline-color:var(--brand)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.upload{border:2px dashed #cbd5e1;border-radius:14px;padding:18px;text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center}
+.upload{border:2px dashed var(--line);border-radius:var(--radius-sm);padding:18px;text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center}
 .dash{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dash button{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:16px 10px;font-weight:700;font-size:13.5px;display:flex;flex-direction:column;align-items:center;gap:6px}
-.dash button span{width:44px;height:44px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center}
+.dash button{background:var(--surface);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:16px 10px;font-weight:700;font-size:13.5px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform .2s var(--spring)}
+.dash button:active{transform:scale(.95)}
+.dash button span{width:46px;height:46px;border-radius:14px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.steps div{background:#fff;border-radius:12px;padding:10px 4px;text-align:center;font-size:11.5px;font-weight:700;box-shadow:var(--shadow)}
+.steps div{background:var(--surface);border-radius:12px;padding:10px 4px;text-align:center;font-size:11.5px;font-weight:700;box-shadow:var(--shadow)}
 .steps i{display:grid;place-items:center;width:28px;height:28px;margin:0 auto 6px;border-radius:50%;color:#fff;font-style:normal}
-.card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:14px}
-.feat{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px;border-bottom:1px solid var(--line)}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+.feat{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:14px;border-bottom:1px solid var(--line)}
 .feat:last-child{border:0}
-.feat span{width:34px;height:34px;border-radius:10px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center}
+.feat span{width:36px;height:36px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex-shrink:0}
+.theme-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.theme-pick button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border-radius:14px;border:1.5px solid var(--line);font-weight:700;font-size:13px;background:var(--surface)}
+.theme-pick button.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
 .empty{text-align:center;color:var(--muted);padding:40px 10px}
-.empty div{display:grid;place-items:center;margin-bottom:8px;color:#c4b5fd}
-
-/* Bottom nav */
-.nav{position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding-bottom:6px;z-index:10}
-.nav button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;color:#9ca3af;font-weight:700;position:relative}
-.nav button span{opacity:.8}
-.nav button.on{color:var(--primary)}
-.nav button.on span{opacity:1}
-.nav button.on svg{stroke-width:2.4}
-.nav .count{position:absolute;top:-4px;left:6px;background:var(--sale);color:#fff;border-radius:9px;font-size:10px;padding:0 5px;min-width:16px}
-
-.toast{position:absolute;bottom:86px;left:50%;transform:translateX(-50%) translateY(20px);background:#111827;color:#fff;padding:10px 18px;border-radius:12px;font-size:13.5px;opacity:0;transition:.3s;z-index:60;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.disclaimer{font-size:11px;color:var(--muted);text-align:center;margin-top:16px}
+.empty div{display:grid;place-items:center;margin-bottom:10px;color:var(--brand-2);opacity:.7}
 .state{font-size:11.5px;font-weight:800;border-radius:20px;padding:2px 10px;white-space:nowrap}
-.state.pending{background:#fef3c7;color:#92400e}.state.approved{background:#dcfce7;color:#166534}.state.rejected{background:#fee2e2;color:#991b1b}
-.infobox a{color:var(--primary);font-weight:700}
+.state.pending{background:var(--amber-soft);color:var(--amber-ink)}.state.approved{background:var(--mint-soft);color:var(--mint)}.state.rejected{background:var(--sale-soft);color:var(--sale)}
+
+/* ---------- Bottom nav ---------- */
+.nav{position:absolute;bottom:0;left:0;right:0;height:76px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding-bottom:8px;z-index:10}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;color:var(--muted);font-weight:600;position:relative;min-width:56px;transition:color .2s}
+.nav button span{transition:transform .3s var(--spring)}
+.nav button.on{color:var(--brand)}
+.nav button.on span{transform:translateY(-2px)}
+.nav button.on::after{content:"";position:absolute;bottom:-8px;width:5px;height:5px;border-radius:50%;background:var(--brand)}
+.nav button.center span{width:54px;height:54px;margin-top:-30px;border-radius:20px;display:grid;place-items:center;background:var(--dusk);color:#fff;box-shadow:0 12px 24px -10px #f2456b;border:4px solid var(--bg)}
+.nav button.center.on::after{display:none}
+.nav button.center.on span{transform:translateY(-2px) rotate(-8deg)}
+.nav .count{position:absolute;top:-4px;left:8px;background:var(--sale);color:#fff;border-radius:9px;font-size:10px;font-style:normal;padding:0 5px;min-width:16px}
+.nav .count.bump{animation:heart-pop .5s var(--spring)}
+
+.toast{position:absolute;bottom:160px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:14px;font-size:13.5px;opacity:0;transition:.35s var(--spring);z-index:60;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.disclaimer{font-size:11px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.6}
+
+/* confetti burst when the cheapest basket is shown */
+.burst{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:30}
+.burst i{position:absolute;top:40%;left:50%;width:8px;height:12px;border-radius:2px;animation:confetti 1.1s var(--ease) forwards}
+@keyframes confetti{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
 
 </style>
 </head>
 <body>
   <div class="app">
-    <div class="splash" id="splash">
-      <div class="logo-bag">%</div>
+    <div class="splash" id="splash" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="logo-bag"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
       <h1>OFFERS</h1>
       <h2>أوفرس</h2>
       <p>كل العروض في الإمارات<br />في مكان واحد</p>
-      <svg class="skyline" viewBox="0 0 400 180" preserveAspectRatio="none" fill="#2e1065">
-        <path d="M0 180V130h20v-20h15v30h18V95h12v45h20v-60h10v60h15V70h8V20l4-20 4 20v50h8v110h20v-80h18v80h15v-55h20v55h18V85h14v95h22v-40h16v40h20v-70h12v70h20v-30h20v50z"/>
+      <svg class="skyline" viewBox="0 0 400 190" preserveAspectRatio="none">
+        <path d="M0 190V140h18v-22h14v30h16V105h12v43h18V88h10v60h14V80h7V32l4-32 4 32v48h7v110h18v-86h16v86h14V120h18v70h16V95h13v95h20v-44h15v44h18v-74h11v74h18v-32h16v-24h10v56h14V150h22v40z"/>
       </svg>
     </div>
     <main class="screen" id="screen"></main>
+    <div class="cbar" id="cbar" hidden></div>
     <nav class="nav" id="nav"></nav>
     <div class="toast" id="toast" role="status"></div>
   </div>
   <script>
 // Icons from Lucide (lucide.dev), ISC License. ISC License
-window.ICONS = {"house": "<path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\" /> <path d=\"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" />", "store": "<path d=\"m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7\" /> <path d=\"M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\" /> <path d=\"M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4\" /> <path d=\"M2 7h20\" /> <path d=\"M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7\" />", "heart": "<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\" />", "shopping-cart": "<circle cx=\"8\" cy=\"21\" r=\"1\" /> <circle cx=\"19\" cy=\"21\" r=\"1\" /> <path d=\"M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12\" />", "user": "<path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\" /> <circle cx=\"12\" cy=\"7\" r=\"4\" />", "bell": "<path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\" /> <path d=\"M10.3 21a1.94 1.94 0 0 0 3.4 0\" />", "map-pin": "<path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\" /> <circle cx=\"12\" cy=\"10\" r=\"3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "scan-line": "<path d=\"M3 7V5a2 2 0 0 1 2-2h2\" /> <path d=\"M17 3h2a2 2 0 0 1 2 2v2\" /> <path d=\"M21 17v2a2 2 0 0 1-2 2h-2\" /> <path d=\"M7 21H5a2 2 0 0 1-2-2v-2\" /> <path d=\"M7 12h10\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "apple": "<path d=\"M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z\" /> <path d=\"M10 2c1 .5 2 2 2 5\" />", "monitor": "<rect width=\"20\" height=\"14\" x=\"2\" y=\"3\" rx=\"2\" /> <line x1=\"8\" x2=\"16\" y1=\"21\" y2=\"21\" /> <line x1=\"12\" x2=\"12\" y1=\"17\" y2=\"21\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sofa": "<path d=\"M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3\" /> <path d=\"M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\" /> <path d=\"M4 18v2\" /> <path d=\"M20 18v2\" /> <path d=\"M12 4v9\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "baby": "<path d=\"M9 12h.01\" /> <path d=\"M15 12h.01\" /> <path d=\"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5\" /> <path d=\"M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1\" />", "package": "<path d=\"m7.5 4.27 9 5.15\" /> <path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\" /> <path d=\"m3.3 7 8.7 5 8.7-5\" /> <path d=\"M12 22V12\" />", "milk": "<path d=\"M8 2h8\" /> <path d=\"M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2\" /> <path d=\"M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0\" />", "beef": "<circle cx=\"12.5\" cy=\"8.5\" r=\"2.5\" /> <path d=\"M12.5 2a6.5 6.5 0 0 0-6.22 4.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3A6.5 6.5 0 0 0 12.5 2Z\" /> <path d=\"m18.5 6 2.19 4.5a6.48 6.48 0 0 1 .31 2 6.49 6.49 0 0 1-2.6 5.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5\" />", "carrot": "<path d=\"M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.77 11.84 2.27 21.7 2.27 21.7zM8.64 14l-2.05-2.04M15.34 15l-2.46-2.46\" /> <path d=\"M22 9s-1.33-2-3.5-2C16.86 7 15 9 15 9s1.33 2 3.5 2S22 9 22 9z\" /> <path d=\"M15 2s-2 1.33-2 3.5S15 9 15 9s2-1.84 2-3.5C17 3.33 15 2 15 2z\" />", "croissant": "<path d=\"m4.6 13.11 5.79-3.21c1.89-1.05 4.79 1.78 3.71 3.71l-3.22 5.81C8.8 23.16.79 15.23 4.6 13.11Z\" /> <path d=\"m10.5 9.5-1-2.29C9.2 6.48 8.8 6 8 6H4.5C2.79 6 2 6.5 2 8.5a7.71 7.71 0 0 0 2 4.83\" /> <path d=\"M8 6c0-1.55.24-4-2-4-2 0-2.5 2.17-2.5 4\" /> <path d=\"m14.5 13.5 2.29 1c.73.3 1.21.7 1.21 1.5v3.5c0 1.71-.5 2.5-2.5 2.5a7.71 7.71 0 0 1-4.83-2\" /> <path d=\"M18 16c1.55 0 4-.24 4 2 0 2-2.17 2.5-4 2.5\" />", "cup-soda": "<path d=\"m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8\" /> <path d=\"M5 8h14\" /> <path d=\"M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0\" /> <path d=\"m12 8 1-6h2\" />", "calendar": "<path d=\"M8 2v4\" /> <path d=\"M16 2v4\" /> <rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" /> <path d=\"M3 10h18\" />", "share-2": "<circle cx=\"18\" cy=\"5\" r=\"3\" /> <circle cx=\"6\" cy=\"12\" r=\"3\" /> <circle cx=\"18\" cy=\"19\" r=\"3\" /> <line x1=\"8.59\" x2=\"15.42\" y1=\"13.51\" y2=\"17.49\" /> <line x1=\"15.41\" x2=\"8.59\" y1=\"6.51\" y2=\"10.49\" />", "arrow-right": "<path d=\"M5 12h14\" /> <path d=\"m12 5 7 7-7 7\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "check": "<path d=\"M20 6 9 17l-5-5\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "chevron-left": "<path d=\"m15 18-6-6 6-6\" />", "camera": "<path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\" /> <circle cx=\"12\" cy=\"13\" r=\"3\" />", "bar-chart-3": "<path d=\"M3 3v18h18\" /> <path d=\"M18 17V9\" /> <path d=\"M13 17V5\" /> <path d=\"M8 17v-3\" />", "tag": "<path d=\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"7.5\" cy=\"7.5\" r=\".5\" fill=\"currentColor\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "credit-card": "<rect width=\"20\" height=\"14\" x=\"2\" y=\"5\" rx=\"2\" /> <line x1=\"2\" x2=\"22\" y1=\"10\" y2=\"10\" />", "percent": "<line x1=\"19\" x2=\"5\" y1=\"5\" y2=\"19\" /> <circle cx=\"6.5\" cy=\"6.5\" r=\"2.5\" /> <circle cx=\"17.5\" cy=\"17.5\" r=\"2.5\" />", "log-out": "<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\" /> <polyline points=\"16 17 21 12 16 7\" /> <line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\" />", "wheat": "<path d=\"M2 22 16 8\" /> <path d=\"M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z\" /> <path d=\"M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" /> <path d=\"M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" /> <path d=\"M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" />", "droplets": "<path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\" /> <path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\" />", "droplet": "<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\" />", "smartphone": "<rect width=\"14\" height=\"20\" x=\"5\" y=\"2\" rx=\"2\" ry=\"2\" /> <path d=\"M12 18h.01\" />", "tv": "<rect width=\"20\" height=\"15\" x=\"2\" y=\"7\" rx=\"2\" ry=\"2\" /> <polyline points=\"17 2 12 7 7 2\" />", "headphones": "<path d=\"M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3\" />", "armchair": "<path d=\"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3\" /> <path d=\"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\" /> <path d=\"M5 18v2\" /> <path d=\"M19 18v2\" />", "flower-2": "<path d=\"M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1\" /> <circle cx=\"12\" cy=\"8\" r=\"2\" /> <path d=\"M12 10v12\" /> <path d=\"M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z\" /> <path d=\"M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z\" />", "spray-can": "<path d=\"M3 3h.01\" /> <path d=\"M7 5h.01\" /> <path d=\"M11 7h.01\" /> <path d=\"M3 7h.01\" /> <path d=\"M7 9h.01\" /> <path d=\"M3 11h.01\" /> <rect width=\"4\" height=\"4\" x=\"15\" y=\"5\" /> <path d=\"m19 9 2 2v10c0 .6-.4 1-1 1h-6c-.6 0-1-.4-1-1V11l2-2\" /> <path d=\"m13 14 8-2\" /> <path d=\"m13 19 8-2\" />", "drumstick": "<path d=\"M15.4 15.63a7.875 6 135 1 1 6.23-6.23 4.5 3.43 135 0 0-6.23 6.23\" /> <path d=\"m8.29 12.71-2.6 2.6a2.5 2.5 0 1 0-1.65 4.65A2.5 2.5 0 1 0 8.7 18.3l2.59-2.59\" />", "washing-machine": "<path d=\"M3 6h3\" /> <path d=\"M17 6h.01\" /> <rect width=\"18\" height=\"20\" x=\"3\" y=\"2\" rx=\"2\" /> <circle cx=\"12\" cy=\"13\" r=\"5\" /> <path d=\"M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5\" />", "ellipsis": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"19\" cy=\"12\" r=\"1\" /> <circle cx=\"5\" cy=\"12\" r=\"1\" />", "list-filter": "<path d=\"M3 6h18\" /> <path d=\"M7 12h10\" /> <path d=\"M10 18h4\" />", "shopping-bag": "<path d=\"M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z\" /> <path d=\"M3 6h18\" /> <path d=\"M16 10a4 4 0 0 1-8 0\" />"};
+window.ICONS = {"house": "<path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\" /> <path d=\"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" />", "store": "<path d=\"m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7\" /> <path d=\"M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\" /> <path d=\"M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4\" /> <path d=\"M2 7h20\" /> <path d=\"M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7\" />", "heart": "<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\" />", "shopping-cart": "<circle cx=\"8\" cy=\"21\" r=\"1\" /> <circle cx=\"19\" cy=\"21\" r=\"1\" /> <path d=\"M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12\" />", "user": "<path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\" /> <circle cx=\"12\" cy=\"7\" r=\"4\" />", "bell": "<path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\" /> <path d=\"M10.3 21a1.94 1.94 0 0 0 3.4 0\" />", "map-pin": "<path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\" /> <circle cx=\"12\" cy=\"10\" r=\"3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "scan-line": "<path d=\"M3 7V5a2 2 0 0 1 2-2h2\" /> <path d=\"M17 3h2a2 2 0 0 1 2 2v2\" /> <path d=\"M21 17v2a2 2 0 0 1-2 2h-2\" /> <path d=\"M7 21H5a2 2 0 0 1-2-2v-2\" /> <path d=\"M7 12h10\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "apple": "<path d=\"M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z\" /> <path d=\"M10 2c1 .5 2 2 2 5\" />", "monitor": "<rect width=\"20\" height=\"14\" x=\"2\" y=\"3\" rx=\"2\" /> <line x1=\"8\" x2=\"16\" y1=\"21\" y2=\"21\" /> <line x1=\"12\" x2=\"12\" y1=\"17\" y2=\"21\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sofa": "<path d=\"M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3\" /> <path d=\"M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\" /> <path d=\"M4 18v2\" /> <path d=\"M20 18v2\" /> <path d=\"M12 4v9\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "baby": "<path d=\"M9 12h.01\" /> <path d=\"M15 12h.01\" /> <path d=\"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5\" /> <path d=\"M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1\" />", "package": "<path d=\"m7.5 4.27 9 5.15\" /> <path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\" /> <path d=\"m3.3 7 8.7 5 8.7-5\" /> <path d=\"M12 22V12\" />", "milk": "<path d=\"M8 2h8\" /> <path d=\"M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2\" /> <path d=\"M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0\" />", "beef": "<circle cx=\"12.5\" cy=\"8.5\" r=\"2.5\" /> <path d=\"M12.5 2a6.5 6.5 0 0 0-6.22 4.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3A6.5 6.5 0 0 0 12.5 2Z\" /> <path d=\"m18.5 6 2.19 4.5a6.48 6.48 0 0 1 .31 2 6.49 6.49 0 0 1-2.6 5.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5\" />", "carrot": "<path d=\"M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.77 11.84 2.27 21.7 2.27 21.7zM8.64 14l-2.05-2.04M15.34 15l-2.46-2.46\" /> <path d=\"M22 9s-1.33-2-3.5-2C16.86 7 15 9 15 9s1.33 2 3.5 2S22 9 22 9z\" /> <path d=\"M15 2s-2 1.33-2 3.5S15 9 15 9s2-1.84 2-3.5C17 3.33 15 2 15 2z\" />", "croissant": "<path d=\"m4.6 13.11 5.79-3.21c1.89-1.05 4.79 1.78 3.71 3.71l-3.22 5.81C8.8 23.16.79 15.23 4.6 13.11Z\" /> <path d=\"m10.5 9.5-1-2.29C9.2 6.48 8.8 6 8 6H4.5C2.79 6 2 6.5 2 8.5a7.71 7.71 0 0 0 2 4.83\" /> <path d=\"M8 6c0-1.55.24-4-2-4-2 0-2.5 2.17-2.5 4\" /> <path d=\"m14.5 13.5 2.29 1c.73.3 1.21.7 1.21 1.5v3.5c0 1.71-.5 2.5-2.5 2.5a7.71 7.71 0 0 1-4.83-2\" /> <path d=\"M18 16c1.55 0 4-.24 4 2 0 2-2.17 2.5-4 2.5\" />", "cup-soda": "<path d=\"m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8\" /> <path d=\"M5 8h14\" /> <path d=\"M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0\" /> <path d=\"m12 8 1-6h2\" />", "calendar": "<path d=\"M8 2v4\" /> <path d=\"M16 2v4\" /> <rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" /> <path d=\"M3 10h18\" />", "share-2": "<circle cx=\"18\" cy=\"5\" r=\"3\" /> <circle cx=\"6\" cy=\"12\" r=\"3\" /> <circle cx=\"18\" cy=\"19\" r=\"3\" /> <line x1=\"8.59\" x2=\"15.42\" y1=\"13.51\" y2=\"17.49\" /> <line x1=\"15.41\" x2=\"8.59\" y1=\"6.51\" y2=\"10.49\" />", "arrow-right": "<path d=\"M5 12h14\" /> <path d=\"m12 5 7 7-7 7\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "check": "<path d=\"M20 6 9 17l-5-5\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "chevron-left": "<path d=\"m15 18-6-6 6-6\" />", "camera": "<path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\" /> <circle cx=\"12\" cy=\"13\" r=\"3\" />", "bar-chart-3": "<path d=\"M3 3v18h18\" /> <path d=\"M18 17V9\" /> <path d=\"M13 17V5\" /> <path d=\"M8 17v-3\" />", "tag": "<path d=\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"7.5\" cy=\"7.5\" r=\".5\" fill=\"currentColor\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "credit-card": "<rect width=\"20\" height=\"14\" x=\"2\" y=\"5\" rx=\"2\" /> <line x1=\"2\" x2=\"22\" y1=\"10\" y2=\"10\" />", "percent": "<line x1=\"19\" x2=\"5\" y1=\"5\" y2=\"19\" /> <circle cx=\"6.5\" cy=\"6.5\" r=\"2.5\" /> <circle cx=\"17.5\" cy=\"17.5\" r=\"2.5\" />", "log-out": "<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\" /> <polyline points=\"16 17 21 12 16 7\" /> <line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\" />", "wheat": "<path d=\"M2 22 16 8\" /> <path d=\"M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z\" /> <path d=\"M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" /> <path d=\"M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" /> <path d=\"M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" />", "droplets": "<path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\" /> <path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\" />", "droplet": "<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\" />", "smartphone": "<rect width=\"14\" height=\"20\" x=\"5\" y=\"2\" rx=\"2\" ry=\"2\" /> <path d=\"M12 18h.01\" />", "tv": "<rect width=\"20\" height=\"15\" x=\"2\" y=\"7\" rx=\"2\" ry=\"2\" /> <polyline points=\"17 2 12 7 7 2\" />", "headphones": "<path d=\"M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3\" />", "armchair": "<path d=\"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3\" /> <path d=\"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\" /> <path d=\"M5 18v2\" /> <path d=\"M19 18v2\" />", "flower-2": "<path d=\"M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1\" /> <circle cx=\"12\" cy=\"8\" r=\"2\" /> <path d=\"M12 10v12\" /> <path d=\"M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z\" /> <path d=\"M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z\" />", "spray-can": "<path d=\"M3 3h.01\" /> <path d=\"M7 5h.01\" /> <path d=\"M11 7h.01\" /> <path d=\"M3 7h.01\" /> <path d=\"M7 9h.01\" /> <path d=\"M3 11h.01\" /> <rect width=\"4\" height=\"4\" x=\"15\" y=\"5\" /> <path d=\"m19 9 2 2v10c0 .6-.4 1-1 1h-6c-.6 0-1-.4-1-1V11l2-2\" /> <path d=\"m13 14 8-2\" /> <path d=\"m13 19 8-2\" />", "drumstick": "<path d=\"M15.4 15.63a7.875 6 135 1 1 6.23-6.23 4.5 3.43 135 0 0-6.23 6.23\" /> <path d=\"m8.29 12.71-2.6 2.6a2.5 2.5 0 1 0-1.65 4.65A2.5 2.5 0 1 0 8.7 18.3l2.59-2.59\" />", "washing-machine": "<path d=\"M3 6h3\" /> <path d=\"M17 6h.01\" /> <rect width=\"18\" height=\"20\" x=\"3\" y=\"2\" rx=\"2\" /> <circle cx=\"12\" cy=\"13\" r=\"5\" /> <path d=\"M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5\" />", "ellipsis": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"19\" cy=\"12\" r=\"1\" /> <circle cx=\"5\" cy=\"12\" r=\"1\" />", "list-filter": "<path d=\"M3 6h18\" /> <path d=\"M7 12h10\" /> <path d=\"M10 18h4\" />", "shopping-bag": "<path d=\"M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z\" /> <path d=\"M3 6h18\" /> <path d=\"M16 10a4 4 0 0 1-8 0\" />", "radar": "<path d=\"M19.07 4.93A10 10 0 0 0 6.99 3.34\" /> <path d=\"M4 6h.01\" /> <path d=\"M2.29 9.62A10 10 0 1 0 21.31 8.35\" /> <path d=\"M16.24 7.76A6 6 0 1 0 8.23 16.67\" /> <path d=\"M12 18h.01\" /> <path d=\"M17.99 11.66A6 6 0 0 1 15.77 16.67\" /> <circle cx=\"12\" cy=\"12\" r=\"2\" /> <path d=\"m13.41 10.59 5.66-5.66\" />", "navigation": "<polygon points=\"3 11 22 2 13 21 11 13 3 11\" />", "locate-fixed": "<line x1=\"2\" x2=\"5\" y1=\"12\" y2=\"12\" /> <line x1=\"19\" x2=\"22\" y1=\"12\" y2=\"12\" /> <line x1=\"12\" x2=\"12\" y1=\"2\" y2=\"5\" /> <line x1=\"12\" x2=\"12\" y1=\"19\" y2=\"22\" /> <circle cx=\"12\" cy=\"12\" r=\"7\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "moon": "<path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\" />", "sun": "<circle cx=\"12\" cy=\"12\" r=\"4\" /> <path d=\"M12 2v2\" /> <path d=\"M12 20v2\" /> <path d=\"m4.93 4.93 1.41 1.41\" /> <path d=\"m17.66 17.66 1.41 1.41\" /> <path d=\"M2 12h2\" /> <path d=\"M20 12h2\" /> <path d=\"m6.34 17.66-1.41 1.41\" /> <path d=\"m19.07 4.93-1.41 1.41\" />", "map": "<path d=\"M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z\" /> <path d=\"M15 5.764v15\" /> <path d=\"M9 3.236v15\" />", "route": "<circle cx=\"6\" cy=\"19\" r=\"3\" /> <path d=\"M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15\" /> <circle cx=\"18\" cy=\"5\" r=\"3\" />", "flame": "<path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\" />", "clock": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <polyline points=\"12 6 12 12 16 14\" />", "sun-moon": "<path d=\"M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4\" /> <path d=\"M12 2v2\" /> <path d=\"M12 20v2\" /> <path d=\"m4.9 4.9 1.4 1.4\" /> <path d=\"m17.7 17.7 1.4 1.4\" /> <path d=\"M2 12h2\" /> <path d=\"M20 12h2\" /> <path d=\"m6.3 17.7-1.4 1.4\" /> <path d=\"m19.1 4.9-1.4 1.4\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "sparkle": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" />"};
 window.ic = function (name, size) {
   size = size || 22;
   return '<svg class="i" xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (window.ICONS[name] || "") + "</svg>";
@@ -251,6 +397,66 @@ window.OFFERS_DATA = {
       { id: "canned", name: "معلبات", icon: "package" }
     ]
   },
+
+  // Real branch locations (mall / area names). Coordinates are approximate, for distance only;
+  // directions open Google Maps with the branch name. Confirm each one before launch.
+  branches: [
+    { store: "lulu", name: "الوحدة مول", emirate: "أبوظبي", lat: 24.4706, lng: 54.3725, q: "Lulu Hypermarket Al Wahda Mall Abu Dhabi" },
+    { store: "lulu", name: "مشرف مول", emirate: "أبوظبي", lat: 24.4360, lng: 54.4120, q: "Lulu Hypermarket Mushrif Mall Abu Dhabi" },
+    { store: "lulu", name: "الخالدية مول", emirate: "أبوظبي", lat: 24.4677, lng: 54.3496, q: "Lulu Hypermarket Khalidiyah Mall Abu Dhabi" },
+    { store: "lulu", name: "البرشاء", emirate: "دبي", lat: 25.1149, lng: 55.1960, q: "Lulu Hypermarket Al Barsha Dubai" },
+    { store: "lulu", name: "القصيص", emirate: "دبي", lat: 25.2786, lng: 55.3812, q: "Lulu Hypermarket Al Qusais Dubai" },
+    { store: "lulu", name: "شارع الوحدة", emirate: "الشارقة", lat: 25.3197, lng: 55.3907, q: "Lulu Hypermarket Al Wahda Street Sharjah" },
+    { store: "lulu", name: "عجمان", emirate: "عجمان", lat: 25.3983, lng: 55.4790, q: "Lulu Hypermarket Ajman" },
+    { store: "lulu", name: "الفجيرة", emirate: "الفجيرة", lat: 25.1237, lng: 56.3361, q: "Lulu Hypermarket Fujairah" },
+    { store: "lulu", name: "رأس الخيمة", emirate: "رأس الخيمة", lat: 25.7870, lng: 55.9480, q: "Lulu Hypermarket Ras Al Khaimah" },
+    { store: "carrefour", name: "مول الإمارات", emirate: "دبي", lat: 25.1181, lng: 55.2006, q: "Carrefour Mall of the Emirates" },
+    { store: "carrefour", name: "سيتي سنتر ديرة", emirate: "دبي", lat: 25.2522, lng: 55.3322, q: "Carrefour City Centre Deira" },
+    { store: "carrefour", name: "سيتي سنتر مردف", emirate: "دبي", lat: 25.2166, lng: 55.4079, q: "Carrefour City Centre Mirdif" },
+    { store: "carrefour", name: "مارينا مول", emirate: "أبوظبي", lat: 24.4760, lng: 54.3215, q: "Carrefour Marina Mall Abu Dhabi" },
+    { store: "carrefour", name: "ياس مول", emirate: "أبوظبي", lat: 24.4886, lng: 54.6086, q: "Carrefour Yas Mall" },
+    { store: "carrefour", name: "سيتي سنتر الشارقة", emirate: "الشارقة", lat: 25.3253, lng: 55.3984, q: "Carrefour City Centre Sharjah" },
+    { store: "carrefour", name: "سيتي سنتر عجمان", emirate: "عجمان", lat: 25.4012, lng: 55.4780, q: "Carrefour City Centre Ajman" },
+    { store: "carrefour", name: "سيتي سنتر الفجيرة", emirate: "الفجيرة", lat: 25.1295, lng: 56.3135, q: "Carrefour City Centre Fujairah" },
+    { store: "carrefour", name: "المنار مول", emirate: "رأس الخيمة", lat: 25.7880, lng: 55.9540, q: "Carrefour Manar Mall Ras Al Khaimah" },
+    { store: "spinneys", name: "ذا سبرينغز سوق", emirate: "دبي", lat: 25.0597, lng: 55.1753, q: "Spinneys The Springs Souk Dubai" },
+    { store: "spinneys", name: "ميركاتو مول", emirate: "دبي", lat: 25.2163, lng: 55.2526, q: "Spinneys Mercato Mall Dubai" },
+    { store: "unioncoop", name: "الوصل", emirate: "دبي", lat: 25.1934, lng: 55.2443, q: "Union Coop Al Wasl Dubai" },
+    { store: "unioncoop", name: "الطوار", emirate: "دبي", lat: 25.2585, lng: 55.3836, q: "Union Coop Al Twar Dubai" },
+    { store: "choithrams", name: "أم سقيم", emirate: "دبي", lat: 25.1555, lng: 55.2160, q: "Choithrams Umm Suqeim Dubai" },
+    { store: "nesto", name: "النهدة", emirate: "الشارقة", lat: 25.2995, lng: 55.3725, q: "Nesto Hypermarket Al Nahda Sharjah" },
+    { store: "nesto", name: "مويلح", emirate: "الشارقة", lat: 25.3020, lng: 55.4520, q: "Nesto Hypermarket Muwaileh Sharjah" },
+    { store: "sharafdg", name: "مول الإمارات", emirate: "دبي", lat: 25.1185, lng: 55.2002, q: "Sharaf DG Mall of the Emirates" },
+    { store: "sharafdg", name: "دبي فستيفال سيتي", emirate: "دبي", lat: 25.2220, lng: 55.3530, q: "Sharaf DG Dubai Festival City" },
+    { store: "sharafdg", name: "ياس مول", emirate: "أبوظبي", lat: 24.4884, lng: 54.6083, q: "Sharaf DG Yas Mall" },
+    { store: "ikea", name: "دبي فستيفال سيتي", emirate: "دبي", lat: 25.2224, lng: 55.3525, q: "IKEA Dubai Festival City" },
+    { store: "ikea", name: "جبل علي", emirate: "دبي", lat: 25.0012, lng: 55.1260, q: "IKEA Jebel Ali" },
+    { store: "ikea", name: "جزيرة ياس", emirate: "أبوظبي", lat: 24.4868, lng: 54.6045, q: "IKEA Yas Island" },
+    { store: "homecentre", name: "أوايسس سنتر", emirate: "دبي", lat: 25.1608, lng: 55.2322, q: "Home Centre Oasis Centre Dubai" },
+    { store: "ace", name: "دبي فستيفال سيتي", emirate: "دبي", lat: 25.2213, lng: 55.3557, q: "ACE Dubai Festival City" },
+    { store: "ace", name: "جزيرة ياس", emirate: "أبوظبي", lat: 24.4853, lng: 54.6081, q: "ACE Yas Island" },
+    { store: "centrepoint", name: "أوايسس سنتر", emirate: "دبي", lat: 25.1610, lng: 55.2325, q: "Centrepoint Oasis Centre Dubai" },
+    { store: "centrepoint", name: "صحارى سنتر", emirate: "الشارقة", lat: 25.2975, lng: 55.3740, q: "Centrepoint Sahara Centre Sharjah" },
+    { store: "max", name: "الغرير سنتر", emirate: "دبي", lat: 25.2665, lng: 55.3175, q: "Max Al Ghurair Centre Dubai" },
+    { store: "brandsforless", name: "البرشاء", emirate: "دبي", lat: 25.1110, lng: 55.2010, q: "Brands For Less Al Barsha Dubai" }
+  ],
+
+  // Areas a shopper can pick when GPS is off or not allowed.
+  areas: [
+    { name: "دبي مارينا", emirate: "دبي", lat: 25.0805, lng: 55.1403 },
+    { name: "وسط مدينة دبي", emirate: "دبي", lat: 25.1972, lng: 55.2744 },
+    { name: "البرشاء", emirate: "دبي", lat: 25.1123, lng: 55.1964 },
+    { name: "ديرة", emirate: "دبي", lat: 25.2697, lng: 55.3095 },
+    { name: "مردف", emirate: "دبي", lat: 25.2183, lng: 55.4206 },
+    { name: "كورنيش أبوظبي", emirate: "أبوظبي", lat: 24.4764, lng: 54.3436 },
+    { name: "جزيرة ياس", emirate: "أبوظبي", lat: 24.4884, lng: 54.6087 },
+    { name: "مدينة خليفة", emirate: "أبوظبي", lat: 24.4196, lng: 54.5776 },
+    { name: "المجاز", emirate: "الشارقة", lat: 25.3260, lng: 55.3830 },
+    { name: "كورنيش عجمان", emirate: "عجمان", lat: 25.4130, lng: 55.4450 },
+    { name: "أم القيوين", emirate: "أم القيوين", lat: 25.5650, lng: 55.5530 },
+    { name: "رأس الخيمة", emirate: "رأس الخيمة", lat: 25.7895, lng: 55.9432 },
+    { name: "الفجيرة", emirate: "الفجيرة", lat: 25.1288, lng: 56.3265 }
+  ],
 
   // logo: optional path to the store's official logo (put the file in assets/logos/).
   // Stores without a logo file show a coloured name badge instead.
@@ -337,8 +543,11 @@ window.OFFERS_DATA = {
     live: false,                       // true when prices come from the server
     myOffers: [],
     history: [],
+    loc: load("loc", null),            // { lat, lng, label, source: "gps" | "area" }
+    theme: load("theme", "auto"),      // "auto" | "light" | "dark"
+    pop: null, bump: false, dir: "fwd",
   };
-  const persist = () => { ["emirate", "favs", "favStores", "cart", "custom", "merchant"].forEach((k) => save(k, S[k])); };
+  const persist = () => { ["emirate", "favs", "favStores", "cart", "custom", "merchant", "loc", "theme"].forEach((k) => save(k, S[k])); };
 
   // ---------- helpers ----------
   const products = () => (S.live ? D.products : D.products.concat(S.custom));
@@ -356,6 +565,47 @@ window.OFFERS_DATA = {
   const fmtDate = (s) => new Date(s).toLocaleDateString("ar-AE", { day: "numeric", month: "long", year: "numeric" });
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  // ---------- location ----------
+  // Distance in km between two {lat,lng} points (haversine).
+  function km(a, b) {
+    const R = 6371, rad = Math.PI / 180, dLat = (b.lat - a.lat) * rad, dLng = (b.lng - a.lng) * rad;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  const fmtKm = (d) => (d < 1 ? `${Math.round(d * 1000)} م` : `${d < 10 ? d.toFixed(1) : Math.round(d)} كم`);
+  const ONLINE = new Set(["amazon", "noon"]);
+  /** Nearest branch of a store to the shopper, or null (online store / no location / no branches). */
+  function nearest(storeId) {
+    if (!S.loc || ONLINE.has(storeId)) return null;
+    let bestB = null, bestD = Infinity;
+    for (const b of D.branches || []) if (b.store === storeId) { const d = km(S.loc, b); if (d < bestD) { bestD = d; bestB = b; } }
+    return bestB ? { branch: bestB, d: bestD } : null;
+  }
+  const kmTag = (n) => (n ? `<span class="km ${n.d > 15 ? "far" : ""}">${ic("navigation", 12)} ${fmtKm(n.d)}</span>` : "");
+  const mapsUrl = (b) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(b.q);
+  function setLoc(loc) {
+    S.loc = loc;
+    // the emirate follows the location: take the emirate of the closest known area
+    let e = S.emirate, d0 = Infinity;
+    for (const a of D.areas) { const d = km(loc, a); if (d < d0) { d0 = d; e = a.emirate; } }
+    S.emirate = e; persist();
+    if (S.live) loadLive().then(render).catch(() => {}); else render();
+  }
+  function useGps() {
+    if (!navigator.geolocation) return toast("المتصفح لا يدعم تحديد الموقع، اختر منطقتك");
+    toast("جارٍ تحديد موقعك…");
+    navigator.geolocation.getCurrentPosition(
+      (p) => { setLoc({ lat: p.coords.latitude, lng: p.coords.longitude, label: "موقعي الحالي", source: "gps" }); toast("تم تحديد موقعك"); if (current.name === "location") back(); },
+      () => toast("لم نتمكن من الوصول لموقعك، اختر منطقتك من القائمة"),
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 });
+  }
+
+  // ---------- theme ----------
+  function applyTheme() {
+    const r = document.documentElement;
+    if (S.theme === "auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", S.theme);
+  }
+
   function toast(msg) {
     const t = $("#toast"); t.textContent = msg; t.classList.add("show");
     clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1800);
@@ -364,26 +614,36 @@ window.OFFERS_DATA = {
   // ---------- router ----------
   let current = { name: "home", params: {} };
   function go(name, params = {}, push = true) {
+    S.dir = "fwd";
     if (push) S.history.push(current);
     current = { name, params };
     render();
     screen.scrollTop = 0;
   }
-  function back() { current = S.history.pop() || { name: "home", params: {} }; render(); }
+  function back() { S.dir = "back"; current = S.history.pop() || { name: "home", params: {} }; render(); }
 
   const tabs = [
     { id: "home", label: "الرئيسية", icon: "house" },
     { id: "stores", label: "المتاجر", icon: "store" },
+    { id: "nearby", label: "قريب مني", icon: "radar", center: true },
     { id: "favs", label: "المفضلة", icon: "heart" },
-    { id: "compare", label: "قارن", icon: "shopping-cart" },
     { id: "account", label: "حسابي", icon: "user" },
   ];
   function renderNav() {
-    const n = Object.keys(S.cart).length;
+    const nf = S.favs.length;
     $("#nav").innerHTML = tabs.map((t) => `
-      <button class="${current.name === t.id ? "on" : ""}" data-tab="${t.id}">
-        <span>${ic(t.icon)}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
+      <button class="${current.name === t.id ? "on" : ""} ${t.center ? "center" : ""}" data-tab="${t.id}" aria-label="${t.label}">
+        <span>${ic(t.icon, t.center ? 24 : 22)}</span>${t.label}${t.id === "favs" && nf ? `<em class="count ${S.bump ? "bump" : ""}">${nf}</em>` : ""}
       </button>`).join("");
+    // floating compare bar while the basket has items (not on the compare screen itself)
+    const n = Object.keys(S.cart).filter(product).length;
+    const bar = $("#cbar");
+    if (n && !["compare", "addOffer", "merchantLogin", "location"].includes(current.name)) {
+      bar.hidden = false;
+      bar.innerHTML = `<span class="icon-btn" style="background:transparent;color:inherit">${ic("shopping-cart")}</span>
+        <div class="grow"><b>${n} ${n === 1 ? "منتج" : "منتجات"} في سلتك</b><br/><small>قارن سعر السلة في كل المتاجر</small></div>
+        <button class="btn" data-tab="compare">قارن الآن</button>`;
+    } else bar.hidden = true;
   }
 
   // ---------- components ----------
@@ -394,19 +654,20 @@ window.OFFERS_DATA = {
       ${opts.right || `<span class="icon-btn"></span>`}
     </div>`;
 
-  function pcard(p) {
+  function pcard(p, i = 0) {
     const b = best(p);
     const fav = S.favs.includes(p.id), inCart = !!S.cart[p.id];
+    const n = nearest(b.store);
     return `
-    <div class="pcard" data-open="${p.id}">
+    <div class="pcard rise" style="--i:${Math.min(i, 8)}" data-open="${p.id}">
       <div class="pimg">${pimg(p)}<span class="badge">خصم ${pct(p)}%</span></div>
       <div class="pinfo">
         <h5>${esc(p.name)}</h5>
-        <div class="store">${store(b.store).name}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""}</div>
+        <div class="store">${store(b.store).name}${n ? ` · ${esc(n.branch.name)}` : ""}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""} ${kmTag(n)}</div>
         <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
       </div>
       <div class="pact">
-        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${ic("heart", 20)}</button>
+        <button class="heart ${fav ? "on" : ""} ${S.pop === p.id ? "pop" : ""}" data-fav="${p.id}" aria-label="مفضلة">${ic("heart", 20)}</button>
         <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${ic(inCart ? "check" : "plus", 18)}</button>
       </div>
     </div>`;
@@ -482,49 +743,140 @@ window.OFFERS_DATA = {
   V.home = () => {
     const featured = products().filter((p) => p.featured).concat(products().slice(0, 4));
     const uniq = [...new Map(featured.map((p) => [p.id, p])).values()];
+    const hour = new Date().getHours();
+    const hello = hour < 12 ? "صباح الخير" : hour < 18 ? "مساء الخير" : "مساء النور";
+    const near = nearbyStores().slice(0, 8);
     return `
-    <div class="topbar">
-      <div class="brand"><div class="mark">${ic("percent", 22)}</div><b>OFFERS</b></div>
-      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">${ic("bell")}<i class="dot"></i></button>
+    <div class="hero-top">
+      <div class="topbar">
+        <div class="brand"><div class="mark">${ic("percent", 22)}</div><b>OFFERS</b></div>
+        <div style="display:flex;gap:8px">
+          <button class="icon-btn" data-tab="compare" aria-label="قارن">${ic("shopping-cart")}</button>
+          <button class="icon-btn" data-act="notify" aria-label="الإشعارات">${ic("bell")}<i class="dot"></i></button>
+        </div>
+      </div>
+      <div class="greet">${hello} 👋<b>أفضل العروض حولك اليوم</b></div>
+      <button class="loc-chip" data-go="location" style="margin-top:12px">
+        <i class="pulse"></i>${ic("map-pin", 18)} ${S.loc ? esc(S.loc.label) : "حدّد موقعك لعروض قريبة"}
+        <small>${esc(S.emirate)} ${ic("chevron-down", 14)}</small>
+      </button>
+      <div class="search">${ic("search", 20)}<input id="q" placeholder="ابحث عن أي منتج أو متجر..." />${ic("scan-line", 20)}</div>
     </div>
-    <label class="select">${ic("map-pin", 20)}
-      <select id="emirate">${D.emirates.map((e) => `<option ${e === S.emirate ? "selected" : ""}>${e}</option>`).join("")}</select>
-    </label>
-    <div class="search">${ic("search", 20)}<input id="q" placeholder="ابحث عن أي منتج أو متجر..." />${ic("scan-line", 20)}</div>
-    <div class="cats">${D.categories.map((c) => `
-      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${ic(c.icon, 26)}</div>${c.name}</button>`).join("")}
+    <div class="cats">${D.categories.map((c, i) => `
+      <button class="cat rise" style="--i:${i};--tint:${c.bg}" data-cat="${c.id}"><div class="ic">${ic(c.icon, 26)}</div>${c.name}</button>`).join("")}
     </div>
-    <div class="section-h"><h3>أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
+    ${near.length ? `
+    <div class="section-h"><h3>${ic("radar", 20)} متاجر قريبة منك</h3><a href="#" data-tab="nearby">الخريطة</a></div>
+    <div class="near-strip">${near.map((x, i) => `
+      <button class="near-card rise" style="--i:${i}" data-store="${x.s.id}">
+        ${slogo(x.s, "sm")}<b>${esc(x.s.name)}</b><small>${esc(x.b.name)}</small>${kmTag(x)}
+      </button>`).join("")}</div>` : `
+    <button class="card" data-go="location" style="width:100%;display:flex;gap:12px;align-items:center;margin-bottom:16px;text-align:right">
+      <span class="go">${ic("locate-fixed")}</span><span><b>اعرض العروض القريبة منك</b><br/><small style="color:var(--muted)">فعّل الموقع أو اختر منطقتك</small></span>
+    </button>`}
+    <div class="section-h"><h3>${ic("flame", 20)} أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
     <div class="banner-wrap"><div class="banners" id="banners">${D.banners.map((b) => `
       <div class="banner" style="background:linear-gradient(120deg,${b.from},${b.to})">
         <div><h4>${b.title}</h4><small>${b.sub}</small><button class="btn-w" data-cat="${b.cat}">تصفح الآن</button></div>
-        <div class="art">${ic(b.icon, 72)}</div>
+        <div class="art">${ic(b.icon, 76)}</div>
       </div>`).join("")}</div></div>
     <div class="dots" id="dots">${D.banners.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
-    <div class="section-h"><h3>الأكثر توفيراً</h3></div>
+    <div class="section-h"><h3>${ic("sparkles", 20)} الأكثر توفيراً</h3></div>
     <div class="list">${uniq.sort((a, b) => pct(b) - pct(a)).slice(0, 5).map(pcard).join("")}</div>
     <p class="disclaimer">${!S.live || products().some((p) => (p.offers || []).some((o) => o.source_type === "demo"))
-      ? "نسخة تجريبية — الأسعار المعروضة بيانات تجريبية للعرض فقط." : "الأسعار من نشرات وعروض المتاجر الرسمية. تحقّق من السعر في المتجر."}</p>`;
+      ? "نسخة تجريبية — الأسعار المعروضة بيانات تجريبية للعرض فقط. مواقع الفروع تقريبية." : "الأسعار من نشرات وعروض المتاجر الرسمية. تحقّق من السعر في المتجر."}</p>`;
   };
+
+  /** Physical stores with their nearest branch, closest first. */
+  function nearbyStores(type = "all") {
+    return D.stores.filter((s) => type === "all" || s.type === type)
+      .map((s) => { const n = nearest(s.id); return n && { s, b: n.branch, d: n.d }; })
+      .filter(Boolean).sort((a, b) => a.d - b.d);
+  }
+
+  V.nearby = ({ type = "all" }) => {
+    if (!S.loc) return `
+      ${header("قريب مني")}
+      <div class="radar"><div class="sweep"></div><i class="me"></i></div>
+      <p class="sheet-note" style="text-align:center">نحتاج موقعك لعرض الفروع والعروض الأقرب إليك.</p>
+      <button class="btn" data-act="gps">${ic("locate-fixed", 18)} استخدم موقعي الحالي</button>
+      <button class="btn ghost" style="margin-top:8px" data-go="location">اختر منطقتك</button>`;
+    const all = [];
+    for (const b of D.branches || []) {
+      const s = store(b.store);
+      if (type !== "all" && s.type !== type) continue;
+      all.push({ s, b, d: km(S.loc, b) });
+    }
+    all.sort((a, b) => a.d - b.d);
+    const shown = all.slice(0, 12);
+    const onRadar = shown.slice(0, 9);
+    // Radar scale: square-root so nearby branches get room; the outer ring is a round number of km.
+    const maxD = Math.max(2, ...onRadar.map((x) => x.d));
+    const nice = [1, 2, 3, 5, 10, 15, 20, 30, 50, 80, 120, 200].find((v) => v >= maxD) || Math.ceil(maxD);
+    const rad = (d) => Math.sqrt(Math.min(1, d / nice)) * 35 + 4; // % of the radar's half-width
+    const rings = [nice / 9, nice * 4 / 9, nice].map((d) => ({ d, r: rad(d) }));
+    const placed = [];
+    const pos = (x) => {
+      const dy = (x.b.lat - S.loc.lat) * 111, dx = (x.b.lng - S.loc.lng) * 111 * Math.cos(S.loc.lat * Math.PI / 180);
+      let a = Math.atan2(dy, dx), r = rad(x.d), p;
+      // nudge around the circle until the pin doesn't sit on top of an earlier one
+      for (let k = 0; k < 24; k++) {
+        p = { left: 50 + r * Math.cos(a), top: 50 - r * Math.sin(a) };
+        if (!placed.some((q) => Math.abs(q.left - p.left) < 13 && Math.abs(q.top - p.top) < 8)) break;
+        a += (k % 2 ? -1 : 1) * 0.28 * (k + 1);
+      }
+      placed.push(p); return p;
+    };
+    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["electronics", "إلكترونيات"], ["home", "منزل"], ["fashion", "أزياء"]];
+    return `
+    ${header("قريب مني", { right: `<button class="icon-btn" data-go="location" aria-label="تغيير الموقع">${ic("map-pin")}</button>` })}
+    <button class="loc-chip" data-go="location"><i class="pulse"></i>${esc(S.loc.label)}<small>${esc(S.emirate)}</small></button>
+    <div class="chips">${types.map(([id, n]) => `<button class="chip ${id === type ? "on" : ""}" data-ntype="${id}">${n}</button>`).join("")}</div>
+    <div class="radar" role="img" aria-label="خريطة الفروع القريبة">
+      ${rings.map((g) => `<div class="ring" style="width:${g.r * 2}%;height:${g.r * 2}%"><span>${fmtKm(g.d)}</span></div>`).join("")}
+      <div class="sweep"></div><i class="me"></i>
+      ${onRadar.map((x, i) => { const p = pos(x); return `<button class="pin" style="--i:${i};left:${p.left}%;top:${p.top}%" data-store="${x.s.id}" aria-label="${esc(x.s.name)} ${esc(x.b.name)}">${slogo(x.s, "sm")}</button>`; }).join("")}
+    </div>
+    <div class="section-h"><h3>${ic("route", 20)} الأقرب إليك</h3></div>
+    <div class="list">${shown.map((x, i) => {
+      const count = products().filter((p) => p.prices[x.s.id] != null).length;
+      return `<div class="srow rise" style="--i:${Math.min(i, 8)};cursor:pointer" data-store="${x.s.id}">
+        ${slogo(x.s)}
+        <div class="grow"><h5>${esc(x.s.name)}</h5><small>${esc(x.b.name)} · ${count} عرض</small><br/>${kmTag(x)}</div>
+        <a class="go" href="${mapsUrl(x.b)}" target="_blank" rel="noopener noreferrer" aria-label="الاتجاهات">${ic("navigation", 18)}</a>
+      </div>`; }).join("") || `<div class="empty"><div>${ic("store", 48)}</div>لا توجد فروع من هذا النوع</div>`}</div>
+    <p class="disclaimer">مواقع الفروع تقريبية. اضغط على السهم لفتح الاتجاهات في خرائط Google.</p>`;
+  };
+
+  V.location = () => `
+    ${header("موقعك")}
+    <p class="sheet-note">نستخدم موقعك فقط لترتيب الفروع والعروض حسب القرب منك، ولا نحفظه إلا على جهازك.</p>
+    <button class="btn" data-act="gps">${ic("locate-fixed", 18)} استخدم موقعي الحالي</button>
+    <div class="section-h" style="margin-top:18px"><h3>أو اختر منطقتك</h3></div>
+    <div class="area-list">${D.areas.map((a, i) => `
+      <button class="area rise ${S.loc && S.loc.label === a.name ? "on" : ""}" style="--i:${Math.min(i, 8)}" data-area="${i}">
+        <b>${a.name}</b><small>${a.emirate}</small></button>`).join("")}</div>`;
 
   V.category = ({ cat = "all", sub = null, q = "", sort = "discount" }) => {
     const c = D.categories.find((x) => x.id === cat) || D.categories[0];
     let list = products().filter((p) => (cat === "all" || cat === "more" || p.cat === cat) && (!sub || p.sub === sub));
     if (q) list = products().filter((p) => p.name.includes(q) || Object.keys(p.prices).some((s) => store(s).name.includes(q)));
-    const sorter = { discount: (a, b) => pct(b) - pct(a), low: (a, b) => best(a).price - best(b).price, high: (a, b) => best(b).price - best(a).price };
+    const dist = (p) => Math.min(...Object.keys(p.prices).map((sid) => nearest(sid)?.d ?? (ONLINE.has(sid) ? 999 : 9999)));
+    const sorter = { discount: (a, b) => pct(b) - pct(a), low: (a, b) => best(a).price - best(b).price, high: (a, b) => best(b).price - best(a).price, near: (a, b) => dist(a) - dist(b) };
     list.sort(sorter[sort]);
     const subs = D.subCategories[cat];
     return `
     ${header(q ? `نتائج: ${esc(q)}` : c.name)}
     ${subs ? `<div class="cats">
-      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">${ic("layout-grid", 24)}</div>الكل</button>
-      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${ic(s.icon, 24)}</div>${s.name}</button>`).join("")}
+      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="--tint:#ede9fe">${ic("layout-grid", 24)}</div>الكل</button>
+      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="--tint:#dcfce7">${ic(s.icon, 24)}</div>${s.name}</button>`).join("")}
     </div>` : `<div class="chips">${D.categories.filter((x) => x.id !== "more").map((x) => `<button class="chip ${x.id === cat ? "on" : ""}" data-cat="${x.id}">${x.name}</button>`).join("")}</div>`}
     <div class="toolbar">
       <select id="sort">
         <option value="discount" ${sort === "discount" ? "selected" : ""}>الترتيب: الأعلى خصماً</option>
         <option value="low" ${sort === "low" ? "selected" : ""}>السعر: من الأقل</option>
         <option value="high" ${sort === "high" ? "selected" : ""}>السعر: من الأعلى</option>
+        ${S.loc ? `<option value="near" ${sort === "near" ? "selected" : ""}>الأقرب إليّ</option>` : ""}
       </select>
     </div>
     <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>${ic("search", 48)}</div>لا توجد عروض مطابقة</div>`}</div>`;
@@ -541,16 +893,21 @@ window.OFFERS_DATA = {
       <div class="hero">${pimg(p, 110)}<span class="badge">خصم ${pct(p)}%</span></div>
       <h2>${esc(p.name)}</h2>
       <div class="store" style="color:var(--muted);margin:4px 0 8px">${store(b.store).name}</div>
-      <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
+      <div class="price"><b class="countup" data-to="${b.price}">${aed(b.price)}</b><s>${aed(p.old)}</s></div>
+      ${p.old > b.price ? `<span class="save-pill">${ic("sparkles", 14)} توفّر ${aed(Math.round((p.old - b.price) * 100) / 100)}</span>` : ""}
       <div class="infobox">
         <div>${ic("calendar", 18)} ${p.until ? `يسري العرض حتى: ${fmtDate(p.until)}` : "عرض مستمر"}</div>
-        <div>${ic("map-pin", 18)} جميع فروع ${S.emirate}</div>
+        <div>${ic("map-pin", 18)} ${(() => { const n = nearest(b.store); return n ? `أقرب فرع: ${esc(store(b.store).name)} ${esc(n.branch.name)} · ${fmtKm(n.d)} · <a href="${mapsUrl(n.branch)}" target="_blank" rel="noopener noreferrer">الاتجاهات</a>` : `جميع فروع ${esc(S.emirate)}`; })()}</div>
         <div>${ic("shopping-bag", 18)} متوفر في الفروع أو عبر المتجر الإلكتروني</div>
         ${sourceLine(p, b.store)}
       </div>
       <div class="section-h"><h3>الأسعار في المتاجر</h3></div>
-      <div class="store-prices">${rows.map(([sid, v], i) => `
-        <div class="row ${i ? "" : "best"}"><span class="sname">${slogo(store(sid), "sm")}${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
+      <div class="store-prices">${rows.map(([sid, v], i) => { const n = nearest(sid); return `
+        <div class="row ${i ? "" : "best"}">
+          <span class="sname">${slogo(store(sid), "sm")}<span class="meta"><span>${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span>
+            <small>${n ? `${esc(n.branch.name)} · ${fmtKm(n.d)}` : ONLINE.has(sid) ? "توصيل للمنزل" : ""}</small></span></span>
+          <span class="end"><b>${aed(v)}</b>${n ? `<a class="go" href="${mapsUrl(n.branch)}" target="_blank" rel="noopener noreferrer" aria-label="الاتجاهات">${ic("navigation", 16)}</a>` : ""}</span>
+        </div>`; }).join("")}
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn" data-cart="${p.id}">${ic(S.cart[p.id] ? "check" : "plus", 18)} ${S.cart[p.id] ? "في قائمة المقارنة" : "أضف لقائمة المقارنة"}</button>
@@ -563,7 +920,8 @@ window.OFFERS_DATA = {
 
   V.stores = ({ type = "all", q = "" }) => {
     const types = [["all", "الكل"], ["super", "سوبرماركت"], ["online", "أونلاين"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
-    const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)));
+    const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)))
+      .sort((a, b) => (nearest(a.id)?.d ?? 1e4) - (nearest(b.id)?.d ?? 1e4));
     return `
     <div class="topbar"><span class="icon-btn"></span><h1>المتاجر</h1><span class="icon-btn"></span></div>
     <div class="search">${ic("search", 20)}<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
@@ -571,9 +929,9 @@ window.OFFERS_DATA = {
     <div class="list">${list.map((s) => `
       <div class="srow" data-store="${s.id}">
         ${slogo(s)}
-        <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض</small></div>
+        <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض${nearest(s.id) ? ` · ${esc(nearest(s.id).branch.name)}` : ONLINE.has(s.id) ? " · أونلاين" : ""}</small> ${kmTag(nearest(s.id))}</div>
         <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${ic("heart", 20)}</button>
-        <span style="color:#9ca3af">${ic("chevron-left", 18)}</span>
+        <span style="color:var(--muted)">${ic("chevron-left", 18)}</span>
       </div>`).join("")}</div>`;
   };
 
@@ -583,6 +941,11 @@ window.OFFERS_DATA = {
     return `
     ${header(s.name)}
     <div class="srow" style="margin-bottom:12px">${slogo(s)}<div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض في ${S.emirate}</small></div></div>
+    ${(() => {
+      const br = (D.branches || []).filter((b) => b.store === id).map((b) => ({ b, d: S.loc ? km(S.loc, b) : null })).sort((a, c) => (a.d ?? 0) - (c.d ?? 0)).slice(0, 4);
+      return br.length ? `<div class="near-strip">${br.map((x) => `<a class="near-card" href="${mapsUrl(x.b)}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+        <b>${esc(x.b.name)}</b><small>${esc(x.b.emirate)}</small>${x.d != null ? kmTag(x) : ""}<span class="link">${ic("navigation", 12)} الاتجاهات</span></a>`).join("")}</div>` : "";
+    })()}
     <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("tag", 48)}</div>لا توجد عروض حالياً</div>`}</div>`;
   };
 
@@ -594,6 +957,14 @@ window.OFFERS_DATA = {
     ${st.length ? `<div class="section-h"><h3>متاجري</h3></div><div class="hscroll" style="margin-bottom:12px">${st.map((s) => `<div data-store="${s.id}">${slogo(s)}</div>`).join("")}</div>` : ""}
     <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("heart", 48)}</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
   };
+
+  function burst() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = document.createElement("div"); el.className = "burst";
+    const colors = ["#ff9a2e", "#f2456b", "#7c3aed", "#10b981", "#fbbf24"];
+    el.innerHTML = Array.from({ length: 28 }, (_, i) => `<i style="background:${colors[i % 5]};--x:${(Math.random() - .5) * 360}px;--y:${-120 - Math.random() * 260}px;--r:${Math.random() * 720}deg"></i>`).join("");
+    document.querySelector(".app").appendChild(el); setTimeout(() => el.remove(), 1300);
+  }
 
   V.compare = ({ mode = "all" }) => {
     const ids = Object.keys(S.cart).filter(product);
@@ -644,6 +1015,12 @@ window.OFFERS_DATA = {
 
   V.account = () => `
     <div class="topbar"><span class="icon-btn"></span><h1>حسابي</h1><span class="icon-btn"></span></div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="section-h" style="margin-top:0"><h3>المظهر</h3></div>
+      <div class="theme-pick">${[["light", "sun", "نهاري"], ["dark", "moon", "ليلي"], ["auto", "sun-moon", "تلقائي"]]
+        .map(([id, icon, n]) => `<button class="${S.theme === id ? "on" : ""}" data-theme-set="${id}">${ic(icon)}${n}</button>`).join("")}</div>
+    </div>
+    <button class="card loc-chip" data-go="location" style="margin-bottom:12px"><i class="pulse"></i>${ic("map-pin", 18)} ${S.loc ? esc(S.loc.label) : "حدّد موقعك"}<small>${esc(S.emirate)}</small></button>
     <div class="card" style="margin-bottom:12px">
       <div class="section-h" style="margin-top:0"><h3>مميزات التطبيق</h3></div>
       ${[["store", "جميع العروض من جميع المتاجر في مكان واحد"], ["map-pin", "تغطية جميع الإمارات"], ["search", "بحث سهل ومتقدم"], ["percent", "عرض نسبة الخصم والسعر السابق"], ["shopping-cart", "مقارنة سعر السلة بين المتاجر"], ["bell", "إشعارات بالعروض الجديدة"], ["heart", "مفضلة العروض والمتاجر"], ["share-2", "مشاركة العروض مع الآخرين"]]
@@ -713,8 +1090,18 @@ window.OFFERS_DATA = {
   let bannerTimer;
   function render() {
     clearInterval(bannerTimer);
+    applyTheme();
     screen.innerHTML = (V[current.name] || V.home)(current.params);
+    if (S.dir) { screen.classList.remove("enter-fwd", "enter-back"); void screen.offsetWidth; screen.classList.add("enter-" + S.dir); S.dir = null; }
     renderNav();
+    S.pop = null; S.bump = false;
+    // price count-up on the product page
+    document.querySelectorAll(".countup").forEach((el) => {
+      const to = +el.dataset.to, t0 = performance.now(), dur = 700;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = aed(Math.round(to * e * 100) / 100); if (k < 1) requestAnimationFrame(step); else el.textContent = aed(to); };
+      requestAnimationFrame(step);
+    });
     if (current.name === "home") {
       let i = 0;
       bannerTimer = setInterval(() => {
@@ -732,25 +1119,30 @@ window.OFFERS_DATA = {
   // Missing logo or product photo: drop the image so the badge/icon underneath shows.
   document.addEventListener("error", (e) => { if (e.target.tagName === "IMG") e.target.remove(); }, true);
   document.addEventListener("click", (e) => {
-    const t = e.target.closest("[data-tab],[data-cat],[data-sub],[data-open],[data-fav],[data-favstore],[data-cart],[data-store],[data-stype],[data-mode],[data-qty],[data-go],[data-act]");
+    const t = e.target.closest("[data-tab],[data-cat],[data-sub],[data-open],[data-fav],[data-favstore],[data-cart],[data-store],[data-stype],[data-ntype],[data-area],[data-theme-set],[data-mode],[data-qty],[data-go],[data-act]");
     if (!t) return;
+    if (e.target.closest('a[href]:not([href="#"])')) return; // real links (directions, sources) just open
     const ds = t.dataset;
     if (t.tagName === "A") e.preventDefault();
 
-    if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); i < 0 ? S.favs.push(ds.fav) : S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
+    if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); if (i < 0) { S.favs.push(ds.fav); S.pop = ds.fav; S.bump = true; } else S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
     if (ds.favstore) { e.stopPropagation(); const i = S.favStores.indexOf(ds.favstore); i < 0 ? S.favStores.push(ds.favstore) : S.favStores.splice(i, 1); persist(); return render(); }
     if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة"); } persist(); return render(); }
     if (ds.qty) { const q = (S.cart[ds.qty] || 0) + Number(ds.d); if (q <= 0) delete S.cart[ds.qty]; else S.cart[ds.qty] = q; persist(); return render(); }
-    if (ds.tab) { S.history = []; return go(ds.tab, {}, false); }
+    if (ds.tab) { S.history = ds.tab === "home" ? [] : [{ name: "home", params: {} }]; go(ds.tab, {}, false); if (ds.tab === "compare" && Object.keys(S.cart).length > 1) burst(); return; }
     if (ds.cat !== undefined) { const c = ds.cat === "more" ? "all" : ds.cat; return current.name === "category" ? go("category", { ...current.params, cat: c, sub: null, q: "" }, false) : go("category", { cat: c }); }
     if (ds.sub !== undefined) return go("category", { ...current.params, sub: ds.sub || null }, false);
     if (ds.open) return go("product", { id: ds.open });
     if (ds.store) return go("store", { id: ds.store });
     if (ds.stype) return go("stores", { type: ds.stype }, false);
+    if (ds.ntype) return go("nearby", { type: ds.ntype }, false);
+    if (ds.area !== undefined) { const a = D.areas[+ds.area]; setLoc({ lat: a.lat, lng: a.lng, label: a.name, source: "area" }); toast("الموقع: " + a.name); return back(); }
+    if (ds.themeSet) { S.theme = ds.themeSet; persist(); return render(); }
     if (ds.mode) return go("compare", { mode: ds.mode }, false);
     if (ds.go) return go(ds.go);
     switch (ds.act) {
       case "back": return back();
+      case "gps": return useGps();
       case "notify": return toast("ستصلك إشعارات بالعروض الجديدة في " + S.emirate);
       case "share": {
         const p = product(current.params.id);
@@ -804,7 +1196,7 @@ window.OFFERS_DATA = {
   if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, en: S.merchant.name, color: "#5b21b6", type: "super", offers: S.custom.length });
 
   render();
-  setTimeout(() => $("#splash").classList.add("hide"), 1600);
+  setTimeout(() => $("#splash").classList.add("hide"), 2300);
   boot();
 })();
 

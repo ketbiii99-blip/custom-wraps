@@ -7,21 +7,23 @@
   <title>OFFERS أوفرس</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app">
-    <div class="splash" id="splash">
-      <div class="logo-bag">%</div>
+    <div class="splash" id="splash" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="logo-bag"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
       <h1>OFFERS</h1>
       <h2>أوفرس</h2>
       <p>كل العروض في الإمارات<br />في مكان واحد</p>
-      <svg class="skyline" viewBox="0 0 400 180" preserveAspectRatio="none" fill="#2e1065">
-        <path d="M0 180V130h20v-20h15v30h18V95h12v45h20v-60h10v60h15V70h8V20l4-20 4 20v50h8v110h20v-80h18v80h15v-55h20v55h18V85h14v95h22v-40h16v40h20v-70h12v70h20v-30h20v50z"/>
+      <svg class="skyline" viewBox="0 0 400 190" preserveAspectRatio="none">
+        <path d="M0 190V140h18v-22h14v30h16V105h12v43h18V88h10v60h14V80h7V32l4-32 4 32v48h7v110h18v-86h16v86h14V120h18v70h16V95h13v95h20v-44h15v44h18v-74h11v74h18v-32h16v-24h10v56h14V150h22v40z"/>
       </svg>
     </div>
     <main class="screen" id="screen"></main>
+    <div class="cbar" id="cbar" hidden></div>
     <nav class="nav" id="nav"></nav>
     <div class="toast" id="toast" role="status"></div>
   </div>

@@ -17,8 +17,11 @@
     live: false,                       // true when prices come from the server
     myOffers: [],
     history: [],
+    loc: load("loc", null),            // { lat, lng, label, source: "gps" | "area" }
+    theme: load("theme", "auto"),      // "auto" | "light" | "dark"
+    pop: null, bump: false, dir: "fwd",
   };
-  const persist = () => { ["emirate", "favs", "favStores", "cart", "custom", "merchant"].forEach((k) => save(k, S[k])); };
+  const persist = () => { ["emirate", "favs", "favStores", "cart", "custom", "merchant", "loc", "theme"].forEach((k) => save(k, S[k])); };
 
   // ---------- helpers ----------
   const products = () => (S.live ? D.products : D.products.concat(S.custom));
@@ -36,6 +39,47 @@
   const fmtDate = (s) => new Date(s).toLocaleDateString("ar-AE", { day: "numeric", month: "long", year: "numeric" });
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  // ---------- location ----------
+  // Distance in km between two {lat,lng} points (haversine).
+  function km(a, b) {
+    const R = 6371, rad = Math.PI / 180, dLat = (b.lat - a.lat) * rad, dLng = (b.lng - a.lng) * rad;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  const fmtKm = (d) => (d < 1 ? `${Math.round(d * 1000)} م` : `${d < 10 ? d.toFixed(1) : Math.round(d)} كم`);
+  const ONLINE = new Set(["amazon", "noon"]);
+  /** Nearest branch of a store to the shopper, or null (online store / no location / no branches). */
+  function nearest(storeId) {
+    if (!S.loc || ONLINE.has(storeId)) return null;
+    let bestB = null, bestD = Infinity;
+    for (const b of D.branches || []) if (b.store === storeId) { const d = km(S.loc, b); if (d < bestD) { bestD = d; bestB = b; } }
+    return bestB ? { branch: bestB, d: bestD } : null;
+  }
+  const kmTag = (n) => (n ? `<span class="km ${n.d > 15 ? "far" : ""}">${ic("navigation", 12)} ${fmtKm(n.d)}</span>` : "");
+  const mapsUrl = (b) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(b.q);
+  function setLoc(loc) {
+    S.loc = loc;
+    // the emirate follows the location: take the emirate of the closest known area
+    let e = S.emirate, d0 = Infinity;
+    for (const a of D.areas) { const d = km(loc, a); if (d < d0) { d0 = d; e = a.emirate; } }
+    S.emirate = e; persist();
+    if (S.live) loadLive().then(render).catch(() => {}); else render();
+  }
+  function useGps() {
+    if (!navigator.geolocation) return toast("المتصفح لا يدعم تحديد الموقع، اختر منطقتك");
+    toast("جارٍ تحديد موقعك…");
+    navigator.geolocation.getCurrentPosition(
+      (p) => { setLoc({ lat: p.coords.latitude, lng: p.coords.longitude, label: "موقعي الحالي", source: "gps" }); toast("تم تحديد موقعك"); if (current.name === "location") back(); },
+      () => toast("لم نتمكن من الوصول لموقعك، اختر منطقتك من القائمة"),
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 });
+  }
+
+  // ---------- theme ----------
+  function applyTheme() {
+    const r = document.documentElement;
+    if (S.theme === "auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", S.theme);
+  }
+
   function toast(msg) {
     const t = $("#toast"); t.textContent = msg; t.classList.add("show");
     clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1800);
@@ -44,26 +88,36 @@
   // ---------- router ----------
   let current = { name: "home", params: {} };
   function go(name, params = {}, push = true) {
+    S.dir = "fwd";
     if (push) S.history.push(current);
     current = { name, params };
     render();
     screen.scrollTop = 0;
   }
-  function back() { current = S.history.pop() || { name: "home", params: {} }; render(); }
+  function back() { S.dir = "back"; current = S.history.pop() || { name: "home", params: {} }; render(); }
 
   const tabs = [
     { id: "home", label: "الرئيسية", icon: "house" },
     { id: "stores", label: "المتاجر", icon: "store" },
+    { id: "nearby", label: "قريب مني", icon: "radar", center: true },
     { id: "favs", label: "المفضلة", icon: "heart" },
-    { id: "compare", label: "قارن", icon: "shopping-cart" },
     { id: "account", label: "حسابي", icon: "user" },
   ];
   function renderNav() {
-    const n = Object.keys(S.cart).length;
+    const nf = S.favs.length;
     $("#nav").innerHTML = tabs.map((t) => `
-      <button class="${current.name === t.id ? "on" : ""}" data-tab="${t.id}">
-        <span>${ic(t.icon)}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
+      <button class="${current.name === t.id ? "on" : ""} ${t.center ? "center" : ""}" data-tab="${t.id}" aria-label="${t.label}">
+        <span>${ic(t.icon, t.center ? 24 : 22)}</span>${t.label}${t.id === "favs" && nf ? `<em class="count ${S.bump ? "bump" : ""}">${nf}</em>` : ""}
       </button>`).join("");
+    // floating compare bar while the basket has items (not on the compare screen itself)
+    const n = Object.keys(S.cart).filter(product).length;
+    const bar = $("#cbar");
+    if (n && !["compare", "addOffer", "merchantLogin", "location"].includes(current.name)) {
+      bar.hidden = false;
+      bar.innerHTML = `<span class="icon-btn" style="background:transparent;color:inherit">${ic("shopping-cart")}</span>
+        <div class="grow"><b>${n} ${n === 1 ? "منتج" : "منتجات"} في سلتك</b><br/><small>قارن سعر السلة في كل المتاجر</small></div>
+        <button class="btn" data-tab="compare">قارن الآن</button>`;
+    } else bar.hidden = true;
   }
 
   // ---------- components ----------
@@ -74,19 +128,20 @@
       ${opts.right || `<span class="icon-btn"></span>`}
     </div>`;
 
-  function pcard(p) {
+  function pcard(p, i = 0) {
     const b = best(p);
     const fav = S.favs.includes(p.id), inCart = !!S.cart[p.id];
+    const n = nearest(b.store);
     return `
-    <div class="pcard" data-open="${p.id}">
+    <div class="pcard rise" style="--i:${Math.min(i, 8)}" data-open="${p.id}">
       <div class="pimg">${pimg(p)}<span class="badge">خصم ${pct(p)}%</span></div>
       <div class="pinfo">
         <h5>${esc(p.name)}</h5>
-        <div class="store">${store(b.store).name}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""}</div>
+        <div class="store">${store(b.store).name}${n ? ` · ${esc(n.branch.name)}` : ""}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""} ${kmTag(n)}</div>
         <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
       </div>
       <div class="pact">
-        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${ic("heart", 20)}</button>
+        <button class="heart ${fav ? "on" : ""} ${S.pop === p.id ? "pop" : ""}" data-fav="${p.id}" aria-label="مفضلة">${ic("heart", 20)}</button>
         <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${ic(inCart ? "check" : "plus", 18)}</button>
       </div>
     </div>`;
@@ -162,49 +217,140 @@
   V.home = () => {
     const featured = products().filter((p) => p.featured).concat(products().slice(0, 4));
     const uniq = [...new Map(featured.map((p) => [p.id, p])).values()];
+    const hour = new Date().getHours();
+    const hello = hour < 12 ? "صباح الخير" : hour < 18 ? "مساء الخير" : "مساء النور";
+    const near = nearbyStores().slice(0, 8);
     return `
-    <div class="topbar">
-      <div class="brand"><div class="mark">${ic("percent", 22)}</div><b>OFFERS</b></div>
-      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">${ic("bell")}<i class="dot"></i></button>
+    <div class="hero-top">
+      <div class="topbar">
+        <div class="brand"><div class="mark">${ic("percent", 22)}</div><b>OFFERS</b></div>
+        <div style="display:flex;gap:8px">
+          <button class="icon-btn" data-tab="compare" aria-label="قارن">${ic("shopping-cart")}</button>
+          <button class="icon-btn" data-act="notify" aria-label="الإشعارات">${ic("bell")}<i class="dot"></i></button>
+        </div>
+      </div>
+      <div class="greet">${hello} 👋<b>أفضل العروض حولك اليوم</b></div>
+      <button class="loc-chip" data-go="location" style="margin-top:12px">
+        <i class="pulse"></i>${ic("map-pin", 18)} ${S.loc ? esc(S.loc.label) : "حدّد موقعك لعروض قريبة"}
+        <small>${esc(S.emirate)} ${ic("chevron-down", 14)}</small>
+      </button>
+      <div class="search">${ic("search", 20)}<input id="q" placeholder="ابحث عن أي منتج أو متجر..." />${ic("scan-line", 20)}</div>
     </div>
-    <label class="select">${ic("map-pin", 20)}
-      <select id="emirate">${D.emirates.map((e) => `<option ${e === S.emirate ? "selected" : ""}>${e}</option>`).join("")}</select>
-    </label>
-    <div class="search">${ic("search", 20)}<input id="q" placeholder="ابحث عن أي منتج أو متجر..." />${ic("scan-line", 20)}</div>
-    <div class="cats">${D.categories.map((c) => `
-      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${ic(c.icon, 26)}</div>${c.name}</button>`).join("")}
+    <div class="cats">${D.categories.map((c, i) => `
+      <button class="cat rise" style="--i:${i};--tint:${c.bg}" data-cat="${c.id}"><div class="ic">${ic(c.icon, 26)}</div>${c.name}</button>`).join("")}
     </div>
-    <div class="section-h"><h3>أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
+    ${near.length ? `
+    <div class="section-h"><h3>${ic("radar", 20)} متاجر قريبة منك</h3><a href="#" data-tab="nearby">الخريطة</a></div>
+    <div class="near-strip">${near.map((x, i) => `
+      <button class="near-card rise" style="--i:${i}" data-store="${x.s.id}">
+        ${slogo(x.s, "sm")}<b>${esc(x.s.name)}</b><small>${esc(x.b.name)}</small>${kmTag(x)}
+      </button>`).join("")}</div>` : `
+    <button class="card" data-go="location" style="width:100%;display:flex;gap:12px;align-items:center;margin-bottom:16px;text-align:right">
+      <span class="go">${ic("locate-fixed")}</span><span><b>اعرض العروض القريبة منك</b><br/><small style="color:var(--muted)">فعّل الموقع أو اختر منطقتك</small></span>
+    </button>`}
+    <div class="section-h"><h3>${ic("flame", 20)} أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
     <div class="banner-wrap"><div class="banners" id="banners">${D.banners.map((b) => `
       <div class="banner" style="background:linear-gradient(120deg,${b.from},${b.to})">
         <div><h4>${b.title}</h4><small>${b.sub}</small><button class="btn-w" data-cat="${b.cat}">تصفح الآن</button></div>
-        <div class="art">${ic(b.icon, 72)}</div>
+        <div class="art">${ic(b.icon, 76)}</div>
       </div>`).join("")}</div></div>
     <div class="dots" id="dots">${D.banners.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
-    <div class="section-h"><h3>الأكثر توفيراً</h3></div>
+    <div class="section-h"><h3>${ic("sparkles", 20)} الأكثر توفيراً</h3></div>
     <div class="list">${uniq.sort((a, b) => pct(b) - pct(a)).slice(0, 5).map(pcard).join("")}</div>
     <p class="disclaimer">${!S.live || products().some((p) => (p.offers || []).some((o) => o.source_type === "demo"))
-      ? "نسخة تجريبية — الأسعار المعروضة بيانات تجريبية للعرض فقط." : "الأسعار من نشرات وعروض المتاجر الرسمية. تحقّق من السعر في المتجر."}</p>`;
+      ? "نسخة تجريبية — الأسعار المعروضة بيانات تجريبية للعرض فقط. مواقع الفروع تقريبية." : "الأسعار من نشرات وعروض المتاجر الرسمية. تحقّق من السعر في المتجر."}</p>`;
   };
+
+  /** Physical stores with their nearest branch, closest first. */
+  function nearbyStores(type = "all") {
+    return D.stores.filter((s) => type === "all" || s.type === type)
+      .map((s) => { const n = nearest(s.id); return n && { s, b: n.branch, d: n.d }; })
+      .filter(Boolean).sort((a, b) => a.d - b.d);
+  }
+
+  V.nearby = ({ type = "all" }) => {
+    if (!S.loc) return `
+      ${header("قريب مني")}
+      <div class="radar"><div class="sweep"></div><i class="me"></i></div>
+      <p class="sheet-note" style="text-align:center">نحتاج موقعك لعرض الفروع والعروض الأقرب إليك.</p>
+      <button class="btn" data-act="gps">${ic("locate-fixed", 18)} استخدم موقعي الحالي</button>
+      <button class="btn ghost" style="margin-top:8px" data-go="location">اختر منطقتك</button>`;
+    const all = [];
+    for (const b of D.branches || []) {
+      const s = store(b.store);
+      if (type !== "all" && s.type !== type) continue;
+      all.push({ s, b, d: km(S.loc, b) });
+    }
+    all.sort((a, b) => a.d - b.d);
+    const shown = all.slice(0, 12);
+    const onRadar = shown.slice(0, 9);
+    // Radar scale: square-root so nearby branches get room; the outer ring is a round number of km.
+    const maxD = Math.max(2, ...onRadar.map((x) => x.d));
+    const nice = [1, 2, 3, 5, 10, 15, 20, 30, 50, 80, 120, 200].find((v) => v >= maxD) || Math.ceil(maxD);
+    const rad = (d) => Math.sqrt(Math.min(1, d / nice)) * 35 + 4; // % of the radar's half-width
+    const rings = [nice / 9, nice * 4 / 9, nice].map((d) => ({ d, r: rad(d) }));
+    const placed = [];
+    const pos = (x) => {
+      const dy = (x.b.lat - S.loc.lat) * 111, dx = (x.b.lng - S.loc.lng) * 111 * Math.cos(S.loc.lat * Math.PI / 180);
+      let a = Math.atan2(dy, dx), r = rad(x.d), p;
+      // nudge around the circle until the pin doesn't sit on top of an earlier one
+      for (let k = 0; k < 24; k++) {
+        p = { left: 50 + r * Math.cos(a), top: 50 - r * Math.sin(a) };
+        if (!placed.some((q) => Math.abs(q.left - p.left) < 13 && Math.abs(q.top - p.top) < 8)) break;
+        a += (k % 2 ? -1 : 1) * 0.28 * (k + 1);
+      }
+      placed.push(p); return p;
+    };
+    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["electronics", "إلكترونيات"], ["home", "منزل"], ["fashion", "أزياء"]];
+    return `
+    ${header("قريب مني", { right: `<button class="icon-btn" data-go="location" aria-label="تغيير الموقع">${ic("map-pin")}</button>` })}
+    <button class="loc-chip" data-go="location"><i class="pulse"></i>${esc(S.loc.label)}<small>${esc(S.emirate)}</small></button>
+    <div class="chips">${types.map(([id, n]) => `<button class="chip ${id === type ? "on" : ""}" data-ntype="${id}">${n}</button>`).join("")}</div>
+    <div class="radar" role="img" aria-label="خريطة الفروع القريبة">
+      ${rings.map((g) => `<div class="ring" style="width:${g.r * 2}%;height:${g.r * 2}%"><span>${fmtKm(g.d)}</span></div>`).join("")}
+      <div class="sweep"></div><i class="me"></i>
+      ${onRadar.map((x, i) => { const p = pos(x); return `<button class="pin" style="--i:${i};left:${p.left}%;top:${p.top}%" data-store="${x.s.id}" aria-label="${esc(x.s.name)} ${esc(x.b.name)}">${slogo(x.s, "sm")}</button>`; }).join("")}
+    </div>
+    <div class="section-h"><h3>${ic("route", 20)} الأقرب إليك</h3></div>
+    <div class="list">${shown.map((x, i) => {
+      const count = products().filter((p) => p.prices[x.s.id] != null).length;
+      return `<div class="srow rise" style="--i:${Math.min(i, 8)};cursor:pointer" data-store="${x.s.id}">
+        ${slogo(x.s)}
+        <div class="grow"><h5>${esc(x.s.name)}</h5><small>${esc(x.b.name)} · ${count} عرض</small><br/>${kmTag(x)}</div>
+        <a class="go" href="${mapsUrl(x.b)}" target="_blank" rel="noopener noreferrer" aria-label="الاتجاهات">${ic("navigation", 18)}</a>
+      </div>`; }).join("") || `<div class="empty"><div>${ic("store", 48)}</div>لا توجد فروع من هذا النوع</div>`}</div>
+    <p class="disclaimer">مواقع الفروع تقريبية. اضغط على السهم لفتح الاتجاهات في خرائط Google.</p>`;
+  };
+
+  V.location = () => `
+    ${header("موقعك")}
+    <p class="sheet-note">نستخدم موقعك فقط لترتيب الفروع والعروض حسب القرب منك، ولا نحفظه إلا على جهازك.</p>
+    <button class="btn" data-act="gps">${ic("locate-fixed", 18)} استخدم موقعي الحالي</button>
+    <div class="section-h" style="margin-top:18px"><h3>أو اختر منطقتك</h3></div>
+    <div class="area-list">${D.areas.map((a, i) => `
+      <button class="area rise ${S.loc && S.loc.label === a.name ? "on" : ""}" style="--i:${Math.min(i, 8)}" data-area="${i}">
+        <b>${a.name}</b><small>${a.emirate}</small></button>`).join("")}</div>`;
 
   V.category = ({ cat = "all", sub = null, q = "", sort = "discount" }) => {
     const c = D.categories.find((x) => x.id === cat) || D.categories[0];
     let list = products().filter((p) => (cat === "all" || cat === "more" || p.cat === cat) && (!sub || p.sub === sub));
     if (q) list = products().filter((p) => p.name.includes(q) || Object.keys(p.prices).some((s) => store(s).name.includes(q)));
-    const sorter = { discount: (a, b) => pct(b) - pct(a), low: (a, b) => best(a).price - best(b).price, high: (a, b) => best(b).price - best(a).price };
+    const dist = (p) => Math.min(...Object.keys(p.prices).map((sid) => nearest(sid)?.d ?? (ONLINE.has(sid) ? 999 : 9999)));
+    const sorter = { discount: (a, b) => pct(b) - pct(a), low: (a, b) => best(a).price - best(b).price, high: (a, b) => best(b).price - best(a).price, near: (a, b) => dist(a) - dist(b) };
     list.sort(sorter[sort]);
     const subs = D.subCategories[cat];
     return `
     ${header(q ? `نتائج: ${esc(q)}` : c.name)}
     ${subs ? `<div class="cats">
-      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">${ic("layout-grid", 24)}</div>الكل</button>
-      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${ic(s.icon, 24)}</div>${s.name}</button>`).join("")}
+      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="--tint:#ede9fe">${ic("layout-grid", 24)}</div>الكل</button>
+      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="--tint:#dcfce7">${ic(s.icon, 24)}</div>${s.name}</button>`).join("")}
     </div>` : `<div class="chips">${D.categories.filter((x) => x.id !== "more").map((x) => `<button class="chip ${x.id === cat ? "on" : ""}" data-cat="${x.id}">${x.name}</button>`).join("")}</div>`}
     <div class="toolbar">
       <select id="sort">
         <option value="discount" ${sort === "discount" ? "selected" : ""}>الترتيب: الأعلى خصماً</option>
         <option value="low" ${sort === "low" ? "selected" : ""}>السعر: من الأقل</option>
         <option value="high" ${sort === "high" ? "selected" : ""}>السعر: من الأعلى</option>
+        ${S.loc ? `<option value="near" ${sort === "near" ? "selected" : ""}>الأقرب إليّ</option>` : ""}
       </select>
     </div>
     <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>${ic("search", 48)}</div>لا توجد عروض مطابقة</div>`}</div>`;
@@ -221,16 +367,21 @@
       <div class="hero">${pimg(p, 110)}<span class="badge">خصم ${pct(p)}%</span></div>
       <h2>${esc(p.name)}</h2>
       <div class="store" style="color:var(--muted);margin:4px 0 8px">${store(b.store).name}</div>
-      <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
+      <div class="price"><b class="countup" data-to="${b.price}">${aed(b.price)}</b><s>${aed(p.old)}</s></div>
+      ${p.old > b.price ? `<span class="save-pill">${ic("sparkles", 14)} توفّر ${aed(Math.round((p.old - b.price) * 100) / 100)}</span>` : ""}
       <div class="infobox">
         <div>${ic("calendar", 18)} ${p.until ? `يسري العرض حتى: ${fmtDate(p.until)}` : "عرض مستمر"}</div>
-        <div>${ic("map-pin", 18)} جميع فروع ${S.emirate}</div>
+        <div>${ic("map-pin", 18)} ${(() => { const n = nearest(b.store); return n ? `أقرب فرع: ${esc(store(b.store).name)} ${esc(n.branch.name)} · ${fmtKm(n.d)} · <a href="${mapsUrl(n.branch)}" target="_blank" rel="noopener noreferrer">الاتجاهات</a>` : `جميع فروع ${esc(S.emirate)}`; })()}</div>
         <div>${ic("shopping-bag", 18)} متوفر في الفروع أو عبر المتجر الإلكتروني</div>
         ${sourceLine(p, b.store)}
       </div>
       <div class="section-h"><h3>الأسعار في المتاجر</h3></div>
-      <div class="store-prices">${rows.map(([sid, v], i) => `
-        <div class="row ${i ? "" : "best"}"><span class="sname">${slogo(store(sid), "sm")}${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
+      <div class="store-prices">${rows.map(([sid, v], i) => { const n = nearest(sid); return `
+        <div class="row ${i ? "" : "best"}">
+          <span class="sname">${slogo(store(sid), "sm")}<span class="meta"><span>${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span>
+            <small>${n ? `${esc(n.branch.name)} · ${fmtKm(n.d)}` : ONLINE.has(sid) ? "توصيل للمنزل" : ""}</small></span></span>
+          <span class="end"><b>${aed(v)}</b>${n ? `<a class="go" href="${mapsUrl(n.branch)}" target="_blank" rel="noopener noreferrer" aria-label="الاتجاهات">${ic("navigation", 16)}</a>` : ""}</span>
+        </div>`; }).join("")}
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn" data-cart="${p.id}">${ic(S.cart[p.id] ? "check" : "plus", 18)} ${S.cart[p.id] ? "في قائمة المقارنة" : "أضف لقائمة المقارنة"}</button>
@@ -243,7 +394,8 @@
 
   V.stores = ({ type = "all", q = "" }) => {
     const types = [["all", "الكل"], ["super", "سوبرماركت"], ["online", "أونلاين"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
-    const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)));
+    const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)))
+      .sort((a, b) => (nearest(a.id)?.d ?? 1e4) - (nearest(b.id)?.d ?? 1e4));
     return `
     <div class="topbar"><span class="icon-btn"></span><h1>المتاجر</h1><span class="icon-btn"></span></div>
     <div class="search">${ic("search", 20)}<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
@@ -251,9 +403,9 @@
     <div class="list">${list.map((s) => `
       <div class="srow" data-store="${s.id}">
         ${slogo(s)}
-        <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض</small></div>
+        <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض${nearest(s.id) ? ` · ${esc(nearest(s.id).branch.name)}` : ONLINE.has(s.id) ? " · أونلاين" : ""}</small> ${kmTag(nearest(s.id))}</div>
         <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${ic("heart", 20)}</button>
-        <span style="color:#9ca3af">${ic("chevron-left", 18)}</span>
+        <span style="color:var(--muted)">${ic("chevron-left", 18)}</span>
       </div>`).join("")}</div>`;
   };
 
@@ -263,6 +415,11 @@
     return `
     ${header(s.name)}
     <div class="srow" style="margin-bottom:12px">${slogo(s)}<div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض في ${S.emirate}</small></div></div>
+    ${(() => {
+      const br = (D.branches || []).filter((b) => b.store === id).map((b) => ({ b, d: S.loc ? km(S.loc, b) : null })).sort((a, c) => (a.d ?? 0) - (c.d ?? 0)).slice(0, 4);
+      return br.length ? `<div class="near-strip">${br.map((x) => `<a class="near-card" href="${mapsUrl(x.b)}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+        <b>${esc(x.b.name)}</b><small>${esc(x.b.emirate)}</small>${x.d != null ? kmTag(x) : ""}<span class="link">${ic("navigation", 12)} الاتجاهات</span></a>`).join("")}</div>` : "";
+    })()}
     <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("tag", 48)}</div>لا توجد عروض حالياً</div>`}</div>`;
   };
 
@@ -274,6 +431,14 @@
     ${st.length ? `<div class="section-h"><h3>متاجري</h3></div><div class="hscroll" style="margin-bottom:12px">${st.map((s) => `<div data-store="${s.id}">${slogo(s)}</div>`).join("")}</div>` : ""}
     <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("heart", 48)}</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
   };
+
+  function burst() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = document.createElement("div"); el.className = "burst";
+    const colors = ["#ff9a2e", "#f2456b", "#7c3aed", "#10b981", "#fbbf24"];
+    el.innerHTML = Array.from({ length: 28 }, (_, i) => `<i style="background:${colors[i % 5]};--x:${(Math.random() - .5) * 360}px;--y:${-120 - Math.random() * 260}px;--r:${Math.random() * 720}deg"></i>`).join("");
+    document.querySelector(".app").appendChild(el); setTimeout(() => el.remove(), 1300);
+  }
 
   V.compare = ({ mode = "all" }) => {
     const ids = Object.keys(S.cart).filter(product);
@@ -324,6 +489,12 @@
 
   V.account = () => `
     <div class="topbar"><span class="icon-btn"></span><h1>حسابي</h1><span class="icon-btn"></span></div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="section-h" style="margin-top:0"><h3>المظهر</h3></div>
+      <div class="theme-pick">${[["light", "sun", "نهاري"], ["dark", "moon", "ليلي"], ["auto", "sun-moon", "تلقائي"]]
+        .map(([id, icon, n]) => `<button class="${S.theme === id ? "on" : ""}" data-theme-set="${id}">${ic(icon)}${n}</button>`).join("")}</div>
+    </div>
+    <button class="card loc-chip" data-go="location" style="margin-bottom:12px"><i class="pulse"></i>${ic("map-pin", 18)} ${S.loc ? esc(S.loc.label) : "حدّد موقعك"}<small>${esc(S.emirate)}</small></button>
     <div class="card" style="margin-bottom:12px">
       <div class="section-h" style="margin-top:0"><h3>مميزات التطبيق</h3></div>
       ${[["store", "جميع العروض من جميع المتاجر في مكان واحد"], ["map-pin", "تغطية جميع الإمارات"], ["search", "بحث سهل ومتقدم"], ["percent", "عرض نسبة الخصم والسعر السابق"], ["shopping-cart", "مقارنة سعر السلة بين المتاجر"], ["bell", "إشعارات بالعروض الجديدة"], ["heart", "مفضلة العروض والمتاجر"], ["share-2", "مشاركة العروض مع الآخرين"]]
@@ -393,8 +564,18 @@
   let bannerTimer;
   function render() {
     clearInterval(bannerTimer);
+    applyTheme();
     screen.innerHTML = (V[current.name] || V.home)(current.params);
+    if (S.dir) { screen.classList.remove("enter-fwd", "enter-back"); void screen.offsetWidth; screen.classList.add("enter-" + S.dir); S.dir = null; }
     renderNav();
+    S.pop = null; S.bump = false;
+    // price count-up on the product page
+    document.querySelectorAll(".countup").forEach((el) => {
+      const to = +el.dataset.to, t0 = performance.now(), dur = 700;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = aed(Math.round(to * e * 100) / 100); if (k < 1) requestAnimationFrame(step); else el.textContent = aed(to); };
+      requestAnimationFrame(step);
+    });
     if (current.name === "home") {
       let i = 0;
       bannerTimer = setInterval(() => {
@@ -412,25 +593,30 @@
   // Missing logo or product photo: drop the image so the badge/icon underneath shows.
   document.addEventListener("error", (e) => { if (e.target.tagName === "IMG") e.target.remove(); }, true);
   document.addEventListener("click", (e) => {
-    const t = e.target.closest("[data-tab],[data-cat],[data-sub],[data-open],[data-fav],[data-favstore],[data-cart],[data-store],[data-stype],[data-mode],[data-qty],[data-go],[data-act]");
+    const t = e.target.closest("[data-tab],[data-cat],[data-sub],[data-open],[data-fav],[data-favstore],[data-cart],[data-store],[data-stype],[data-ntype],[data-area],[data-theme-set],[data-mode],[data-qty],[data-go],[data-act]");
     if (!t) return;
+    if (e.target.closest('a[href]:not([href="#"])')) return; // real links (directions, sources) just open
     const ds = t.dataset;
     if (t.tagName === "A") e.preventDefault();
 
-    if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); i < 0 ? S.favs.push(ds.fav) : S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
+    if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); if (i < 0) { S.favs.push(ds.fav); S.pop = ds.fav; S.bump = true; } else S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
     if (ds.favstore) { e.stopPropagation(); const i = S.favStores.indexOf(ds.favstore); i < 0 ? S.favStores.push(ds.favstore) : S.favStores.splice(i, 1); persist(); return render(); }
     if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة"); } persist(); return render(); }
     if (ds.qty) { const q = (S.cart[ds.qty] || 0) + Number(ds.d); if (q <= 0) delete S.cart[ds.qty]; else S.cart[ds.qty] = q; persist(); return render(); }
-    if (ds.tab) { S.history = []; return go(ds.tab, {}, false); }
+    if (ds.tab) { S.history = ds.tab === "home" ? [] : [{ name: "home", params: {} }]; go(ds.tab, {}, false); if (ds.tab === "compare" && Object.keys(S.cart).length > 1) burst(); return; }
     if (ds.cat !== undefined) { const c = ds.cat === "more" ? "all" : ds.cat; return current.name === "category" ? go("category", { ...current.params, cat: c, sub: null, q: "" }, false) : go("category", { cat: c }); }
     if (ds.sub !== undefined) return go("category", { ...current.params, sub: ds.sub || null }, false);
     if (ds.open) return go("product", { id: ds.open });
     if (ds.store) return go("store", { id: ds.store });
     if (ds.stype) return go("stores", { type: ds.stype }, false);
+    if (ds.ntype) return go("nearby", { type: ds.ntype }, false);
+    if (ds.area !== undefined) { const a = D.areas[+ds.area]; setLoc({ lat: a.lat, lng: a.lng, label: a.name, source: "area" }); toast("الموقع: " + a.name); return back(); }
+    if (ds.themeSet) { S.theme = ds.themeSet; persist(); return render(); }
     if (ds.mode) return go("compare", { mode: ds.mode }, false);
     if (ds.go) return go(ds.go);
     switch (ds.act) {
       case "back": return back();
+      case "gps": return useGps();
       case "notify": return toast("ستصلك إشعارات بالعروض الجديدة في " + S.emirate);
       case "share": {
         const p = product(current.params.id);
@@ -484,6 +670,6 @@
   if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, en: S.merchant.name, color: "#5b21b6", type: "super", offers: S.custom.length });
 
   render();
-  setTimeout(() => $("#splash").classList.add("hide"), 1600);
+  setTimeout(() => $("#splash").classList.add("hide"), 2300);
   boot();
 })();

@@ -25,6 +25,66 @@ window.OFFERS_DATA = {
     ]
   },
 
+  // Real branch locations (mall / area names). Coordinates are approximate, for distance only;
+  // directions open Google Maps with the branch name. Confirm each one before launch.
+  branches: [
+    { store: "lulu", name: "الوحدة مول", emirate: "أبوظبي", lat: 24.4706, lng: 54.3725, q: "Lulu Hypermarket Al Wahda Mall Abu Dhabi" },
+    { store: "lulu", name: "مشرف مول", emirate: "أبوظبي", lat: 24.4360, lng: 54.4120, q: "Lulu Hypermarket Mushrif Mall Abu Dhabi" },
+    { store: "lulu", name: "الخالدية مول", emirate: "أبوظبي", lat: 24.4677, lng: 54.3496, q: "Lulu Hypermarket Khalidiyah Mall Abu Dhabi" },
+    { store: "lulu", name: "البرشاء", emirate: "دبي", lat: 25.1149, lng: 55.1960, q: "Lulu Hypermarket Al Barsha Dubai" },
+    { store: "lulu", name: "القصيص", emirate: "دبي", lat: 25.2786, lng: 55.3812, q: "Lulu Hypermarket Al Qusais Dubai" },
+    { store: "lulu", name: "شارع الوحدة", emirate: "الشارقة", lat: 25.3197, lng: 55.3907, q: "Lulu Hypermarket Al Wahda Street Sharjah" },
+    { store: "lulu", name: "عجمان", emirate: "عجمان", lat: 25.3983, lng: 55.4790, q: "Lulu Hypermarket Ajman" },
+    { store: "lulu", name: "الفجيرة", emirate: "الفجيرة", lat: 25.1237, lng: 56.3361, q: "Lulu Hypermarket Fujairah" },
+    { store: "lulu", name: "رأس الخيمة", emirate: "رأس الخيمة", lat: 25.7870, lng: 55.9480, q: "Lulu Hypermarket Ras Al Khaimah" },
+    { store: "carrefour", name: "مول الإمارات", emirate: "دبي", lat: 25.1181, lng: 55.2006, q: "Carrefour Mall of the Emirates" },
+    { store: "carrefour", name: "سيتي سنتر ديرة", emirate: "دبي", lat: 25.2522, lng: 55.3322, q: "Carrefour City Centre Deira" },
+    { store: "carrefour", name: "سيتي سنتر مردف", emirate: "دبي", lat: 25.2166, lng: 55.4079, q: "Carrefour City Centre Mirdif" },
+    { store: "carrefour", name: "مارينا مول", emirate: "أبوظبي", lat: 24.4760, lng: 54.3215, q: "Carrefour Marina Mall Abu Dhabi" },
+    { store: "carrefour", name: "ياس مول", emirate: "أبوظبي", lat: 24.4886, lng: 54.6086, q: "Carrefour Yas Mall" },
+    { store: "carrefour", name: "سيتي سنتر الشارقة", emirate: "الشارقة", lat: 25.3253, lng: 55.3984, q: "Carrefour City Centre Sharjah" },
+    { store: "carrefour", name: "سيتي سنتر عجمان", emirate: "عجمان", lat: 25.4012, lng: 55.4780, q: "Carrefour City Centre Ajman" },
+    { store: "carrefour", name: "سيتي سنتر الفجيرة", emirate: "الفجيرة", lat: 25.1295, lng: 56.3135, q: "Carrefour City Centre Fujairah" },
+    { store: "carrefour", name: "المنار مول", emirate: "رأس الخيمة", lat: 25.7880, lng: 55.9540, q: "Carrefour Manar Mall Ras Al Khaimah" },
+    { store: "spinneys", name: "ذا سبرينغز سوق", emirate: "دبي", lat: 25.0597, lng: 55.1753, q: "Spinneys The Springs Souk Dubai" },
+    { store: "spinneys", name: "ميركاتو مول", emirate: "دبي", lat: 25.2163, lng: 55.2526, q: "Spinneys Mercato Mall Dubai" },
+    { store: "unioncoop", name: "الوصل", emirate: "دبي", lat: 25.1934, lng: 55.2443, q: "Union Coop Al Wasl Dubai" },
+    { store: "unioncoop", name: "الطوار", emirate: "دبي", lat: 25.2585, lng: 55.3836, q: "Union Coop Al Twar Dubai" },
+    { store: "choithrams", name: "أم سقيم", emirate: "دبي", lat: 25.1555, lng: 55.2160, q: "Choithrams Umm Suqeim Dubai" },
+    { store: "nesto", name: "النهدة", emirate: "الشارقة", lat: 25.2995, lng: 55.3725, q: "Nesto Hypermarket Al Nahda Sharjah" },
+    { store: "nesto", name: "مويلح", emirate: "الشارقة", lat: 25.3020, lng: 55.4520, q: "Nesto Hypermarket Muwaileh Sharjah" },
+    { store: "sharafdg", name: "مول الإمارات", emirate: "دبي", lat: 25.1185, lng: 55.2002, q: "Sharaf DG Mall of the Emirates" },
+    { store: "sharafdg", name: "دبي فستيفال سيتي", emirate: "دبي", lat: 25.2220, lng: 55.3530, q: "Sharaf DG Dubai Festival City" },
+    { store: "sharafdg", name: "ياس مول", emirate: "أبوظبي", lat: 24.4884, lng: 54.6083, q: "Sharaf DG Yas Mall" },
+    { store: "ikea", name: "دبي فستيفال سيتي", emirate: "دبي", lat: 25.2224, lng: 55.3525, q: "IKEA Dubai Festival City" },
+    { store: "ikea", name: "جبل علي", emirate: "دبي", lat: 25.0012, lng: 55.1260, q: "IKEA Jebel Ali" },
+    { store: "ikea", name: "جزيرة ياس", emirate: "أبوظبي", lat: 24.4868, lng: 54.6045, q: "IKEA Yas Island" },
+    { store: "homecentre", name: "أوايسس سنتر", emirate: "دبي", lat: 25.1608, lng: 55.2322, q: "Home Centre Oasis Centre Dubai" },
+    { store: "ace", name: "دبي فستيفال سيتي", emirate: "دبي", lat: 25.2213, lng: 55.3557, q: "ACE Dubai Festival City" },
+    { store: "ace", name: "جزيرة ياس", emirate: "أبوظبي", lat: 24.4853, lng: 54.6081, q: "ACE Yas Island" },
+    { store: "centrepoint", name: "أوايسس سنتر", emirate: "دبي", lat: 25.1610, lng: 55.2325, q: "Centrepoint Oasis Centre Dubai" },
+    { store: "centrepoint", name: "صحارى سنتر", emirate: "الشارقة", lat: 25.2975, lng: 55.3740, q: "Centrepoint Sahara Centre Sharjah" },
+    { store: "max", name: "الغرير سنتر", emirate: "دبي", lat: 25.2665, lng: 55.3175, q: "Max Al Ghurair Centre Dubai" },
+    { store: "brandsforless", name: "البرشاء", emirate: "دبي", lat: 25.1110, lng: 55.2010, q: "Brands For Less Al Barsha Dubai" }
+  ],
+
+  // Areas a shopper can pick when GPS is off or not allowed.
+  areas: [
+    { name: "دبي مارينا", emirate: "دبي", lat: 25.0805, lng: 55.1403 },
+    { name: "وسط مدينة دبي", emirate: "دبي", lat: 25.1972, lng: 55.2744 },
+    { name: "البرشاء", emirate: "دبي", lat: 25.1123, lng: 55.1964 },
+    { name: "ديرة", emirate: "دبي", lat: 25.2697, lng: 55.3095 },
+    { name: "مردف", emirate: "دبي", lat: 25.2183, lng: 55.4206 },
+    { name: "كورنيش أبوظبي", emirate: "أبوظبي", lat: 24.4764, lng: 54.3436 },
+    { name: "جزيرة ياس", emirate: "أبوظبي", lat: 24.4884, lng: 54.6087 },
+    { name: "مدينة خليفة", emirate: "أبوظبي", lat: 24.4196, lng: 54.5776 },
+    { name: "المجاز", emirate: "الشارقة", lat: 25.3260, lng: 55.3830 },
+    { name: "كورنيش عجمان", emirate: "عجمان", lat: 25.4130, lng: 55.4450 },
+    { name: "أم القيوين", emirate: "أم القيوين", lat: 25.5650, lng: 55.5530 },
+    { name: "رأس الخيمة", emirate: "رأس الخيمة", lat: 25.7895, lng: 55.9432 },
+    { name: "الفجيرة", emirate: "الفجيرة", lat: 25.1288, lng: 56.3265 }
+  ],
+
   // logo: optional path to the store's official logo (put the file in assets/logos/).
   // Stores without a logo file show a coloured name badge instead.
   // Products can also take img: "assets/products/<id>.jpg" for a real photo; otherwise an icon is shown.
