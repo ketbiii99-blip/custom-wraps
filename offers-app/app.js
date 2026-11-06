@@ -12,7 +12,7 @@
     favs: load("favs", []),          // product ids
     favStores: load("favStores", []),
     cart: load("cart", {}),          // productId -> qty
-    custom: load("custom", []),      // merchant-added offers
+    custom: load("custom", []).map((o) => (o.emoji ? { ...o, icon: "tag", emoji: undefined } : o)), // merchant-added offers
     merchant: load("merchant", null),
     history: [],
   };
@@ -20,7 +20,9 @@
 
   // ---------- helpers ----------
   const products = () => D.products.concat(S.custom);
-  const store = (id) => D.stores.find((s) => s.id === id) || { id, name: id, short: "?", color: "#64748b" };
+  const store = (id) => D.stores.find((s) => s.id === id) || { id, name: id, en: "?", color: "#64748b" };
+  const ic = window.ic;
+  const pimg = (p, size) => `${p.img ? `<img src="${p.img}" alt="" onerror="this.remove()" />` : ""}${ic(p.icon || "tag", size || 40)}`;
   const product = (id) => products().find((p) => p.id === id);
   const best = (p) => {
     let bid = null, bp = Infinity;
@@ -48,24 +50,24 @@
   function back() { current = S.history.pop() || { name: "home", params: {} }; render(); }
 
   const tabs = [
-    { id: "home", label: "الرئيسية", icon: "🏠" },
-    { id: "stores", label: "المتاجر", icon: "🏬" },
-    { id: "favs", label: "المفضلة", icon: "❤️" },
-    { id: "compare", label: "قارن", icon: "🛒" },
-    { id: "account", label: "حسابي", icon: "👤" },
+    { id: "home", label: "الرئيسية", icon: "house" },
+    { id: "stores", label: "المتاجر", icon: "store" },
+    { id: "favs", label: "المفضلة", icon: "heart" },
+    { id: "compare", label: "قارن", icon: "shopping-cart" },
+    { id: "account", label: "حسابي", icon: "user" },
   ];
   function renderNav() {
     const n = Object.keys(S.cart).length;
     $("#nav").innerHTML = tabs.map((t) => `
       <button class="${current.name === t.id ? "on" : ""}" data-tab="${t.id}">
-        <span>${t.icon}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
+        <span>${ic(t.icon)}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
       </button>`).join("");
   }
 
   // ---------- components ----------
   const header = (title, opts = {}) => `
     <div class="topbar">
-      <button class="icon-btn" data-act="back" aria-label="رجوع">→</button>
+      <button class="icon-btn" data-act="back" aria-label="رجوع">${ic("arrow-right")}</button>
       <h1>${title}</h1>
       ${opts.right || `<span class="icon-btn"></span>`}
     </div>`;
@@ -75,24 +77,24 @@
     const fav = S.favs.includes(p.id), inCart = !!S.cart[p.id];
     return `
     <div class="pcard" data-open="${p.id}">
-      <div class="pimg">${p.emoji}<span class="badge">خصم ${pct(p)}%</span></div>
+      <div class="pimg">${pimg(p)}<span class="badge">خصم ${pct(p)}%</span></div>
       <div class="pinfo">
         <h5>${esc(p.name)}</h5>
         <div class="store">${store(b.store).name}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""}</div>
         <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
       </div>
       <div class="pact">
-        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${fav ? "♥" : "♡"}</button>
-        <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${inCart ? "✓" : "+"}</button>
+        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${ic("heart", 20)}</button>
+        <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${ic(inCart ? "check" : "plus", 18)}</button>
       </div>
     </div>`;
   }
   const mini = (p) => `
     <div class="mini" data-open="${p.id}">
-      <div class="pimg">${p.emoji}<span class="badge">-${pct(p)}%</span></div>
+      <div class="pimg">${pimg(p, 34)}<span class="badge">-${pct(p)}%</span></div>
       <h6>${esc(p.name)}</h6><b>${aed(best(p).price)}</b>
     </div>`;
-  const slogo = (s) => `<div class="slogo" style="background:${s.color}">${s.short}</div>`;
+  const slogo = (s, cls = "") => `<div class="slogo ${cls}" style="--c:${s.color}">${s.logo ? `<img src="${s.logo}" alt="${s.en}" onerror="this.remove()" />` : ""}<span>${esc(s.en)}</span></div>`;
 
   // ---------- screens ----------
   const V = {};
@@ -102,21 +104,21 @@
     const uniq = [...new Map(featured.map((p) => [p.id, p])).values()];
     return `
     <div class="topbar">
-      <div class="brand"><div class="mark">%</div><b>OFFERS</b></div>
-      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">🔔<i class="dot"></i></button>
+      <div class="brand"><div class="mark">${ic("percent", 22)}</div><b>OFFERS</b></div>
+      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">${ic("bell")}<i class="dot"></i></button>
     </div>
-    <label class="select">📍
+    <label class="select">${ic("map-pin", 20)}
       <select id="emirate">${D.emirates.map((e) => `<option ${e === S.emirate ? "selected" : ""}>${e}</option>`).join("")}</select>
     </label>
-    <div class="search">🔍<input id="q" placeholder="ابحث عن أي منتج أو متجر..." /><span>⌗</span></div>
+    <div class="search">${ic("search", 20)}<input id="q" placeholder="ابحث عن أي منتج أو متجر..." />${ic("scan-line", 20)}</div>
     <div class="cats">${D.categories.map((c) => `
-      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${c.icon}</div>${c.name}</button>`).join("")}
+      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${ic(c.icon, 26)}</div>${c.name}</button>`).join("")}
     </div>
     <div class="section-h"><h3>أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
     <div class="banner-wrap"><div class="banners" id="banners">${D.banners.map((b) => `
       <div class="banner" style="background:linear-gradient(120deg,${b.from},${b.to})">
         <div><h4>${b.title}</h4><small>${b.sub}</small><button class="btn-w" data-cat="${b.cat}">تصفح الآن</button></div>
-        <div class="art">${b.emoji}</div>
+        <div class="art">${ic(b.icon, 72)}</div>
       </div>`).join("")}</div></div>
     <div class="dots" id="dots">${D.banners.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
     <div class="section-h"><h3>الأكثر توفيراً</h3></div>
@@ -134,8 +136,8 @@
     return `
     ${header(q ? `نتائج: ${esc(q)}` : c.name)}
     ${subs ? `<div class="cats">
-      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">🔲</div>الكل</button>
-      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${s.icon}</div>${s.name}</button>`).join("")}
+      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">${ic("layout-grid", 24)}</div>الكل</button>
+      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${ic(s.icon, 24)}</div>${s.name}</button>`).join("")}
     </div>` : `<div class="chips">${D.categories.filter((x) => x.id !== "more").map((x) => `<button class="chip ${x.id === cat ? "on" : ""}" data-cat="${x.id}">${x.name}</button>`).join("")}</div>`}
     <div class="toolbar">
       <select id="sort">
@@ -144,7 +146,7 @@
         <option value="high" ${sort === "high" ? "selected" : ""}>السعر: من الأعلى</option>
       </select>
     </div>
-    <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>🔎</div>لا توجد عروض مطابقة</div>`}</div>`;
+    <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>${ic("search", 48)}</div>لا توجد عروض مطابقة</div>`}</div>`;
   };
 
   V.product = ({ id }) => {
@@ -153,24 +155,24 @@
     const rows = Object.entries(p.prices).sort((a, c) => a[1] - c[1]);
     const similar = products().filter((x) => x.cat === p.cat && x.id !== p.id).slice(0, 6);
     return `
-    ${header("", { right: `<button class="icon-btn heart ${fav ? "on" : ""}" data-fav="${p.id}">${fav ? "♥" : "♡"}</button>` })}
+    ${header("", { right: `<button class="icon-btn heart ${fav ? "on" : ""}" data-fav="${p.id}">${ic("heart")}</button>` })}
     <div class="detail">
-      <div class="hero">${p.emoji}<span class="badge">خصم ${pct(p)}%</span></div>
+      <div class="hero">${pimg(p, 110)}<span class="badge">خصم ${pct(p)}%</span></div>
       <h2>${esc(p.name)}</h2>
       <div class="store" style="color:var(--muted);margin:4px 0 8px">${store(b.store).name}</div>
       <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
       <div class="infobox">
-        <div>📅 يسري العرض حتى: ${fmtDate(p.until)}</div>
-        <div>📍 جميع فروع ${S.emirate}</div>
-        <div>🛍️ متوفر في الفروع أو عبر المتجر الإلكتروني</div>
+        <div>${ic("calendar", 18)} يسري العرض حتى: ${fmtDate(p.until)}</div>
+        <div>${ic("map-pin", 18)} جميع فروع ${S.emirate}</div>
+        <div>${ic("shopping-bag", 18)} متوفر في الفروع أو عبر المتجر الإلكتروني</div>
       </div>
       <div class="section-h"><h3>الأسعار في المتاجر</h3></div>
       <div class="store-prices">${rows.map(([sid, v], i) => `
-        <div class="row ${i ? "" : "best"}"><span>${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
+        <div class="row ${i ? "" : "best"}"><span class="sname">${slogo(store(sid), "sm")}${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn" data-cart="${p.id}">${S.cart[p.id] ? "✓ في قائمة المقارنة" : "＋ أضف لقائمة المقارنة"}</button>
-        <button class="btn ghost" style="width:auto" data-act="share">↗</button>
+        <button class="btn" data-cart="${p.id}">${ic(S.cart[p.id] ? "check" : "plus", 18)} ${S.cart[p.id] ? "في قائمة المقارنة" : "أضف لقائمة المقارنة"}</button>
+        <button class="btn ghost" style="width:auto" data-act="share">${ic("share-2", 20)}</button>
       </div>
       <button class="btn ghost" style="margin-top:8px" data-store="${b.store}">زيارة صفحة المتجر</button>
       ${similar.length ? `<div class="section-h" style="margin-top:18px"><h3>منتجات مشابهة</h3></div><div class="hscroll">${similar.map(mini).join("")}</div>` : ""}
@@ -178,18 +180,18 @@
   };
 
   V.stores = ({ type = "all", q = "" }) => {
-    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
+    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["online", "أونلاين"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
     const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)));
     return `
     <div class="topbar"><span class="icon-btn"></span><h1>المتاجر</h1><span class="icon-btn"></span></div>
-    <div class="search">🔍<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
+    <div class="search">${ic("search", 20)}<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
     <div class="chips">${types.map(([id, n]) => `<button class="chip ${id === type ? "on" : ""}" data-stype="${id}">${n}</button>`).join("")}</div>
     <div class="list">${list.map((s) => `
       <div class="srow" data-store="${s.id}">
         ${slogo(s)}
         <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض</small></div>
-        <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${S.favStores.includes(s.id) ? "♥" : "♡"}</button>
-        <span style="color:#9ca3af">‹</span>
+        <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${ic("heart", 20)}</button>
+        <span style="color:#9ca3af">${ic("chevron-left", 18)}</span>
       </div>`).join("")}</div>`;
   };
 
@@ -199,7 +201,7 @@
     return `
     ${header(s.name)}
     <div class="srow" style="margin-bottom:12px">${slogo(s)}<div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض في ${S.emirate}</small></div></div>
-    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>🏷️</div>لا توجد عروض حالياً</div>`}</div>`;
+    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("tag", 48)}</div>لا توجد عروض حالياً</div>`}</div>`;
   };
 
   V.favs = () => {
@@ -208,14 +210,14 @@
     return `
     <div class="topbar"><span class="icon-btn"></span><h1>المفضلة</h1><span class="icon-btn"></span></div>
     ${st.length ? `<div class="section-h"><h3>متاجري</h3></div><div class="hscroll" style="margin-bottom:12px">${st.map((s) => `<div data-store="${s.id}">${slogo(s)}</div>`).join("")}</div>` : ""}
-    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>♡</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
+    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("heart", 48)}</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
   };
 
   V.compare = ({ mode = "all" }) => {
     const ids = Object.keys(S.cart).filter(product);
     if (!ids.length) return `
       <div class="topbar"><span class="icon-btn"></span><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
-      <div class="empty"><div>🛒</div>أضف منتجات بالضغط على <b>+</b> لمقارنة سعر سلتك في كل المتاجر</div>
+      <div class="empty"><div>${ic("shopping-cart", 48)}</div>أضف منتجات بالضغط على <b>+</b> لمقارنة سعر سلتك في كل المتاجر</div>
       <button class="btn" data-cat="all">تصفح العروض</button>`;
     const items = ids.map(product);
     const sids = [...new Set(items.flatMap((p) => Object.keys(p.prices)))];
@@ -232,20 +234,20 @@
     const worst = Math.max(...full.map((t) => t.sum), bestT.sum);
 
     return `
-    <div class="topbar"><button class="icon-btn" data-act="clear" title="مسح">🗑️</button><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
+    <div class="topbar"><button class="icon-btn" data-act="clear" title="مسح">${ic("trash-2")}</button><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
     <div class="cmp"><table>
       <thead><tr><th class="prod">المنتجات</th>${totals.map((t) => `
-        <th><div class="slogo" style="width:60px;height:30px;font-size:12px;margin:auto;background:${store(t.sid).color}">${store(t.sid).short}</div>
+        <th>${slogo(store(t.sid), "th")}
         <span class="avail">${t.have}/${items.length}</span></th>`).join("")}</tr></thead>
       <tbody>${items.map((p) => {
         const cheapest = best(p).store;
-        return `<tr><td class="prod">${p.emoji} ${esc(p.name)}<br/>
+        return `<tr><td class="prod"><span class="tiny">${pimg(p, 18)}</span> ${esc(p.name)}<br/>
           <span class="qty"><button data-qty="${p.id}" data-d="-1">−</button>${S.cart[p.id]}<button data-qty="${p.id}" data-d="1">+</button></span></td>
           ${totals.map((t) => {
             const v = p.prices[t.sid];
             if (v == null) return `<td class="na">—</td>`;
             const hl = mode === "multi" ? t.sid === cheapest : t.sid === bestT.sid;
-            return `<td class="${hl ? "cheap" : ""}">${(v * S.cart[p.id]).toFixed(2)}${hl ? " ✓" : ""}</td>`;
+            return `<td class="${hl ? "cheap" : ""}">${(v * S.cart[p.id]).toFixed(2)}</td>`;
           }).join("")}</tr>`;
       }).join("")}</tbody>
       <tfoot><tr><td class="prod">الإجمالي (درهم)</td>${totals.map((t) => `<td class="${t.sid === bestT.sid ? "bestcol" : ""}">${t.sum.toFixed(2)}${t.have < items.length ? "*" : ""}</td>`).join("")}</tr></tfoot>
@@ -262,8 +264,8 @@
     <div class="topbar"><span class="icon-btn"></span><h1>حسابي</h1><span class="icon-btn"></span></div>
     <div class="card" style="margin-bottom:12px">
       <div class="section-h" style="margin-top:0"><h3>مميزات التطبيق</h3></div>
-      ${[["🏬", "جميع العروض من جميع المتاجر في مكان واحد"], ["📍", "تغطية جميع الإمارات"], ["🔍", "بحث سهل ومتقدم"], ["%", "عرض نسبة الخصم والسعر السابق"], ["🛒", "مقارنة سعر السلة بين المتاجر"], ["🔔", "إشعارات بالعروض الجديدة"], ["❤️", "مفضلة العروض والمتاجر"], ["↗", "مشاركة العروض مع الآخرين"]]
-        .map(([i, t]) => `<div class="feat"><span>${i}</span>${t}</div>`).join("")}
+      ${[["store", "جميع العروض من جميع المتاجر في مكان واحد"], ["map-pin", "تغطية جميع الإمارات"], ["search", "بحث سهل ومتقدم"], ["percent", "عرض نسبة الخصم والسعر السابق"], ["shopping-cart", "مقارنة سعر السلة بين المتاجر"], ["bell", "إشعارات بالعروض الجديدة"], ["heart", "مفضلة العروض والمتاجر"], ["share-2", "مشاركة العروض مع الآخرين"]]
+        .map(([i, t]) => `<div class="feat"><span>${ic(i, 18)}</span>${t}</div>`).join("")}
     </div>
     <div class="card">
       <div class="section-h" style="margin-top:0"><h3>هل تملك متجراً؟</h3></div>
@@ -288,14 +290,14 @@
     const mine = S.custom;
     return `
     ${header("لوحة تحكم المتجر")}
-    <div class="srow" style="margin-bottom:12px"><div class="slogo" style="background:var(--primary)">🏪</div><div class="grow"><h5>${esc(S.merchant.name)}</h5><small>${mine.length} عرض منشور</small></div></div>
+    <div class="srow" style="margin-bottom:12px"><div class="slogo" style="--c:var(--primary)">${ic("store", 24)}</div><div class="grow"><h5>${esc(S.merchant.name)}</h5><small>${mine.length} عرض منشور</small></div></div>
     <div class="dash">
-      <button data-go="addOffer"><span>➕</span>إضافة عرض جديد</button>
-      <button data-act="myoffers"><span>🏷️</span>إدارة العروض</button>
-      <button data-act="soon"><span>📍</span>الفروع والمواقع</button>
-      <button data-act="soon"><span>🖼️</span>منتجات العروض</button>
-      <button data-act="soon"><span>🗓️</span>المدفوعات</button>
-      <button data-act="soon"><span>📊</span>الإحصائيات</button>
+      <button data-go="addOffer"><span>${ic("plus")}</span>إضافة عرض جديد</button>
+      <button data-act="myoffers"><span>${ic("tag")}</span>إدارة العروض</button>
+      <button data-act="soon"><span>${ic("map-pin")}</span>الفروع والمواقع</button>
+      <button data-act="soon"><span>${ic("image")}</span>منتجات العروض</button>
+      <button data-act="soon"><span>${ic("credit-card")}</span>المدفوعات</button>
+      <button data-act="soon"><span>${ic("bar-chart-3")}</span>الإحصائيات</button>
     </div>
     <div id="myoffers" style="margin-top:14px" class="list">${mine.map(pcard).join("")}</div>
     <button class="btn ghost" style="margin-top:14px" data-act="logout">تسجيل الخروج</button>`;
@@ -304,7 +306,7 @@
   V.addOffer = () => `
     ${header("إضافة عرض جديد")}
     <form class="form" id="oform">
-      <div class="upload">📷<br/>إضافة صور المنتج<br/><small>(سيتم دعم رفع الصور مع الخادم)</small></div>
+      <div class="upload">${ic("camera", 32)}<br/>إضافة صور المنتج<br/><small>(سيتم دعم رفع الصور مع الخادم)</small></div>
       <label>اسم المنتج *<input name="name" required placeholder="مثل: أرز بسمتي 5 كيلو" /></label>
       <label>القسم<select name="cat">${D.categories.filter((c) => !["all", "more"].includes(c.id)).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}</select></label>
       <div class="two">
@@ -347,7 +349,7 @@
 
     if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); i < 0 ? S.favs.push(ds.fav) : S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
     if (ds.favstore) { e.stopPropagation(); const i = S.favStores.indexOf(ds.favstore); i < 0 ? S.favStores.push(ds.favstore) : S.favStores.splice(i, 1); persist(); return render(); }
-    if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة 🛒"); } persist(); return render(); }
+    if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة"); } persist(); return render(); }
     if (ds.qty) { const q = (S.cart[ds.qty] || 0) + Number(ds.d); if (q <= 0) delete S.cart[ds.qty]; else S.cart[ds.qty] = q; persist(); return render(); }
     if (ds.tab) { S.history = []; return go(ds.tab, {}, false); }
     if (ds.cat !== undefined) { const c = ds.cat === "more" ? "all" : ds.cat; return current.name === "category" ? go("category", { ...current.params, cat: c, sub: null, q: "" }, false) : go("category", { cat: c }); }
@@ -399,15 +401,15 @@
       if (price >= old) return toast("السعر الجديد يجب أن يكون أقل من السابق");
       if (fd.until < fd.from) return toast("تاريخ النهاية قبل تاريخ البداية");
       const sid = "m_" + S.merchant.name;
-      if (!D.stores.find((s) => s.id === sid)) D.stores.push({ id: sid, name: S.merchant.name, short: S.merchant.name.slice(0, 2), color: "#5b21b6", type: "super", offers: 0 });
+      if (!D.stores.find((s) => s.id === sid)) D.stores.push({ id: sid, name: S.merchant.name, en: S.merchant.name, color: "#5b21b6", type: "super", offers: 0 });
       const cat = D.categories.find((c) => c.id === fd.cat);
-      S.custom.push({ id: "c" + Date.now(), name: fd.name, cat: fd.cat, sub: null, emoji: cat ? cat.icon : "🏷️", old, prices: { [sid]: price }, until: fd.until, featured: true });
-      persist(); toast("تم نشر العرض ✅"); back();
+      S.custom.push({ id: "c" + Date.now(), name: fd.name, cat: fd.cat, sub: null, icon: cat ? cat.icon : "tag", old, prices: { [sid]: price }, until: fd.until, featured: true });
+      persist(); toast("تم نشر العرض"); back();
     }
   });
 
   // restore merchant store records
-  if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, short: S.merchant.name.slice(0, 2), color: "#5b21b6", type: "super", offers: S.custom.length });
+  if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, en: S.merchant.name, color: "#5b21b6", type: "super", offers: S.custom.length });
 
   render();
   setTimeout(() => $("#splash").classList.add("hide"), 1600);

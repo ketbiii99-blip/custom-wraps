@@ -40,7 +40,7 @@ input,select{font:inherit}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 0 12px}
 .topbar h1{font-size:19px;font-weight:800}
 .brand{display:flex;align-items:center;gap:8px}
-.brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#f97316,#c026d3);color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px}
+.brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#f97316,#c026d3);color:#fff;display:grid;place-items:center}
 .brand b{font-size:26px;font-weight:900;color:var(--primary);font-family:system-ui,sans-serif;letter-spacing:1px}
 .icon-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:18px;position:relative}
 .icon-btn .dot{position:absolute;top:8px;left:9px;width:8px;height:8px;border-radius:50%;background:var(--sale)}
@@ -53,7 +53,7 @@ input,select{font:inherit}
 /* Grid of categories */
 .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px;margin-bottom:18px}
 .cat{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
-.cat .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:26px}
+.cat .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;color:#4c1d95}
 .cat.active .ic{outline:2px solid var(--primary)}
 
 .section-h{display:flex;justify-content:space-between;align-items:center;margin:6px 0 10px}
@@ -67,7 +67,7 @@ input,select{font:inherit}
 .banner h4{font-size:22px;font-weight:900;line-height:1.3}
 .banner small{display:block;opacity:.9;margin:4px 0 10px}
 .banner .btn-w{background:#fff;color:var(--sale);border-radius:10px;padding:6px 14px;font-weight:800;font-size:13px}
-.banner .art{font-size:34px;white-space:nowrap}
+.banner .art{opacity:.9;color:#fff}
 .dots{display:flex;justify-content:center;gap:6px;margin:10px 0 18px}
 .dots i{width:7px;height:7px;border-radius:9px;background:#d4d4d8;transition:.3s}
 .dots i.on{width:20px;background:var(--primary)}
@@ -75,7 +75,11 @@ input,select{font:inherit}
 /* Product cards */
 .list{display:flex;flex-direction:column;gap:10px}
 .pcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);display:flex;gap:12px;padding:10px;align-items:center}
-.pimg{position:relative;width:96px;height:86px;border-radius:12px;background:linear-gradient(135deg,#fff7ed,#fef3c7);display:grid;place-items:center;font-size:44px;flex-shrink:0}
+.pimg{position:relative;width:96px;height:86px;border-radius:12px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);color:var(--primary-2);display:grid;place-items:center;flex-shrink:0;overflow:hidden}
+.pimg img,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
+.tiny{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--primary-soft);color:var(--primary-2);vertical-align:middle;position:relative;overflow:hidden}
+.tiny img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.i{display:block;flex-shrink:0}
 .badge{position:absolute;top:6px;right:6px;background:var(--sale);color:#fff;font-size:11px;font-weight:800;border-radius:8px;padding:2px 7px}
 .pinfo{flex:1;min-width:0}
 .pinfo h5{font-size:14.5px;font-weight:800;line-height:1.4}
@@ -84,8 +88,9 @@ input,select{font:inherit}
 .price b{color:var(--sale);font-size:18px;font-weight:900}
 .price s{color:var(--muted);font-size:12.5px}
 .pact{display:flex;flex-direction:column;align-items:center;justify-content:space-between;align-self:stretch}
-.heart{font-size:20px;color:#9ca3af}
+.heart{color:#9ca3af}
 .heart.on{color:var(--sale)}
+.heart.on svg{fill:currentColor}
 .plus{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-size:20px;font-weight:700;display:grid;place-items:center}
 .plus.added{background:var(--ok)}
 
@@ -106,12 +111,15 @@ input,select{font:inherit}
 .toolbar .icon-btn{background:var(--card);border:1px solid var(--line)}
 
 /* Detail */
-.hero{position:relative;height:250px;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#fde68a);display:grid;place-items:center;font-size:120px;margin-bottom:14px}
+.hero{position:relative;height:250px;border-radius:20px;background:linear-gradient(135deg,#f5f3ff,#ddd6fe);color:var(--primary-2);display:grid;place-items:center;margin-bottom:14px;overflow:hidden}
+.hero .badge{z-index:1}
 .hero .badge{font-size:15px;padding:6px 14px;border-radius:20px;top:14px;right:14px}
 .detail h2{font-size:22px;font-weight:900}
 .detail .price b{font-size:26px}
 .infobox{background:var(--primary-soft);border-radius:14px;padding:12px 14px;margin:14px 0;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
-.btn{width:100%;padding:13px;border-radius:14px;background:var(--primary);color:#fff;font-weight:800;font-size:15px;display:flex;justify-content:center;gap:8px}
+.infobox div{display:flex;align-items:center;gap:8px}
+.infobox svg{color:var(--primary)}
+.btn{width:100%;padding:13px;border-radius:14px;background:var(--primary);color:#fff;font-weight:800;font-size:15px;display:flex;justify-content:center;align-items:center;gap:8px}
 .btn.ghost{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
 .btn.orange{background:var(--accent)}
 .store-prices{background:var(--card);border-radius:14px;box-shadow:var(--shadow);margin:14px 0;overflow:hidden}
@@ -122,7 +130,15 @@ input,select{font:inherit}
 
 /* Stores list */
 .srow{background:var(--card);display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;box-shadow:var(--shadow)}
-.slogo{width:72px;height:44px;border-radius:10px;color:#fff;font-weight:900;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:15px}
+.slogo{position:relative;width:84px;height:46px;border-radius:10px;background:var(--c,#64748b);color:#fff;font-weight:900;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:13px;text-align:center;line-height:1.1;padding:4px;flex-shrink:0;overflow:hidden}
+.slogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7px;background:var(--c,#64748b)}
+.slogo img[src$=".png"],.slogo img[src$=".jpg"],.slogo img[src$=".webp"]{background:#fff}
+.slogo img+span{visibility:hidden}
+.slogo.sm{width:44px;height:26px;font-size:9px;border-radius:6px;padding:2px}
+.slogo.sm img{padding:3px}
+.slogo.th{width:64px;height:32px;font-size:10px;margin:auto}
+.slogo.th img{padding:4px}
+.sname{display:flex;align-items:center;gap:8px}
 .srow .grow{flex:1}
 .srow h5{font-size:15px;font-weight:800}
 .srow small{color:var(--muted)}
@@ -152,26 +168,27 @@ input,select{font:inherit}
 .form label{font-size:13px;font-weight:700;color:var(--muted)}
 .form input,.form select{width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;outline-color:var(--primary)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.upload{border:2px dashed #cbd5e1;border-radius:14px;padding:18px;text-align:center;color:var(--muted)}
+.upload{border:2px dashed #cbd5e1;border-radius:14px;padding:18px;text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center}
 .dash{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .dash button{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:16px 10px;font-weight:700;font-size:13.5px;display:flex;flex-direction:column;align-items:center;gap:6px}
-.dash button span{font-size:24px}
+.dash button span{width:44px;height:44px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
 .steps div{background:#fff;border-radius:12px;padding:10px 4px;text-align:center;font-size:11.5px;font-weight:700;box-shadow:var(--shadow)}
 .steps i{display:grid;place-items:center;width:28px;height:28px;margin:0 auto 6px;border-radius:50%;color:#fff;font-style:normal}
 .card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:14px}
 .feat{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px;border-bottom:1px solid var(--line)}
 .feat:last-child{border:0}
-.feat span{width:34px;height:34px;border-radius:10px;background:var(--primary-soft);display:grid;place-items:center}
+.feat span{width:34px;height:34px;border-radius:10px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center}
 .empty{text-align:center;color:var(--muted);padding:40px 10px}
-.empty div{font-size:50px;margin-bottom:8px}
+.empty div{display:grid;place-items:center;margin-bottom:8px;color:#c4b5fd}
 
 /* Bottom nav */
 .nav{position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding-bottom:6px;z-index:10}
 .nav button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;color:#9ca3af;font-weight:700;position:relative}
-.nav button span{font-size:21px;filter:grayscale(1);opacity:.7}
+.nav button span{opacity:.8}
 .nav button.on{color:var(--primary)}
-.nav button.on span{filter:none;opacity:1}
+.nav button.on span{opacity:1}
+.nav button.on svg{stroke-width:2.4}
 .nav .count{position:absolute;top:-4px;left:6px;background:var(--sale);color:#fff;border-radius:9px;font-size:10px;padding:0 5px;min-width:16px}
 
 .toast{position:absolute;bottom:86px;left:50%;transform:translateX(-50%) translateY(20px);background:#111827;color:#fff;padding:10px 18px;border-radius:12px;font-size:13.5px;opacity:0;transition:.3s;z-index:60;white-space:nowrap}
@@ -196,89 +213,108 @@ input,select{font:inherit}
     <div class="toast" id="toast" role="status"></div>
   </div>
   <script>
+// Icons from Lucide (lucide.dev), ISC License. ISC License
+window.ICONS = {"house": "<path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\" /> <path d=\"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" />", "store": "<path d=\"m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7\" /> <path d=\"M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\" /> <path d=\"M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4\" /> <path d=\"M2 7h20\" /> <path d=\"M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7\" />", "heart": "<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\" />", "shopping-cart": "<circle cx=\"8\" cy=\"21\" r=\"1\" /> <circle cx=\"19\" cy=\"21\" r=\"1\" /> <path d=\"M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12\" />", "user": "<path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\" /> <circle cx=\"12\" cy=\"7\" r=\"4\" />", "bell": "<path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\" /> <path d=\"M10.3 21a1.94 1.94 0 0 0 3.4 0\" />", "map-pin": "<path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\" /> <circle cx=\"12\" cy=\"10\" r=\"3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "scan-line": "<path d=\"M3 7V5a2 2 0 0 1 2-2h2\" /> <path d=\"M17 3h2a2 2 0 0 1 2 2v2\" /> <path d=\"M21 17v2a2 2 0 0 1-2 2h-2\" /> <path d=\"M7 21H5a2 2 0 0 1-2-2v-2\" /> <path d=\"M7 12h10\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "apple": "<path d=\"M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z\" /> <path d=\"M10 2c1 .5 2 2 2 5\" />", "monitor": "<rect width=\"20\" height=\"14\" x=\"2\" y=\"3\" rx=\"2\" /> <line x1=\"8\" x2=\"16\" y1=\"21\" y2=\"21\" /> <line x1=\"12\" x2=\"12\" y1=\"17\" y2=\"21\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sofa": "<path d=\"M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3\" /> <path d=\"M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\" /> <path d=\"M4 18v2\" /> <path d=\"M20 18v2\" /> <path d=\"M12 4v9\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "baby": "<path d=\"M9 12h.01\" /> <path d=\"M15 12h.01\" /> <path d=\"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5\" /> <path d=\"M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1\" />", "package": "<path d=\"m7.5 4.27 9 5.15\" /> <path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\" /> <path d=\"m3.3 7 8.7 5 8.7-5\" /> <path d=\"M12 22V12\" />", "milk": "<path d=\"M8 2h8\" /> <path d=\"M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2\" /> <path d=\"M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0\" />", "beef": "<circle cx=\"12.5\" cy=\"8.5\" r=\"2.5\" /> <path d=\"M12.5 2a6.5 6.5 0 0 0-6.22 4.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3A6.5 6.5 0 0 0 12.5 2Z\" /> <path d=\"m18.5 6 2.19 4.5a6.48 6.48 0 0 1 .31 2 6.49 6.49 0 0 1-2.6 5.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5\" />", "carrot": "<path d=\"M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.77 11.84 2.27 21.7 2.27 21.7zM8.64 14l-2.05-2.04M15.34 15l-2.46-2.46\" /> <path d=\"M22 9s-1.33-2-3.5-2C16.86 7 15 9 15 9s1.33 2 3.5 2S22 9 22 9z\" /> <path d=\"M15 2s-2 1.33-2 3.5S15 9 15 9s2-1.84 2-3.5C17 3.33 15 2 15 2z\" />", "croissant": "<path d=\"m4.6 13.11 5.79-3.21c1.89-1.05 4.79 1.78 3.71 3.71l-3.22 5.81C8.8 23.16.79 15.23 4.6 13.11Z\" /> <path d=\"m10.5 9.5-1-2.29C9.2 6.48 8.8 6 8 6H4.5C2.79 6 2 6.5 2 8.5a7.71 7.71 0 0 0 2 4.83\" /> <path d=\"M8 6c0-1.55.24-4-2-4-2 0-2.5 2.17-2.5 4\" /> <path d=\"m14.5 13.5 2.29 1c.73.3 1.21.7 1.21 1.5v3.5c0 1.71-.5 2.5-2.5 2.5a7.71 7.71 0 0 1-4.83-2\" /> <path d=\"M18 16c1.55 0 4-.24 4 2 0 2-2.17 2.5-4 2.5\" />", "cup-soda": "<path d=\"m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8\" /> <path d=\"M5 8h14\" /> <path d=\"M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0\" /> <path d=\"m12 8 1-6h2\" />", "calendar": "<path d=\"M8 2v4\" /> <path d=\"M16 2v4\" /> <rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" /> <path d=\"M3 10h18\" />", "share-2": "<circle cx=\"18\" cy=\"5\" r=\"3\" /> <circle cx=\"6\" cy=\"12\" r=\"3\" /> <circle cx=\"18\" cy=\"19\" r=\"3\" /> <line x1=\"8.59\" x2=\"15.42\" y1=\"13.51\" y2=\"17.49\" /> <line x1=\"15.41\" x2=\"8.59\" y1=\"6.51\" y2=\"10.49\" />", "arrow-right": "<path d=\"M5 12h14\" /> <path d=\"m12 5 7 7-7 7\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "check": "<path d=\"M20 6 9 17l-5-5\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "chevron-left": "<path d=\"m15 18-6-6 6-6\" />", "camera": "<path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\" /> <circle cx=\"12\" cy=\"13\" r=\"3\" />", "bar-chart-3": "<path d=\"M3 3v18h18\" /> <path d=\"M18 17V9\" /> <path d=\"M13 17V5\" /> <path d=\"M8 17v-3\" />", "tag": "<path d=\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"7.5\" cy=\"7.5\" r=\".5\" fill=\"currentColor\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "credit-card": "<rect width=\"20\" height=\"14\" x=\"2\" y=\"5\" rx=\"2\" /> <line x1=\"2\" x2=\"22\" y1=\"10\" y2=\"10\" />", "percent": "<line x1=\"19\" x2=\"5\" y1=\"5\" y2=\"19\" /> <circle cx=\"6.5\" cy=\"6.5\" r=\"2.5\" /> <circle cx=\"17.5\" cy=\"17.5\" r=\"2.5\" />", "log-out": "<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\" /> <polyline points=\"16 17 21 12 16 7\" /> <line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\" />", "wheat": "<path d=\"M2 22 16 8\" /> <path d=\"M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z\" /> <path d=\"M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z\" /> <path d=\"M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" /> <path d=\"M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" /> <path d=\"M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z\" />", "droplets": "<path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\" /> <path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\" />", "droplet": "<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\" />", "smartphone": "<rect width=\"14\" height=\"20\" x=\"5\" y=\"2\" rx=\"2\" ry=\"2\" /> <path d=\"M12 18h.01\" />", "tv": "<rect width=\"20\" height=\"15\" x=\"2\" y=\"7\" rx=\"2\" ry=\"2\" /> <polyline points=\"17 2 12 7 7 2\" />", "headphones": "<path d=\"M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3\" />", "armchair": "<path d=\"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3\" /> <path d=\"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\" /> <path d=\"M5 18v2\" /> <path d=\"M19 18v2\" />", "flower-2": "<path d=\"M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1\" /> <circle cx=\"12\" cy=\"8\" r=\"2\" /> <path d=\"M12 10v12\" /> <path d=\"M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z\" /> <path d=\"M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z\" />", "spray-can": "<path d=\"M3 3h.01\" /> <path d=\"M7 5h.01\" /> <path d=\"M11 7h.01\" /> <path d=\"M3 7h.01\" /> <path d=\"M7 9h.01\" /> <path d=\"M3 11h.01\" /> <rect width=\"4\" height=\"4\" x=\"15\" y=\"5\" /> <path d=\"m19 9 2 2v10c0 .6-.4 1-1 1h-6c-.6 0-1-.4-1-1V11l2-2\" /> <path d=\"m13 14 8-2\" /> <path d=\"m13 19 8-2\" />", "drumstick": "<path d=\"M15.4 15.63a7.875 6 135 1 1 6.23-6.23 4.5 3.43 135 0 0-6.23 6.23\" /> <path d=\"m8.29 12.71-2.6 2.6a2.5 2.5 0 1 0-1.65 4.65A2.5 2.5 0 1 0 8.7 18.3l2.59-2.59\" />", "washing-machine": "<path d=\"M3 6h3\" /> <path d=\"M17 6h.01\" /> <rect width=\"18\" height=\"20\" x=\"3\" y=\"2\" rx=\"2\" /> <circle cx=\"12\" cy=\"13\" r=\"5\" /> <path d=\"M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5\" />", "ellipsis": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"19\" cy=\"12\" r=\"1\" /> <circle cx=\"5\" cy=\"12\" r=\"1\" />", "list-filter": "<path d=\"M3 6h18\" /> <path d=\"M7 12h10\" /> <path d=\"M10 18h4\" />", "shopping-bag": "<path d=\"M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z\" /> <path d=\"M3 6h18\" /> <path d=\"M16 10a4 4 0 0 1-8 0\" />"};
+window.ic = function (name, size) {
+  size = size || 22;
+  return '<svg class="i" xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (window.ICONS[name] || "") + "</svg>";
+};
+
+</script>
+<script>
 // Demo data only. Prices, stores and offers are sample values for the prototype,
 // not real retailer data. Replace with a backend/API in production.
 window.OFFERS_DATA = {
   emirates: ["أبوظبي", "دبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة"],
 
   categories: [
-    { id: "all", name: "الكل", icon: "🟦", bg: "#ede9fe" },
-    { id: "grocery", name: "مواد غذائية", icon: "🥬", bg: "#dcfce7" },
-    { id: "electronics", name: "إلكترونيات", icon: "💻", bg: "#e0f2fe" },
-    { id: "fashion", name: "ملابس", icon: "👕", bg: "#fee2e2" },
-    { id: "home", name: "المنزل", icon: "🏠", bg: "#ffedd5" },
-    { id: "beauty", name: "عطور وتجميل", icon: "🧴", bg: "#fce7f3" },
-    { id: "kids", name: "أطفال", icon: "🧸", bg: "#fef9c3" },
-    { id: "more", name: "أخرى", icon: "✨", bg: "#e0e7ff" }
+    { id: "all", name: "الكل", icon: "layout-grid", bg: "#ede9fe" },
+    { id: "grocery", name: "مواد غذائية", icon: "carrot", bg: "#dcfce7" },
+    { id: "electronics", name: "إلكترونيات", icon: "monitor", bg: "#e0f2fe" },
+    { id: "fashion", name: "ملابس", icon: "shirt", bg: "#fee2e2" },
+    { id: "home", name: "المنزل", icon: "sofa", bg: "#ffedd5" },
+    { id: "beauty", name: "عطور وتجميل", icon: "spray-can", bg: "#fce7f3" },
+    { id: "kids", name: "أطفال", icon: "baby", bg: "#fef9c3" },
+    { id: "more", name: "أخرى", icon: "ellipsis", bg: "#e0e7ff" }
   ],
 
   subCategories: {
     grocery: [
-      { id: "dairy", name: "ألبان", icon: "🥛" },
-      { id: "meat", name: "لحوم ودواجن", icon: "🥩" },
-      { id: "veg", name: "خضروات وفواكه", icon: "🍎" },
-      { id: "bakery", name: "مخبوزات", icon: "🍞" },
-      { id: "drinks", name: "مشروبات", icon: "🥤" },
-      { id: "canned", name: "معلبات", icon: "🥫" }
+      { id: "dairy", name: "ألبان", icon: "milk" },
+      { id: "meat", name: "لحوم ودواجن", icon: "beef" },
+      { id: "veg", name: "خضروات وفواكه", icon: "apple" },
+      { id: "bakery", name: "مخبوزات", icon: "croissant" },
+      { id: "drinks", name: "مشروبات", icon: "cup-soda" },
+      { id: "canned", name: "معلبات", icon: "package" }
     ]
   },
 
+  // logo: optional path to the store's official logo (put the file in assets/logos/).
+  // Stores without a logo file show a coloured name badge instead.
+  // Products can also take img: "assets/products/<id>.jpg" for a real photo; otherwise an icon is shown.
   stores: [
-    { id: "lulu", name: "لولو هايبرماركت", short: "Lulu", color: "#d71920", type: "super", offers: 320 },
-    { id: "carrefour", name: "كارفور", short: "C4", color: "#1e4fa3", type: "super", offers: 280 },
-    { id: "spinneys", name: "سبينيس", short: "Sp", color: "#2f7d32", type: "super", offers: 210 },
-    { id: "unioncoop", name: "جمعية الاتحاد", short: "UC", color: "#0b6e99", type: "super", offers: 195 },
-    { id: "sharafdg", name: "شرف دي جي", short: "DG", color: "#f4b400", type: "electronics", offers: 420 },
-    { id: "ikea", name: "إيكيا", short: "IK", color: "#0058a3", type: "home", offers: 150 },
-    { id: "centrepoint", name: "سنتربوينت", short: "CP", color: "#e85d1f", type: "fashion", offers: 175 },
-    { id: "ace", name: "إيس", short: "ACE", color: "#c8102e", type: "home", offers: 90 }
+    { id: "lulu", name: "لولو هايبرماركت", en: "Lulu", color: "#d71920", type: "super", offers: 320 },
+    { id: "carrefour", name: "كارفور", en: "Carrefour", color: "#1e4fa3", type: "super", offers: 280, logo: "data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+Q2FycmVmb3VyPC90aXRsZT48cGF0aCBkPSJNMTIuMTQgNC4wNDVjLTIuNTY5IDAtMy41NzIgMy42NC0zLjU3MiA3Ljk3OSAwIDQuMzQgMS4wMDMgNy45MzEgMy41NzIgNy45MzEgMS41NDEgMCAyLjg1NS0uOTAzIDIuODYtMS42NDVhLjYyNS42MjUgMCAwIDAtLjE5OS0uNDUzYy0uNzMtLjcwNi0xLjAxNi0xLjQxMi0xLjAxOC0yLjAzNC0uMDA1LTEuMTg5IDEuMDI2LTIuMDc0IDEuOTc3LTIuMDc0IDEuMzA2IDAgMi4wNzcgMS4wMjcgMi4wNzcgMi4zNTcgMCAxLjI2LS41MzcgMi4zMS0xLjEyMSAzLjE1YS4xOTMuMTkzIDAgMCAwLS4wMzQuMTA3YzAgLjA2NS4wNC4xMi4wOTguMTIuMDM1IDAgLjA3Ni0uMDIuMTIyLS4wNjVsNi41NjEtNi4zNDRjLjMyOC0uMjguNTM3LS42MDguNTM3LTEuMDczIDAtLjQ2OC0uMjEtLjc5NC0uNTM3LTEuMDczbC02LjU2MS02LjM0NmMtLjA0NS0uMDQ1LS4wODctLjA2NC0uMTIyLS4wNjQtLjA1OSAwLS4wOTcuMDU1LS4wOTguMTIgMCAuMDM1LjAxLjA3My4wMzQuMTA3LjU4NC44NCAxLjEyIDEuODkgMS4xMiAzLjE1IDAgMS4zMjktLjc3IDIuMzU2LTIuMDc2IDIuMzU2LS45NSAwLTEuOTgyLS44ODQtMS45NzctMi4wNzMuMDAyLS42MjIuMjg4LTEuMzI4IDEuMDE4LTIuMDMzQS42MjQuNjI0IDAgMCAwIDE1IDUuNjljLS4wMDQtLjc0My0xLjMxOS0xLjY0Ni0yLjg2LTEuNjQ2bS01LjA0My41MzdMLjUzNyAxMC45M0MuMjA5IDExLjIwNyAwIDExLjUzNCAwIDEyYzAgLjQ2NS4yMS43OTMuNTM3IDEuMDczbDYuNTYgNi4zNDVjLjA0Mi4wNDMuMDgzLjA2LjExNy4wNi4wNjIgMCAuMTA1LS4wNTcuMTAzLS4xMjNhLjE4OC4xODggMCAwIDAtLjA1Ny0uMTIzQzUuNzIgMTcuMzIgNC42IDE1LjEyNiA0LjYgMTIuMDI0YzAtMy4xMDQgMS4xMi01LjM0MSAyLjY2LTcuMjU1YS4xODUuMTg1IDAgMCAwIC4wNTctLjEyM2MuMDAyLS4wNjgtLjA0LS4xMjMtLjEwMy0uMTIzLS4wMzQgMC0uMDc1LjAxNy0uMTE3LjA2Ii8+PC9zdmc+" },
+    { id: "spinneys", name: "سبينيس", en: "Spinneys", color: "#2f7d32", type: "super", offers: 210 },
+    { id: "unioncoop", name: "جمعية الاتحاد", en: "Union Coop", color: "#0b6e99", type: "super", offers: 195 },
+    { id: "choithrams", name: "تشويترامز", en: "Choithrams", color: "#9b1c1c", type: "super", offers: 140 },
+    { id: "nesto", name: "نستو", en: "Nesto", color: "#b91c1c", type: "super", offers: 160 },
+    { id: "sharafdg", name: "شرف دي جي", en: "Sharaf DG", color: "#d4a100", type: "electronics", offers: 420 },
+    { id: "amazon", name: "أمازون", en: "amazon.ae", color: "#232f3e", type: "online", offers: 510, logo: "data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QW1hem9uPC90aXRsZT48cGF0aCBkPSJNLjA0NSAxOC4wMmMuMDcyLS4xMTYuMTg3LS4xMjQuMzQ4LS4wMjIgMy42MzYgMi4xMSA3LjU5NCAzLjE2NiAxMS44NyAzLjE2NiAyLjg1MiAwIDUuNjY4LS41MzMgOC40NDctMS41OTVsLjMxNS0uMTRjLjEzOC0uMDYuMjM0LS4xLjI5My0uMTMuMjI2LS4wODguMzktLjA0Ni41MjUuMTMuMTIuMTc0LjA5LjMzNi0uMTIuNDgtLjI1Ni4xOS0uNi40MS0xLjAwNi42NTQtMS4yNDQuNzQzLTIuNjQgMS4zMTYtNC4xODUgMS43MjZhMTcuNjE3IDE3LjYxNyAwIDAxLTEwLjk1MS0uNTc3IDE3Ljg4IDE3Ljg4IDAgMDEtNS40My0zLjM1Yy0uMS0uMDc0LS4xNTEtLjE1LS4xNTEtLjIyIDAtLjA0Ny4wMjEtLjA5LjA1MS0uMTN6bTYuNTY1LTYuMjE4YzAtMS4wMDUuMjQ3LTEuODYzLjc0My0yLjU3Ny40OTUtLjcxIDEuMTctMS4yNSAyLjA0LTEuNjE1Ljc5Ni0uMzM1IDEuNzU2LS41NzUgMi45MTItLjcyLjM5LS4wNDYgMS4wMzMtLjEwMyAxLjkyLS4xNzR2LS4zN2MwLS45My0uMTA1LTEuNTU4LS4zLTEuODc1LS4zMDItLjQzLS43OC0uNjUtMS40NC0uNjVoLS4xODJjLS40OC4wNDYtLjg5Ni4xOTYtMS4yNDYuNDYtLjM1LjI3LS41NzUuNjMtLjY3NSAxLjA5Ni0uMDYuMy0uMjA2LjQ2NS0uNDM1LjUxbC0yLjUyLS4zMTVjLS4yNDgtLjA2LS4zNzItLjE4LS4zNzItLjM5IDAtLjA0Ni4wMDctLjA5LjAyMi0uMTUuMjQ3LTEuMjkuODU1LTIuMjUgMS44Mi0yLjg4Ljk3Ni0uNjE2IDIuMS0uOTc1IDMuMzktMS4wNWguNTRjMS42NSAwIDIuOTU3LjQzNCAzLjg4OCAxLjI5LjEzNS4xNS4yNy4zLjQwNS40OC4xMi4xNjUuMjI0LjMxNC4yODMuNDUuMDc1LjEzNC4xNS4zMy4xOTUuNTcuMDYuMjU0LjEwNS40Mi4xMzUuNTEuMDMuMTA0LjA2Mi4zLjA3Ni42MTUuMDEuMzEzLjAyLjQ5My4wMi41NTN2NS4yOGMwIC4zNzYuMDYuNzIuMTY1IDEuMDM2LjEwNS4zMTMuMjEuNTQuMzE1LjY3NGwuNTEuNjc0Yy4wOS4xMzYuMTM2LjI1Ni4xMzYuMzYgMCAuMTItLjA2LjIyNi0uMTguMzE0LTEuMiAxLjA1LTEuODYgMS42Mi0xLjk2MyAxLjcxLS4xNjUuMTM1LS4zNzUuMTUtLjYzLjA0NWE2LjA2MiA2LjA2MiAwIDAxLS41MjYtLjQ5NmwtLjMxLS4zNDdhOS4zOTEgOS4zOTEgMCAwMS0uMzE3LS40MmwtLjMtLjQzNWMtLjgxLjg4Ni0xLjYwMyAxLjQ0LTIuNCAxLjY2NS0uNDk0LjE1LTEuMDkzLjIyNy0xLjgzLjIyNy0xLjExIDAtMi4wNC0uMzQzLTIuNzYtMS4wMzQtLjcyLS42OS0xLjA4LTEuNjY1LTEuMDgtMi45NGwtLjA1LS4wNzZ6bTMuNzUzLS40MzhjMCAuNTY2LjE0IDEuMDIuNDI1IDEuMzY0LjI4NS4zNC42NzUuNTEyIDEuMTU1LjUxMi4wNDUgMCAuMTA2LS4wMDcuMTk1LS4wMi4wOS0uMDE2LjEzNC0uMDIzLjE2Ni0uMDIzLjYxNC0uMTYgMS4wOC0uNTUzIDEuNDI0LTEuMTc4LjE2NS0uMjguMjg1LS41OC4zNi0uOTEuMDktLjMyLjEyLS41OS4xMzUtLjguMDE1LS4xOTUuMDE1LS41NC4wMTUtMS4wMDV2LS41NGMtLjg0IDAtMS40ODQuMDYtMS45Mi4xOC0xLjI3NS4zNi0xLjkyIDEuMTctMS45MiAyLjQzbC0uMDM1LS4wMnptOS4xNjIgNy4wMjdjLjAzLS4wNi4wNzUtLjExLjEzMi0uMTcuMzYyLS4yNDMuNzE0LS40MSAxLjA1LS41YTguMDk0IDguMDk0IDAgMDExLjYxMi0uMjRjLjE0LS4wMTIuMjggMCAuNDEuMDMuNjUuMDYgMS4wNS4xNjggMS4xNzIuMzMuMDYzLjA5LjA5OS4yMjguMDk5LjM5di4xNWMwIC41MS0uMTQ5IDEuMTEtLjQyNCAxLjgtLjI3OC42OS0uNjY0IDEuMjQ4LTEuMTU2IDEuNjgtLjA3My4wNi0uMTQuMDktLjE5Ny4wOS0uMDMgMC0uMDYgMC0uMDktLjAxMi0uMDktLjA0NC0uMTA3LS4xMi0uMDY0LS4yNC41NC0xLjI2LjgwNi0yLjE0My44MDYtMi42NCAwLS4xNS0uMDMtLjI3LS4wODctLjM0NC0uMTQ1LS4xNjYtLjU1LS4yNTctMS4yMjQtLjI1Ny0uMjQzIDAtLjUzMy4wMTYtLjg3LjA0Ni0uMzYzLjA0NS0uNy4wOS0xIC4xMzUtLjA5IDAtLjE0OC0uMDE0LS4xOC0uMDQ0LS4wMy0uMDMtLjAzNi0uMDQ3LS4wMi0uMDc3IDAtLjAxNy4wMDYtLjAzLjAyLS4wNjN2LS4wNnoiLz48L3N2Zz4=" },
+    { id: "noon", name: "نون", en: "noon", color: "#e6c200", type: "online", offers: 470 },
+    { id: "ikea", name: "إيكيا", en: "IKEA", color: "#0058a3", type: "home", offers: 150, logo: "data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+SUtFQTwvdGl0bGU+PHBhdGggZD0iTTAgNy4ydjkuNmgyNFY3LjJIMHptMTIuMDAyIDkuMTJDNS4zMDggMTYuMzIuNDggMTQuMzYuNDggMTJzNC44MzEtNC4zMiAxMS41MjItNC4zMmM2LjY5IDAgMTEuNTE4IDEuOTYgMTEuNTE4IDQuMzJzLTQuODI0IDQuMzItMTEuNTE4IDQuMzJ6bS0uMjI1LTYuMDYyaDQuMTc2di45NjRjLS4xMDMtLjA0Ny0uMjAzLS4wNDctLjMwNi0uMDQ3aC0xLjc1OHYuNDZoMS42ODl2LjczMmgtMS42ODl2LjQ1N2gxLjc1OGMuMTAzIDAgLjIwMyAwIC4zMDYtLjA1di45NjdoLTQuMTc2Yy4wNTItLjEwMS4wNTItLjE5OC4wNTItLjI5OVYxMC41NmMwLS4xMDEgMC0uMTk4LS4wNTItLjMwMnptLTcuMDc2LjMwMnYyLjg4MWMwIC4xMDEgMCAuMTk4LjA1Mi4yOTlIMi40Yy4wNTItLjEwMS4wNTItLjE5OC4wNTItLjI5OVYxMC41NmMwLS4xMDEgMC0uMTk4LS4wNTItLjI5OWgyLjM1M2MtLjA1Mi4xMDEtLjA1Mi4xOTgtLjA1Mi4yOTl6bTYuNDQ3IDIuODgxYy4wNzYuMTA3LjE1OC4yMDguMjU1LjI5OUg4LjgwNWMwLS4xMDEtLjEtLjMwNi0uMjEtLjQ2Ny0uMTEtLjE2MS0uNzA1LTEuMDQ0LS43MDUtMS4wNDR2MS4yMTJjMCAuMTAxIDAgLjE5OC4wNTIuMjk5SDUuNzc4Yy4wNTItLjEwMS4wNTItLjE5OC4wNTItLjI5OVYxMC41NmMwLS4xMDEgMC0uMTk4LS4wNTItLjI5OWgyLjE2NGMtLjA1Mi4xMDEtLjA1Mi4xOTgtLjA1Mi4yOTl2MS4yNTlzLjY5MS0uODguODUtMS4wODVjLjEyLS4xNTQuMjY4LS4zNzMuMjY4LS40NzNoMi4yNTdjLS4xNTUuMTAxLS4zMjcuMjgyLS40NjguNDVsLS44MjYuOTg0czEuMDM5IDEuNTQ4IDEuMTc3IDEuNzQ2em0xMC41NDYtMy4wMDVhLjE3OC4xNzggMCAwIDAtLjE3NS0uMTc4aC0uMjF2LjU1MWguMDgzdi0uMTk1aC4xMmwuMTEuMTk1aC4wOTNsLS4xMi0uMjEyYS4xODQuMTg0IDAgMCAwIC4wOTktLjE2MXptLS4xODkuMTAxaC0uMTE0di0uMTkxaC4xMjRjLjA1NSAwIC4wOTMuMDQ3LjA5My4xMDEgMCAuMDUzLS4wNDguMDkzLS4xMDMuMDl6bS0uMDIxLS40NTdoLS4wMzFhLjQ0NC40NDQgMCAwIDAtLjQzNy40NTdjMCAuMDA3IDAgLjAxNy0uMDAzLjAyM2EuNDY2LjQ2NiAwIDAgMCAuNDgyLjQ0Ny40NjQuNDY0IDAgMCAwIC40NTgtLjQ3di0uMDE3YS40NTQuNDU0IDAgMCAwLS40NjktLjQ0em0wIC44MjNhLjM3Mi4zNzIgMCAwIDEtLjM3NS0uMzY2di0uMDI3YS4zNTcuMzU3IDAgMCAxIC4zNzUtLjMzOWMuMjA2IDAgLjM3NS4xNjUuMzc1LjM2NnMtLjE2OC4zNjYtLjM3NS4zNjZ6bS0uODc3LS4zMzljLS4wMzgtLjEwMS0uMDkzLS4xOTgtLjA2NS0uMjk5aC0zLjAxN2MuMDE0LjEwMS0uMDI0LjE5OC0uMDYyLjI5OWwtMS4wNyAyLjg4MWEuODUyLjg1MiAwIDAgMS0uMTYyLjI5OWgxLjc4NWMtLjAxNC0uMTAxLjAyNC0uMTk4LjA1OC0uMjk5LjAzNC0uMTAxLjA3Mi0uMTk4LjA3Mi0uMTk4bC4wMjEtLjA1NGgxLjMwNGwuMDIxLjA1Yy4wNDguMTE4LjA4My4xOTguMDgzLjE5OC4wNDEuMTAxLjA3OS4xOTguMDY5LjI5OWgyLjI2M2EuODM3LjgzNyAwIDAgMS0uMTY5LS4yOTkgNjkwLjI3NyA2OTAuMjc3IDAgMCAwLTEuMTMxLTIuODc3em0tMi4xNjcgMS44OTNjLjE1NS0uNDIuMjg5LS43NzIuMjk5LS44MDYuMDI4LS4wNzQuMDQ4LS4xNTEuMDYyLS4yMjguMDE3LjA3Ny4wNDEuMTU0LjA2OS4yMjhsLjMxNi44MDZoLS43NDZ6Ii8+PC9zdmc+" },
+    { id: "homecentre", name: "هوم سنتر", en: "Home Centre", color: "#374151", type: "home", offers: 120 },
+    { id: "ace", name: "إيس", en: "ACE", color: "#c8102e", type: "home", offers: 90 },
+    { id: "centrepoint", name: "سنتربوينت", en: "Centrepoint", color: "#e85d1f", type: "fashion", offers: 175 },
+    { id: "max", name: "ماكس", en: "max", color: "#1d4ed8", type: "fashion", offers: 130 },
+    { id: "brandsforless", name: "براندز فور لس", en: "Brands For Less", color: "#ca8a04", type: "fashion", offers: 110 }
   ],
 
   // prices: map of storeId -> current price (AED). "old" is the reference price.
   products: [
-    { id: "p1", name: "أرز بسمتي 5 كيلو", cat: "grocery", sub: "canned", emoji: "🍚", old: 45,
+    { id: "p1", name: "أرز بسمتي 5 كيلو", cat: "grocery", sub: "canned", icon: "wheat", old: 45,
       prices: { lulu: 29, carrefour: 32.5, unioncoop: 33, spinneys: 36 }, until: "2026-11-30", featured: true },
-    { id: "p2", name: "مياه معدنية 1.5 لتر (6 عبوات)", cat: "grocery", sub: "drinks", emoji: "💧", old: 16.8,
+    { id: "p2", name: "مياه معدنية 1.5 لتر (6 عبوات)", cat: "grocery", sub: "drinks", icon: "droplets", old: 16.8,
       prices: { carrefour: 12, lulu: 12.75, unioncoop: 13.5, spinneys: 14.25 }, until: "2026-11-20" },
-    { id: "p3", name: "زيت دوار الشمس 1.5 لتر", cat: "grocery", sub: "canned", emoji: "🫒", old: 17.5,
+    { id: "p3", name: "زيت دوار الشمس 1.5 لتر", cat: "grocery", sub: "canned", icon: "droplet", old: 17.5,
       prices: { unioncoop: 13.5, lulu: 14, carrefour: 14.95 }, until: "2026-11-25" },
-    { id: "p4", name: "حليب طازج 2 لتر", cat: "grocery", sub: "dairy", emoji: "🥛", old: 12,
+    { id: "p4", name: "حليب طازج 2 لتر", cat: "grocery", sub: "dairy", icon: "milk", old: 12,
       prices: { lulu: 9.5, carrefour: 9.75, spinneys: 10.5, unioncoop: 9.25 }, until: "2026-11-15" },
-    { id: "p5", name: "صدور دجاج 1 كيلو", cat: "grocery", sub: "meat", emoji: "🍗", old: 32,
-      prices: { carrefour: 24.95, lulu: 23.5, spinneys: 27 }, until: "2026-11-18" },
-    { id: "p6", name: "خبز توست أبيض", cat: "grocery", sub: "bakery", emoji: "🍞", old: 7,
+    { id: "p5", name: "صدور دجاج 1 كيلو", cat: "grocery", sub: "meat", icon: "drumstick", old: 32,
+      prices: { carrefour: 24.95, lulu: 23.5, spinneys: 27, nesto: 22.75, choithrams: 26 }, until: "2026-11-18" },
+    { id: "p6", name: "خبز توست أبيض", cat: "grocery", sub: "bakery", icon: "croissant", old: 7,
       prices: { lulu: 5.25, carrefour: 5, unioncoop: 5.5 }, until: "2026-11-12" },
-    { id: "p7", name: "تفاح أحمر 1 كيلو", cat: "grocery", sub: "veg", emoji: "🍎", old: 9.5,
+    { id: "p7", name: "تفاح أحمر 1 كيلو", cat: "grocery", sub: "veg", icon: "apple", old: 9.5,
       prices: { spinneys: 7.25, lulu: 6.5, carrefour: 6.95, unioncoop: 6.75 }, until: "2026-11-14" },
-    { id: "p8", name: "منظف غسيل 3 كيلو", cat: "home", sub: null, emoji: "🧺", old: 58,
+    { id: "p8", name: "منظف غسيل 3 كيلو", cat: "home", sub: null, icon: "washing-machine", old: 58,
       prices: { carrefour: 41.2, lulu: 44, unioncoop: 48.75 }, until: "2026-11-30" },
-    { id: "p9", name: "سماعات لاسلكية", cat: "electronics", sub: null, emoji: "🎧", old: 499,
-      prices: { sharafdg: 349, carrefour: 379, lulu: 369 }, until: "2026-12-05", featured: true },
-    { id: "p10", name: "تلفزيون ذكي 55 بوصة", cat: "electronics", sub: null, emoji: "📺", old: 2299,
+    { id: "p9", name: "سماعات لاسلكية", cat: "electronics", sub: null, icon: "headphones", old: 499,
+      prices: { sharafdg: 349, carrefour: 379, lulu: 369, amazon: 339, noon: 345 }, until: "2026-12-05", featured: true },
+    { id: "p10", name: "تلفزيون ذكي 55 بوصة", cat: "electronics", sub: null, icon: "tv", old: 2299,
       prices: { sharafdg: 1599, carrefour: 1649, lulu: 1699 }, until: "2026-11-28", featured: true },
-    { id: "p11", name: "هاتف ذكي 128 جيجا", cat: "electronics", sub: null, emoji: "📱", old: 1899,
-      prices: { sharafdg: 1499, carrefour: 1549 }, until: "2026-11-22" },
-    { id: "p12", name: "طاولة جانبية خشب", cat: "home", sub: null, emoji: "🪑", old: 149,
-      prices: { ikea: 99, ace: 115 }, until: "2026-12-10" },
-    { id: "p13", name: "قميص قطني رجالي", cat: "fashion", sub: null, emoji: "👔", old: 89,
-      prices: { centrepoint: 49, lulu: 55 }, until: "2026-11-30" },
-    { id: "p14", name: "عطر نسائي 100 مل", cat: "beauty", sub: null, emoji: "🌸", old: 320,
+    { id: "p11", name: "هاتف ذكي 128 جيجا", cat: "electronics", sub: null, icon: "smartphone", old: 1899,
+      prices: { sharafdg: 1499, carrefour: 1549, amazon: 1479, noon: 1489 }, until: "2026-11-22" },
+    { id: "p12", name: "طاولة جانبية خشب", cat: "home", sub: null, icon: "armchair", old: 149,
+      prices: { ikea: 99, ace: 115, homecentre: 109 }, until: "2026-12-10" },
+    { id: "p13", name: "قميص قطني رجالي", cat: "fashion", sub: null, icon: "shirt", old: 89,
+      prices: { centrepoint: 49, max: 45, brandsforless: 52, lulu: 55 }, until: "2026-11-30" },
+    { id: "p14", name: "عطر نسائي 100 مل", cat: "beauty", sub: null, icon: "flower-2", old: 320,
       prices: { lulu: 219, carrefour: 239 }, until: "2026-11-30" },
-    { id: "p15", name: "حفاضات أطفال (مقاس 4)", cat: "kids", sub: null, emoji: "👶", old: 75,
+    { id: "p15", name: "حفاضات أطفال (مقاس 4)", cat: "kids", sub: null, icon: "baby", old: 75,
       prices: { carrefour: 52, lulu: 54.5, unioncoop: 49.9 }, until: "2026-11-26" },
-    { id: "p16", name: "شامبو 400 مل", cat: "beauty", sub: null, emoji: "🧴", old: 24,
+    { id: "p16", name: "شامبو 400 مل", cat: "beauty", sub: null, icon: "spray-can", old: 24,
       prices: { carrefour: 18.7, unioncoop: 21.9, lulu: 19.5 }, until: "2026-11-21" }
   ],
 
   banners: [
-    { title: "عروض المواد الغذائية", sub: "خصومات حتى 40%", cat: "grocery", emoji: "🥕🍅🍋", from: "#f97316", to: "#ef4444" },
-    { title: "أسبوع الإلكترونيات", sub: "أفضل الأسعار في الإمارات", cat: "electronics", emoji: "📺🎧📱", from: "#6d28d9", to: "#2563eb" },
-    { title: "جدّد منزلك", sub: "عروض الأثاث والأدوات", cat: "home", emoji: "🛋️🪑🧺", from: "#0d9488", to: "#16a34a" }
+    { title: "عروض المواد الغذائية", sub: "خصومات حتى 40%", cat: "grocery", icon: "carrot", from: "#f97316", to: "#ef4444" },
+    { title: "أسبوع الإلكترونيات", sub: "أفضل الأسعار في الإمارات", cat: "electronics", icon: "tv", from: "#6d28d9", to: "#2563eb" },
+    { title: "جدّد منزلك", sub: "عروض الأثاث والأدوات", cat: "home", icon: "sofa", from: "#0d9488", to: "#16a34a" }
   ]
 };
 
 </script>
-  <script>
+<script>
 (function () {
   const D = window.OFFERS_DATA;
   const $ = (s) => document.querySelector(s);
@@ -293,7 +329,7 @@ window.OFFERS_DATA = {
     favs: load("favs", []),          // product ids
     favStores: load("favStores", []),
     cart: load("cart", {}),          // productId -> qty
-    custom: load("custom", []),      // merchant-added offers
+    custom: load("custom", []).map((o) => (o.emoji ? { ...o, icon: "tag", emoji: undefined } : o)), // merchant-added offers
     merchant: load("merchant", null),
     history: [],
   };
@@ -301,7 +337,9 @@ window.OFFERS_DATA = {
 
   // ---------- helpers ----------
   const products = () => D.products.concat(S.custom);
-  const store = (id) => D.stores.find((s) => s.id === id) || { id, name: id, short: "?", color: "#64748b" };
+  const store = (id) => D.stores.find((s) => s.id === id) || { id, name: id, en: "?", color: "#64748b" };
+  const ic = window.ic;
+  const pimg = (p, size) => `${p.img ? `<img src="${p.img}" alt="" onerror="this.remove()" />` : ""}${ic(p.icon || "tag", size || 40)}`;
   const product = (id) => products().find((p) => p.id === id);
   const best = (p) => {
     let bid = null, bp = Infinity;
@@ -329,24 +367,24 @@ window.OFFERS_DATA = {
   function back() { current = S.history.pop() || { name: "home", params: {} }; render(); }
 
   const tabs = [
-    { id: "home", label: "الرئيسية", icon: "🏠" },
-    { id: "stores", label: "المتاجر", icon: "🏬" },
-    { id: "favs", label: "المفضلة", icon: "❤️" },
-    { id: "compare", label: "قارن", icon: "🛒" },
-    { id: "account", label: "حسابي", icon: "👤" },
+    { id: "home", label: "الرئيسية", icon: "house" },
+    { id: "stores", label: "المتاجر", icon: "store" },
+    { id: "favs", label: "المفضلة", icon: "heart" },
+    { id: "compare", label: "قارن", icon: "shopping-cart" },
+    { id: "account", label: "حسابي", icon: "user" },
   ];
   function renderNav() {
     const n = Object.keys(S.cart).length;
     $("#nav").innerHTML = tabs.map((t) => `
       <button class="${current.name === t.id ? "on" : ""}" data-tab="${t.id}">
-        <span>${t.icon}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
+        <span>${ic(t.icon)}</span>${t.label}${t.id === "compare" && n ? `<em class="count">${n}</em>` : ""}
       </button>`).join("");
   }
 
   // ---------- components ----------
   const header = (title, opts = {}) => `
     <div class="topbar">
-      <button class="icon-btn" data-act="back" aria-label="رجوع">→</button>
+      <button class="icon-btn" data-act="back" aria-label="رجوع">${ic("arrow-right")}</button>
       <h1>${title}</h1>
       ${opts.right || `<span class="icon-btn"></span>`}
     </div>`;
@@ -356,24 +394,24 @@ window.OFFERS_DATA = {
     const fav = S.favs.includes(p.id), inCart = !!S.cart[p.id];
     return `
     <div class="pcard" data-open="${p.id}">
-      <div class="pimg">${p.emoji}<span class="badge">خصم ${pct(p)}%</span></div>
+      <div class="pimg">${pimg(p)}<span class="badge">خصم ${pct(p)}%</span></div>
       <div class="pinfo">
         <h5>${esc(p.name)}</h5>
         <div class="store">${store(b.store).name}${Object.keys(p.prices).length > 1 ? ` · ${Object.keys(p.prices).length} متاجر` : ""}</div>
         <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
       </div>
       <div class="pact">
-        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${fav ? "♥" : "♡"}</button>
-        <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${inCart ? "✓" : "+"}</button>
+        <button class="heart ${fav ? "on" : ""}" data-fav="${p.id}" aria-label="مفضلة">${ic("heart", 20)}</button>
+        <button class="plus ${inCart ? "added" : ""}" data-cart="${p.id}" aria-label="أضف للمقارنة">${ic(inCart ? "check" : "plus", 18)}</button>
       </div>
     </div>`;
   }
   const mini = (p) => `
     <div class="mini" data-open="${p.id}">
-      <div class="pimg">${p.emoji}<span class="badge">-${pct(p)}%</span></div>
+      <div class="pimg">${pimg(p, 34)}<span class="badge">-${pct(p)}%</span></div>
       <h6>${esc(p.name)}</h6><b>${aed(best(p).price)}</b>
     </div>`;
-  const slogo = (s) => `<div class="slogo" style="background:${s.color}">${s.short}</div>`;
+  const slogo = (s, cls = "") => `<div class="slogo ${cls}" style="--c:${s.color}">${s.logo ? `<img src="${s.logo}" alt="${s.en}" onerror="this.remove()" />` : ""}<span>${esc(s.en)}</span></div>`;
 
   // ---------- screens ----------
   const V = {};
@@ -383,21 +421,21 @@ window.OFFERS_DATA = {
     const uniq = [...new Map(featured.map((p) => [p.id, p])).values()];
     return `
     <div class="topbar">
-      <div class="brand"><div class="mark">%</div><b>OFFERS</b></div>
-      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">🔔<i class="dot"></i></button>
+      <div class="brand"><div class="mark">${ic("percent", 22)}</div><b>OFFERS</b></div>
+      <button class="icon-btn" data-act="notify" aria-label="الإشعارات">${ic("bell")}<i class="dot"></i></button>
     </div>
-    <label class="select">📍
+    <label class="select">${ic("map-pin", 20)}
       <select id="emirate">${D.emirates.map((e) => `<option ${e === S.emirate ? "selected" : ""}>${e}</option>`).join("")}</select>
     </label>
-    <div class="search">🔍<input id="q" placeholder="ابحث عن أي منتج أو متجر..." /><span>⌗</span></div>
+    <div class="search">${ic("search", 20)}<input id="q" placeholder="ابحث عن أي منتج أو متجر..." />${ic("scan-line", 20)}</div>
     <div class="cats">${D.categories.map((c) => `
-      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${c.icon}</div>${c.name}</button>`).join("")}
+      <button class="cat" data-cat="${c.id}"><div class="ic" style="background:${c.bg}">${ic(c.icon, 26)}</div>${c.name}</button>`).join("")}
     </div>
     <div class="section-h"><h3>أبرز العروض اليوم</h3><a href="#" data-cat="all">عرض الكل</a></div>
     <div class="banner-wrap"><div class="banners" id="banners">${D.banners.map((b) => `
       <div class="banner" style="background:linear-gradient(120deg,${b.from},${b.to})">
         <div><h4>${b.title}</h4><small>${b.sub}</small><button class="btn-w" data-cat="${b.cat}">تصفح الآن</button></div>
-        <div class="art">${b.emoji}</div>
+        <div class="art">${ic(b.icon, 72)}</div>
       </div>`).join("")}</div></div>
     <div class="dots" id="dots">${D.banners.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>
     <div class="section-h"><h3>الأكثر توفيراً</h3></div>
@@ -415,8 +453,8 @@ window.OFFERS_DATA = {
     return `
     ${header(q ? `نتائج: ${esc(q)}` : c.name)}
     ${subs ? `<div class="cats">
-      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">🔲</div>الكل</button>
-      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${s.icon}</div>${s.name}</button>`).join("")}
+      <button class="cat ${!sub ? "active" : ""}" data-sub=""><div class="ic" style="background:#ede9fe">${ic("layout-grid", 24)}</div>الكل</button>
+      ${subs.map((s) => `<button class="cat ${sub === s.id ? "active" : ""}" data-sub="${s.id}"><div class="ic" style="background:#f3f4f6">${ic(s.icon, 24)}</div>${s.name}</button>`).join("")}
     </div>` : `<div class="chips">${D.categories.filter((x) => x.id !== "more").map((x) => `<button class="chip ${x.id === cat ? "on" : ""}" data-cat="${x.id}">${x.name}</button>`).join("")}</div>`}
     <div class="toolbar">
       <select id="sort">
@@ -425,7 +463,7 @@ window.OFFERS_DATA = {
         <option value="high" ${sort === "high" ? "selected" : ""}>السعر: من الأعلى</option>
       </select>
     </div>
-    <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>🔎</div>لا توجد عروض مطابقة</div>`}</div>`;
+    <div class="list">${list.length ? list.map(pcard).join("") : `<div class="empty"><div>${ic("search", 48)}</div>لا توجد عروض مطابقة</div>`}</div>`;
   };
 
   V.product = ({ id }) => {
@@ -434,24 +472,24 @@ window.OFFERS_DATA = {
     const rows = Object.entries(p.prices).sort((a, c) => a[1] - c[1]);
     const similar = products().filter((x) => x.cat === p.cat && x.id !== p.id).slice(0, 6);
     return `
-    ${header("", { right: `<button class="icon-btn heart ${fav ? "on" : ""}" data-fav="${p.id}">${fav ? "♥" : "♡"}</button>` })}
+    ${header("", { right: `<button class="icon-btn heart ${fav ? "on" : ""}" data-fav="${p.id}">${ic("heart")}</button>` })}
     <div class="detail">
-      <div class="hero">${p.emoji}<span class="badge">خصم ${pct(p)}%</span></div>
+      <div class="hero">${pimg(p, 110)}<span class="badge">خصم ${pct(p)}%</span></div>
       <h2>${esc(p.name)}</h2>
       <div class="store" style="color:var(--muted);margin:4px 0 8px">${store(b.store).name}</div>
       <div class="price"><b>${aed(b.price)}</b><s>${aed(p.old)}</s></div>
       <div class="infobox">
-        <div>📅 يسري العرض حتى: ${fmtDate(p.until)}</div>
-        <div>📍 جميع فروع ${S.emirate}</div>
-        <div>🛍️ متوفر في الفروع أو عبر المتجر الإلكتروني</div>
+        <div>${ic("calendar", 18)} يسري العرض حتى: ${fmtDate(p.until)}</div>
+        <div>${ic("map-pin", 18)} جميع فروع ${S.emirate}</div>
+        <div>${ic("shopping-bag", 18)} متوفر في الفروع أو عبر المتجر الإلكتروني</div>
       </div>
       <div class="section-h"><h3>الأسعار في المتاجر</h3></div>
       <div class="store-prices">${rows.map(([sid, v], i) => `
-        <div class="row ${i ? "" : "best"}"><span>${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
+        <div class="row ${i ? "" : "best"}"><span class="sname">${slogo(store(sid), "sm")}${store(sid).name}${i ? "" : '<span class="tag">الأرخص</span>'}</span><b>${aed(v)}</b></div>`).join("")}
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn" data-cart="${p.id}">${S.cart[p.id] ? "✓ في قائمة المقارنة" : "＋ أضف لقائمة المقارنة"}</button>
-        <button class="btn ghost" style="width:auto" data-act="share">↗</button>
+        <button class="btn" data-cart="${p.id}">${ic(S.cart[p.id] ? "check" : "plus", 18)} ${S.cart[p.id] ? "في قائمة المقارنة" : "أضف لقائمة المقارنة"}</button>
+        <button class="btn ghost" style="width:auto" data-act="share">${ic("share-2", 20)}</button>
       </div>
       <button class="btn ghost" style="margin-top:8px" data-store="${b.store}">زيارة صفحة المتجر</button>
       ${similar.length ? `<div class="section-h" style="margin-top:18px"><h3>منتجات مشابهة</h3></div><div class="hscroll">${similar.map(mini).join("")}</div>` : ""}
@@ -459,18 +497,18 @@ window.OFFERS_DATA = {
   };
 
   V.stores = ({ type = "all", q = "" }) => {
-    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
+    const types = [["all", "الكل"], ["super", "سوبرماركت"], ["online", "أونلاين"], ["electronics", "إلكترونيات"], ["fashion", "أزياء"], ["home", "منزل"]];
     const list = D.stores.filter((s) => (type === "all" || s.type === type) && (!q || s.name.includes(q)));
     return `
     <div class="topbar"><span class="icon-btn"></span><h1>المتاجر</h1><span class="icon-btn"></span></div>
-    <div class="search">🔍<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
+    <div class="search">${ic("search", 20)}<input id="sq" value="${esc(q)}" placeholder="ابحث عن متجر..." /></div>
     <div class="chips">${types.map(([id, n]) => `<button class="chip ${id === type ? "on" : ""}" data-stype="${id}">${n}</button>`).join("")}</div>
     <div class="list">${list.map((s) => `
       <div class="srow" data-store="${s.id}">
         ${slogo(s)}
         <div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض</small></div>
-        <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${S.favStores.includes(s.id) ? "♥" : "♡"}</button>
-        <span style="color:#9ca3af">‹</span>
+        <button class="heart ${S.favStores.includes(s.id) ? "on" : ""}" data-favstore="${s.id}">${ic("heart", 20)}</button>
+        <span style="color:#9ca3af">${ic("chevron-left", 18)}</span>
       </div>`).join("")}</div>`;
   };
 
@@ -480,7 +518,7 @@ window.OFFERS_DATA = {
     return `
     ${header(s.name)}
     <div class="srow" style="margin-bottom:12px">${slogo(s)}<div class="grow"><h5>${s.name}</h5><small>${s.offers} عرض في ${S.emirate}</small></div></div>
-    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>🏷️</div>لا توجد عروض حالياً</div>`}</div>`;
+    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("tag", 48)}</div>لا توجد عروض حالياً</div>`}</div>`;
   };
 
   V.favs = () => {
@@ -489,14 +527,14 @@ window.OFFERS_DATA = {
     return `
     <div class="topbar"><span class="icon-btn"></span><h1>المفضلة</h1><span class="icon-btn"></span></div>
     ${st.length ? `<div class="section-h"><h3>متاجري</h3></div><div class="hscroll" style="margin-bottom:12px">${st.map((s) => `<div data-store="${s.id}">${slogo(s)}</div>`).join("")}</div>` : ""}
-    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>♡</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
+    <div class="list">${list.map(pcard).join("") || `<div class="empty"><div>${ic("heart", 48)}</div>اضغط على القلب لحفظ العروض هنا</div>`}</div>`;
   };
 
   V.compare = ({ mode = "all" }) => {
     const ids = Object.keys(S.cart).filter(product);
     if (!ids.length) return `
       <div class="topbar"><span class="icon-btn"></span><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
-      <div class="empty"><div>🛒</div>أضف منتجات بالضغط على <b>+</b> لمقارنة سعر سلتك في كل المتاجر</div>
+      <div class="empty"><div>${ic("shopping-cart", 48)}</div>أضف منتجات بالضغط على <b>+</b> لمقارنة سعر سلتك في كل المتاجر</div>
       <button class="btn" data-cat="all">تصفح العروض</button>`;
     const items = ids.map(product);
     const sids = [...new Set(items.flatMap((p) => Object.keys(p.prices)))];
@@ -513,20 +551,20 @@ window.OFFERS_DATA = {
     const worst = Math.max(...full.map((t) => t.sum), bestT.sum);
 
     return `
-    <div class="topbar"><button class="icon-btn" data-act="clear" title="مسح">🗑️</button><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
+    <div class="topbar"><button class="icon-btn" data-act="clear" title="مسح">${ic("trash-2")}</button><h1>مقارنة الأسعار</h1><span class="icon-btn"></span></div>
     <div class="cmp"><table>
       <thead><tr><th class="prod">المنتجات</th>${totals.map((t) => `
-        <th><div class="slogo" style="width:60px;height:30px;font-size:12px;margin:auto;background:${store(t.sid).color}">${store(t.sid).short}</div>
+        <th>${slogo(store(t.sid), "th")}
         <span class="avail">${t.have}/${items.length}</span></th>`).join("")}</tr></thead>
       <tbody>${items.map((p) => {
         const cheapest = best(p).store;
-        return `<tr><td class="prod">${p.emoji} ${esc(p.name)}<br/>
+        return `<tr><td class="prod"><span class="tiny">${pimg(p, 18)}</span> ${esc(p.name)}<br/>
           <span class="qty"><button data-qty="${p.id}" data-d="-1">−</button>${S.cart[p.id]}<button data-qty="${p.id}" data-d="1">+</button></span></td>
           ${totals.map((t) => {
             const v = p.prices[t.sid];
             if (v == null) return `<td class="na">—</td>`;
             const hl = mode === "multi" ? t.sid === cheapest : t.sid === bestT.sid;
-            return `<td class="${hl ? "cheap" : ""}">${(v * S.cart[p.id]).toFixed(2)}${hl ? " ✓" : ""}</td>`;
+            return `<td class="${hl ? "cheap" : ""}">${(v * S.cart[p.id]).toFixed(2)}</td>`;
           }).join("")}</tr>`;
       }).join("")}</tbody>
       <tfoot><tr><td class="prod">الإجمالي (درهم)</td>${totals.map((t) => `<td class="${t.sid === bestT.sid ? "bestcol" : ""}">${t.sum.toFixed(2)}${t.have < items.length ? "*" : ""}</td>`).join("")}</tr></tfoot>
@@ -543,8 +581,8 @@ window.OFFERS_DATA = {
     <div class="topbar"><span class="icon-btn"></span><h1>حسابي</h1><span class="icon-btn"></span></div>
     <div class="card" style="margin-bottom:12px">
       <div class="section-h" style="margin-top:0"><h3>مميزات التطبيق</h3></div>
-      ${[["🏬", "جميع العروض من جميع المتاجر في مكان واحد"], ["📍", "تغطية جميع الإمارات"], ["🔍", "بحث سهل ومتقدم"], ["%", "عرض نسبة الخصم والسعر السابق"], ["🛒", "مقارنة سعر السلة بين المتاجر"], ["🔔", "إشعارات بالعروض الجديدة"], ["❤️", "مفضلة العروض والمتاجر"], ["↗", "مشاركة العروض مع الآخرين"]]
-        .map(([i, t]) => `<div class="feat"><span>${i}</span>${t}</div>`).join("")}
+      ${[["store", "جميع العروض من جميع المتاجر في مكان واحد"], ["map-pin", "تغطية جميع الإمارات"], ["search", "بحث سهل ومتقدم"], ["percent", "عرض نسبة الخصم والسعر السابق"], ["shopping-cart", "مقارنة سعر السلة بين المتاجر"], ["bell", "إشعارات بالعروض الجديدة"], ["heart", "مفضلة العروض والمتاجر"], ["share-2", "مشاركة العروض مع الآخرين"]]
+        .map(([i, t]) => `<div class="feat"><span>${ic(i, 18)}</span>${t}</div>`).join("")}
     </div>
     <div class="card">
       <div class="section-h" style="margin-top:0"><h3>هل تملك متجراً؟</h3></div>
@@ -569,14 +607,14 @@ window.OFFERS_DATA = {
     const mine = S.custom;
     return `
     ${header("لوحة تحكم المتجر")}
-    <div class="srow" style="margin-bottom:12px"><div class="slogo" style="background:var(--primary)">🏪</div><div class="grow"><h5>${esc(S.merchant.name)}</h5><small>${mine.length} عرض منشور</small></div></div>
+    <div class="srow" style="margin-bottom:12px"><div class="slogo" style="--c:var(--primary)">${ic("store", 24)}</div><div class="grow"><h5>${esc(S.merchant.name)}</h5><small>${mine.length} عرض منشور</small></div></div>
     <div class="dash">
-      <button data-go="addOffer"><span>➕</span>إضافة عرض جديد</button>
-      <button data-act="myoffers"><span>🏷️</span>إدارة العروض</button>
-      <button data-act="soon"><span>📍</span>الفروع والمواقع</button>
-      <button data-act="soon"><span>🖼️</span>منتجات العروض</button>
-      <button data-act="soon"><span>🗓️</span>المدفوعات</button>
-      <button data-act="soon"><span>📊</span>الإحصائيات</button>
+      <button data-go="addOffer"><span>${ic("plus")}</span>إضافة عرض جديد</button>
+      <button data-act="myoffers"><span>${ic("tag")}</span>إدارة العروض</button>
+      <button data-act="soon"><span>${ic("map-pin")}</span>الفروع والمواقع</button>
+      <button data-act="soon"><span>${ic("image")}</span>منتجات العروض</button>
+      <button data-act="soon"><span>${ic("credit-card")}</span>المدفوعات</button>
+      <button data-act="soon"><span>${ic("bar-chart-3")}</span>الإحصائيات</button>
     </div>
     <div id="myoffers" style="margin-top:14px" class="list">${mine.map(pcard).join("")}</div>
     <button class="btn ghost" style="margin-top:14px" data-act="logout">تسجيل الخروج</button>`;
@@ -585,7 +623,7 @@ window.OFFERS_DATA = {
   V.addOffer = () => `
     ${header("إضافة عرض جديد")}
     <form class="form" id="oform">
-      <div class="upload">📷<br/>إضافة صور المنتج<br/><small>(سيتم دعم رفع الصور مع الخادم)</small></div>
+      <div class="upload">${ic("camera", 32)}<br/>إضافة صور المنتج<br/><small>(سيتم دعم رفع الصور مع الخادم)</small></div>
       <label>اسم المنتج *<input name="name" required placeholder="مثل: أرز بسمتي 5 كيلو" /></label>
       <label>القسم<select name="cat">${D.categories.filter((c) => !["all", "more"].includes(c.id)).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}</select></label>
       <div class="two">
@@ -628,7 +666,7 @@ window.OFFERS_DATA = {
 
     if (ds.fav) { e.stopPropagation(); const i = S.favs.indexOf(ds.fav); i < 0 ? S.favs.push(ds.fav) : S.favs.splice(i, 1); persist(); toast(i < 0 ? "تمت الإضافة للمفضلة" : "تمت الإزالة من المفضلة"); return render(); }
     if (ds.favstore) { e.stopPropagation(); const i = S.favStores.indexOf(ds.favstore); i < 0 ? S.favStores.push(ds.favstore) : S.favStores.splice(i, 1); persist(); return render(); }
-    if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة 🛒"); } persist(); return render(); }
+    if (ds.cart) { e.stopPropagation(); if (S.cart[ds.cart]) { delete S.cart[ds.cart]; toast("أزيل من قائمة المقارنة"); } else { S.cart[ds.cart] = 1; toast("أضيف لقائمة المقارنة"); } persist(); return render(); }
     if (ds.qty) { const q = (S.cart[ds.qty] || 0) + Number(ds.d); if (q <= 0) delete S.cart[ds.qty]; else S.cart[ds.qty] = q; persist(); return render(); }
     if (ds.tab) { S.history = []; return go(ds.tab, {}, false); }
     if (ds.cat !== undefined) { const c = ds.cat === "more" ? "all" : ds.cat; return current.name === "category" ? go("category", { ...current.params, cat: c, sub: null, q: "" }, false) : go("category", { cat: c }); }
@@ -680,15 +718,15 @@ window.OFFERS_DATA = {
       if (price >= old) return toast("السعر الجديد يجب أن يكون أقل من السابق");
       if (fd.until < fd.from) return toast("تاريخ النهاية قبل تاريخ البداية");
       const sid = "m_" + S.merchant.name;
-      if (!D.stores.find((s) => s.id === sid)) D.stores.push({ id: sid, name: S.merchant.name, short: S.merchant.name.slice(0, 2), color: "#5b21b6", type: "super", offers: 0 });
+      if (!D.stores.find((s) => s.id === sid)) D.stores.push({ id: sid, name: S.merchant.name, en: S.merchant.name, color: "#5b21b6", type: "super", offers: 0 });
       const cat = D.categories.find((c) => c.id === fd.cat);
-      S.custom.push({ id: "c" + Date.now(), name: fd.name, cat: fd.cat, sub: null, emoji: cat ? cat.icon : "🏷️", old, prices: { [sid]: price }, until: fd.until, featured: true });
-      persist(); toast("تم نشر العرض ✅"); back();
+      S.custom.push({ id: "c" + Date.now(), name: fd.name, cat: fd.cat, sub: null, icon: cat ? cat.icon : "tag", old, prices: { [sid]: price }, until: fd.until, featured: true });
+      persist(); toast("تم نشر العرض"); back();
     }
   });
 
   // restore merchant store records
-  if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, short: S.merchant.name.slice(0, 2), color: "#5b21b6", type: "super", offers: S.custom.length });
+  if (S.merchant) D.stores.push({ id: "m_" + S.merchant.name, name: S.merchant.name, en: S.merchant.name, color: "#5b21b6", type: "super", offers: S.custom.length });
 
   render();
   setTimeout(() => $("#splash").classList.add("hide"), 1600);
