@@ -1,0 +1,10 @@
+{
+  "name": "OFFERS أوفرس",
+  "short_name": "OFFERS",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#4c1d95",
+  "theme_color": "#5b21b6"
+}
