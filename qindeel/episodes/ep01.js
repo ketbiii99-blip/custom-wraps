@@ -45,8 +45,8 @@ window.EPISODE = {
     { t0: 10.6, t1: 12.2, text: 'A small act… but look at its reward.' },
     { t0: 12.6, t1: 15.4, text: 'The Prophet ﷺ said: a man found a thorny branch on the road and removed it…' },
     { t0: 15.4, t1: 18.5, text: '“…so Allah appreciated his deed and forgave him.”<small>Bukhari 652 · Muslim 1914</small>' },
-    { t0: 18.9, t1: 19.7, text: 'So never belittle a good deed, however small.' },
-    { t0: 19.7, t1: 23.5, text: '“So whoever does an atom’s weight of good will see it.”<small>Qur’an 99:7</small>' },
+    { t0: 18.9, t1: 20.7, text: 'So never belittle a good deed, however small.' },
+    { t0: 20.7, t1: 23.5, text: '“So whoever does an atom’s weight of good will see it.”<small>Qur’an 99:7</small>' },
     { t0: 23.9, t1: 28.5, text: 'What “branch” will you move out of the way today?<small>Tell us in the comments</small>' },
   ],
 };
