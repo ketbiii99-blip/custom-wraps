@@ -268,7 +268,7 @@ function render(t) {
   const s0 = A.stopAt;
   const bend = ss(s0 + 0.15, s0 + 0.95, t) - ss(s0 + 1.95, s0 + 2.9, t);
   const carry = ss(s0 + 0.95, s0 + 1.95, t);            // branch being moved aside
-  const reward = ss(s0 + 2.0, s0 + 3.6, t);              // lantern brightens
+  const rAt = A.rewardAt ?? s0 + 2.0, reward = ss(rAt, rAt + 1.6, t);              // lantern brightens
   const glow = 0.32 + 0.68 * reward;
   const cy = GY + 52, S = 1.22;
 
@@ -291,11 +291,11 @@ function render(t) {
   glowAt(LX, LY - 20, 120 + 90 * reward, (0.5 + 0.35 * reward) * fl);
 
   // reward: expanding ring + rising motes
-  const rt = t - (s0 + 2.0);
+  const rt = t - rAt;
   if (rt > 0 && rt < 2.2) { const k = rt / 2.2; ctx.strokeStyle = `rgba(255,214,140,${(1 - k) * 0.7})`; ctx.lineWidth = 5 * (1 - k) + 1; ctx.beginPath(); ctx.arc(LX, LY - 20, 40 + k * 640, 0, 6.3); ctx.stroke(); }
   if (rt > 0) { ctx.globalCompositeOperation = 'lighter';
     for (const m of motes) { const lt = mod(rt - m.dl, m.life + 1.4); if (rt < m.dl || lt > m.life) continue; const k = lt / m.life, fade = Math.sin(k * Math.PI) * (1 - ss(7, 10, rt));
-      const px = LX + Math.cos(m.a) * m.d + Math.sin(lt * 2 + m.wob) * 16 + (D - dist(s0 + 2 + m.dl + Math.floor((rt - m.dl) / (m.life + 1.4)) * (m.life + 1.4))) * 1, py = LY - 20 + Math.sin(m.a) * m.d * 0.5 - lt * m.sp;
+      const px = LX + Math.cos(m.a) * m.d + Math.sin(lt * 2 + m.wob) * 16 + (D - dist(rAt + m.dl + Math.floor((rt - m.dl) / (m.life + 1.4)) * (m.life + 1.4))) * 1, py = LY - 20 + Math.sin(m.a) * m.d * 0.5 - lt * m.sp;
       ctx.fillStyle = `rgba(255,220,150,${fade * 0.85})`; ctx.beginPath(); ctx.arc(px, py, m.r, 0, 6.3); ctx.fill(); }
     ctx.globalCompositeOperation = 'source-over'; }
 

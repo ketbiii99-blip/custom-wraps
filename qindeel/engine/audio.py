@@ -1,8 +1,9 @@
 """Ambient sound bed for an episode (no musical instruments): night wind, soft footsteps,
 a rustle when the branch is moved, one bell-like chime at the reward moment, dawn birds.
-usage: python3 engine/audio.py out/ep01.wav 28 8.6 11.9"""
+usage: python3 engine/audio.py out/ep01.wav <duration> <stopAt> <resumeAt> [rewardAt]"""
 import sys, wave, numpy as np
 out, DUR, STOP, RESUME = sys.argv[1], float(sys.argv[2]), float(sys.argv[3]), float(sys.argv[4])
+REWARD = float(sys.argv[5]) if len(sys.argv) > 5 else STOP + 2.0
 SR = 44100; N = int(DUR * SR); t = np.arange(N) / SR; rs = np.random.RandomState(3)
 ss = lambda a, b, x: (lambda u: u * u * (3 - 2 * u))(np.clip((x - a) / (b - a), 0, 1))
 def band(n, lo, hi, seed):
@@ -29,7 +30,7 @@ for j, i in enumerate(idx):
 n = int(1.0 * SR); env = np.sin(np.linspace(0, np.pi, n)) ** 2 * (0.6 + 0.4 * np.sin(np.linspace(0, 40, n)) ** 2)
 s = band(n, 1500, 6000, 50) * env; place(L, s, STOP + 0.9, 0.07); place(R, s, STOP + 0.9, 0.06)
 # reward chime (single bell-like tone) + airy shimmer
-T0 = STOP + 2.0; n = int(5 * SR); tt = np.arange(n) / SR; bell = np.zeros(n)
+T0 = REWARD; n = int(5 * SR); tt = np.arange(n) / SR; bell = np.zeros(n)
 for f, a, dcy in [(587.3, 1, 2.2), (880, .6, 1.8), (1174.7, .45, 1.4), (1760, .25, 1.0), (2349.3, .12, .7)]:
     bell += a * np.sin(2 * np.pi * f * tt) * np.exp(-tt / dcy)
 bell *= np.minimum(1, tt / 0.01); place(L, bell, T0, 0.05); place(R, bell, T0 + 0.012, 0.05)
