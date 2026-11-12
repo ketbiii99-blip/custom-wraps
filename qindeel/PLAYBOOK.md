@@ -29,7 +29,7 @@ Post 3 reels before telling anyone about the account, so the first visitor sees 
 | 18–23 | **Lesson** in one line, plus a supporting verse | The takeaway they repeat |
 | 23–28 | **Question** to the comments + follow line | Comments and shares drive reach |
 
-Rules that stay fixed: 20–30 seconds; Arabic on top, English subtitle below on every line;
+Rules that stay fixed: 30–45 seconds with voice-over; Arabic on top, English subtitle below on every line;
 no musical instruments (ambient sound only, safe for the whole audience); no faces drawn;
 never depict prophets or companions; every text carries its source.
 
@@ -105,14 +105,19 @@ one video breaks out. The first month is about finding which hooks work, not fol
 
 - Have someone with Islamic knowledge you trust review each script. I check wording and
   references against published sources, but I am not a scholar and the account carries your name.
-- Sound: the pilot uses ambient sound only (wind, footsteps, one chime, birds). A voice-over in
-  Arabic would raise watch time noticeably if you want to record one or have one generated.
+- Sound: ambient bed (wind, footsteps, one chime, birds, no instruments) plus a generated Arabic
+  voice-over (ElevenLabs through Higgsfield, voice "Arthur", about 0.3 credits per line). Each line
+  is transcribed back by speech recognition to catch mispronunciations, but a native listener
+  should still approve every episode.
+- The synthetic voice never recites Qur'an. Verses are shown on screen in silence after
+  «قال الله تعالى»; if you want them recited, use a licensed recording of a human reciter.
 
 ## 8. Producing a new episode
 
 ```
 episodes/epNN.js          the script: Arabic lines, English subtitles, timings
-python3 engine/audio.py out/epNN.wav 28 8.6 11.9
+python3 engine/audio.py out/epNN.wav <duration> <stopAt> <resumeAt> <rewardAt>   ambient bed
+(voice clips are generated per line from `voice` in the episode file, then mixed over the bed)
 node engine/render.mjs epNN            -> out/epNN.mp4 (1080×1920, 30 fps)
 node engine/render.mjs epNN --stills 2,10,20   preview frames
 ```
