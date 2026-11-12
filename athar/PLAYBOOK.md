@@ -1,19 +1,18 @@
-# قِنديل · Qindeel — account playbook
+# أثَر · Athar — account playbook
 
-Working name: **قِنديل** ("lantern"). One idea carries the whole account: a traveler walks a
-night road with a lantern, and every good lesson makes the light grow until dawn breaks.
-The name, the visual motif and the lesson are the same thing, which is what makes it recognisable
-after two or three videos. The name is a proposal — change `brand` in the episode file and it
-updates everywhere.
+Name: **أثَر** ("a trace, a lasting effect"). One idea carries the whole account: a traveler walks
+a night road with a lantern, and every small good deed leaves a trace — the light grows until dawn
+breaks. A walker leaves footprints; a good deed leaves an athar. The name sits in `brand` in each
+episode file.
 
 ## 1. Account setup (you do this once, ~10 minutes)
 
 | Field | Value |
 |---|---|
-| Handle (check availability, in this order) | `@qindeel.ar` · `@qindeel.stories` · `@qindeel.daily` · `@qindeel.light` |
-| Name field (searchable) | `قنديل \| دروس إسلامية قصيرة` |
+| Handle (check availability, in this order) | `@athar.stories` · `@athar.daily` · `@athar.ar` · `@athar.reels` |
+| Name field (searchable) | `أثر \| دروس إسلامية قصيرة` |
 | Account type | Creator → category "Education" |
-| Bio | `درسٌ قصير يُضيء يومك 🏮`<br>`قصص وعِبَر من القرآن والسنّة الصحيحة`<br>`Short Islamic lessons · English subtitles`<br>`كلَّ يوم ٩ مساءً بتوقيت مكة` |
+| Bio | `عملٌ صغير… وأثرٌ يبقى 🏮`<br>`قصص وعِبَر من القرآن والسنّة الصحيحة`<br>`Short Islamic lessons · English subtitles`<br>`كلَّ يوم ٩ مساءً بتوقيت مكة` |
 | Profile picture | The lantern on the midnight-blue background (I can export it) |
 | Highlights (later) | `ابدأ هنا` · `أحاديث` · `آيات` · `أسئلتكم` |
 
@@ -79,7 +78,7 @@ The Prophet ﷺ said a man removed a thorny branch from the road, so Allah appre
 his deed and forgave him. (Bukhari 652, Muslim 1914)
 Never belittle a small good deed. What "branch" will you move today?
 
-#قنديل #دروس_إسلامية #حديث_شريف #السنة_النبوية #عبرة #ذكر_الله #اسلاميات #islamicreminders #hadith #muslim
+#أثر #دروس_إسلامية #حديث_شريف #السنة_النبوية #عبرة #ذكر_الله #اسلاميات #islamicreminders #hadith #muslim
 ```
 
 Keep to 8–10 hashtags: 1 brand tag, 5 Arabic topic tags, 3 English ones.
@@ -90,7 +89,7 @@ Keep to 8–10 hashtags: 1 brand tag, 5 Arabic topic tags, 3 English ones.
    than through likes. Every caption ends with a share prompt, every video with a question.
 2. **Reply to every comment in the first hour**, with a question back where it fits.
 3. **Pin one comment** on each reel: the full hadith text and source.
-4. **Series naming.** Title the episodes ("قنديل ١", "قنديل ٢"…) so viewers look for the others.
+4. **Series naming.** Title the episodes ("أثر ١", "أثر ٢"…) so viewers look for the others.
 5. **Cross-post the same file** to TikTok, YouTube Shorts and Facebook Reels. Same work, four chances.
 6. **Collaborate** with 5–10 small Arabic Islamic pages (5k–50k followers) using Instagram's
    Collab post, once there are 10+ reels up.
@@ -106,11 +105,11 @@ one video breaks out. The first month is about finding which hooks work, not fol
 - Have someone with Islamic knowledge you trust review each script. I check wording and
   references against published sources, but I am not a scholar and the account carries your name.
 - Sound: ambient bed (wind, footsteps, one chime, birds, no instruments) plus a generated Arabic
-  voice-over (ElevenLabs through Higgsfield, voice "Arthur", about 0.3 credits per line). Each line
-  is transcribed back by speech recognition to catch mispronunciations, but a native listener
-  should still approve every episode.
-- The synthetic voice never recites Qur'an. Verses are shown on screen in silence after
-  «قال الله تعالى»; if you want them recited, use a licensed recording of a human reciter.
+  narrator (ElevenLabs v4 through Higgsfield, voice "Harrison", under 1 credit per line). Each line
+  is transcribed back by speech recognition to catch wrong words, but that cannot judge accent or
+  naturalness, so a native listener should approve every episode.
+- Qur'an is never read by the synthetic voice. Verses use a human recitation (Mishary Rashid
+  Alafasy, per-verse files from everyayah.com) with the reciter credited on screen and in the caption.
 
 ## 8. Producing a new episode
 
