@@ -1,0 +1,205 @@
+{
+ "id": "ep02",
+ "title": "شربة ماء",
+ "sources": "Sahih al-Bukhari 2363, Sahih Muslim 2244",
+ "scene": {
+  "prop": "dog",
+  "sound": "water"
+ },
+ "action": {
+  "stopAt": "see:end-0.1",
+  "actHold": 2.4,
+  "resumeAt": "h1:0.55",
+  "rewardAt": "h1:0.5",
+  "dawnFrom": "h1:0.6",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 200,
+   "voice": "سَقى كلبًا عطشان... فغَفَرَ اللهُ له.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "سقى كلبًا عطشان…"
+    },
+    {
+     "f": 0.5,
+     "cls": "big gold",
+     "html": "فغفرَ اللهُ له"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.5,
+     "text": "He gave a thirsty dog a drink…"
+    },
+    {
+     "f0": 0.5,
+     "text": "…and Allah forgave him."
+    }
+   ]
+  },
+  {
+   "id": "well",
+   "clip": 201,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "رجلٌ اشتدَّ عليه العطش…<br>فنزل بئرًا فشرب"
+    }
+   ],
+   "subs": [
+    {
+     "text": "A man, parched with thirst, climbed down a well and drank."
+    }
+   ],
+   "voice": "رجلٌ اشتدَّ عليهِ العطش، فنزلَ بئرًا فشرِب."
+  },
+  {
+   "id": "see",
+   "clip": 202,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "فلمّا خرج… رأى <span class=\"gold\">كلبًا يلهث</span><br>من شدّة العطش"
+    }
+   ],
+   "subs": [
+    {
+     "text": "When he came out, he saw a dog panting, desperate for water."
+    }
+   ],
+   "voice": "ثمَّ خرج، فإذا كلبٌ يلهثُ من شدّةِ العطش."
+  },
+  {
+   "id": "give",
+   "clip": 203,
+   "gap": 1.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "فملأ خُفَّه ماءً… <span class=\"gold\">وسقاه</span>"
+    }
+   ],
+   "subs": [
+    {
+     "text": "So he filled his shoe with water and gave it a drink."
+    }
+   ],
+   "voice": "فملأَ خُفَّهُ ماءً، وسقاه."
+  },
+  {
+   "id": "h1",
+   "clip": 204,
+   "card": true,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.3,
+     "cls": "hadith",
+     "html": "«…فَسَقَى الْكَلْبَ، <span class=\"gold\">فَشَكَرَ اللَّهُ لَهُ فَغَفَرَ لَهُ</span>»"
+    },
+    {
+     "f": 0.45,
+     "cls": "source",
+     "html": "متفق عليه · البخاري (٢٣٦٣) ومسلم (٢٢٤٤)"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.38,
+     "text": "The Messenger of Allah ﷺ said:"
+    },
+    {
+     "f0": 0.38,
+     "text": "“…he gave the dog a drink, so Allah appreciated his deed and forgave him.”<small>Bukhari 2363 · Muslim 2244</small>"
+    }
+   ],
+   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: فَسَقَى الكلبَ، فَشَكَرَ اللهُ لهُ، فَغَفَرَ له."
+  },
+  {
+   "id": "h2",
+   "clip": 205,
+   "card": true,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قالوا: يا رسولَ الله، وإنَّ لنا في البهائم أجرًا؟"
+    },
+    {
+     "f": 0.5,
+     "cls": "hadith",
+     "html": "«<span class=\"gold\">فِي كُلِّ كَبِدٍ رَطْبَةٍ أَجْرٌ</span>»"
+    },
+    {
+     "f": 0.6,
+     "cls": "source",
+     "html": "متفق عليه · البخاري (٢٣٦٣) ومسلم (٢٢٤٤)"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.52,
+     "text": "They asked: “Messenger of Allah, are we rewarded for kindness to animals?”"
+    },
+    {
+     "f0": 0.52,
+     "text": "He said: “There is a reward for kindness to every living creature.”<small>Bukhari 2363 · Muslim 2244</small>"
+    }
+   ],
+   "voice": "قالوا: يا رسولَ الله، وإنَّ لنا في البهائمِ أجرًا؟ قال: في كلِّ كَبِدٍ رَطْبَةٍ أجر."
+  },
+  {
+   "id": "lesson",
+   "clip": 206,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "الرحمةُ لا تضيع…"
+    },
+    {
+     "f": 0.42,
+     "cls": "mid gold",
+     "html": "حتى مع مخلوقٍ لا يتكلّم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Mercy is never wasted — even on a creature that cannot speak."
+    }
+   ],
+   "voice": "الرحمةُ لا تضيع، حتّى معَ مخلوقٍ لا يتكلّم."
+  },
+  {
+   "id": "cta",
+   "clip": 207,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "مَن <span class=\"gold\">سترحمُ</span> اليوم؟"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "اكتبْه في التعليقات"
+    },
+    {
+     "f": 0.75,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Who will you show mercy to today?<small>Tell us in the comments</small>"
+    }
+   ],
+   "voice": "مَن سترحمُ اليوم؟ اكتُبْهُ في التعليقات."
+  }
+ ]
+}

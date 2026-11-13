@@ -1,0 +1,165 @@
+{
+ "id": "ep03",
+ "title": "الكلمة الطيبة",
+ "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009",
+ "scene": {
+  "prop": "person",
+  "sound": "none"
+ },
+ "action": {
+  "stopAt": "pass:end-0.1",
+  "actHold": 2.2,
+  "bendAmt": 0.22,
+  "resumeAt": "h1:0.5",
+  "rewardAt": "light:0.35",
+  "dawnFrom": "light:0.6",
+  "dawnTo": "cta:start",
+  "actAt": "word:0.4"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 300,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "صدقةٌ…"
+    },
+    {
+     "f": 0.35,
+     "cls": "big gold",
+     "html": "لا تكلّفك درهمًا واحدًا"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.35,
+     "text": "A charity…"
+    },
+    {
+     "f0": 0.35,
+     "text": "…that won’t cost you a single coin."
+    }
+   ],
+   "voice": "صدقةٌ... لا تُكلِّفُكَ دِرهمًا واحدًا."
+  },
+  {
+   "id": "pass",
+   "clip": 301,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "في طريقك… قد تمرُّ بإنسانٍ<br><span class=\"gold\">أثقله الهمّ</span>"
+    }
+   ],
+   "subs": [
+    {
+     "text": "On your way, you may pass someone weighed down by worry."
+    }
+   ],
+   "voice": "في طريقِك، قد تمرُّ بإنسانٍ أثقلَهُ الهمّ."
+  },
+  {
+   "id": "word",
+   "clip": 302,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "لا تملك له مالًا…"
+    },
+    {
+     "f": 0.5,
+     "cls": "mid gold",
+     "html": "لكنّك تملك كلمة"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.5,
+     "text": "You have no money to give him…"
+    },
+    {
+     "f0": 0.5,
+     "text": "…but you do have a word."
+    }
+   ],
+   "voice": "لا تملكُ لهُ مالًا... لكنّكَ تملكُ كلمة."
+  },
+  {
+   "id": "light",
+   "clip": 303,
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "كلمةٌ طيّبة…<br>قد <span class=\"gold\">تُضيء يومَه</span> كلَّه"
+    }
+   ],
+   "subs": [
+    {
+     "text": "One kind word may light up his whole day."
+    }
+   ],
+   "voice": "كلمةٌ طيّبة، قد تُضيءُ يومَهُ كلَّه."
+  },
+  {
+   "id": "h1",
+   "clip": 304,
+   "card": true,
+   "gap": 1.4,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.5,
+     "cls": "hadith",
+     "html": "«<span class=\"gold\">وَالْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ</span>»"
+    },
+    {
+     "f": 0.65,
+     "cls": "source",
+     "html": "متفق عليه · البخاري (٢٩٨٩) ومسلم (١٠٠٩)"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.55,
+     "text": "The Messenger of Allah ﷺ said:"
+    },
+    {
+     "f0": 0.55,
+     "text": "“And a kind word is charity.”<small>Bukhari 2989 · Muslim 1009</small>"
+    }
+   ],
+   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: والكلمةُ الطيّبةُ صدقة."
+  },
+  {
+   "id": "cta",
+   "clip": 305,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "قل اليوم <span class=\"gold\">كلمةً طيّبة</span><br>لشخصٍ واحد"
+    },
+    {
+     "f": 0.6,
+     "cls": "small",
+     "html": "من سيكون؟ اكتبْه في التعليقات"
+    },
+    {
+     "f": 0.85,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Say one kind word to one person today. Who will it be?<small>Tell us in the comments</small>"
+    }
+   ],
+   "voice": "قُلِ اليومَ كلمةً طيّبةً لشخصٍ واحد. مَن سيكون؟"
+  }
+ ]
+}

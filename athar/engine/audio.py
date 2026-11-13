@@ -4,6 +4,7 @@ usage: python3 engine/audio.py out/ep01.wav <duration> <stopAt> <resumeAt> [rewa
 import sys, wave, numpy as np
 out, DUR, STOP, RESUME = sys.argv[1], float(sys.argv[2]), float(sys.argv[3]), float(sys.argv[4])
 REWARD = float(sys.argv[5]) if len(sys.argv) > 5 else STOP + 2.0
+RUSTLE = (sys.argv[6] if len(sys.argv) > 6 else 'rustle')  # rustle | water | none
 SR = 44100; N = int(DUR * SR); t = np.arange(N) / SR; rs = np.random.RandomState(3)
 ss = lambda a, b, x: (lambda u: u * u * (3 - 2 * u))(np.clip((x - a) / (b - a), 0, 1))
 def band(n, lo, hi, seed):
@@ -26,9 +27,13 @@ for j, i in enumerate(idx):
     n = int(0.13 * SR); e = np.exp(-np.arange(n) / (0.028 * SR))
     s = band(n, 250, 1600, 100 + j) * e
     pan = 0.45 + 0.1 * (j % 2); place(L, s, i / SR, 0.16 * pan * 2); place(R, s, i / SR, 0.16 * (1 - pan) * 2)
-# rustle while moving the branch
-n = int(1.0 * SR); env = np.sin(np.linspace(0, np.pi, n)) ** 2 * (0.6 + 0.4 * np.sin(np.linspace(0, 40, n)) ** 2)
-s = band(n, 1500, 6000, 50) * env; place(L, s, STOP + 0.9, 0.07); place(R, s, STOP + 0.9, 0.06)
+# sound of the deed itself
+if RUSTLE == 'rustle':
+    n = int(1.0 * SR); env = np.sin(np.linspace(0, np.pi, n)) ** 2 * (0.6 + 0.4 * np.sin(np.linspace(0, 40, n)) ** 2)
+    s = band(n, 1500, 6000, 50) * env; place(L, s, STOP + 0.9, 0.07); place(R, s, STOP + 0.9, 0.06)
+elif RUSTLE == 'water':
+    n = int(2.4 * SR); env = np.sin(np.linspace(0, np.pi, n)) ** 1.5 * (0.5 + 0.5 * np.abs(np.sin(np.linspace(0, 90, n)) * np.sin(np.linspace(0, 37, n))))
+    s = band(n, 900, 4500, 51) * env; place(L, s, STOP + 0.9, 0.06); place(R, s, STOP + 0.95, 0.06)
 # reward chime (single bell-like tone) + airy shimmer
 T0 = REWARD; n = int(5 * SR); tt = np.arange(n) / SR; bell = np.zeros(n)
 for f, a, dcy in [(587.3, 1, 2.2), (880, .6, 1.8), (1174.7, .45, 1.4), (1760, .25, 1.0), (2349.3, .12, .7)]:

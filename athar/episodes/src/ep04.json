@@ -1,0 +1,188 @@
+{
+ "id": "ep04",
+ "title": "الفسيلة",
+ "sources": "Al-Adab al-Mufrad 479 (authenticated by al-Albani); Musnad Ahmad 12981",
+ "scene": {
+  "prop": "sapling",
+  "sound": "rustle"
+ },
+ "action": {
+  "stopAt": "years:end-0.1",
+  "actHold": 1.8,
+  "resumeAt": "h1:0.3",
+  "rewardAt": "plant:end+1.9",
+  "dawnFrom": "h1:0.3",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 400,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "لو قامت القيامةُ الآن…"
+    },
+    {
+     "f": 0.55,
+     "cls": "big gold",
+     "html": "ماذا تفعل؟"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.55,
+     "text": "If the Last Hour began right now…"
+    },
+    {
+     "f0": 0.55,
+     "text": "…what would you do?"
+    }
+   ],
+   "voice": "لو قامتِ القيامةُ الآن... ماذا تفعل؟"
+  },
+  {
+   "id": "imagine",
+   "clip": 401,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "تخيّل أنّ في يدك <span class=\"gold\">فسيلة</span>…<br>نخلةً صغيرة لم تُزرع بعد"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Imagine a sapling in your hand — a young palm not yet planted."
+    }
+   ],
+   "voice": "تخيَّلْ أنَّ في يدِكَ فسيلة، نخلةً صغيرةً لم تُزرَعْ بعد."
+  },
+  {
+   "id": "years",
+   "clip": 402,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "لن تُثمر إلا بعد سنين…"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "ولن يبقى أحدٌ ليأكل منها"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.5,
+     "text": "It won’t bear fruit for years…"
+    },
+    {
+     "f0": 0.5,
+     "text": "…and no one will be left to eat from it."
+    }
+   ],
+   "voice": "لن تُثمِرَ إلّا بعدَ سنين... ولن يبقى أحدٌ ليأكلَ منها."
+  },
+  {
+   "id": "plant",
+   "clip": 403,
+   "gap": 2.6,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "ومع ذلك…"
+    },
+    {
+     "f": 0.5,
+     "cls": "big gold",
+     "html": "اغرسْها"
+    }
+   ],
+   "subs": [
+    {
+     "text": "And still… plant it."
+    }
+   ],
+   "voice": "ومعَ ذلك... اغرِسْها."
+  },
+  {
+   "id": "h1",
+   "clip": 404,
+   "card": true,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.2,
+     "cls": "hadith",
+     "html": "«إِنْ قَامَتِ السَّاعَةُ وَفِي يَدِ أَحَدِكُمْ فَسِيلَةٌ، فَإِنِ اسْتَطَاعَ أَنْ لَا تَقُومَ حَتَّى يَغْرِسَهَا <span class=\"gold\">فَلْيَغْرِسْهَا</span>»"
+    },
+    {
+     "f": 0.3,
+     "cls": "source",
+     "html": "البخاري في الأدب المفرد (٤٧٩) · صحّحه الألباني"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.22,
+     "text": "The Messenger of Allah ﷺ said:"
+    },
+    {
+     "f0": 0.22,
+     "text": "“If the Hour begins while one of you holds a sapling, and he is able to plant it before it comes, let him plant it.”<small>Al-Adab al-Mufrad 479 · authenticated by al-Albani</small>"
+    }
+   ],
+   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: إنْ قامتِ الساعةُ وفي يدِ أحدِكم فسيلة، فإنِ استطاعَ أن لا تقومَ حتى يغرِسَها، فليغرِسْها."
+  },
+  {
+   "id": "lesson",
+   "clip": 405,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "اعمل الخير…"
+    },
+    {
+     "f": 0.45,
+     "cls": "mid gold",
+     "html": "ولو لم ترَ ثمرته"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Do good — even if you never see its fruit."
+    }
+   ],
+   "voice": "اعملِ الخير... ولو لم ترَ ثمرتَه."
+  },
+  {
+   "id": "cta",
+   "clip": 406,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "ما <span class=\"gold\">«الفسيلة»</span> التي<br>ستغرسها اليوم؟"
+    },
+    {
+     "f": 0.55,
+     "cls": "small",
+     "html": "اكتبْها في التعليقات"
+    },
+    {
+     "f": 0.8,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "What “sapling” will you plant today?<small>Tell us in the comments</small>"
+    }
+   ],
+   "voice": "ما الفسيلةُ التي ستغرِسُها اليوم؟ اكتُبْها في التعليقات."
+  }
+ ]
+}

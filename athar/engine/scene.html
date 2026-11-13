@@ -243,6 +243,86 @@ function drawTraveler(x, y, S, ph, mv, bend, reach, glow, t) {
   ctx.restore();
   return [x + lx * S, y + (ly + crouch - bob) * S];
 }
+
+/* ---------- episode props ---------- */
+function drawWell(x, y, d) {
+  ctx.save(); ctx.translate(x, y);
+  const st = mix('#3A3F78', '#A98C8A', d), dk = mix('#22264F', '#6E5560', d), wood = mix('#3B2A1C', '#5A3D2A', d);
+  ctx.fillStyle = 'rgba(2,3,14,.35)'; ctx.beginPath(); ctx.ellipse(0, 6, 96, 12, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = st; ctx.beginPath(); ctx.moveTo(-70, 0); ctx.lineTo(-64, -74); ctx.lineTo(64, -74); ctx.lineTo(70, 0); ctx.fill();
+  ctx.fillStyle = dk; for (let r = 0; r < 3; r++) for (let c = -2; c <= 2; c++) ctx.fillRect(c * 26 - 10 + (r % 2) * 12, -64 + r * 22, 18, 3);
+  ctx.fillStyle = dk; ctx.beginPath(); ctx.ellipse(0, -74, 64, 13, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#060821'; ctx.beginPath(); ctx.ellipse(0, -74, 50, 8, 0, 0, 6.3); ctx.fill();
+  ctx.strokeStyle = wood; ctx.lineWidth = 9; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-58, -76); ctx.lineTo(-58, -196); ctx.moveTo(58, -76); ctx.lineTo(58, -196); ctx.moveTo(-70, -196); ctx.lineTo(70, -196); ctx.stroke();
+  ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, -196); ctx.lineTo(0, -120); ctx.stroke();
+  ctx.fillStyle = wood; ctx.beginPath(); ctx.moveTo(-13, -120); ctx.lineTo(13, -120); ctx.lineTo(10, -96); ctx.lineTo(-10, -96); ctx.fill();
+  ctx.restore();
+}
+// Dog lies facing right (toward the traveler). r: 0 = exhausted and panting, 1 = revived.
+function drawDog(x, y, r, t, d) {
+  ctx.save(); ctx.translate(x, y);
+  const c1 = mix('#B8946A', '#C9A27A', d), c2 = mix('#8E6E4A', '#9C7A55', d);
+  ctx.fillStyle = 'rgba(2,3,14,.4)'; ctx.beginPath(); ctx.ellipse(0, 4, 100, 10, 0, 0, 6.3); ctx.fill();
+  const wag = Math.sin(t * 15) * 0.55 * r;
+  ctx.save(); ctx.translate(-78, -26); ctx.rotate(-0.5 - r * 0.7 + wag); ctx.strokeStyle = c2; ctx.lineWidth = 11; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-26, -6, -44, -22); ctx.stroke(); ctx.restore();
+  ctx.fillStyle = c1; ctx.beginPath(); ctx.ellipse(-44, -28, 34, 29, 0, 0, 6.3); ctx.fill();
+  const pant = Math.sin(t * 9) * 1.6 * (1 - r);
+  ctx.beginPath(); ctx.ellipse(0, -26 + pant * 0.4, 62, 25 + pant, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = c2; ctx.beginPath(); ctx.roundRect(-64, -12, 44, 13, 6); ctx.fill();
+  ctx.fillStyle = c1; ctx.beginPath(); ctx.roundRect(26, -13, 62, 14, 7); ctx.fill();
+  const hy = -34 - r * 30, hx = 58 + r * 4;
+  ctx.strokeStyle = c1; ctx.lineWidth = 30; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(40, -30); ctx.lineTo(hx - 4, hy + 6); ctx.stroke();
+  ctx.fillStyle = c1; ctx.beginPath(); ctx.arc(hx, hy, 21, 0, 6.3); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(hx + 24, hy + 7, 17, 11, 0.15, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#2A1D14'; ctx.beginPath(); ctx.arc(hx + 39, hy + 3, 4.5, 0, 6.3); ctx.fill();
+  ctx.fillStyle = c2; ctx.beginPath(); ctx.moveTo(hx - 16, hy - 14); ctx.quadraticCurveTo(hx - 30, hy + 4, hx - 20, hy + 22); ctx.quadraticCurveTo(hx - 6, hy + 8, hx - 4, hy - 16); ctx.fill();
+  if (r < 0.75) { ctx.fillStyle = `rgba(222,120,120,${1 - r / 0.75})`; ctx.beginPath(); ctx.ellipse(hx + 27, hy + 19 + Math.abs(Math.sin(t * 9)) * 3, 5, 9, 0.1, 0, 6.3); ctx.fill(); }
+  ctx.restore();
+  return [x + hx + 34, y + hy + 12];
+}
+// A second traveler sitting hunched on a rock, facing right. q: 0 = bowed and in the dark, 1 = upright, lantern lit.
+function drawSitter(x, y, q, t, d) {
+  ctx.save(); ctx.translate(x, y);
+  ctx.fillStyle = 'rgba(2,3,14,.4)'; ctx.beginPath(); ctx.ellipse(0, 4, 110, 12, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = mix('#23284F', '#7A6470', d); ctx.beginPath(); ctx.ellipse(-12, -26, 70, 34, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#3A2418'; ctx.beginPath(); ctx.ellipse(62, -4, 20, 8, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#E9DFC6'; ctx.beginPath(); ctx.moveTo(-26, -70); ctx.quadraticCurveTo(30, -84, 56, -60); ctx.quadraticCurveTo(72, -30, 70, -8); ctx.lineTo(40, -6); ctx.quadraticCurveTo(30, -40, -10, -44); ctx.fill();
+  ctx.save(); ctx.translate(-8, -62); ctx.rotate(0.42 * (1 - q));
+  ctx.fillStyle = '#3F5F86'; ctx.beginPath(); ctx.moveTo(-40, 6); ctx.quadraticCurveTo(-48, -70, -28, -112); ctx.lineTo(26, -112); ctx.quadraticCurveTo(44, -70, 40, 6); ctx.quadraticCurveTo(0, 18, -40, 6); ctx.fill();
+  ctx.fillStyle = '#2F4A6C'; ctx.beginPath(); ctx.moveTo(-40, 6); ctx.quadraticCurveTo(-48, -70, -28, -112); ctx.lineTo(-12, -112); ctx.quadraticCurveTo(-26, -60, -18, 10); ctx.fill();
+  ctx.save(); ctx.translate(4, -118); ctx.rotate(0.5 * (1 - q));
+  ctx.fillStyle = COL.skin; ctx.beginPath(); ctx.arc(6, -22, 28, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#F4ECD8'; ctx.beginPath(); ctx.moveTo(32, -30); ctx.quadraticCurveTo(26, -58, 0, -56); ctx.quadraticCurveTo(-28, -54, -30, -22); ctx.quadraticCurveTo(-36, 12, -44, 38); ctx.quadraticCurveTo(-22, 40, -4, 24); ctx.quadraticCurveTo(2, -6, 12, -26); ctx.quadraticCurveTo(22, -34, 32, -30); ctx.fill();
+  ctx.strokeStyle = '#5A3D2A'; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(28, -40); ctx.quadraticCurveTo(0, -54, -27, -38); ctx.stroke();
+  ctx.restore();
+  const hx = 44 + q * 14, hy = -46 - q * 56 * ss(0.6, 1, q) + Math.sin(t * 6) * 5 * ss(0.8, 1, q);
+  ctx.strokeStyle = '#3F5F86'; ctx.lineWidth = 22; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(14, -96); ctx.quadraticCurveTo(36, -60, hx, hy); ctx.stroke();
+  ctx.fillStyle = COL.skin; ctx.beginPath(); ctx.arc(hx, hy, 10, 0, 6.3); ctx.fill();
+  ctx.restore();
+  ctx.restore();
+  // his lantern on the ground, unlit until the kind word reaches him
+  const lx = x + 118, ly = y - 104;
+  ctx.save(); ctx.translate(lx, ly); ctx.globalAlpha = 1; 
+  ctx.fillStyle = '#3B2A1C'; ctx.beginPath(); ctx.moveTo(-17, 50); ctx.lineTo(0, 34); ctx.lineTo(17, 50); ctx.fill();
+  ctx.fillStyle = `rgb(${Math.round(lerp(70, 255, q))},${Math.round(lerp(72, 205, q))},${Math.round(lerp(96, 110, q))})`; ctx.beginPath(); ctx.moveTo(-14, 50); ctx.lineTo(14, 50); ctx.lineTo(18, 74); ctx.lineTo(13, 98); ctx.lineTo(-13, 98); ctx.lineTo(-18, 74); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = '#3B2A1C'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(0, 50); ctx.lineTo(0, 98); ctx.moveTo(-18, 74); ctx.lineTo(18, 74); ctx.stroke(); ctx.fillStyle = '#3B2A1C'; ctx.fillRect(-17, 96, 34, 8);
+  ctx.restore();
+  if (q > 0.01) glowAt(lx, ly + 74, 260 * q + 40, 0.55 * q);
+  return [x + 6, y - 200];
+}
+// A date-palm sapling. g: 0 = nothing, 0.4 = just planted, 1 = taller with dawn.
+function drawSapling(x, y, g, t, d) {
+  if (g <= 0) return;
+  ctx.save(); ctx.translate(x, y);
+  ctx.fillStyle = mix('#3A2A22', '#7A5540', d); ctx.beginPath(); ctx.ellipse(0, 0, 52 * Math.min(1, g * 3), 13 * Math.min(1, g * 3), 0, Math.PI, 0); ctx.fill();
+  const h = 150 * ss(0.12, 1, g); if (h > 2) {
+    const sway = Math.sin(t * 1.4) * 0.05, col = mix('#3E8A5A', '#5FAE6C', d), col2 = mix('#2C6A46', '#3F8F58', d);
+    ctx.strokeStyle = col2; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(0, -4); ctx.quadraticCurveTo(4, -h * 0.5, 0, -h * 0.72); ctx.stroke();
+    for (let i = 0; i < 7; i++) { const a = -Math.PI * (0.06 + i / 6 * 0.88) + sway, L = h * (0.5 + (i % 2) * 0.12), ty = -h * 0.72;
+      const ex = Math.cos(a) * L, ey = ty + Math.sin(a) * L * 0.75 + L * 0.2, mx = Math.cos(a) * L * 0.5, my = ty + Math.sin(a) * L * 0.95 - 8;
+      ctx.fillStyle = i % 2 ? col : col2; ctx.beginPath(); ctx.moveTo(0, ty); ctx.quadraticCurveTo(mx, my, ex, ey); ctx.quadraticCurveTo(mx + 3, my + 16, 0, ty + 6); ctx.fill(); } }
+  ctx.restore();
+}
 function drawFg(D, d) {
   const off = mod(D * 1.55, FG_W);
   ctx.fillStyle = mix('#02030F', '#120C22', d);
@@ -266,16 +346,44 @@ function render(t) {
   // character state
   const mv = speed(t), ph = D / 34;
   const s0 = A.stopAt;
-  const bend = ss(s0 + 0.15, s0 + 0.95, t) - ss(s0 + 1.95, s0 + 2.9, t);
-  const carry = ss(s0 + 0.95, s0 + 1.95, t);            // branch being moved aside
+  const PROP = (EP.scene && EP.scene.prop) || 'branch', hold = A.actHold ?? 1.0, as = A.actAt ?? s0, a1 = as + 0.95, a2 = a1 + hold;
+  const bend = (ss(as + 0.15, a1, t) - ss(a2, a2 + 0.95, t)) * (A.bendAmt ?? 1);
+  const carry = ss(a1, a2, t);                                   // progress of the deed itself
   const rAt = A.rewardAt ?? s0 + 2.0, reward = ss(rAt, rAt + 1.6, t);              // lantern brightens
   const glow = 0.32 + 0.68 * reward;
   const cy = GY + 52, S = 1.22;
+  const px0 = CX - 150 - dist(s0), pX = px0 + D;                   // prop anchor: just ahead of where he stops
+  let reachTo = null, propFront = null;
 
-  // branch
-  const bx0 = CX - 150 - dist(s0), bX = bx0 + D - carry * 36, bY = GY + 66 + carry * 54 - Math.sin(carry * Math.PI) * 40, bR = -0.12 + carry * 0.5;
-  const branchFront = carry > 0.02;
-  if (!branchFront) drawBranch(bX, bY, bR, d, glow);
+  if (PROP === 'branch') {
+    const bX = pX - carry * 36, bY = GY + 66 + carry * 54 - Math.sin(carry * Math.PI) * 40, bR = -0.12 + carry * 0.5;
+    if (carry > 0.02) propFront = () => drawBranch(bX, bY, bR, d, glow); else drawBranch(bX, bY, bR, d, glow);
+    reachTo = [bX, bY - 12];
+  } else if (PROP === 'dog') {
+    drawWell(pX + 420, GY + 4, d);
+    const rev = ss(a1 + 0.3, a2 + 0.6, t), dx = pX - 96, dy = GY + 82;
+    const [mx, my] = [dx + 58 + rev * 4 + 34, dy - 34 - rev * 30 + 12];
+    reachTo = [mx + 16, my - 46];
+    propFront = () => { const m = drawDog(dx, dy, rev, t, d);
+      // the leather shoe he filled, and the water falling from it
+      const k = ss(as + 0.5, a1, t) - ss(a2, a2 + 0.5, t); if (k > 0.05) { const vx = m[0] + 16, vy = m[1] - 50;
+        ctx.save(); ctx.translate(vx, vy); ctx.rotate(-0.5 * carry); ctx.fillStyle = '#5A3D2A'; ctx.beginPath(); ctx.moveTo(-20, -8); ctx.lineTo(16, -8); ctx.quadraticCurveTo(24, 8, 6, 14); ctx.lineTo(-22, 12); ctx.closePath(); ctx.fill(); ctx.restore();
+        if (carry > 0.05 && carry < 0.98) for (let i = 0; i < 5; i++) { const u = mod(t * 2.4 + i / 5, 1); ctx.fillStyle = `rgba(150,205,255,${0.9 * (1 - u)})`; ctx.beginPath(); ctx.ellipse(vx - 18 - u * 6, vy + 8 + u * 44, 3.2, 6, 0, 0, 6.3); ctx.fill(); } } };
+  } else if (PROP === 'person') {
+    const q = ss(a1 + 0.2, a2 + 0.4, t), sx = pX - 170, sy = GY + 30;
+    const head = drawSitter(sx, sy, q, t, d);
+    // the kind word: a ribbon of light travelling from him to the sitter
+    const w = (t - (as + 0.5)) / (hold + 0.6); if (w > 0 && w < 1.25) { ctx.globalCompositeOperation = 'lighter';
+      const x0 = CX - 40, y0 = cy - 330, x1 = head[0], y1 = head[1];
+      for (let i = 0; i < 26; i++) { const u = w - i * 0.02; if (u < 0 || u > 1) continue; const e = u * u * (3 - 2 * u);
+        const x = lerp(x0, x1, e), y = lerp(y0, y1, e) - Math.sin(e * Math.PI) * 70 + Math.sin(i * 1.7 + t * 5) * 7;
+        ctx.fillStyle = `rgba(255,222,150,${0.75 * (1 - i / 26)})`; ctx.beginPath(); ctx.arc(x, y, 7 - i * 0.2, 0, 6.3); ctx.fill(); }
+      ctx.globalCompositeOperation = 'source-over'; }
+  } else if (PROP === 'sapling') {
+    const g = carry * 0.42 + 0.58 * ss(rAt, rAt + 6, t) * (carry >= 1 ? 1 : 0), sx = pX - 18, sy = GY + 86;
+    reachTo = [sx + 6, sy - 26];
+    propFront = () => { drawSapling(sx, sy, g, t, d); if (reward > 0) glowAt(sx, sy - 60, 150, 0.22 * reward * (1 - ss(rAt + 4, rAt + 8, t))); };
+  }
 
   // lantern light on the world (before the figure so he is lit from it, then again on top)
   const lxE = CX - 88 * S, lyE = cy - 100 * S;
@@ -284,10 +392,10 @@ function render(t) {
   ctx.save(); ctx.globalCompositeOperation = 'lighter'; const pool = ctx.createRadialGradient(0, 0, 0, 0, 0, 1); pool.addColorStop(0, `rgba(255,190,110,${(0.2 + 0.2 * reward) * fl})`); pool.addColorStop(1, 'rgba(255,190,110,0)');
   ctx.translate(lxE + 10, cy + 6); ctx.scale(250 + 200 * reward, 46 + 26 * reward); ctx.fillStyle = pool; ctx.beginPath(); ctx.arc(0, 0, 1, 0, 6.3); ctx.fill(); ctx.restore();
 
-  const reachOn = ss(s0 + 0.35, s0 + 0.95, t) - ss(s0 + 1.95, s0 + 2.5, t);
-  const reach = reachOn > 0.02 ? [lerp(34, (bX - CX) / S + 30, reachOn), lerp(-150, (bY - cy) / S - 12, reachOn)] : null;
+  const reachOn = reachTo ? ss(as + 0.35, a1, t) - ss(a2, a2 + 0.55, t) : 0;
+  const reach = reachOn > 0.02 ? [lerp(34, (reachTo[0] - CX) / S + 30, reachOn), lerp(-150, (reachTo[1] - cy) / S, reachOn)] : null;
   const [LX, LY] = drawTraveler(CX, cy, S, ph, mv, bend, reach, glow, t);
-  if (branchFront) drawBranch(bX, bY, bR, d, glow);
+  if (propFront) propFront();
   glowAt(LX, LY - 20, 120 + 90 * reward, (0.5 + 0.35 * reward) * fl);
 
   // reward: expanding ring + rising motes
