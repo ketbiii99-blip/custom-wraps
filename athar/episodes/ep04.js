@@ -3,7 +3,7 @@ window.EPISODE = {
  "id": "ep04",
  "title": "الفسيلة",
  "sources": "Al-Adab al-Mufrad 479 (authenticated by al-Albani); Musnad Ahmad 12981",
- "duration": 46.3,
+ "duration": 41.4,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -13,17 +13,17 @@ window.EPISODE = {
   "sound": "rustle"
  },
  "action": {
-  "stopAt": 16.5,
+  "stopAt": 14.68,
   "actHold": 1.8,
-  "resumeAt": 26.1,
-  "rewardAt": 21.65,
-  "dawnFrom": 26.1,
-  "dawnTo": 39.55
+  "resumeAt": 23.35,
+  "rewardAt": 19.41,
+  "dawnFrom": 23.35,
+  "dawnTo": 35.15
  },
  "cues": [
   {
    "t0": 0.2,
-   "t1": 4.8,
+   "t1": 3.85,
    "card": false,
    "lines": [
     {
@@ -32,15 +32,15 @@ window.EPISODE = {
      "html": "لو قامت القيامةُ الآن…"
     },
     {
-     "at": 2.41,
+     "at": 1.89,
      "cls": "big gold",
      "html": "ماذا تفعل؟"
     }
    ]
   },
   {
-   "t0": 4.95,
-   "t1": 10.95,
+   "t0": 4.0,
+   "t1": 9.47,
    "card": false,
    "lines": [
     {
@@ -51,8 +51,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 11.1,
-   "t1": 16.9,
+   "t0": 9.62,
+   "t1": 15.08,
    "card": false,
    "lines": [
     {
@@ -61,15 +61,15 @@ window.EPISODE = {
      "html": "لن تُثمر إلا بعد سنين…"
     },
     {
-     "at": 2.8,
+     "at": 2.63,
      "cls": "small",
      "html": "ولن يبقى أحدٌ ليأكل منها"
     }
    ]
   },
   {
-   "t0": 17.05,
-   "t1": 20.05,
+   "t0": 15.23,
+   "t1": 17.81,
    "card": false,
    "lines": [
     {
@@ -78,15 +78,15 @@ window.EPISODE = {
      "html": "ومع ذلك…"
     },
     {
-     "at": 1.4,
+     "at": 1.19,
      "cls": "big gold",
      "html": "اغرسْها"
     }
    ]
   },
   {
-   "t0": 22.25,
-   "t1": 35.15,
+   "t0": 20.01,
+   "t1": 31.2,
    "card": true,
    "lines": [
     {
@@ -95,20 +95,20 @@ window.EPISODE = {
      "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
     },
     {
-     "at": 2.6,
+     "at": 2.26,
      "cls": "hadith",
      "html": "«إِنْ قَامَتِ السَّاعَةُ وَفِي يَدِ أَحَدِكُمْ فَسِيلَةٌ، فَإِنِ اسْتَطَاعَ أَنْ لَا تَقُومَ حَتَّى يَغْرِسَهَا <span class=\"gold\">فَلْيَغْرِسْهَا</span>»"
     },
     {
-     "at": 3.85,
+     "at": 3.34,
      "cls": "source",
      "html": "البخاري في الأدب المفرد (٤٧٩) · صحّحه الألباني"
     }
    ]
   },
   {
-   "t0": 35.3,
-   "t1": 39.3,
+   "t0": 31.35,
+   "t1": 34.9,
    "card": false,
    "lines": [
     {
@@ -117,15 +117,15 @@ window.EPISODE = {
      "html": "اعمل الخير…"
     },
     {
-     "at": 1.72,
+     "at": 1.52,
      "cls": "mid gold",
      "html": "ولو لم ترَ ثمرته"
     }
    ]
   },
   {
-   "t0": 39.45,
-   "t1": 47.0,
+   "t0": 35.05,
+   "t1": 42.1,
    "card": false,
    "lines": [
     {
@@ -134,12 +134,12 @@ window.EPISODE = {
      "html": "ما <span class=\"gold\">«الفسيلة»</span> التي<br>ستغرسها اليوم؟"
     },
     {
-     "at": 2.63,
+     "at": 2.36,
      "cls": "small",
      "html": "اكتبْها في التعليقات"
     },
     {
-     "at": 3.78,
+     "at": 3.39,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -149,52 +149,52 @@ window.EPISODE = {
  "subs": [
   {
    "t0": 0.2,
-   "t1": 2.61,
+   "t1": 2.09,
    "text": "If the Last Hour began right now…"
   },
   {
-   "t0": 2.61,
-   "t1": 4.8,
+   "t0": 2.09,
+   "t1": 3.85,
    "text": "…what would you do?"
   },
   {
-   "t0": 4.95,
-   "t1": 10.95,
+   "t0": 4.0,
+   "t1": 9.47,
    "text": "Imagine a sapling in your hand — a young palm not yet planted."
   },
   {
-   "t0": 11.1,
-   "t1": 13.9,
+   "t0": 9.62,
+   "t1": 12.25,
    "text": "It won’t bear fruit for years…"
   },
   {
-   "t0": 13.9,
-   "t1": 16.9,
+   "t0": 12.25,
+   "t1": 15.08,
    "text": "…and no one will be left to eat from it."
   },
   {
-   "t0": 17.05,
-   "t1": 20.05,
+   "t0": 15.23,
+   "t1": 17.81,
    "text": "And still… plant it."
   },
   {
-   "t0": 22.25,
-   "t1": 25.1,
+   "t0": 20.01,
+   "t1": 22.49,
    "text": "The Messenger of Allah ﷺ said:"
   },
   {
-   "t0": 25.1,
-   "t1": 35.15,
+   "t0": 22.49,
+   "t1": 31.2,
    "text": "“If the Hour begins while one of you holds a sapling, and he is able to plant it before it comes, let him plant it.”<small>Al-Adab al-Mufrad 479 · authenticated by al-Albani</small>"
   },
   {
-   "t0": 35.3,
-   "t1": 39.3,
+   "t0": 31.35,
+   "t1": 34.9,
    "text": "Do good — even if you never see its fruit."
   },
   {
-   "t0": 39.45,
-   "t1": 47.0,
+   "t0": 35.05,
+   "t1": 42.1,
    "text": "What “sapling” will you plant today?<small>Tell us in the comments</small>"
   }
  ],
@@ -205,32 +205,32 @@ window.EPISODE = {
    "text": "لو قامتِ القيامةُ الآن... ماذا تفعل؟"
   },
   {
-   "at": 5.05,
+   "at": 4.1,
    "clip": 401,
    "text": "تخيَّلْ أنَّ في يدِكَ فسيلة، نخلةً صغيرةً لم تُزرَعْ بعد."
   },
   {
-   "at": 11.2,
+   "at": 9.72,
    "clip": 402,
    "text": "لن تُثمِرَ إلّا بعدَ سنين... ولن يبقى أحدٌ ليأكلَ منها."
   },
   {
-   "at": 17.15,
+   "at": 15.33,
    "clip": 403,
    "text": "ومعَ ذلك... اغرِسْها."
   },
   {
-   "at": 22.35,
+   "at": 20.11,
    "clip": 404,
    "text": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: إنْ قامتِ الساعةُ وفي يدِ أحدِكم فسيلة، فإنِ استطاعَ أن لا تقومَ حتى يغرِسَها، فليغرِسْها."
   },
   {
-   "at": 35.4,
+   "at": 31.45,
    "clip": 405,
    "text": "اعملِ الخير... ولو لم ترَ ثمرتَه."
   },
   {
-   "at": 39.55,
+   "at": 35.15,
    "clip": 406,
    "text": "ما الفسيلةُ التي ستغرِسُها اليوم؟ اكتُبْها في التعليقات."
   }

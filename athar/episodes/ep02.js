@@ -3,7 +3,7 @@ window.EPISODE = {
  "id": "ep02",
  "title": "شربة ماء",
  "sources": "Sahih al-Bukhari 2363, Sahih Muslim 2244",
- "duration": 50.2,
+ "duration": 45.4,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -13,17 +13,17 @@ window.EPISODE = {
   "sound": "water"
  },
  "action": {
-  "stopAt": 14.5,
+  "stopAt": 13.97,
   "actHold": 2.4,
-  "resumeAt": 24.53,
-  "rewardAt": 24.1,
-  "dawnFrom": 24.95,
-  "dawnTo": 44.1
+  "resumeAt": 23.14,
+  "rewardAt": 22.76,
+  "dawnFrom": 23.51,
+  "dawnTo": 40.09
  },
  "cues": [
   {
    "t0": 0.2,
-   "t1": 4.8,
+   "t1": 4.79,
    "card": false,
    "lines": [
     {
@@ -39,8 +39,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 4.95,
-   "t1": 9.95,
+   "t0": 4.94,
+   "t1": 9.78,
    "card": false,
    "lines": [
     {
@@ -51,8 +51,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 10.1,
-   "t1": 14.9,
+   "t0": 9.93,
+   "t1": 14.37,
    "card": false,
    "lines": [
     {
@@ -63,8 +63,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 15.05,
-   "t1": 18.65,
+   "t0": 14.52,
+   "t1": 17.84,
    "card": false,
    "lines": [
     {
@@ -75,8 +75,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 19.75,
-   "t1": 28.65,
+   "t0": 18.94,
+   "t1": 26.78,
    "card": true,
    "lines": [
     {
@@ -85,20 +85,20 @@ window.EPISODE = {
      "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
     },
     {
-     "at": 2.65,
+     "at": 2.34,
      "cls": "hadith",
      "html": "«…فَسَقَى الْكَلْبَ، <span class=\"gold\">فَشَكَرَ اللَّهُ لَهُ فَغَفَرَ لَهُ</span>»"
     },
     {
-     "at": 3.93,
+     "at": 3.45,
      "cls": "source",
      "html": "متفق عليه · البخاري (٢٣٦٣) ومسلم (٢٢٤٤)"
     }
    ]
   },
   {
-   "t0": 28.8,
-   "t1": 38.7,
+   "t0": 26.93,
+   "t1": 34.96,
    "card": true,
    "lines": [
     {
@@ -107,20 +107,20 @@ window.EPISODE = {
      "html": "قالوا: يا رسولَ الله، وإنَّ لنا في البهائم أجرًا؟"
     },
     {
-     "at": 4.85,
+     "at": 3.92,
      "cls": "hadith",
      "html": "«<span class=\"gold\">فِي كُلِّ كَبِدٍ رَطْبَةٍ أَجْرٌ</span>»"
     },
     {
-     "at": 5.8,
+     "at": 4.68,
      "cls": "source",
      "html": "متفق عليه · البخاري (٢٣٦٣) ومسلم (٢٢٤٤)"
     }
    ]
   },
   {
-   "t0": 38.85,
-   "t1": 43.85,
+   "t0": 35.11,
+   "t1": 39.84,
    "card": false,
    "lines": [
     {
@@ -129,15 +129,15 @@ window.EPISODE = {
      "html": "الرحمةُ لا تضيع…"
     },
     {
-     "at": 2.03,
+     "at": 1.92,
      "cls": "mid gold",
      "html": "حتى مع مخلوقٍ لا يتكلّم"
     }
    ]
   },
   {
-   "t0": 44.0,
-   "t1": 50.900000000000006,
+   "t0": 39.99,
+   "t1": 46.1,
    "card": false,
    "lines": [
     {
@@ -146,12 +146,12 @@ window.EPISODE = {
      "html": "مَن <span class=\"gold\">سترحمُ</span> اليوم؟"
     },
     {
-     "at": 2.1,
+     "at": 1.66,
      "cls": "small",
      "html": "اكتبْه في التعليقات"
     },
     {
-     "at": 3.1,
+     "at": 2.45,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -166,52 +166,52 @@ window.EPISODE = {
   },
   {
    "t0": 2.4,
-   "t1": 4.8,
+   "t1": 4.79,
    "text": "…and Allah forgave him."
   },
   {
-   "t0": 4.95,
-   "t1": 9.95,
+   "t0": 4.94,
+   "t1": 9.78,
    "text": "A man, parched with thirst, climbed down a well and drank."
   },
   {
-   "t0": 10.1,
-   "t1": 14.9,
+   "t0": 9.93,
+   "t1": 14.37,
    "text": "When he came out, he saw a dog panting, desperate for water."
   },
   {
-   "t0": 15.05,
-   "t1": 18.65,
+   "t0": 14.52,
+   "t1": 17.84,
    "text": "So he filled his shoe with water and gave it a drink."
   },
   {
-   "t0": 19.75,
-   "t1": 23.08,
+   "t0": 18.94,
+   "t1": 21.87,
    "text": "The Messenger of Allah ﷺ said:"
   },
   {
-   "t0": 23.08,
-   "t1": 28.65,
+   "t0": 21.87,
+   "t1": 26.78,
    "text": "“…he gave the dog a drink, so Allah appreciated his deed and forgave him.”<small>Bukhari 2363 · Muslim 2244</small>"
   },
   {
-   "t0": 28.8,
-   "t1": 33.84,
+   "t0": 26.93,
+   "t1": 31.0,
    "text": "They asked: “Messenger of Allah, are we rewarded for kindness to animals?”"
   },
   {
-   "t0": 33.84,
-   "t1": 38.7,
+   "t0": 31.0,
+   "t1": 34.96,
    "text": "He said: “There is a reward for kindness to every living creature.”<small>Bukhari 2363 · Muslim 2244</small>"
   },
   {
-   "t0": 38.85,
-   "t1": 43.85,
+   "t0": 35.11,
+   "t1": 39.84,
    "text": "Mercy is never wasted — even on a creature that cannot speak."
   },
   {
-   "t0": 44.0,
-   "t1": 50.900000000000006,
+   "t0": 39.99,
+   "t1": 46.1,
    "text": "Who will you show mercy to today?<small>Tell us in the comments</small>"
   }
  ],
@@ -222,37 +222,37 @@ window.EPISODE = {
    "text": "سَقى كلبًا عطشان... فغَفَرَ اللهُ له."
   },
   {
-   "at": 5.05,
+   "at": 5.04,
    "clip": 201,
    "text": "رجلٌ اشتدَّ عليهِ العطش، فنزلَ بئرًا فشرِب."
   },
   {
-   "at": 10.2,
+   "at": 10.03,
    "clip": 202,
    "text": "ثمَّ خرج، فإذا كلبٌ يلهثُ من شدّةِ العطش."
   },
   {
-   "at": 15.15,
+   "at": 14.62,
    "clip": 203,
    "text": "فملأَ خُفَّهُ ماءً، وسقاه."
   },
   {
-   "at": 19.85,
+   "at": 19.04,
    "clip": 204,
    "text": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: فَسَقَى الكلبَ، فَشَكَرَ اللهُ لهُ، فَغَفَرَ له."
   },
   {
-   "at": 28.9,
+   "at": 27.03,
    "clip": 205,
    "text": "قالوا: يا رسولَ الله، وإنَّ لنا في البهائمِ أجرًا؟ قال: في كلِّ كَبِدٍ رَطْبَةٍ أجر."
   },
   {
-   "at": 38.95,
+   "at": 35.21,
    "clip": 206,
    "text": "الرحمةُ لا تضيع، حتّى معَ مخلوقٍ لا يتكلّم."
   },
   {
-   "at": 44.1,
+   "at": 40.09,
    "clip": 207,
    "text": "مَن سترحمُ اليوم؟ اكتُبْهُ في التعليقات."
   }
