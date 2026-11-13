@@ -3,7 +3,7 @@
 // Timings follow the Arabic voice-over (see `voice` at the bottom).
 window.EPISODE = {
   id: 'ep01',
-  duration: 47.1,
+  duration: 47.8,
   brand: { ar: 'أثَر', en: 'ATHAR' },
   action: { stopAt: 9.0, resumeAt: 13.8, rewardAt: 14.0, dawnFrom: 14.6, dawnTo: 26 },
   cues: [
@@ -23,12 +23,12 @@ window.EPISODE = {
       { at: 0.5, cls: 'hadith', html: '«بَيْنَمَا رَجُلٌ يَمْشِي بِطَرِيقٍ، وَجَدَ غُصْنَ شَوْكٍ عَلَى الطَّرِيقِ فَأَخَّرَهُ، <span class="gold">فَشَكَرَ اللَّهُ لَهُ فَغَفَرَ لَهُ</span>»' },
       { at: 1.2, cls: 'source', html: 'متفق عليه · البخاري (٦٥٢) ومسلم (١٩١٤)' },
     ]},
-    { t0: 28.7, t1: 41.1, lines: [
-      { at: 0, cls: 'mid', html: 'فلا تحتقرْ خيرًا مهما صغُر' },
-      { at: 4.6, cls: 'ayah', html: '﴿فَمَن يَعۡمَلۡ مِثۡقَالَ ذَرَّةٍ خَيۡرٗا يَرَهُۥ﴾' },
-      { at: 5.1, cls: 'source', html: 'سورة الزلزلة · الآية ٧ · بصوت مشاري العفاسي' },
+    { t0: 28.7, t1: 41.8, lines: [
+      { at: 0, cls: 'mid', html: 'قد يكون أصغرُ أعمالك…<br><span class="gold">أعظمَها أثرًا</span>' },
+      { at: 5.3, cls: 'ayah', html: '﴿فَمَن يَعۡمَلۡ مِثۡقَالَ ذَرَّةٍ خَيۡرٗا يَرَهُۥ﴾' },
+      { at: 5.8, cls: 'source', html: 'سورة الزلزلة · الآية ٧ · بصوت مشاري العفاسي' },
     ]},
-    { t0: 41.4, t1: 47.6, lines: [
+    { t0: 42.1, t1: 48.3, lines: [
       { at: 0, cls: 'big', html: 'ما <span class="gold">«الغصنُ»</span> الذي<br>ستُزيحه اليوم؟' },
       { at: 2.0, cls: 'small', html: 'اكتبْه في التعليقات' },
       { at: 2.8, cls: 'follow', html: 'تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم' },
@@ -43,10 +43,10 @@ window.EPISODE = {
     { t0: 15.8, t1: 18.6, text: 'The Messenger of Allah ﷺ said:' },
     { t0: 18.6, t1: 24.8, text: '“A man walking along a road found a thorny branch on it and moved it aside…' },
     { t0: 24.8, t1: 28.4, text: '…so Allah appreciated his deed and forgave him.”<small>Bukhari 652 · Muslim 1914</small>' },
-    { t0: 28.7, t1: 31.4, text: 'So never belittle a good deed, however small.' },
-    { t0: 31.4, t1: 33.2, text: 'Allah, the Most High, says:' },
-    { t0: 33.2, t1: 41.1, text: '“So whoever does an atom’s weight of good will see it.”<small>Qur’an 99:7 · recited by Mishary Alafasy</small>' },
-    { t0: 41.4, t1: 47.6, text: 'What “branch” will you move out of the way today?<small>Tell us in the comments</small>' },
+    { t0: 28.7, t1: 32.4, text: 'Your smallest deed may leave the greatest trace.' },
+    { t0: 32.4, t1: 33.9, text: 'Allah, the Most High, says:' },
+    { t0: 33.9, t1: 41.8, text: '“So whoever does an atom’s weight of good will see it.”<small>Qur’an 99:7 · recited by Mishary Alafasy</small>' },
+    { t0: 42.1, t1: 48.3, text: 'What “branch” will you move out of the way today?<small>Tell us in the comments</small>' },
   ],
   // Voice-over: generated narration (ElevenLabs v4 via Higgsfield, cloned native voice "Athar narrator", natural speed; every clip levelled to the same mean volume) and where each clip starts.
   // The Qur'an verse is a human recitation (Mishary Rashid Alafasy, everyayah.com 099007.mp3), never synthetic.
@@ -56,8 +56,8 @@ window.EPISODE = {
     { at: 9.6, text: 'فأزاحَهُ جانِبًا.' },
     { at: 11.9, text: 'عَمَلٌ بسيط، لكنِ انظُرْ إلى جَزائِه.' },
     { at: 15.9, text: 'قَالَ رَسُولُ اللَّهِ، صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: بَيْنَمَا رَجُلٌ يَمْشِي بِطَرِيقٍ، وَجَدَ غُصْنَ شَوْكٍ عَلَى الطَّرِيقِ فَأَخَّرَهُ، فَشَكَرَ اللَّهُ لَهُ، فَغَفَرَ لَهُ.' },
-    { at: 28.8, text: 'فلا تَحتَقِرْ خيرًا مهما صَغُر. قالَ اللهُ تعالى:' },
-    { at: 33.7, recitation: 'Qur\'an 99:7 — Mishary Rashid Alafasy' },
-    { at: 41.5, text: 'ما الغُصنُ الذي ستُزيحُهُ اليوم؟ اكتُبْهُ في التعليقات.' },
+    { at: 28.8, text: 'قد يكونُ أصغرُ أعمالِكَ، أعظمَها أثَرًا. قالَ اللهُ تعالى:' },
+    { at: 34.4, recitation: 'Qur\'an 99:7 — Mishary Rashid Alafasy' },
+    { at: 42.2, text: 'ما الغُصنُ الذي ستُزيحُهُ اليوم؟ اكتُبْهُ في التعليقات.' },
   ],
 };
