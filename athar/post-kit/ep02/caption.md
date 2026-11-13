@@ -1,35 +1,38 @@
-# Episode 2 — شربة ماء
+# Episode 2 — حِملٌ ثقيل
 
 Files: `athar_ep02.mp4` (reel) · `cover.jpg` (cover). Post as described in `../README.md`.
 
 **Caption**
 
 ```
-سقى كلبًا عطشان… فغفر الله له 🏮
+تريد أن يُفرِّج الله همَّك؟ فرِّجْ همَّ غيرك 🏮
 
-رجلٌ اشتدّ عليه العطش فنزل بئرًا فشرب، ثم خرج فإذا كلبٌ يلهث من العطش، فملأ خُفَّه ماءً فسقاه.
-قال رسول الله ﷺ: «فسقى الكلب، فشكر الله له فغفر له»
-قالوا: يا رسول الله، وإنّ لنا في البهائم أجرًا؟ قال: «في كل كبدٍ رطبةٍ أجر»
-متفق عليه (البخاري ٢٣٦٣، مسلم ٢٢٤٤)
+قال رسول الله ﷺ: «من نفَّس عن مؤمنٍ كربةً من كرب الدنيا، نفَّس الله عنه كربةً من كرب يوم القيامة»
+رواه مسلم (٢٦٩٩)
 
-الرحمة لا تضيع… حتى مع مخلوقٍ لا يتكلّم.
-مَن سترحم اليوم؟ اكتبه في التعليقات 👇
-أرسلها لمن يحبّ الرفق بالحيوان.
+﴿هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ﴾ — الرحمن ٦٠
+
+خفِّف عن غيرك… يخفِّف الله عنك.
+عن مَن ستخفِّف اليوم؟ اكتبه في التعليقات 👇
+أرسلها لمن خفَّف عنك يومًا.
+
+التلاوة: الشيخ مشاري راشد العفاسي
 
 —
-He gave a thirsty dog a drink — and Allah forgave him.
-The Prophet ﷺ said: "There is a reward for kindness to every living creature."
-(Bukhari 2363, Muslim 2244)
-Who will you show mercy to today?
+Want Allah to lift your burden? Lift someone else's.
+The Prophet ﷺ said: "Whoever relieves a believer of a hardship of this world, Allah will
+relieve him of a hardship of the Day of Resurrection." (Muslim 2699)
+"Is the reward for good anything but good?" (Qur'an 55:60)
+Recitation: Mishary Rashid Alafasy
 
-#أثر #دروس_إسلامية #حديث_شريف #الرحمة #الرفق_بالحيوان #السنة_النبوية #عبرة #islamicreminders #hadith #mercy
+#أثر #دروس_إسلامية #حديث_شريف #تفريج_الكرب #الإحسان #السنة_النبوية #عبرة #islamicreminders #hadith #kindness
 ```
 
 **Pinned comment**
 
 ```
-📖 الحديث في صحيح البخاري (٢٣٦٣) وصحيح مسلم (٢٢٤٤).
+📖 الحديث في صحيح مسلم (٢٦٩٩)، والآية من سورة الرحمن (٦٠).
 تابع «أثر» لدرسٍ جديد كلَّ يوم 🏮
 ```
 
-**Story:** share the reel with a poll sticker: «هل سقيتَ أو أطعمتَ حيوانًا هذا الأسبوع؟»
+**Story:** share the reel with a question sticker: «من خفَّف عنك يومًا؟ اذكره بدعوة»

@@ -323,6 +323,33 @@ function drawSapling(x, y, g, t, d) {
       ctx.fillStyle = i % 2 ? col : col2; ctx.beginPath(); ctx.moveTo(0, ty); ctx.quadraticCurveTo(mx, my, ex, ey); ctx.quadraticCurveTo(mx + 3, my + 16, 0, ty + 6); ctx.fill(); } }
   ctx.restore();
 }
+
+// A traveler ahead on the road (facing left), stopped under a heavy sack. q: 0 = bent under it, 1 = upright, load shared.
+function drawCarrier(x, y, q, ph, mv, t, d) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(1.12, 1.12);
+  ctx.fillStyle = 'rgba(2,3,14,.45)'; ctx.beginPath(); ctx.ellipse(6, 4, 86, 11, 0, 0, 6.3); ctx.fill();
+  for (const k of [1, -1]) { const fx = Math.sin(ph) * 26 * k * mv - 6, lift = Math.max(0, Math.cos(ph) * k) * 10 * mv; ctx.fillStyle = '#3A2418'; ctx.beginPath(); ctx.ellipse(fx - 8, -5 - lift, 19, 8, -0.08, 0, 6.3); ctx.fill(); }
+  const sink = (1 - q) * 20, bob = Math.abs(Math.sin(ph)) * 6 * mv;
+  ctx.translate(0, sink - bob);
+  ctx.fillStyle = '#DCD3BC'; ctx.beginPath(); ctx.moveTo(-34, -140); ctx.lineTo(36, -140); ctx.quadraticCurveTo(48, -76, 48, -14 - sink + bob); ctx.quadraticCurveTo(0, -4 - sink + bob, -46, -14 - sink + bob); ctx.quadraticCurveTo(-42, -76, -34, -140); ctx.fill();
+  ctx.save(); ctx.translate(2, -124); ctx.rotate(-0.5 * (1 - q)); ctx.translate(-2, 124);
+  // the sack on his back
+  const sy = -214 - q * 16;
+  ctx.fillStyle = mix('#8A7350', '#B79A6C', d); ctx.beginPath(); ctx.ellipse(62, sy, 62, 50, 0.25, 0, 6.3); ctx.fill();
+  ctx.fillStyle = mix('#6E5B3E', '#927A55', d); ctx.beginPath(); ctx.ellipse(78, sy + 12, 40, 30, 0.25, 0, 6.3); ctx.fill();
+  ctx.strokeStyle = '#3B2A1C'; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(8, sy - 26); ctx.quadraticCurveTo(-6, sy + 6, -20, sy + 30); ctx.stroke();
+  ctx.fillStyle = mix('#8A7350', '#B79A6C', d); ctx.beginPath(); ctx.ellipse(10, sy - 34, 14, 10, -0.6, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#4E7A6A'; ctx.beginPath(); ctx.moveTo(-34, -116); ctx.quadraticCurveTo(-40, -196, -22, -232); ctx.lineTo(26, -232); ctx.quadraticCurveTo(42, -196, 36, -116); ctx.quadraticCurveTo(0, -102, -34, -116); ctx.fill();
+  ctx.fillStyle = '#3B6153'; ctx.beginPath(); ctx.moveTo(8, -232); ctx.lineTo(26, -232); ctx.quadraticCurveTo(42, -196, 36, -116); ctx.quadraticCurveTo(26, -110, 16, -110); ctx.quadraticCurveTo(22, -176, 8, -232); ctx.fill();
+  ctx.fillStyle = COL.skin; ctx.beginPath(); ctx.arc(-8, -260, 28, 0, 6.3); ctx.fill();
+  ctx.fillStyle = '#F2E8D0'; ctx.beginPath(); ctx.moveTo(-34, -270); ctx.quadraticCurveTo(-28, -298, -2, -296); ctx.quadraticCurveTo(28, -294, 30, -262); ctx.quadraticCurveTo(34, -232, 40, -210); ctx.quadraticCurveTo(20, -206, 2, -220); ctx.quadraticCurveTo(-2, -248, -14, -266); ctx.quadraticCurveTo(-24, -274, -34, -270); ctx.fill();
+  ctx.strokeStyle = '#6B4A33'; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(-29, -280); ctx.quadraticCurveTo(0, -292, 27, -278); ctx.stroke();
+  ctx.strokeStyle = '#4E7A6A'; ctx.lineWidth = 22; ctx.beginPath(); ctx.moveTo(-8, -214); ctx.quadraticCurveTo(-30, -196, -18, sy + 34); ctx.stroke();
+  ctx.fillStyle = COL.skin; ctx.beginPath(); ctx.arc(-18, sy + 34, 10, 0, 6.3); ctx.fill();
+  ctx.restore(); ctx.restore();
+  const a = -0.5 * (1 - q), px = 2 + (62 + 34 - 2) * Math.cos(a) - (sy + 124) * Math.sin(a), py = -124 + (62 + 34 - 2) * Math.sin(a) + (sy + 124) * Math.cos(a);
+  return [x + px * 1.12, y + (py + sink - bob) * 1.12];
+}
 function drawFg(D, d) {
   const off = mod(D * 1.55, FG_W);
   ctx.fillStyle = mix('#02030F', '#120C22', d);
@@ -353,7 +380,7 @@ function render(t) {
   const glow = 0.32 + 0.68 * reward;
   const cy = GY + 52, S = 1.22;
   const px0 = CX - 150 - dist(s0), pX = px0 + D;                   // prop anchor: just ahead of where he stops
-  let reachTo = null, propFront = null;
+  let reachTo = null, propFront = null, holdReach = false;
 
   if (PROP === 'branch') {
     const bX = pX - carry * 36, bY = GY + 66 + carry * 54 - Math.sin(carry * Math.PI) * 40, bR = -0.12 + carry * 0.5;
@@ -379,6 +406,10 @@ function render(t) {
         const x = lerp(x0, x1, e), y = lerp(y0, y1, e) - Math.sin(e * Math.PI) * 70 + Math.sin(i * 1.7 + t * 5) * 7;
         ctx.fillStyle = `rgba(255,222,150,${0.75 * (1 - i / 26)})`; ctx.beginPath(); ctx.arc(x, y, 7 - i * 0.2, 0, 6.3); ctx.fill(); }
       ctx.globalCompositeOperation = 'source-over'; }
+  } else if (PROP === 'burden') {
+    const q = ss(a1, a2 + 0.3, t), bx = px0 + Math.min(D, dist(s0)) - 96, moving = t > s0 ? mv : 0;
+    const grip = drawCarrier(bx, cy - 6, q, ph + 1.3, moving, t, d);
+    reachTo = [grip[0] + 6, grip[1] + 10]; holdReach = true;
   } else if (PROP === 'sapling') {
     const g = carry * 0.42 + 0.58 * ss(rAt, rAt + 6, t) * (carry >= 1 ? 1 : 0), sx = pX - 18, sy = GY + 86;
     reachTo = [sx + 6, sy - 26];
@@ -392,7 +423,7 @@ function render(t) {
   ctx.save(); ctx.globalCompositeOperation = 'lighter'; const pool = ctx.createRadialGradient(0, 0, 0, 0, 0, 1); pool.addColorStop(0, `rgba(255,190,110,${(0.2 + 0.2 * reward) * fl})`); pool.addColorStop(1, 'rgba(255,190,110,0)');
   ctx.translate(lxE + 10, cy + 6); ctx.scale(250 + 200 * reward, 46 + 26 * reward); ctx.fillStyle = pool; ctx.beginPath(); ctx.arc(0, 0, 1, 0, 6.3); ctx.fill(); ctx.restore();
 
-  const reachOn = reachTo ? ss(as + 0.35, a1, t) - ss(a2, a2 + 0.55, t) : 0;
+  const reachOn = reachTo ? ss(as + 0.35, a1, t) - (holdReach ? 0 : ss(a2, a2 + 0.55, t)) : 0;
   const reach = reachOn > 0.02 ? [lerp(34, (reachTo[0] - CX) / S + 30, reachOn), lerp(-150, (reachTo[1] - cy) / S, reachOn)] : null;
   const [LX, LY] = drawTraveler(CX, cy, S, ph, mv, bend, reach, glow, t);
   if (propFront) propFront();

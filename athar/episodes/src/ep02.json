@@ -1,98 +1,100 @@
 {
  "id": "ep02",
- "title": "شربة ماء",
- "sources": "Sahih al-Bukhari 2363, Sahih Muslim 2244",
+ "title": "حِملٌ ثقيل",
+ "sources": "Sahih Muslim 2699 · Qur'an 55:60 (recited by Mishary Rashid Alafasy, everyayah.com)",
  "scene": {
-  "prop": "dog",
-  "sound": "water"
+  "prop": "burden",
+  "sound": "rustle"
  },
  "action": {
-  "stopAt": "see:end-0.1",
-  "actHold": 2.4,
-  "resumeAt": "h1:0.55",
-  "rewardAt": "h1:0.5",
+  "stopAt": "road:end-0.1",
+  "actAt": "help:0.45",
+  "actHold": 1.6,
+  "bendAmt": 0.1,
+  "resumeAt": "h1:0.2",
+  "rewardAt": "h1:0.55",
   "dawnFrom": "h1:0.6",
   "dawnTo": "cta:start"
  },
  "beats": [
   {
    "id": "hook",
-   "clip": 200,
-   "voice": "سَقى كلبًا عطشان... فغَفَرَ اللهُ له.",
+   "clip": 500,
+   "voice": "تُريدُ أن يُفرِّجَ اللهُ هَمَّك؟ فَرِّجْ هَمَّ غيرِك.",
    "lines": [
     {
      "cls": "big",
-     "html": "سقى كلبًا عطشان…"
+     "html": "تريد أن يُفرِّج اللهُ همَّك؟"
     },
     {
-     "f": 0.5,
+     "f": 0.58,
      "cls": "big gold",
-     "html": "فغفرَ اللهُ له"
+     "html": "فرِّجْ همَّ غيرك"
     }
    ],
    "subs": [
     {
-     "f1": 0.5,
-     "text": "He gave a thirsty dog a drink…"
+     "f1": 0.58,
+     "text": "Want Allah to lift your burden?"
     },
     {
-     "f0": 0.5,
-     "text": "…and Allah forgave him."
+     "f0": 0.58,
+     "text": "Lift someone else’s."
     }
    ]
   },
   {
-   "id": "well",
-   "clip": 201,
+   "id": "road",
+   "clip": 501,
+   "voice": "في الطريق، رجلٌ أثقلَهُ حِملُه، حتى توقّفَ عنِ المسير.",
    "lines": [
     {
      "cls": "mid",
-     "html": "رجلٌ اشتدَّ عليه العطش…<br>فنزل بئرًا فشرب"
+     "html": "في الطريق… رجلٌ<br><span class=\"gold\">أثقله حِملُه</span>"
+    },
+    {
+     "f": 0.55,
+     "cls": "small",
+     "html": "حتى توقّف عن المسير"
     }
    ],
    "subs": [
     {
-     "text": "A man, parched with thirst, climbed down a well and drank."
+     "text": "On the road: a man so weighed down by his load that he could go no further."
     }
-   ],
-   "voice": "رجلٌ اشتدَّ عليهِ العطش، فنزلَ بئرًا فشرِب."
+   ]
   },
   {
-   "id": "see",
-   "clip": 202,
+   "id": "help",
+   "clip": 502,
+   "voice": "لم يسألْهُ: مَن أنت؟ مدَّ يدَهُ، وحملَ معه.",
+   "gap": 0.9,
    "lines": [
     {
      "cls": "mid",
-     "html": "فلمّا خرج… رأى <span class=\"gold\">كلبًا يلهث</span><br>من شدّة العطش"
+     "html": "لم يسأله: من أنت؟"
+    },
+    {
+     "f": 0.48,
+     "cls": "mid gold",
+     "html": "مدَّ يده… وحمل معه"
     }
    ],
    "subs": [
     {
-     "text": "When he came out, he saw a dog panting, desperate for water."
-    }
-   ],
-   "voice": "ثمَّ خرج، فإذا كلبٌ يلهثُ من شدّةِ العطش."
-  },
-  {
-   "id": "give",
-   "clip": 203,
-   "gap": 1.5,
-   "lines": [
+     "f1": 0.48,
+     "text": "He didn’t ask, “Who are you?”"
+    },
     {
-     "cls": "mid",
-     "html": "فملأ خُفَّه ماءً… <span class=\"gold\">وسقاه</span>"
+     "f0": 0.48,
+     "text": "He reached out and carried it with him."
     }
-   ],
-   "subs": [
-    {
-     "text": "So he filled his shoe with water and gave it a drink."
-    }
-   ],
-   "voice": "فملأَ خُفَّهُ ماءً، وسقاه."
+   ]
   },
   {
    "id": "h1",
-   "clip": 204,
+   "clip": 503,
+   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: مَن نَفَّسَ عن مؤمنٍ كُربةً من كُرَبِ الدنيا، نَفَّسَ اللهُ عنهُ كُربةً من كُرَبِ يومِ القيامة.",
    "card": true,
    "lines": [
     {
@@ -100,88 +102,81 @@
      "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
     },
     {
-     "f": 0.3,
+     "f": 0.22,
      "cls": "hadith",
-     "html": "«…فَسَقَى الْكَلْبَ، <span class=\"gold\">فَشَكَرَ اللَّهُ لَهُ فَغَفَرَ لَهُ</span>»"
+     "html": "«مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا، <span class=\"gold\">نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ</span>»"
     },
     {
-     "f": 0.45,
+     "f": 0.32,
      "cls": "source",
-     "html": "متفق عليه · البخاري (٢٣٦٣) ومسلم (٢٢٤٤)"
+     "html": "رواه مسلم (٢٦٩٩)"
     }
    ],
    "subs": [
     {
-     "f1": 0.38,
+     "f1": 0.24,
      "text": "The Messenger of Allah ﷺ said:"
     },
     {
-     "f0": 0.38,
-     "text": "“…he gave the dog a drink, so Allah appreciated his deed and forgave him.”<small>Bukhari 2363 · Muslim 2244</small>"
+     "f0": 0.24,
+     "text": "“Whoever relieves a believer of a hardship of this world, Allah will relieve him of a hardship of the Day of Resurrection.”<small>Muslim 2699</small>"
     }
-   ],
-   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: فَسَقَى الكلبَ، فَشَكَرَ اللهُ لهُ، فَغَفَرَ له."
-  },
-  {
-   "id": "h2",
-   "clip": 205,
-   "card": true,
-   "lines": [
-    {
-     "cls": "label",
-     "html": "قالوا: يا رسولَ الله، وإنَّ لنا في البهائم أجرًا؟"
-    },
-    {
-     "f": 0.5,
-     "cls": "hadith",
-     "html": "«<span class=\"gold\">فِي كُلِّ كَبِدٍ رَطْبَةٍ أَجْرٌ</span>»"
-    },
-    {
-     "f": 0.6,
-     "cls": "source",
-     "html": "متفق عليه · البخاري (٢٣٦٣) ومسلم (٢٢٤٤)"
-    }
-   ],
-   "subs": [
-    {
-     "f1": 0.52,
-     "text": "They asked: “Messenger of Allah, are we rewarded for kindness to animals?”"
-    },
-    {
-     "f0": 0.52,
-     "text": "He said: “There is a reward for kindness to every living creature.”<small>Bukhari 2363 · Muslim 2244</small>"
-    }
-   ],
-   "voice": "قالوا: يا رسولَ الله، وإنَّ لنا في البهائمِ أجرًا؟ قال: في كلِّ كَبِدٍ رَطْبَةٍ أجر."
+   ]
   },
   {
    "id": "lesson",
-   "clip": 206,
+   "clip": 504,
+   "voice": "خَفِّفْ عن غيرِك، يُخَفِّفِ اللهُ عنك. قالَ اللهُ تعالى:",
+   "gap": 0.4,
    "lines": [
     {
      "cls": "mid",
-     "html": "الرحمةُ لا تضيع…"
-    },
-    {
-     "f": 0.42,
-     "cls": "mid gold",
-     "html": "حتى مع مخلوقٍ لا يتكلّم"
+     "html": "خفِّفْ عن غيرك…<br><span class=\"gold\">يخفِّفِ اللهُ عنك</span>"
     }
    ],
    "subs": [
     {
-     "text": "Mercy is never wasted — even on a creature that cannot speak."
+     "f1": 0.66,
+     "text": "Lighten someone’s load, and Allah will lighten yours."
+    },
+    {
+     "f0": 0.66,
+     "text": "Allah, the Most High, says:"
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q55_60",
+   "recitation": "Qur'an 55:60 — Mishary Rashid Alafasy",
+   "joinPrev": true,
+   "gap": 0.7,
+   "lines": [
+    {
+     "f": -0.04,
+     "cls": "ayah",
+     "html": "﴿هَلۡ جَزَآءُ ٱلۡإِحۡسَٰنِ إِلَّا ٱلۡإِحۡسَٰنُ﴾"
+    },
+    {
+     "f": 0.03,
+     "cls": "source",
+     "html": "سورة الرحمن · الآية ٦٠ · بصوت مشاري العفاسي"
     }
    ],
-   "voice": "الرحمةُ لا تضيع، حتّى معَ مخلوقٍ لا يتكلّم."
+   "subs": [
+    {
+     "text": "“Is the reward for good anything but good?”<small>Qur’an 55:60 · recited by Mishary Alafasy</small>"
+    }
+   ]
   },
   {
    "id": "cta",
-   "clip": 207,
+   "clip": 505,
+   "voice": "عن مَن ستُخَفِّفُ اليوم؟ اكتُبْهُ في التعليقات.",
    "lines": [
     {
      "cls": "big",
-     "html": "مَن <span class=\"gold\">سترحمُ</span> اليوم؟"
+     "html": "عن مَن <span class=\"gold\">ستخفِّف</span> اليوم؟"
     },
     {
      "f": 0.5,
@@ -196,10 +191,9 @@
    ],
    "subs": [
     {
-     "text": "Who will you show mercy to today?<small>Tell us in the comments</small>"
+     "text": "Whose load will you lighten today?<small>Tell us in the comments</small>"
     }
-   ],
-   "voice": "مَن سترحمُ اليوم؟ اكتُبْهُ في التعليقات."
+   ]
   }
  ]
 }

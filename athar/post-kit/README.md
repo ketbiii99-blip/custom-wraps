@@ -71,6 +71,6 @@ Each folder (`ep02/`, `ep03/`, `ep04/`) has the reel, its cover and a `caption.m
 | Day | Episode | Folder |
 |---|---|---|
 | 1 | غصن الشوك | `ep01/` |
-| 2 | شربة ماء | `ep02/` |
+| 2 | حِملٌ ثقيل | `ep02/` |
 | 3 | الكلمة الطيبة | `ep03/` |
 | 4 | الفسيلة | `ep04/` |

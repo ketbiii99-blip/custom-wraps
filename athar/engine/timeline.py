@@ -10,7 +10,7 @@ for b in spec['beats']:
     d = dur[str(b['clip'])] if 'clip' in b else b['hold']
     start = t; end = t + d
     marks[b['id']] = (start, end)
-    if 'clip' in b: voice.append({'at': round(start, 2), 'clip': b['clip'], 'text': b.get('voice', '')})
+    if 'clip' in b: voice.append({'at': round(start, 2), 'clip': b['clip'], 'text': b.get('voice', ''), **({'recitation': b['recitation'], 'end': round(end, 2)} if b.get('recitation') else {})})
     if not b.get('joinPrev'):
         cues.append({'t0': round(start - 0.1, 2), 't1': round(end + 0.3, 2), 'card': bool(b.get('card')), 'lines': []})
     cue = cues[-1]; cue['t1'] = round(end + 0.3, 2)
