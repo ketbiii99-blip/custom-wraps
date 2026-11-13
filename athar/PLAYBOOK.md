@@ -60,27 +60,9 @@ source before it goes into a video, as I did for episode 1.
 - **Fridays:** a Jumu'ah-themed episode (Surah al-Kahf, salawat, the hour of response).
 - **Stories daily:** a question box or poll tied to that day's reel.
 
-## 5. Caption template (episode 1, ready to paste)
+## 5. Captions
 
-```
-عملٌ لا يأخذ منك إلّا لحظة… غفر الله لرجلٍ بسببه 🏮
-
-قال رسول الله ﷺ: «بينما رجلٌ يمشي بطريقٍ، وجد غصنَ شوكٍ على الطريق فأخّره، فشكر الله له فغفر له»
-متفق عليه (البخاري ٦٥٢، مسلم ١٩١٤)
-
-لا تحتقر خيرًا مهما صغُر.
-ما «الغصن» الذي ستُزيحه اليوم؟ اكتبه في التعليقات 👇
-أرسلها لمن تحب أن يشاركك الأجر.
-
-—
-A deed that takes a moment — and Allah forgave a man for it.
-The Prophet ﷺ said a man removed a thorny branch from the road, so Allah appreciated
-his deed and forgave him. (Bukhari 652, Muslim 1914)
-Never belittle a small good deed. What "branch" will you move today?
-
-#أثر #دروس_إسلامية #حديث_شريف #السنة_النبوية #عبرة #ذكر_الله #اسلاميات #islamicreminders #hadith #muslim
-```
-
+Every episode gets a ready-to-paste caption, pinned comment and cover in `post-kit/`.
 Keep to 8–10 hashtags: 1 brand tag, 5 Arabic topic tags, 3 English ones.
 
 ## 6. Growing the audience
