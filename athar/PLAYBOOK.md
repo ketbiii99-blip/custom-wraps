@@ -105,7 +105,8 @@ one video breaks out. The first month is about finding which hooks work, not fol
 - Have someone with Islamic knowledge you trust review each script. I check wording and
   references against published sources, but I am not a scholar and the account carries your name.
 - Sound: ambient bed (wind, footsteps, one chime, birds, no instruments) plus a generated Arabic
-  narrator (ElevenLabs v4 through Higgsfield, voice "Harrison", under 1 credit per line). Each line
+  narrator: a clone of a native speaker's voice, saved in Higgsfield as "Athar narrator"
+  (ElevenLabs v4, under 1 credit per line). Each line
   is transcribed back by speech recognition to catch wrong words, but that cannot judge accent or
   naturalness, so a native listener should approve every episode.
 - Qur'an is never read by the synthetic voice. Verses use a human recitation (Mishary Rashid

@@ -48,7 +48,7 @@ window.EPISODE = {
     { t0: 33.2, t1: 41.1, text: '“So whoever does an atom’s weight of good will see it.”<small>Qur’an 99:7 · recited by Mishary Alafasy</small>' },
     { t0: 41.4, t1: 47.6, text: 'What “branch” will you move out of the way today?<small>Tell us in the comments</small>' },
   ],
-  // Voice-over: generated narration (ElevenLabs v4 via Higgsfield, voice "Harrison", 1.07x; every clip levelled to the same mean volume) and where each clip starts.
+  // Voice-over: generated narration (ElevenLabs v4 via Higgsfield, cloned native voice "Athar narrator", natural speed; every clip levelled to the same mean volume) and where each clip starts.
   // The Qur'an verse is a human recitation (Mishary Rashid Alafasy, everyayah.com 099007.mp3), never synthetic.
   voice: [
     { at: 0.3, text: 'عَمَلٌ لا يأخذُ منكَ إلّا لَحظة... غَفَرَ اللهُ لرجُلٍ بسببِه.' },
