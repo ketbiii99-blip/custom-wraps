@@ -1,3 +1,4 @@
 out/*.wav
 out/a.jpg
 out/b.jpg
+out/_*/

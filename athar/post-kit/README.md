@@ -62,3 +62,15 @@ Recitation: Mishary Rashid Alafasy
 ```
 
 **Story (same day):** share the reel to your story with a question sticker: «ما العمل الصغير الذي فعلته اليوم؟»
+
+
+## Episodes 2–4
+
+Each folder (`ep02/`, `ep03/`, `ep04/`) has the reel, its cover and a `caption.md` with the caption, pinned comment and story idea. The posting steps are the same as for episode 1.
+
+| Day | Episode | Folder |
+|---|---|---|
+| 1 | غصن الشوك | `ep01/` |
+| 2 | شربة ماء | `ep02/` |
+| 3 | الكلمة الطيبة | `ep03/` |
+| 4 | الفسيلة | `ep04/` |

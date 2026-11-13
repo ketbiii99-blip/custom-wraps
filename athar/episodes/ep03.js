@@ -3,7 +3,7 @@ window.EPISODE = {
  "id": "ep03",
  "title": "الكلمة الطيبة",
  "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009",
- "duration": 34.7,
+ "duration": 31.8,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -13,19 +13,19 @@ window.EPISODE = {
   "sound": "none"
  },
  "action": {
-  "stopAt": 9.35,
+  "stopAt": 8.46,
   "actHold": 2.2,
   "bendAmt": 0.22,
-  "resumeAt": 22.9,
-  "rewardAt": 16.28,
-  "dawnFrom": 17.23,
-  "dawnTo": 27.55,
-  "actAt": 11.76
+  "resumeAt": 20.78,
+  "rewardAt": 14.71,
+  "dawnFrom": 15.61,
+  "dawnTo": 25.0,
+  "actAt": 10.62
  },
  "cues": [
   {
    "t0": 0.2,
-   "t1": 4.6,
+   "t1": 4.44,
    "card": false,
    "lines": [
     {
@@ -34,15 +34,15 @@ window.EPISODE = {
      "html": "صدقةٌ…"
     },
     {
-     "at": 1.5,
+     "at": 1.45,
      "cls": "big gold",
      "html": "لا تكلّفك درهمًا واحدًا"
     }
    ]
   },
   {
-   "t0": 4.75,
-   "t1": 9.75,
+   "t0": 4.59,
+   "t1": 8.86,
    "card": false,
    "lines": [
     {
@@ -53,8 +53,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 9.9,
-   "t1": 14.7,
+   "t0": 9.01,
+   "t1": 13.18,
    "card": false,
    "lines": [
     {
@@ -63,15 +63,15 @@ window.EPISODE = {
      "html": "لا تملك له مالًا…"
     },
     {
-     "at": 2.3,
+     "at": 1.99,
      "cls": "mid gold",
      "html": "لكنّك تملك كلمة"
     }
    ]
   },
   {
-   "t0": 14.85,
-   "t1": 19.05,
+   "t0": 13.33,
+   "t1": 17.37,
    "card": false,
    "lines": [
     {
@@ -82,8 +82,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 19.55,
-   "t1": 26.45,
+   "t0": 17.87,
+   "t1": 23.9,
    "card": true,
    "lines": [
     {
@@ -92,20 +92,20 @@ window.EPISODE = {
      "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
     },
     {
-     "at": 3.35,
+     "at": 2.91,
      "cls": "hadith",
      "html": "«<span class=\"gold\">وَالْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ</span>»"
     },
     {
-     "at": 4.32,
+     "at": 3.76,
      "cls": "source",
      "html": "متفق عليه · البخاري (٢٩٨٩) ومسلم (١٠٠٩)"
     }
    ]
   },
   {
-   "t0": 27.45,
-   "t1": 35.400000000000006,
+   "t0": 24.9,
+   "t1": 32.5,
    "card": false,
    "lines": [
     {
@@ -114,12 +114,12 @@ window.EPISODE = {
      "html": "قل اليوم <span class=\"gold\">كلمةً طيّبة</span><br>لشخصٍ واحد"
     },
     {
-     "at": 3.1,
+     "at": 2.86,
      "cls": "small",
      "html": "من سيكون؟ اكتبْه في التعليقات"
     },
     {
-     "at": 4.35,
+     "at": 4.01,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -129,47 +129,47 @@ window.EPISODE = {
  "subs": [
   {
    "t0": 0.2,
-   "t1": 1.7,
+   "t1": 1.65,
    "text": "A charity…"
   },
   {
-   "t0": 1.7,
-   "t1": 4.6,
+   "t0": 1.65,
+   "t1": 4.44,
    "text": "…that won’t cost you a single coin."
   },
   {
-   "t0": 4.75,
-   "t1": 9.75,
+   "t0": 4.59,
+   "t1": 8.86,
    "text": "On your way, you may pass someone weighed down by worry."
   },
   {
-   "t0": 9.9,
-   "t1": 12.2,
+   "t0": 9.01,
+   "t1": 11.0,
    "text": "You have no money to give him…"
   },
   {
-   "t0": 12.2,
-   "t1": 14.7,
+   "t0": 11.0,
+   "t1": 13.18,
    "text": "…but you do have a word."
   },
   {
-   "t0": 14.85,
-   "t1": 19.05,
+   "t0": 13.33,
+   "t1": 17.37,
    "text": "One kind word may light up his whole day."
   },
   {
-   "t0": 19.55,
-   "t1": 23.22,
+   "t0": 17.87,
+   "t1": 21.07,
    "text": "The Messenger of Allah ﷺ said:"
   },
   {
-   "t0": 23.22,
-   "t1": 26.45,
+   "t0": 21.07,
+   "t1": 23.9,
    "text": "“And a kind word is charity.”<small>Bukhari 2989 · Muslim 1009</small>"
   },
   {
-   "t0": 27.45,
-   "t1": 35.400000000000006,
+   "t0": 24.9,
+   "t1": 32.5,
    "text": "Say one kind word to one person today. Who will it be?<small>Tell us in the comments</small>"
   }
  ],
@@ -180,27 +180,27 @@ window.EPISODE = {
    "text": "صدقةٌ... لا تُكلِّفُكَ دِرهمًا واحدًا."
   },
   {
-   "at": 4.85,
+   "at": 4.69,
    "clip": 301,
    "text": "في طريقِك، قد تمرُّ بإنسانٍ أثقلَهُ الهمّ."
   },
   {
-   "at": 10.0,
+   "at": 9.11,
    "clip": 302,
    "text": "لا تملكُ لهُ مالًا... لكنّكَ تملكُ كلمة."
   },
   {
-   "at": 14.95,
+   "at": 13.43,
    "clip": 303,
    "text": "كلمةٌ طيّبة، قد تُضيءُ يومَهُ كلَّه."
   },
   {
-   "at": 19.65,
+   "at": 17.97,
    "clip": 304,
    "text": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: والكلمةُ الطيّبةُ صدقة."
   },
   {
-   "at": 27.55,
+   "at": 25.0,
    "clip": 305,
    "text": "قُلِ اليومَ كلمةً طيّبةً لشخصٍ واحد. مَن سيكون؟"
   }
