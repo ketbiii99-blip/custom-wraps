@@ -63,7 +63,7 @@ source before it goes into a video, as I did for episode 1.
 ## 5. Captions
 
 Every episode gets a ready-to-paste caption, pinned comment and cover in `post-kit/`.
-Keep to 8–10 hashtags: 1 brand tag, 5 Arabic topic tags, 3 English ones.
+Instagram allows five hashtags per post: the brand tag, three Arabic topic tags and one English tag.
 
 ## 6. Growing the audience
 

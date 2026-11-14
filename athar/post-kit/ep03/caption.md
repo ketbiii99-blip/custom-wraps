@@ -19,7 +19,7 @@ A charity that won't cost you a single coin.
 The Prophet ﷺ said: "And a kind word is charity." (Bukhari 2989, Muslim 1009)
 Say one kind word to one person today. Who will it be?
 
-#أثر #دروس_إسلامية #حديث_شريف #الكلمة_الطيبة #صدقة #السنة_النبوية #عبرة #islamicreminders #hadith #kindness
+#أثر #دروس_إسلامية #حديث_شريف #الكلمة_الطيبة #islamicreminders
 ```
 
 **Pinned comment**

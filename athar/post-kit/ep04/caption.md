@@ -20,7 +20,7 @@ The Prophet ﷺ said: "If the Hour begins while one of you holds a sapling, and 
 to plant it before it comes, let him plant it." (Al-Adab al-Mufrad 479, authenticated by al-Albani)
 Do good — even if you never see its fruit.
 
-#أثر #دروس_إسلامية #حديث_شريف #الفسيلة #العمل_الصالح #السنة_النبوية #عبرة #islamicreminders #hadith #dogood
+#أثر #دروس_إسلامية #حديث_شريف #العمل_الصالح #islamicreminders
 ```
 
 **Pinned comment**

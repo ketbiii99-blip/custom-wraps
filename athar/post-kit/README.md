@@ -51,7 +51,7 @@ his deed and forgave him. (Bukhari 652, Muslim 1914)
 Your smallest deed may leave the greatest trace. What "branch" will you move today?
 Recitation: Mishary Rashid Alafasy
 
-#أثر #دروس_إسلامية #حديث_شريف #السنة_النبوية #عبرة #ذكر_الله #اسلاميات #islamicreminders #hadith #muslim
+#أثر #دروس_إسلامية #حديث_شريف #السنة_النبوية #islamicreminders
 ```
 
 **Pinned comment**

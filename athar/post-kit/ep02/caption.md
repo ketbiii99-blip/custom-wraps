@@ -25,7 +25,7 @@ relieve him of a hardship of the Day of Resurrection." (Muslim 2699)
 "Is the reward for good anything but good?" (Qur'an 55:60)
 Recitation: Mishary Rashid Alafasy
 
-#أثر #دروس_إسلامية #حديث_شريف #تفريج_الكرب #الإحسان #السنة_النبوية #عبرة #islamicreminders #hadith #kindness
+#أثر #دروس_إسلامية #حديث_شريف #تفريج_الكرب #islamicreminders
 ```
 
 **Pinned comment**
