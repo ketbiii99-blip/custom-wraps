@@ -2,8 +2,8 @@
 window.EPISODE = {
  "id": "ep02",
  "title": "حِملٌ ثقيل",
- "sources": "Sahih Muslim 2699 · Qur'an 55:60 (recited by Mishary Rashid Alafasy, everyayah.com)",
- "duration": 47.1,
+ "sources": "Sahih Muslim 2699 · Qur'an 55:60 (recited by Nasser Al-Qatami, everyayah.com)",
+ "duration": 46.9,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -20,7 +20,7 @@ window.EPISODE = {
   "resumeAt": 17.86,
   "rewardAt": 21.59,
   "dawnFrom": 22.13,
-  "dawnTo": 41.6
+  "dawnTo": 41.31
  },
  "cues": [
   {
@@ -98,7 +98,7 @@ window.EPISODE = {
   },
   {
    "t0": 26.85,
-   "t1": 41.2,
+   "t1": 40.91,
    "card": false,
    "lines": [
     {
@@ -107,20 +107,20 @@ window.EPISODE = {
      "html": "خفِّفْ عن غيرك…<br><span class=\"gold\">يخفِّفِ اللهُ عنك</span>"
     },
     {
-     "at": 5.32,
+     "at": 5.33,
      "cls": "ayah",
      "html": "﴿هَلۡ جَزَآءُ ٱلۡإِحۡسَٰنِ إِلَّا ٱلۡإِحۡسَٰنُ﴾"
     },
     {
-     "at": 5.91,
+     "at": 5.9,
      "cls": "source",
-     "html": "سورة الرحمن · الآية ٦٠ · بصوت مشاري العفاسي"
+     "html": "سورة الرحمن · الآية ٦٠ · بصوت ناصر القطامي"
     }
    ]
   },
   {
-   "t0": 41.5,
-   "t1": 47.800000000000004,
+   "t0": 41.21,
+   "t1": 47.6,
    "card": false,
    "lines": [
     {
@@ -129,12 +129,12 @@ window.EPISODE = {
      "html": "عن مَن <span class=\"gold\">ستخفِّف</span> اليوم؟"
     },
     {
-     "at": 1.8,
+     "at": 1.79,
      "cls": "small",
      "html": "اكتبْه في التعليقات"
     },
     {
-     "at": 2.65,
+     "at": 2.64,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -189,12 +189,12 @@ window.EPISODE = {
   },
   {
    "t0": 32.41,
-   "t1": 41.2,
-   "text": "“Is the reward for good anything but good?”<small>Qur’an 55:60 · recited by Mishary Alafasy</small>"
+   "t1": 40.91,
+   "text": "“Is the reward for good anything but good?”<small>Qur’an 55:60 · recited by Nasser Al-Qatami</small>"
   },
   {
-   "t0": 41.5,
-   "t1": 47.800000000000004,
+   "t0": 41.21,
+   "t1": 47.6,
    "text": "Whose load will you lighten today?<small>Tell us in the comments</small>"
   }
  ],
@@ -226,13 +226,13 @@ window.EPISODE = {
   },
   {
    "at": 32.51,
-   "clip": "q55_60",
+   "clip": "q55_60_qatami",
    "text": "",
-   "recitation": "Qur'an 55:60 — Mishary Rashid Alafasy",
-   "end": 40.9
+   "recitation": "Qur'an 55:60 — Nasser Al-Qatami",
+   "end": 40.61
   },
   {
-   "at": 41.6,
+   "at": 41.31,
    "clip": 505,
    "text": "عن مَن ستُخَفِّفُ اليوم؟ اكتُبْهُ في التعليقات."
   }

@@ -91,8 +91,8 @@ one video breaks out. The first month is about finding which hooks work, not fol
   (ElevenLabs v4, under 1 credit per line). Each line
   is transcribed back by speech recognition to catch wrong words, but that cannot judge accent or
   naturalness, so a native listener should approve every episode.
-- Qur'an is never read by the synthetic voice. Verses use a human recitation (Mishary Rashid
-  Alafasy, per-verse files from everyayah.com) with the reciter credited on screen and in the caption.
+- Qur'an is never read by the synthetic voice. Verses use a human recitation (Nasser Al-Qatami from
+  episode 2 onward; episode 1 used Mishary Rashid Alafasy; per-verse files from everyayah.com) with the reciter credited on screen and in the caption.
 
 ## 8. Producing a new episode
 
