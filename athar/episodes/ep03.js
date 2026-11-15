@@ -2,8 +2,8 @@
 window.EPISODE = {
  "id": "ep03",
  "title": "الكلمة الطيبة",
- "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009",
- "duration": 31.8,
+ "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009 · Qur'an 2:263 (recited by Nasser Al-Qatami, everyayah.com)",
+ "duration": 52.0,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -19,7 +19,7 @@ window.EPISODE = {
   "resumeAt": 20.78,
   "rewardAt": 14.71,
   "dawnFrom": 15.61,
-  "dawnTo": 25.0,
+  "dawnTo": 45.21,
   "actAt": 10.62
  },
  "cues": [
@@ -104,8 +104,42 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 24.9,
-   "t1": 32.5,
+   "t0": 24.2,
+   "t1": 30.88,
+   "card": false,
+   "lines": [
+    {
+     "at": 0.1,
+     "cls": "mid",
+     "html": "كلمةٌ طيّبة…"
+    },
+    {
+     "at": 1.36,
+     "cls": "mid gold",
+     "html": "خيرٌ من صدقةٍ يتبعها أذى"
+    }
+   ]
+  },
+  {
+   "t0": 30.98,
+   "t1": 44.81,
+   "card": false,
+   "lines": [
+    {
+     "at": 0.1,
+     "cls": "ayah",
+     "html": "﴿قَوۡلٞ مَّعۡرُوفٞ وَمَغۡفِرَةٌ خَيۡرٞ مِّن صَدَقَةٖ يَتۡبَعُهَآ أَذٗىۗ وَٱللَّهُ غَنِيٌّ حَلِيمٞ﴾"
+    },
+    {
+     "at": 0.77,
+     "cls": "source",
+     "html": "سورة البقرة · الآية ٢٦٣ · بصوت ناصر القطامي"
+    }
+   ]
+  },
+  {
+   "t0": 45.11,
+   "t1": 52.7,
    "card": false,
    "lines": [
     {
@@ -168,8 +202,23 @@ window.EPISODE = {
    "text": "“And a kind word is charity.”<small>Bukhari 2989 · Muslim 1009</small>"
   },
   {
-   "t0": 24.9,
-   "t1": 32.5,
+   "t0": 24.2,
+   "t1": 28.44,
+   "text": "A kind word is better than charity followed by hurt."
+  },
+  {
+   "t0": 28.44,
+   "t1": 30.88,
+   "text": "Allah, the Most High, says:"
+  },
+  {
+   "t0": 30.98,
+   "t1": 44.81,
+   "text": "“Kind speech and forgiveness are better than charity followed by injury. And Allah is Free of need, Forbearing.”<small>Qur’an 2:263 · recited by Nasser Al-Qatami</small>"
+  },
+  {
+   "t0": 45.11,
+   "t1": 52.7,
    "text": "Say one kind word to one person today. Who will it be?<small>Tell us in the comments</small>"
   }
  ],
@@ -200,7 +249,19 @@ window.EPISODE = {
    "text": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: والكلمةُ الطيّبةُ صدقة."
   },
   {
-   "at": 25.0,
+   "at": 24.3,
+   "clip": 306,
+   "text": "كلمةٌ طيّبة، خيرٌ من صدقةٍ يتبعُها أذى. قالَ اللهُ تعالى:"
+  },
+  {
+   "at": 31.08,
+   "clip": "q2_263_qatami",
+   "text": "",
+   "recitation": "Qur'an 2:263 — Nasser Al-Qatami",
+   "end": 44.51
+  },
+  {
+   "at": 45.21,
    "clip": 305,
    "text": "قُلِ اليومَ كلمةً طيّبةً لشخصٍ واحد. مَن سيكون؟"
   }

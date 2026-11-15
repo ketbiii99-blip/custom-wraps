@@ -1,7 +1,7 @@
 {
  "id": "ep03",
  "title": "الكلمة الطيبة",
- "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009",
+ "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009 · Qur'an 2:263 (recited by Nasser Al-Qatami, everyayah.com)",
  "scene": {
   "prop": "person",
   "sound": "none"
@@ -106,7 +106,7 @@
    "id": "h1",
    "clip": 304,
    "card": true,
-   "gap": 1.4,
+   "gap": 0.7,
    "lines": [
     {
      "cls": "label",
@@ -134,6 +134,55 @@
     }
    ],
    "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: والكلمةُ الطيّبةُ صدقة."
+  },
+  {
+   "id": "lesson",
+   "clip": 306,
+   "voice": "كلمةٌ طيّبة، خيرٌ من صدقةٍ يتبعُها أذى. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "كلمةٌ طيّبة…"
+    },
+    {
+     "f": 0.2,
+     "cls": "mid gold",
+     "html": "خيرٌ من صدقةٍ يتبعها أذى"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.66,
+     "text": "A kind word is better than charity followed by hurt."
+    },
+    {
+     "f0": 0.66,
+     "text": "Allah, the Most High, says:"
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q2_263_qatami",
+   "recitation": "Qur'an 2:263 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿قَوۡلٞ مَّعۡرُوفٞ وَمَغۡفِرَةٌ خَيۡرٞ مِّن صَدَقَةٖ يَتۡبَعُهَآ أَذٗىۗ وَٱللَّهُ غَنِيٌّ حَلِيمٞ﴾"
+    },
+    {
+     "f": 0.05,
+     "cls": "source",
+     "html": "سورة البقرة · الآية ٢٦٣ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“Kind speech and forgiveness are better than charity followed by injury. And Allah is Free of need, Forbearing.”<small>Qur’an 2:263 · recited by Nasser Al-Qatami</small>"
+    }
+   ]
   },
   {
    "id": "cta",

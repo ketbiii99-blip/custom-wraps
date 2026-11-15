@@ -7,7 +7,7 @@
 @font-face{font-family:"Messiri";font-weight:700;src:url(../fonts/el-messiri-arabic-700-normal.woff2)}
 @font-face{font-family:"Amiri";font-weight:400;src:url(../fonts/amiri-arabic-400-normal.woff2)}
 @font-face{font-family:"Amiri";font-weight:700;src:url(../fonts/amiri-arabic-700-normal.woff2)}
-@font-face{font-family:"AmiriQuran";font-weight:400;src:url(../fonts/amiri-quran-arabic-400-normal.woff2)}
+@font-face{font-family:"AmiriQuran";font-weight:400;src:url(../fonts/AmiriQuran-Regular.ttf)}
 @font-face{font-family:"Plex";font-weight:400;src:url(../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2)}
 @font-face{font-family:"Plex";font-weight:500;src:url(../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2)}
 @font-face{font-family:"Outfit";font-weight:400;src:url(../fonts/outfit-latin-400-normal.woff2)}
@@ -461,7 +461,7 @@ async function init() {
   document.querySelector('#brand .en').textContent = EP.brand.en;
   const cues = document.getElementById('cues'), subs = document.getElementById('subs');
   for (const c of EP.cues) { const el = document.createElement('div'); el.className = 'cue' + (c.card ? ' card' : ''); const lines = [];
-    for (const l of c.lines) { const le = document.createElement('div'); le.className = 'line ' + l.cls; le.innerHTML = l.html; const wrap = document.createElement('div'); wrap.appendChild(le); el.appendChild(wrap); lines.push({ ...l, el: le }); }
+    for (const l of c.lines) { const le = document.createElement('div'); le.className = 'line ' + l.cls; le.innerHTML = /\bayah\b/.test(l.cls) ? l.html.replace(/\u0657/g, '\u08F0').replace(/\u065E/g, '\u08F1').replace(/\u0656/g, '\u08F2') : l.html; const wrap = document.createElement('div'); wrap.appendChild(le); el.appendChild(wrap); lines.push({ ...l, el: le }); }
     cues.appendChild(el); cueEls.push({ ...c, el, lines }); }
   for (const s of EP.subs) { const el = document.createElement('div'); el.className = 'sub'; el.innerHTML = s.text; subs.appendChild(el); subEls.push({ ...s, el }); }
   await document.fonts.ready;
