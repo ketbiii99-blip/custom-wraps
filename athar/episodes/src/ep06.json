@@ -1,0 +1,229 @@
+{
+ "id": "ep06",
+ "title": "الدالّ على الخير",
+ "sources": "Sahih Muslim 1893 · Qur'an 51:55 (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "guide",
+  "sound": "none"
+ },
+ "action": {
+  "stopAt": "lost:end-0.1",
+  "actAt": "show:0.15",
+  "actHold": 1.4,
+  "bendAmt": 0.06,
+  "resumeAt": "h1:0.15",
+  "rewardAt": "reward:0.5",
+  "dawnFrom": "reward:0.6",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 600,
+   "voice": "تُريدُ أجرَ عملٍ لم تعمَلْه؟ دُلَّ عليهِ غيرَك.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "تريد أجرَ عملٍ<br>لم تعمله؟"
+    },
+    {
+     "f": 0.6,
+     "cls": "big gold",
+     "html": "دُلَّ عليه غيرك"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.6,
+     "text": "Want the reward of a deed you never did?"
+    },
+    {
+     "f0": 0.6,
+     "text": "Point someone else to it."
+    }
+   ]
+  },
+  {
+   "id": "lost",
+   "clip": 601,
+   "voice": "في الطريق، رجلٌ تائه، لا يدري أينَ يتّجه.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "في الطريق… رجلٌ <span class=\"gold\">تائه</span>"
+    },
+    {
+     "f": 0.55,
+     "cls": "small",
+     "html": "لا يدري أين يتّجه"
+    }
+   ],
+   "subs": [
+    {
+     "text": "On the road: a man who has lost his way."
+    }
+   ]
+  },
+  {
+   "id": "show",
+   "clip": 602,
+   "voice": "لم تمشِ عنه... فقط أرشدتَه.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "لم تمشِ عنه…"
+    },
+    {
+     "f": 0.5,
+     "cls": "mid gold",
+     "html": "فقط أرشدتَه"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.5,
+     "text": "You didn’t walk it for him…"
+    },
+    {
+     "f0": 0.5,
+     "text": "…you only showed him the way."
+    }
+   ]
+  },
+  {
+   "id": "reward",
+   "clip": 603,
+   "voice": "فمشى، ووصل... وكُتِبَ لكَ مثلُ أجرِه.",
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "فمشى… ووصل"
+    },
+    {
+     "f": 0.45,
+     "cls": "mid gold",
+     "html": "وكُتب لك مثلُ أجره"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.45,
+     "text": "He walked on, and arrived…"
+    },
+    {
+     "f0": 0.45,
+     "text": "…and a reward like his was written for you."
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 604,
+   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: مَن دَلَّ على خيرٍ، فلهُ مِثلُ أجرِ فاعِلِه.",
+   "card": true,
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.4,
+     "cls": "hadith",
+     "html": "«مَنْ دَلَّ عَلَى خَيْرٍ <span class=\"gold\">فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ</span>»"
+    },
+    {
+     "f": 0.55,
+     "cls": "source",
+     "html": "رواه مسلم (١٨٩٣)"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.42,
+     "text": "The Messenger of Allah ﷺ said:"
+    },
+    {
+     "f0": 0.42,
+     "text": "“Whoever guides someone to good will have a reward like that of the one who does it.”<small>Muslim 1893</small>"
+    }
+   ]
+  },
+  {
+   "id": "lesson",
+   "clip": 605,
+   "voice": "دُلَّ على الخير، ولو بكلمة. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "دُلَّ على الخير…"
+    },
+    {
+     "f": 0.3,
+     "cls": "mid gold",
+     "html": "ولو بكلمة"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.6,
+     "text": "Point to good — even with a single word."
+    },
+    {
+     "f0": 0.6,
+     "text": "Allah, the Most High, says:"
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q51_55_qatami",
+   "recitation": "Qur'an 51:55 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿وَذَكِّرۡ فَإِنَّ ٱلذِّكۡرَىٰ تَنفَعُ ٱلۡمُؤۡمِنِينَ﴾"
+    },
+    {
+     "f": 0.06,
+     "cls": "source",
+     "html": "سورة الذاريات · الآية ٥٥ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“And remind, for indeed, the reminder benefits the believers.”<small>Qur’an 51:55 · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 606,
+   "voice": "على أيِّ خيرٍ ستدُلُّ اليوم؟ اكتُبْهُ في التعليقات.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "على أيِّ <span class=\"gold\">خيرٍ</span><br>ستدلُّ اليوم؟"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "اكتبْه في التعليقات"
+    },
+    {
+     "f": 0.75,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "What good will you point someone to today?<small>Tell us in the comments</small>"
+    }
+   ]
+  }
+ ]
+}
