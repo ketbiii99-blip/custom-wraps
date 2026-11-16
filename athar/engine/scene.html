@@ -425,6 +425,16 @@ function render(t) {
         ctx.fillStyle = `rgba(255,222,150,${0.7 * (1 - i / 34)})`; ctx.beginPath(); ctx.arc(x, y, 7 - i * 0.15, 0, 6.3); ctx.fill(); }
       ctx.globalCompositeOperation = 'source-over'; }
     if (q > 0.02) glowAt(bx, cy - 150, 220, 0.3 * q * (1 - leave));
+  } else if (PROP === 'palms') {
+    // words of remembrance rise from him, and where they land a palm grows: one for each time it is said
+    const spots = [-70, -235, -400];
+    spots.forEach((dx, i) => { const t0 = a1 - 0.6 + i * 0.95, g = ss(t0 + 0.5, t0 + 2.6, t), sx = pX + dx, sy = GY + 14;
+      const w = (t - t0) / 0.9; if (w > 0 && w < 1.25) { ctx.globalCompositeOperation = 'lighter';
+        for (let k = 0; k < 20; k++) { const u = w - k * 0.02; if (u < 0 || u > 1) continue; const e = u * u * (3 - 2 * u);
+          const x = lerp(CX - 40, sx, e), y = lerp(cy - 330, sy - 20, e) - Math.sin(e * Math.PI) * 130;
+          ctx.fillStyle = `rgba(255,222,150,${0.75 * (1 - k / 20)})`; ctx.beginPath(); ctx.arc(x, y, 7 - k * 0.25, 0, 6.3); ctx.fill(); }
+        ctx.globalCompositeOperation = 'source-over'; }
+      if (g > 0) { glowAt(sx, sy - 150, 260, 0.32 * g * (1 - d * 0.5)); ctx.save(); ctx.translate(sx, sy); ctx.scale(2.0 + (i % 2) * 0.25, 2.0 + (i % 2) * 0.25); drawSapling(0, 0, g, t + i, d); ctx.restore(); } });
   } else if (PROP === 'sapling') {
     const g = carry * 0.42 + 0.58 * ss(rAt, rAt + 6, t) * (carry >= 1 ? 1 : 0), sx = pX - 18, sy = GY + 86;
     reachTo = [sx + 6, sy - 26];

@@ -1,0 +1,209 @@
+{
+ "id": "ep07",
+ "title": "نخلة في الجنة",
+ "sources": "Jami' at-Tirmidhi 3464 (authenticated by al-Albani) · Qur'an 33:41-42 (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "palms",
+  "sound": "none"
+ },
+ "action": {
+  "stopAt": "one:end-0.1",
+  "actAt": "say:start-0.6",
+  "actHold": 2.4,
+  "bendAmt": 0,
+  "resumeAt": "h1:0.2",
+  "rewardAt": "h1:0.62",
+  "dawnFrom": "h1:0.65",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 700,
+   "voice": "ازرَعْ نخلةً في الجنّة... في ثلاثِ ثوانٍ.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "ازرعْ نخلةً في الجنّة…"
+    },
+    {
+     "f": 0.6,
+     "cls": "big gold",
+     "html": "في ثلاث ثوانٍ"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.6,
+     "text": "Plant a palm tree in Paradise…"
+    },
+    {
+     "f0": 0.6,
+     "text": "…in three seconds."
+    }
+   ]
+  },
+  {
+   "id": "no",
+   "clip": 701,
+   "voice": "لا أرضَ تحتاجُها، ولا ماء، ولا تعب.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "لا أرض… ولا ماء… ولا تعب"
+    }
+   ],
+   "subs": [
+    {
+     "text": "No land needed. No water. No effort."
+    }
+   ]
+  },
+  {
+   "id": "one",
+   "clip": 702,
+   "voice": "فقط جملةٌ واحدة، تقولُها وأنتَ تمشي.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "فقط <span class=\"gold\">جملةٌ واحدة</span>"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "تقولها وأنت تمشي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Just one sentence — said as you walk."
+    }
+   ]
+  },
+  {
+   "id": "say",
+   "clip": 703,
+   "voice": "سُبحانَ اللهِ العظيمِ وبِحمدِه.",
+   "gap": 2.2,
+   "lines": [
+    {
+     "cls": "big gold",
+     "html": "سبحانَ اللهِ العظيمِ<br>وبحمدِه"
+    }
+   ],
+   "subs": [
+    {
+     "text": "SubḥānAllāhi l-ʿAẓīmi wa bi-ḥamdih<small>Glory be to Allah the Almighty, and praise be to Him</small>"
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 704,
+   "voice": "قالَ رسولُ اللهِ، صلّى اللهُ عليهِ وسلَّم: مَن قال: سُبحانَ اللهِ العظيمِ وبِحمدِه، غُرِسَتْ لهُ نخلةٌ في الجنّة.",
+   "card": true,
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.3,
+     "cls": "hadith",
+     "html": "«مَنْ قَالَ: سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ، <span class=\"gold\">غُرِسَتْ لَهُ نَخْلَةٌ فِي الْجَنَّةِ</span>»"
+    },
+    {
+     "f": 0.45,
+     "cls": "source",
+     "html": "رواه الترمذي (٣٤٦٤) · صحّحه الألباني"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.32,
+     "text": "The Messenger of Allah ﷺ said:"
+    },
+    {
+     "f0": 0.32,
+     "text": "“Whoever says: Glory be to Allah the Almighty, and praise be to Him — a palm tree is planted for him in Paradise.”<small>Tirmidhi 3464 · authenticated by al-Albani</small>"
+    }
+   ]
+  },
+  {
+   "id": "lesson",
+   "clip": 705,
+   "voice": "في كلِّ مرّةٍ تقولُها، نخلةٌ جديدة. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "في كلِّ مرّةٍ تقولها…"
+    },
+    {
+     "f": 0.35,
+     "cls": "mid gold",
+     "html": "نخلةٌ جديدة"
+    }
+   ],
+   "subs": [
+    {
+     "f1": 0.62,
+     "text": "Every time you say it — another palm."
+    },
+    {
+     "f0": 0.62,
+     "text": "Allah, the Most High, says:"
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q33_41_42_qatami",
+   "recitation": "Qur'an 33:41-42 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱذۡكُرُواْ ٱللَّهَ ذِكۡرٗا كَثِيرٗا ۝٤١ وَسَبِّحُوهُ بُكۡرَةٗ وَأَصِيلًا﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة الأحزاب · الآيتان ٤١–٤٢ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“O you who believe, remember Allah with much remembrance, and glorify Him morning and evening.”<small>Qur’an 33:41–42 · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 706,
+   "voice": "اغرِسْ نخلتَكَ الآن. اكتُبْها في التعليقات.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "اغرسْ <span class=\"gold\">نخلتك</span> الآن"
+    },
+    {
+     "f": 0.45,
+     "cls": "small",
+     "html": "اكتبْ «سبحان الله العظيم وبحمده»<br>في التعليقات"
+    },
+    {
+     "f": 0.8,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Plant yours now: write it in the comments."
+    }
+   ]
+  }
+ ]
+}
