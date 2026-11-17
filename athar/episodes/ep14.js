@@ -3,7 +3,7 @@ window.EPISODE = {
  "id": "ep14",
  "title": "كما يُرزق الطير",
  "sources": "Jami' at-Tirmidhi 2344 (authenticated by al-Albani), Ibn Majah 4164 · Qur'an 65:3, first part (recited by Nasser Al-Qatami, everyayah.com)",
- "duration": 51.0,
+ "duration": 51.2,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -135,7 +135,7 @@ window.EPISODE = {
   },
   {
    "t0": 44.54,
-   "t1": 51.7,
+   "t1": 51.900000000000006,
    "card": false,
    "lines": [
     {
@@ -144,12 +144,12 @@ window.EPISODE = {
      "html": "اسعَ، وتوكَّلْ على الله…"
     },
     {
-     "at": 2.4,
+     "at": 2.53,
      "cls": "big gold",
-     "html": "ورزقُكَ آتٍ"
+     "html": "وَرِزقُكَ آتٍ"
     },
     {
-     "at": 3.66,
+     "at": 3.85,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -204,7 +204,7 @@ window.EPISODE = {
   },
   {
    "t0": 44.54,
-   "t1": 51.7,
+   "t1": 51.900000000000006,
    "text": "Strive, rely on Allah… and your provision will come."
   }
  ],
@@ -244,7 +244,7 @@ window.EPISODE = {
   {
    "at": 44.64,
    "clip": 1105,
-   "text": "اسعَ، وتوكَّلْ على الله... ورزقُكَ آتٍ."
+   "text": "اسعَ، وتوكَّلْ على الله... وَرِزقُكَ آتٍ."
   }
  ]
 };
