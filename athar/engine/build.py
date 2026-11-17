@@ -43,7 +43,7 @@ run('node', 'engine/render.mjs', ep, stdout=subprocess.DEVNULL)
 kit = f'post-kit/{ep}'; os.makedirs(kit, exist_ok=True)
 hook_end = E['voice'][1]['at'] - 0.9
 run('node', 'engine/render.mjs', ep, '--stills', f'{hook_end:.1f}')
-shutil.move(f'out/{ep}_t{hook_end:.1f}.jpg', f'{kit}/cover.jpg'); shutil.copy(f'out/{ep}.mp4', f'{kit}/athar_{ep}.mp4')
+shutil.move(f'out/{ep}_t{float(f"{hook_end:.1f}"):g}.jpg', f'{kit}/cover.jpg'); shutil.copy(f'out/{ep}.mp4', f'{kit}/athar_{ep}.mp4')
 os.remove(f'out/{ep}.wav'); shutil.rmtree(work)
 lv = [re.search(r'mean_volume: ([-0-9.]+)', subprocess.run(['ffmpeg', '-ss', str(v['at']), '-t', '2.5', '-i', f'out/{ep}.mp4', '-af', 'volumedetect', '-f', 'null', '-'], capture_output=True, text=True).stderr).group(1) for v in E['voice']]
 print(ep, 'done', E['duration'], 's; loudness per line:', ' '.join(lv))

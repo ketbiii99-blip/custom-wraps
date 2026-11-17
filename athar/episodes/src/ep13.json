@@ -1,0 +1,219 @@
+{
+ "id": "ep13",
+ "title": "ولك بمثل",
+ "sources": "Sahih Muslim 2732 · Qur'an 40:60, first part (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "dua",
+  "sound": "none",
+  "words": [
+   "شفاء",
+   "رزق",
+   "سعادة"
+  ],
+  "wordAt": [
+   0.75,
+   1.65,
+   2.55
+  ]
+ },
+ "action": {
+  "stopAt": "first:0.6",
+  "actAt": "dua:start-0.95",
+  "actHold": 3.9,
+  "bendAmt": 0,
+  "resumeAt": "lesson:0.15",
+  "rewardAt": "h1:0.86",
+  "dawnFrom": "h1:0.9",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 1000,
+   "voice": "ادعُ لغيرِكَ... والمَلَكُ يدعو لكَ أنت.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "ادعُ لغيرِك…"
+    },
+    {
+     "f": 0.42,
+     "cls": "big gold",
+     "html": "والمَلَكُ يدعو لكَ أنت"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Pray for someone else…",
+     "f1": 0.42
+    },
+    {
+     "text": "…and the angel prays for you.",
+     "f0": 0.42
+    }
+   ]
+  },
+  {
+   "id": "wish",
+   "clip": 1001,
+   "voice": "هل في قلبِكَ أمنية؟ شفاءٌ، أو رزقٌ، أو راحةُ بال؟",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "هل في قلبِك <span class=\"gold\">أمنية</span>؟"
+    },
+    {
+     "f": 0.42,
+     "cls": "small",
+     "html": "شفاء… رزق… راحةُ بال"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Is there a wish in your heart? Healing, provision, peace of mind?"
+    }
+   ]
+  },
+  {
+   "id": "first",
+   "clip": 1002,
+   "voice": "اطلُبْها لأخيكَ أوّلًا، وهو لا يعلم.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "اطلبْها <span class=\"gold\">لأخيك</span> أوّلًا"
+    },
+    {
+     "f": 0.6,
+     "cls": "small",
+     "html": "وهو لا يعلم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Ask it for your brother first, without him knowing."
+    }
+   ]
+  },
+  {
+   "id": "dua",
+   "clip": 1003,
+   "voice": "اللهمَّ اشفِه، وارزُقْه، وأسعِدْ قلبَه.",
+   "gap": 2.4,
+   "lines": [
+    {
+     "cls": "big gold",
+     "html": "اللهمَّ اشفِه، وارزُقْه<br>وأسعِدْ قلبَه"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“O Allah, heal him, provide for him, and bring joy to his heart.”"
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 1004,
+   "voice": "",
+   "card": true,
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.3,
+     "cls": "hadith",
+     "html": "«مَا مِنْ عَبْدٍ مُسْلِمٍ يَدْعُو لِأَخِيهِ بِظَهْرِ الْغَيْبِ، إِلَّا قَالَ الْمَلَكُ: <span class=\"gold\">وَلَكَ بِمِثْلٍ</span>»"
+    },
+    {
+     "f": 0.5,
+     "cls": "source",
+     "html": "رواه مسلم (٢٧٣٢)"
+    }
+   ],
+   "subs": [
+    {
+     "text": "The Messenger of Allah ﷺ said:",
+     "f1": 0.3
+    },
+    {
+     "text": "“No Muslim servant prays for his brother in his absence, except that the angel says: And for you, the same.”<small>Sahih Muslim 2732</small>",
+     "f0": 0.3
+    }
+   ]
+  },
+  {
+   "id": "lesson",
+   "clip": 1005,
+   "voice": "دعوتُكَ له... تعودُ إليكَ بمِثلِها. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "دعوتُك له…"
+    },
+    {
+     "f": 0.3,
+     "cls": "mid gold",
+     "html": "تعودُ إليك بمثلِها"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Your prayer for him comes back to you, the same.",
+     "f1": 0.68
+    },
+    {
+     "text": "Allah, the Most High, says:",
+     "f0": 0.68
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q40_60_qatami",
+   "recitation": "Qur'an 40:60 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿وَقَالَ رَبُّكُمُ ٱدۡعُونِيٓ أَسۡتَجِبۡ لَكُمۡ﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة غافر · من الآية ٦٠ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“And your Lord says: Call upon Me; I will respond to you.”<small>Qur’an 40:60 (part) · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 1006,
+   "voice": "أرسِلْها لمن ستدعو له الليلة.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "أرسِلها لمن <span class=\"gold\">ستدعو له</span> الليلة"
+    },
+    {
+     "f": 0.7,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Send this to the one you’ll pray for tonight."
+    }
+   ]
+  }
+ ]
+}

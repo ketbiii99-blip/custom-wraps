@@ -388,7 +388,7 @@ function render(t) {
   const glow = 0.32 + 0.68 * reward;
   const cy = GY + 52, S = 1.22;
   const px0 = CX - 150 - dist(s0), pX = px0 + D;                   // prop anchor: just ahead of where he stops
-  let reachTo = null, propFront = null, holdReach = false;
+  let reachTo = null, propFront = null, holdReach = false, reachEnd = null;
 
   if (PROP === 'branch') {
     const bX = pX - carry * 36, bY = GY + 66 + carry * 54 - Math.sin(carry * Math.PI) * 40, bR = -0.12 + carry * 0.5;
@@ -404,6 +404,37 @@ function render(t) {
       const k = ss(as + 0.5, a1, t) - ss(a2, a2 + 0.5, t); if (k > 0.05) { const vx = m[0] + 16, vy = m[1] - 50;
         ctx.save(); ctx.translate(vx, vy); ctx.rotate(-0.5 * carry); ctx.fillStyle = '#5A3D2A'; ctx.beginPath(); ctx.moveTo(-20, -8); ctx.lineTo(16, -8); ctx.quadraticCurveTo(24, 8, 6, 14); ctx.lineTo(-22, 12); ctx.closePath(); ctx.fill(); ctx.restore();
         if (carry > 0.05 && carry < 0.98) for (let i = 0; i < 5; i++) { const u = mod(t * 2.4 + i / 5, 1); ctx.fillStyle = `rgba(150,205,255,${0.9 * (1 - u)})`; ctx.beginPath(); ctx.ellipse(vx - 18 - u * 6, vy + 8 + u * 44, 3.2, 6, 0, 0, 6.3); ctx.fill(); } } };
+  } else if (PROP === 'dua') {
+    // A du'a for someone far away: three lights leave his raised hand, cross the night sky to a distant home
+    // whose window warms up — and at «ولك بمثل» the same three come back down to him from above.
+    const hx = pX - 262, hy = GY - 30, HX = CX - 128, HY = cy - 318, words = EP.scene.words || [], fly = 1.9;
+    const outAt = i => a1 + (EP.scene.wordAt ? EP.scene.wordAt[i] : (i + 0.1) * hold / 3), backAt = i => rAt - 0.5 + i * 0.45;
+    const bez = (p0, p1, p2, u) => [(1 - u) * (1 - u) * p0[0] + 2 * (1 - u) * u * p1[0] + u * u * p2[0], (1 - u) * (1 - u) * p0[1] + 2 * (1 - u) * u * p1[1] + u * u * p2[1]];
+    reachTo = [HX - 36, HY]; holdReach = true; reachEnd = rAt + 3.0;
+    let win = 0; for (let i = 0; i < 3; i++) win += ss(outAt(i) + fly - 0.2, outAt(i) + fly + 0.6, t) / 3;
+    // the distant home
+    ctx.save(); ctx.translate(hx, hy); ctx.scale(1.45, 1.45); ctx.translate(-hx, -hy); ctx.fillStyle = mix('#080B2A', '#4A3260', d); ctx.fillRect(hx - 52, hy - 64, 104, 70); ctx.beginPath(); ctx.arc(hx, hy - 64, 36, Math.PI, 0); ctx.fill(); ctx.fillRect(hx + 58, hy - 118, 15, 124); ctx.beginPath(); ctx.arc(hx + 65.5, hy - 118, 7.5, Math.PI, 0); ctx.fill();
+    ctx.fillStyle = `rgba(255,208,128,${0.1 + 0.9 * win})`; ctx.beginPath(); ctx.roundRect(hx - 10, hy - 48, 20, 32, [10, 10, 2, 2]); ctx.fill(); ctx.restore();
+    if (win > 0) glowAt(hx, hy - 46, 90 + 210 * win, 0.6 * win * (1 - d * 0.5));
+    for (let i = 0; i < 3; i++) { const k = (t - outAt(i) - fly) / 1.1; if (k > 0 && k < 1) { ctx.strokeStyle = `rgba(255,220,150,${(1 - k) * 0.7})`; ctx.lineWidth = 3 * (1 - k) + 1; ctx.beginPath(); ctx.arc(hx, hy - 46, 20 + k * 150, 0, 6.3); ctx.stroke(); } }
+    // soft shaft of light from above when the answer comes
+    const sh = ss(rAt - 0.7, rAt + 0.9, t) * (1 - ss(rAt + 4.5, rAt + 8, t));
+    if (sh > 0) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; const g = ctx.createLinearGradient(0, 0, 0, cy + 20); g.addColorStop(0, `rgba(255,228,170,${0.5 * sh})`); g.addColorStop(0.75, `rgba(255,214,150,${0.2 * sh})`); g.addColorStop(1, 'rgba(255,214,150,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(CX - 110, 0); ctx.lineTo(CX + 70, 0); ctx.lineTo(CX + 250, cy + 20); ctx.lineTo(CX - 330, cy + 20); ctx.closePath(); ctx.filter = 'blur(26px)'; ctx.fill(); ctx.filter = 'none'; ctx.restore(); }
+    const orb = (t0, p0, p1, p2, big, label, seed) => { let head = null; ctx.globalCompositeOperation = 'lighter';
+      { const k = (t - t0) / (fly + 2.6); if (k > 0 && k < 1) { ctx.strokeStyle = `rgba(255,222,160,${0.16 * Math.sin(k * Math.PI)})`; ctx.lineWidth = 3; ctx.setLineDash([2, 14]); ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.quadraticCurveTo(p1[0], p1[1], p2[0], p2[1]); ctx.stroke(); ctx.setLineDash([]); } }
+      for (let j = 0; j < 40; j++) { const u = (t - t0 - j * 0.026) / fly; if (u < 0 || u > 1) continue; const e = u * u * (3 - 2 * u), [x, y0] = bez(p0, p1, p2, e), y = y0 + Math.sin(e * 9 + seed) * 12 * Math.sin(e * Math.PI);
+        if (j === 0) head = [x, y, u]; ctx.fillStyle = `rgba(255,${226 - j},${165 - j * 2},${0.85 * (1 - j / 40)})`; ctx.beginPath(); ctx.arc(x, y, Math.max(1.2, (big ? 16 : 13) - j * 0.34), 0, 6.3); ctx.fill();
+        if (j % 6 === 3) { ctx.fillStyle = `rgba(255,240,205,${0.8 * (1 - j / 40)})`; ctx.beginPath(); ctx.arc(x + Math.sin(j * 2.3 + seed + t * 3) * 26, y + Math.cos(j * 1.7 + seed + t * 2) * 26, 3, 0, 6.3); ctx.fill(); } }
+      ctx.globalCompositeOperation = 'source-over';
+      if (head) { glowAt(head[0], head[1], big ? 170 : 130, 0.7); ctx.fillStyle = '#FFF7E2'; ctx.beginPath(); ctx.arc(head[0], head[1], big ? 10 : 8, 0, 6.3); ctx.fill();
+        if (label) { const la = Math.sin(Math.min(1, head[2] * 1.25) * Math.PI); ctx.save(); ctx.globalAlpha = la; ctx.font = '700 46px Messiri'; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 14; ctx.fillStyle = '#F9D58A'; ctx.fillText(label, head[0], head[1] - 40); ctx.restore(); } } };
+    propFront = () => {
+      const cup = ss(as + 0.6, a1, t) * (1 - ss(a2 + 0.2, a2 + 1.0, t)) + ss(rAt + 0.9, rAt + 1.7, t) * (1 - ss(rAt + 2.8, rAt + 3.6, t));
+      if (cup > 0) glowAt(HX, HY - 14, 90, 0.6 * cup);
+      for (let i = 0; i < 3; i++) orb(outAt(i), [HX, HY - 16], [CX - 150 - i * 70, 470 - i * 70], [hx, hy - 46], false, words[i], i * 2.1);
+      for (let i = 0; i < 3; i++) orb(backAt(i), [CX + 150 - i * 150, 150], [CX + 230 - i * 210, 760], [HX, HY - 16], true, words[i], 4 + i * 1.7);
+    };
   } else if (PROP === 'person') {
     const q = ss(a1 + 0.2, a2 + 0.4, t), sx = pX - 170, sy = GY + 30;
     const head = drawSitter(sx, sy, q, t, d);
@@ -464,7 +495,7 @@ function render(t) {
   ctx.save(); ctx.globalCompositeOperation = 'lighter'; const pool = ctx.createRadialGradient(0, 0, 0, 0, 0, 1); pool.addColorStop(0, `rgba(255,190,110,${(0.2 + 0.2 * reward) * fl})`); pool.addColorStop(1, 'rgba(255,190,110,0)');
   ctx.translate(lxE + 10, cy + 6); ctx.scale(250 + 200 * reward, 46 + 26 * reward); ctx.fillStyle = pool; ctx.beginPath(); ctx.arc(0, 0, 1, 0, 6.3); ctx.fill(); ctx.restore();
 
-  const reachOn = reachTo ? ss(as + 0.35, a1, t) - (holdReach ? 0 : ss(a2, a2 + 0.55, t)) : 0;
+  const reachOn = reachTo ? ss(as + 0.35, a1, t) - (holdReach ? (reachEnd ? ss(reachEnd, reachEnd + 0.7, t) : 0) : ss(a2, a2 + 0.55, t)) : 0;
   const reach = reachOn > 0.02 ? [lerp(34, (reachTo[0] - CX) / S + 30, reachOn), lerp(-150, (reachTo[1] - cy) / S, reachOn)] : null;
   const [LX, LY] = drawTraveler(CX, cy, S, ph, mv, bend, reach, glow, t);
   if (propFront) propFront();
