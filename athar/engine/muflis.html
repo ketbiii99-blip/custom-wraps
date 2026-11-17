@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:"Messiri";font-weight:500;src:url(../fonts/el-messiri-arabic-500-normal.woff2)}
+@font-face{font-family:"Messiri";font-weight:700;src:url(../fonts/el-messiri-arabic-700-normal.woff2)}
+@font-face{font-family:"Amiri";font-weight:400;src:url(../fonts/amiri-arabic-400-normal.woff2)}
+@font-face{font-family:"Amiri";font-weight:700;src:url(../fonts/amiri-arabic-700-normal.woff2)}
+@font-face{font-family:"Plex";font-weight:400;src:url(../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2)}
+@font-face{font-family:"Plex";font-weight:500;src:url(../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2)}
+@font-face{font-family:"Outfit";font-weight:400;src:url(../fonts/outfit-latin-400-normal.woff2)}
+@font-face{font-family:"Outfit";font-weight:500;src:url(../fonts/outfit-latin-500-normal.woff2)}
+:root{--gold:#F7C56B;--cream:#FFF4DC;--red:#F0735A}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#070A24}
+canvas{position:absolute;inset:0}
+#brand{position:absolute;top:212px;left:0;right:0;direction:ltr;color:var(--cream);opacity:.78;display:flex;gap:16px;justify-content:center;align-items:center}
+#brand .ar{font:700 40px "Messiri";color:var(--gold)}
+#brand .en{font:500 19px "Outfit";letter-spacing:.42em;margin-top:6px}
+#brand .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:6px}
+.cap{position:absolute;left:64px;right:64px;top:1300px;text-align:center;color:var(--cream)}
+.cap .ar{font:700 54px/1.55 "Messiri";text-shadow:0 3px 22px rgba(4,6,24,.85)}
+.cap .ar .g{color:var(--gold)} .cap .ar .r{color:var(--red)}
+.cap .ar .p{font-family:"Amiri";font-weight:400}
+.cap .en{direction:ltr;font:500 32px/1.4 "Outfit";opacity:.86;margin-top:12px}
+.cap .src{font:400 30px/1.5 "Plex";opacity:.8;margin-top:14px}
+.cap .cta{display:inline-block;font:500 38px/1.4 "Plex";padding:14px 38px;border-radius:99px;border:2px solid rgba(247,197,107,.7);background:rgba(9,12,40,.55)}
+.cap .cta b{font-family:"Messiri";color:var(--gold)}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="brand"><span class="en"></span><span class="dot"></span><span class="ar"></span></div>
+<div id="caps"></div>
+<script>
+const params = new URLSearchParams(location.search);
+const sc = document.createElement('script'); sc.src = '../episodes/' + (params.get('ep') || 'ep10') + '.js'; sc.onload = init; document.head.appendChild(sc);
+const W = 1080, H = 1920, cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let EP, K, capEls = [];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ss = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+const lerp = (a, b, t) => a + (b - a) * t;
+const out = x => 1 - Math.pow(1 - clamp(x), 3);
+const pop = x => { x = clamp(x); return x <= 0 ? 0 : 1 + 0.28 * Math.exp(-7 * x) * Math.cos(13 * x) - Math.exp(-9 * x); };
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const R = rng(11), stars = Array.from({ length: 60 }, () => ({ x: R() * W, y: R() * 1200, r: 0.7 + R() * 1.6, p: R() * 6.3, s: 0.5 + R() * 1.6 }));
+const LINE = '#FFF1D2', GOLD = '#F7C56B', RED = '#F0735A';
+function glow(x, y, r, a, col = '255,205,130') { if (a <= 0) return; const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(0.35, `rgba(${col},${a * 0.35})`); g.addColorStop(1, `rgba(${col},0)`); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2); ctx.globalCompositeOperation = 'source-over'; }
+function style(a = 1, w = 7, col = LINE) { ctx.globalAlpha = a; ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; }
+function text(s, x, y, size, col, a = 1, sc = 1, font = 'Messiri', glowCol = null) { if (a <= 0 || sc <= 0) return; ctx.save(); ctx.translate(x, y); ctx.scale(sc, sc); ctx.globalAlpha = a; ctx.font = `700 ${size}px ${font}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.direction = 'rtl'; ctx.shadowColor = glowCol || 'rgba(4,6,24,.85)'; ctx.shadowBlur = glowCol ? 30 : 18; ctx.fillStyle = col; ctx.fillText(s, 0, 0); ctx.restore(); }
+
+function jarPath() { ctx.beginPath(); ctx.moveTo(-78, -210); ctx.lineTo(78, -210); ctx.quadraticCurveTo(84, -168, 122, -140); ctx.quadraticCurveTo(170, -90, 170, 40); ctx.quadraticCurveTo(170, 190, 70, 200); ctx.lineTo(-70, 200); ctx.quadraticCurveTo(-170, 190, -170, 40); ctx.quadraticCurveTo(-170, -90, -122, -140); ctx.quadraticCurveTo(-84, -168, -78, -210); ctx.closePath(); }
+// the vessel of deeds: gold = good deeds, dark red = sins taken from others
+function jar(x, y, s, rot, good, bad, a, t) { if (a <= 0) return; ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.save(); jarPath(); ctx.clip();
+  if (good > 0.005) { const top = 200 - 400 * good; const g = ctx.createLinearGradient(0, top, 0, 200); g.addColorStop(0, 'rgba(255,224,150,.95)'); g.addColorStop(1, 'rgba(247,170,70,.9)'); ctx.globalAlpha = a; ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-200, 220); for (let i = -200; i <= 200; i += 20) ctx.lineTo(i, top + Math.sin(i / 34 + t * 3) * 7); ctx.lineTo(200, 220); ctx.fill();
+    const r = rng(3); for (let i = 0; i < 26; i++) { const ox = (r() - 0.5) * 300, oy = lerp(top + 20, 190, r()), rr = 6 + r() * 9; ctx.fillStyle = 'rgba(255,248,220,.75)'; ctx.beginPath(); ctx.arc(ox + Math.sin(t * 2 + i) * 4, oy + Math.cos(t * 1.7 + i) * 4, rr, 0, 6.3); ctx.fill(); } }
+  if (bad > 0.005) { const top = 200 - 400 * bad; const g = ctx.createLinearGradient(0, top, 0, 200); g.addColorStop(0, 'rgba(150,40,34,.96)'); g.addColorStop(1, 'rgba(46,10,16,.98)'); ctx.globalAlpha = a; ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-200, 220); for (let i = -200; i <= 200; i += 20) ctx.lineTo(i, top + Math.sin(i / 30 + t * 4) * 8); ctx.lineTo(200, 220); ctx.fill(); }
+  ctx.restore(); style(a, 8); jarPath(); ctx.stroke(); ctx.beginPath(); ctx.moveTo(-96, -212); ctx.lineTo(96, -212); ctx.lineWidth = 12; ctx.stroke();
+  ctx.restore(); ctx.globalAlpha = 1; if (good > 0.02) glow(x, y, 330 * s, 0.3 * good * a); }
+function bust(x, y, s, a, lit, hit) { if (a <= 0) return; ctx.save(); ctx.translate(x, y); ctx.scale(s, s); if (lit > 0) glow(0, -20, 150, 0.4 * lit * a); if (hit > 0) glow(0, -20, 170, 0.55 * hit * a, '240,115,90');
+  style(a, 7, hit > 0.3 ? RED : LINE); ctx.beginPath(); ctx.arc(0, -58, 34, 0, 6.3); ctx.moveTo(-70, 50); ctx.quadraticCurveTo(-66, -14, 0, -14); ctx.quadraticCurveTo(66, -14, 70, 50); ctx.stroke(); ctx.beginPath(); ctx.moveTo(-28, -76); ctx.quadraticCurveTo(0, -90, 28, -76); ctx.stroke(); ctx.restore(); ctx.globalAlpha = 1; }
+function dot(x, y, r, a, bad) { if (a <= 0) return; if (bad) { glow(x, y, r * 4, 0.3 * a, '200,60,50'); ctx.globalAlpha = a; ctx.fillStyle = '#7A1E1C'; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.3); ctx.fill(); ctx.strokeStyle = RED; ctx.lineWidth = 2.5; ctx.stroke(); }
+  else { glow(x, y, r * 4.5, 0.42 * a); ctx.globalAlpha = a; ctx.fillStyle = '#FFE9B8'; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.3); ctx.fill(); } ctx.globalAlpha = 1; }
+// a burst of n dots travelling from A to B along arcs between t0 and t0+dur
+function stream(t, t0, dur, A, B, n, bad, seed, arc = 160) { const r = rng(seed); for (let i = 0; i < n; i++) { const d = r() * dur * 0.55, o = (r() - 0.5) * 2, sz = 7 + r() * 7, u = (t - t0 - d) / (dur * 0.45); if (u <= 0 || u >= 1) continue; const e = u * u * (3 - 2 * u);
+    dot(lerp(A[0], B[0], e) + o * 26 * Math.sin(e * Math.PI), lerp(A[1], B[1], e) - Math.sin(e * Math.PI) * (arc + o * 50), sz, Math.sin(u * Math.PI) ** 0.5, bad); } }
+
+function render(t) {
+  const v = K.voiceAt, T = k => v + K[k];
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const fire = ss(T('nar') - 0.1, T('nar') + 1.1, t) * (1 - ss(T('ihfaz') - 0.35, T('ihfaz'), t));
+  const bg = ctx.createRadialGradient(W / 2, 860, 60, W / 2, 860, 1300); bg.addColorStop(0, '#171D52'); bg.addColorStop(0.45, '#0C1036'); bg.addColorStop(1, '#04061C'); ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  for (const s of stars) { ctx.globalAlpha = (0.35 + 0.3 * Math.sin(t * s.s + s.p)) * (1 - s.y / 1300) * (1 - fire); ctx.fillStyle = '#FFF4DC'; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.3); ctx.fill(); } ctx.globalAlpha = 1;
+  if (fire > 0) { const fg = ctx.createLinearGradient(0, 700, 0, H); fg.addColorStop(0, 'rgba(120,20,10,0)'); fg.addColorStop(0.55, `rgba(170,40,16,${0.55 * fire})`); fg.addColorStop(1, `rgba(255,120,40,${0.8 * fire})`); ctx.fillStyle = fg; ctx.fillRect(0, 700, W, H - 700); }
+  // camera punch on every beat
+  let z = 1; for (const k of EP.beats) { const u = t - T(k); if (u > 0 && u < 0.6) z += 0.035 * Math.exp(-u * 8) * Math.min(1, u * 30); }
+  const shk = ['shatam', 'qadhaf', 'akal', 'safak', 'darab'].reduce((m, k) => { const u = t - T(k); return u > 0 && u < 0.35 ? Math.max(m, Math.exp(-u * 12) * 10) : m; }, 0);
+  ctx.setTransform(z, 0, 0, z, W / 2 * (1 - z) + Math.sin(t * 95) * shk, 860 * (1 - z) + Math.cos(t * 81) * shk);
+
+  // ── A · the hook
+  const hA = 1 - ss(T('qal') - 0.3, T('qal'), t);
+  if (hA > 0) { text('المُفلِس؟', 540, 700, 210, GOLD, hA, pop((t - 0.15) / 0.6), 'Messiri', 'rgba(247,197,107,.6)');
+    const no = ss(T('laysa'), T('laysa') + 0.35, t);
+    for (let i = 0; i < 3; i++) { const cx = 360 + i * 180, cy = 1010, p = pop((t - 0.5 - i * 0.12) / 0.5), drop = ss(T('laysa') + 0.5 + i * 0.08, T('laysa') + 1.1 + i * 0.08, t); if (p <= 0) continue;
+      ctx.save(); ctx.translate(cx, cy + drop * 420); ctx.rotate(drop * (i - 1) * 0.9); ctx.scale(p, p); style(hA * (1 - drop), 7, GOLD); ctx.beginPath(); ctx.arc(0, 0, 62, 0, 6.3); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, 40, 0, 6.3); ctx.lineWidth = 4; ctx.stroke(); ctx.restore(); ctx.globalAlpha = 1; }
+    if (no > 0) { style(hA * (1 - ss(T('laysa') + 0.9, T('laysa') + 1.4, t)), 12, RED); ctx.beginPath(); ctx.moveTo(250, 1010); ctx.lineTo(lerp(250, 830, no), 1010); ctx.stroke(); ctx.globalAlpha = 1; } }
+
+  // ── the attribution, held large while it is spoken
+  { const qa = ss(T('qal') - 0.05, T('qal') + 0.12, t) * (1 - ss(T('inna') - 0.3, T('inna'), t)); if (qa > 0) { glow(540, 760, 520, 0.3 * qa);
+      ctx.save(); ctx.globalCompositeOperation = 'lighter'; for (let i = 0; i < 15; i++) { const f = (i - 7) / 7, len = ss(T('qal') + Math.abs(f) * 0.2, T('qal') + 0.6 + Math.abs(f) * 0.2, t); ctx.strokeStyle = `rgba(247,197,107,${0.4 * qa * (1 - Math.abs(f) * 0.5)})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(540 + f * 70, 320); ctx.lineTo(lerp(540 + f * 70, 540 + f * 430, len), lerp(320, 640, len)); ctx.stroke(); } ctx.restore();
+      text('قال رسولُ الله', 540, 760, 150, '#FFE3A3', qa, pop((t - T('qal')) / 0.55), 'Amiri', 'rgba(247,197,107,.7)'); text('ﷺ', 540, 950, 130, GOLD, qa * ss(T('qal') + 0.5, T('qal') + 0.7, t), pop((t - T('qal') - 0.5) / 0.5), 'Amiri', 'rgba(247,197,107,.7)'); } }
+  // ── B–E · the vessel and the people he wronged
+  const inJ = ss(T('inna') - 0.1, T('inna') + 0.5, t), move = ss(T('wa_yati') - 0.2, T('wa_yati') + 0.5, t), lesson = ss(T('ihfaz') - 0.25, T('ihfaz') + 0.25, t);
+  const good = (ss(T('salah'), T('salah') + 0.7, t) + ss(T('siyam'), T('siyam') + 0.7, t) + ss(T('zakah'), T('zakah') + 0.7, t)) / 3 * 0.92 * (1 - ss(T('yuta') + 0.4, T('faniyat') + 0.5, t));
+  const bad = ss(T('ukhidha') + 0.5, T('nar') - 0.1, t) * 0.9;
+  const fall = ss(T('nar') + 0.15, T('nar') + 1.2, t);
+  const jx = lerp(540, 250, move), jy = lerp(880, 930, move) + fall * fall * 1300, js = lerp(1.15, 0.8, move);
+  const jA = inJ * (1 - lesson);
+  const people = [0, 1, 2, 3, 4].map(i => ({ x: 880 - (i % 2) * 80, y: 420 + i * 178, key: ['shatam', 'qadhaf', 'akal', 'safak', 'darab'][i], tag: ['شتم هذا', 'قذف هذا', 'أكل مال هذا', 'سفك دم هذا', 'ضرب هذا'][i] }));
+  // deeds flowing in
+  [['salah', 'صلاة', [250, 520]], ['siyam', 'صيام', [830, 520]], ['zakah', 'زكاة', [540, 400]]].forEach(([k, w, p], i) => { const a = ss(T(k) - 0.05, T(k) + 0.1, t) * (1 - move); if (a <= 0) return;
+    text(w, p[0], p[1], 92, GOLD, a, pop((t - T(k)) / 0.5), 'Messiri', 'rgba(247,197,107,.55)'); stream(t, T(k) + 0.1, 1.1, [p[0], p[1] + 60], [jx, jy - 170 * js], 14, false, 20 + i, 60); });
+  jar(jx, jy, js, fall * 0.9, good, bad, jA, t);
+  if (jA > 0 && t > T('faniyat') && t < T('ukhidha') + 0.4) { const u = (t - T('faniyat')) / 0.7; if (u < 1) { style((1 - u) * jA, 6, RED); ctx.beginPath(); ctx.arc(jx, jy, 150 + u * 220, 0, 6.3); ctx.stroke(); ctx.globalAlpha = 1; } text('فَنِيَت', jx, jy + 10, 84, RED, ss(T('faniyat'), T('faniyat') + 0.15, t) * (1 - ss(T('ukhidha') + 0.2, T('ukhidha') + 0.6, t)) * jA, pop((t - T('faniyat')) / 0.5)); }
+  people.forEach((p, i) => { const a = ss(T(p.key) - 0.05, T(p.key) + 0.1, t) * (1 - ss(T('nar') + 0.2, T('nar') + 0.8, t)); if (a <= 0) return;
+    const pp = pop((t - T(p.key)) / 0.5), paid = ss(T(i < 2 ? 'yuta' : 'hadha2') + 0.5 + i * 0.1, T(i < 2 ? 'yuta' : 'hadha2') + 1.3 + i * 0.1, t) * (1 - ss(T('ukhidha'), T('ukhidha') + 0.8, t)), hit = 1 - ss(T(p.key) + 0.25, T(p.key) + 0.9, t);
+    ctx.save(); ctx.translate(p.x, p.y); ctx.scale(pp, pp); ctx.translate(-p.x, -p.y); bust(p.x, p.y, 1, a, paid, hit); ctx.restore();
+    text(p.tag, p.x - 215, p.y - 10, 52, RED, a * (1 - ss(T('yuta') - 0.2, T('yuta') + 0.3, t)), pp);
+    stream(t, T(i < 2 ? 'yuta' : 'hadha2') + 0.15 + i * 0.12, 1.5, [jx + 60, jy - 150 * js], [p.x - 50, p.y - 20], 9, false, 40 + i, 90);
+    stream(t, T('ukhidha') + 0.1 + i * 0.12, 1.5, [p.x - 50, p.y - 20], [jx + 30, jy - 190 * js], 8, true, 60 + i, 90); });
+
+  // ── F · the lesson
+  if (lesson > 0) { const full = ss(T('ihfaz'), T('ihfaz') + 0.8, t); jar(540, 900, 1.05, 0, 0.92 * full, 0, lesson, t);
+    style(0.5 * lesson * full, 5, GOLD); ctx.beginPath(); ctx.arc(540, 900, 330 + Math.sin(t * 2) * 8, 0, 6.3); ctx.stroke(); ctx.globalAlpha = 1;
+    text('احفظْ حسناتِك', 540, 440, 118, '#FFE3A3', lesson, pop((t - T('ihfaz')) / 0.55), 'Messiri', 'rgba(247,197,107,.6)');
+    text('لا تُهدِها لمن ظلمتَه', 540, 1268, 76, LINE, ss(T('la_tuhdi'), T('la_tuhdi') + 0.15, t), pop((t - T('la_tuhdi')) / 0.55)); }
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const vg = ctx.createRadialGradient(W / 2, 900, 520, W / 2, 900, 1250); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,10,.55)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  const f = 1 - ss(0, 0.25, t) + ss(EP.duration - 0.4, EP.duration, t); if (f > 0) { ctx.fillStyle = `rgba(4,6,28,${f})`; ctx.fillRect(0, 0, W, H); }
+  for (const c of capEls) { const o = ss(c.t0, c.t0 + 0.14, t) * (1 - ss(c.t1 - 0.12, c.t1, t)); c.el.style.opacity = o; c.el.style.visibility = o > 0.001 ? 'visible' : 'hidden'; c.el.style.transform = `translateY(${(1 - ss(c.t0, c.t0 + 0.18, t)) * 12}px)`; }
+  document.getElementById('brand').style.opacity = 0.78 * (1 - f);
+}
+async function init() {
+  EP = window.EPISODE; K = EP.keys;
+  document.querySelector('#brand .ar').textContent = EP.brand.ar; document.querySelector('#brand .en').textContent = EP.brand.en;
+  const caps = document.getElementById('caps');
+  for (const c of EP.caps) { const el = document.createElement('div'); el.className = 'cap'; if (c.top) el.style.top = c.top + 'px'; el.innerHTML = c.html; caps.appendChild(el); capEls.push({ ...c, el }); }
+  await document.fonts.ready; await Promise.all([...document.fonts].map(f => f.load().catch(() => {})));
+  window.renderAt = render; window.READY = true;
+  if (params.has('play')) { const t0 = performance.now(); (function loop() { render(((performance.now() - t0) / 1000) % EP.duration); requestAnimationFrame(loop); })(); } else render(parseFloat(params.get('t') || '0'));
+}
+</script>
+</body>
+</html>

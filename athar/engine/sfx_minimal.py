@@ -1,7 +1,7 @@
 """Sound effects bed for the minimal format (no instruments): soft whooshes, one low thud, airy shimmer.
-usage: python3 engine/sfx_minimal.py out.wav <duration> <whoosh times,comma> <thud time> <shimmer time>"""
+usage: python3 engine/sfx_minimal.py out.wav <duration> <whoosh times,comma> <thud times,comma> <shimmer time>"""
 import sys, wave, numpy as np
-out, DUR = sys.argv[1], float(sys.argv[2]); WH = [float(x) for x in sys.argv[3].split(',')]; THUD = float(sys.argv[4]); SHIM = float(sys.argv[5])
+out, DUR = sys.argv[1], float(sys.argv[2]); WH = [float(x) for x in sys.argv[3].split(',')]; THUDS = [float(x) for x in sys.argv[4].split(',')]; SHIM = float(sys.argv[5])
 SR = 44100; N = int(DUR * SR); L = np.zeros(N); R = np.zeros(N)
 def band(n, lo, hi, seed):
     x = np.random.RandomState(seed).randn(n); X = np.fft.rfft(x); f = np.fft.rfftfreq(n, 1 / SR)
@@ -15,7 +15,7 @@ for j, w in enumerate(WH):
     place(L, s, w - 0.3, 0.07); place(R, s, w - 0.26, 0.07)
 n = int(0.7 * SR); tt = np.arange(n) / SR
 thud = np.sin(2 * np.pi * (70 * tt + 60 * (1 - np.exp(-tt * 18)) / 18)) * np.exp(-tt / 0.16) + band(n, 60, 300, 9) * np.exp(-tt / 0.06) * 0.5
-place(L, thud, THUD, 0.3); place(R, thud, THUD, 0.3)
+for THUD in THUDS: place(L, thud, THUD, 0.3); place(R, thud, THUD, 0.3)
 n = int(5.5 * SR); sh = band(n, 3500, 10000, 60) * np.sin(np.linspace(0, np.pi, n)) ** 2
 place(L, sh, SHIM, 0.022); place(R, sh, SHIM + 0.02, 0.022)
 st = np.stack([L, R], 1)
