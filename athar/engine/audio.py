@@ -5,6 +5,8 @@ import sys, wave, numpy as np
 out, DUR, STOP, RESUME = sys.argv[1], float(sys.argv[2]), float(sys.argv[3]), float(sys.argv[4])
 REWARD = float(sys.argv[5]) if len(sys.argv) > 5 else STOP + 2.0
 RUSTLE = (sys.argv[6] if len(sys.argv) > 6 else 'rustle')  # rustle | water | none
+SPEED = float(sys.argv[7]) if len(sys.argv) > 7 else 1.0
+WHOOSH = [float(x) for x in sys.argv[8].split(',')] if len(sys.argv) > 8 and sys.argv[8] else []
 SR = 44100; N = int(DUR * SR); t = np.arange(N) / SR; rs = np.random.RandomState(3)
 ss = lambda a, b, x: (lambda u: u * u * (3 - 2 * u))(np.clip((x - a) / (b - a), 0, 1))
 def band(n, lo, hi, seed):
@@ -21,7 +23,7 @@ lfo = 0.6 + 0.4 * np.sin(2 * np.pi * 0.11 * t) * np.sin(2 * np.pi * 0.047 * t + 
 L += band(N, 120, 700, 1) * 0.085 * lfo; R += band(N, 120, 700, 2) * 0.085 * lfo
 # footsteps, synced with the animation's walk cycle
 sp = 1 - ss(STOP - 0.7, STOP, t) + ss(RESUME, RESUME + 0.8, t)
-ph = np.cumsum(165 * sp / SR) / 34
+ph = np.cumsum(165 * SPEED * sp / SR) / 34
 k = np.floor(ph / np.pi - 0.5); idx = np.nonzero(np.diff(k) > 0)[0]
 for j, i in enumerate(idx):
     n = int(0.13 * SR); e = np.exp(-np.arange(n) / (0.028 * SR))
@@ -34,6 +36,12 @@ if RUSTLE == 'rustle':
 elif RUSTLE == 'water':
     n = int(2.4 * SR); env = np.sin(np.linspace(0, np.pi, n)) ** 1.5 * (0.5 + 0.5 * np.abs(np.sin(np.linspace(0, 90, n)) * np.sin(np.linspace(0, 37, n))))
     s = band(n, 900, 4500, 51) * env; place(L, s, STOP + 0.9, 0.06); place(R, s, STOP + 0.95, 0.06)
+# whoosh on each fast cut
+for j, w in enumerate(WHOOSH):
+    n = int(0.42 * SR); env = np.sin(np.linspace(0, np.pi, n)) ** 3
+    s = band(n, 500, 5000, 70 + j) * env; place(L, s, w - 0.3, 0.11); place(R, s, w - 0.27, 0.11)
+    n = int(0.9 * SR); tt = np.arange(n) / SR; ping = np.sin(2 * np.pi * (880 + 110 * j) * tt) * np.exp(-tt / 0.25) * np.minimum(1, tt / 0.005)
+    place(L, ping, w, 0.035); place(R, ping, w + 0.008, 0.035)
 # reward chime (single bell-like tone) + airy shimmer
 T0 = REWARD; n = int(5 * SR); tt = np.arange(n) / SR; bell = np.zeros(n)
 for f, a, dcy in [(587.3, 1, 2.2), (880, .6, 1.8), (1174.7, .45, 1.4), (1760, .25, 1.0), (2349.3, .12, .7)]:

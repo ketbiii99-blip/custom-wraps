@@ -1,0 +1,179 @@
+{
+ "id": "ep08",
+ "title": "٣ صدقات لا تكلّفك درهمًا",
+ "sources": "Sahih al-Bukhari 2989, Sahih Muslim 1009",
+ "format": "fast",
+ "tempo": 1.1,
+ "gap": 0.22,
+ "lead": 0.15,
+ "tail": 1.0,
+ "scene": {
+  "prop": "passby",
+  "sound": "none",
+  "items": [
+   {
+    "type": "word",
+    "at": "one:0.45"
+   },
+   {
+    "type": "load",
+    "at": "two:0.45"
+   },
+   {
+    "type": "branch",
+    "at": "three:0.45"
+   }
+  ]
+ },
+ "action": {
+  "stopAt": 999,
+  "resumeAt": 999,
+  "speedMul": 2.1,
+  "rewardAt": "three:0.6",
+  "dawnFrom": "one:start",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 800,
+   "voice": "ثلاثُ صدقات، لا تُكلِّفُكَ دِرهمًا!",
+   "lines": [
+    {
+     "cls": "num pop",
+     "html": "٣"
+    },
+    {
+     "f": 0.08,
+     "cls": "key pop",
+     "html": "صدقات"
+    },
+    {
+     "f": 0.45,
+     "cls": "key gold pop",
+     "html": "لا تكلّفك درهمًا"
+    }
+   ],
+   "subs": [
+    {
+     "text": "3 charities that cost you nothing"
+    }
+   ]
+  },
+  {
+   "id": "one",
+   "clip": 801,
+   "voice": "واحد: الكلمةُ الطيّبة.",
+   "lines": [
+    {
+     "cls": "num pop",
+     "html": "١"
+    },
+    {
+     "f": 0.35,
+     "cls": "key pop",
+     "html": "الكلمة الطيّبة"
+    }
+   ],
+   "subs": [
+    {
+     "text": "1 · A kind word"
+    }
+   ]
+  },
+  {
+   "id": "two",
+   "clip": 802,
+   "voice": "اثنان: أن تُعينَ غيرَكَ على حِملِه.",
+   "lines": [
+    {
+     "cls": "num pop",
+     "html": "٢"
+    },
+    {
+     "f": 0.3,
+     "cls": "key pop",
+     "html": "تُعين غيرك على حِمله"
+    }
+   ],
+   "subs": [
+    {
+     "text": "2 · Helping someone with their load"
+    }
+   ]
+  },
+  {
+   "id": "three",
+   "clip": 803,
+   "voice": "ثلاثة: أن تُميطَ الأذى عنِ الطريق.",
+   "lines": [
+    {
+     "cls": "num pop",
+     "html": "٣"
+    },
+    {
+     "f": 0.3,
+     "cls": "key pop",
+     "html": "تُميط الأذى عن الطريق"
+    }
+   ],
+   "subs": [
+    {
+     "text": "3 · Clearing harm from the road"
+    }
+   ]
+  },
+  {
+   "id": "all",
+   "clip": 804,
+   "voice": "كلُّها صدقات، كما أخبرَ النبيُّ صلّى اللهُ عليهِ وسلَّم.",
+   "lines": [
+    {
+     "cls": "key gold pop",
+     "html": "كلُّها صدقات"
+    },
+    {
+     "f": 0.3,
+     "cls": "small",
+     "html": "كما أخبر النبيُّ <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.4,
+     "cls": "source",
+     "html": "متفق عليه · البخاري (٢٩٨٩) ومسلم (١٠٠٩)"
+    }
+   ],
+   "subs": [
+    {
+     "text": "All of them are charity — as the Prophet ﷺ said<small>Bukhari 2989 · Muslim 1009</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 805,
+   "voice": "أيُّها ستفعلُ اليوم؟ واحد، اثنان، أم ثلاثة؟",
+   "lines": [
+    {
+     "cls": "key pop",
+     "html": "أيُّها ستفعل اليوم؟"
+    },
+    {
+     "f": 0.42,
+     "cls": "num pop",
+     "html": "١ · ٢ · ٣"
+    },
+    {
+     "f": 0.75,
+     "cls": "small",
+     "html": "اكتب الرقم في التعليقات"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Which will you do today? Comment 1, 2 or 3"
+    }
+   ]
+  }
+ ]
+}

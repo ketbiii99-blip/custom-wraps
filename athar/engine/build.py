@@ -13,6 +13,12 @@ ids = [str(b['clip']) for b in spec['beats'] if 'clip' in b]
 src = {i: os.path.join(clips, alt.get(i, i) + '.wav') for i in ids}
 def dur(f): return float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f], capture_output=True, text=True).stdout)
 work = f'out/_{ep}'; shutil.rmtree(work, ignore_errors=True); os.makedirs(work + '/ex'); os.makedirs(work + '/mt')
+tempo = spec.get('tempo')
+if tempo:  # fast format: quicker narration
+    os.makedirs(work + '/tp')
+    for i, f in list(src.items()):
+        if i in recit: continue
+        run('ffmpeg', '-v', 'error', '-y', '-i', f, '-af', f'atempo={tempo}', f'{work}/tp/{i}.wav'); src[i] = f'{work}/tp/{i}.wav'
 json.dump({i: dur(f) for i, f in src.items()}, open(work + '/dur.json', 'w'))
 run('python3', 'engine/timeline.py', f'episodes/src/{ep}.json', work + '/dur.json')
 E = json.loads(open(f'episodes/{ep}.js', encoding='utf-8').read().split('window.EPISODE = ', 1)[1].rstrip().rstrip(';'))
@@ -26,7 +32,7 @@ for i in ids:
     m = float(re.search(r'mean_volume: ([-0-9.]+)', subprocess.run(['ffmpeg', '-i', f'{work}/c{i}.wav', '-af', 'volumedetect', '-f', 'null', '-'], capture_output=True, text=True).stderr).group(1))
     run('ffmpeg', '-v', 'error', '-y', '-i', f'{work}/c{i}.wav', '-af', f'volume={-17 - m:.2f}dB,alimiter=limit=0.9', f'{work}/v{i}.wav')
 A = E['action']
-run('python3', 'engine/audio.py', work + '/amb.wav', str(E['duration']), str(A['stopAt']), str(A['resumeAt']), str(A['rewardAt']), E.get('scene', {}).get('sound', 'rustle'), stdout=subprocess.DEVNULL)
+run('python3', 'engine/audio.py', work + '/amb.wav', str(E['duration']), str(A['stopAt']), str(A['resumeAt']), str(A['rewardAt']), E.get('scene', {}).get('sound', 'rustle'), str(A.get('speedMul', 1)), ','.join(str(it['at']) for it in E.get('scene', {}).get('items', [])), stdout=subprocess.DEVNULL)
 duck = '+'.join(f"between(t,{v['at'] - 0.5},{v['end'] + 0.3})" for v in E['voice'] if v.get('recitation')) or '0'
 inputs = ['-i', work + '/amb.wav']; fc = [f"[0]volume='if({duck},0.15,0.6)':eval=frame[a]"]; labels = []; rlabels = []
 for n, v in enumerate(E['voice'], 1):

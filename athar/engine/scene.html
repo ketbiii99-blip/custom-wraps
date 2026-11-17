@@ -44,6 +44,9 @@ canvas{position:absolute;inset:0}
 .follow{font:500 38px/1.5 "Plex";margin-top:44px;display:inline-block;padding:14px 38px;border-radius:99px;
   border:2px solid rgba(247,197,107,.7);background:rgba(9,12,40,.55);text-shadow:none}
 .follow b{font-family:"Messiri";color:var(--gold)}
+.num{font:700 250px/1.05 "Messiri";color:var(--gold);text-shadow:0 6px 40px rgba(247,197,107,.45),0 3px 22px rgba(4,6,24,.85)}
+.key{font:700 92px/1.35 "Messiri"}
+.pop{transform-origin:50% 60%}
 .sub{position:absolute;top:1506px;left:90px;right:90px;text-align:center;direction:ltr;
   font:500 41px/1.34 "Outfit";color:#fff;text-shadow:0 2px 14px rgba(3,4,16,.95),0 0 3px rgba(3,4,16,.9)}
 .sub small{display:block;font:400 27px/1.5 "Outfit";letter-spacing:.07em;color:var(--gold);margin-top:8px;text-transform:uppercase}
@@ -78,7 +81,7 @@ const mod = (x, m) => ((x % m) + m) % m;
 
 /* ---------- motion ---------- */
 function speed(t) { const a = EP.action; return 1 - ss(a.stopAt - 0.7, a.stopAt, t) + ss(a.resumeAt, a.resumeAt + 0.8, t); }
-function dist(t) { let d = 0; const dt = 1 / 120; for (let x = 0; x < t; x += dt) d += V * speed(x) * dt; return d; }
+function dist(t) { let d = 0; const dt = 1 / 120; for (let x = 0; x < t; x += dt) d += V * speed(x) * dt * (EP.action.speedMul || 1); return d; }
 
 /* ---------- pre-generated world ---------- */
 const R = rng(7);
@@ -365,7 +368,9 @@ function drawFg(D, d) {
 /* ---------- frame ---------- */
 function render(t) {
   const A = EP.action, D = dist(t), d = ss(A.dawnFrom, A.dawnTo, t);
-  ctx.clearRect(0, 0, W, H);
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, H);
+  { const items = (EP.scene && EP.scene.items) || []; let z = 1; for (const it of items) { const u = t - it.at + 0.12; if (u > 0 && u < 0.6) z += 0.055 * Math.exp(-u * 7) * Math.min(1, u * 30); }
+    if (z !== 1) ctx.setTransform(z, 0, 0, z, W / 2 * (1 - z), (GY - 150) * (1 - z)); }
   drawSky(t, d);
   drawCity(t, D, d);
   dune(GY - 92, 26, 310, 1.3, D * 0.2, mix('#0E133D', '#77557F', d));
@@ -435,6 +440,17 @@ function render(t) {
           ctx.fillStyle = `rgba(255,222,150,${0.75 * (1 - k / 20)})`; ctx.beginPath(); ctx.arc(x, y, 7 - k * 0.25, 0, 6.3); ctx.fill(); }
         ctx.globalCompositeOperation = 'source-over'; }
       if (g > 0) { glowAt(sx, sy - 150, 260, 0.32 * g * (1 - d * 0.5)); ctx.save(); ctx.translate(sx, sy); ctx.scale(2.0 + (i % 2) * 0.25, 2.0 + (i % 2) * 0.25); drawSapling(0, 0, g, t + i, d); ctx.restore(); } });
+  } else if (PROP === 'passby') {
+    // fast format: he never stops; each deed happens as he strides past it
+    for (const it of EP.scene.items) { const x = CX - 190 - dist(it.at) + D, q = ss(it.at - 0.45, it.at + 0.35, t); if (x < -400 || x > W + 400) continue;
+      if (it.type === 'branch') { const bY = GY + 66 + q * 54 - Math.sin(q * Math.PI) * 60; drawBranch(x - q * 50, bY, -0.12 + q * 0.9, d, 1); }
+      else if (it.type === 'word') { const head = drawSitter(x - 40, GY + 30, q, t, d);
+        const w = (t - (it.at - 0.6)) / 0.8; if (w > 0 && w < 1.3) { ctx.globalCompositeOperation = 'lighter';
+          for (let k = 0; k < 22; k++) { const u = w - k * 0.025; if (u < 0 || u > 1) continue; const e = u * u * (3 - 2 * u);
+            ctx.fillStyle = `rgba(255,222,150,${0.8 * (1 - k / 22)})`; ctx.beginPath(); ctx.arc(lerp(CX - 40, head[0], e), lerp(cy - 330, head[1], e) - Math.sin(e * Math.PI) * 60, 7 - k * 0.22, 0, 6.3); ctx.fill(); }
+          ctx.globalCompositeOperation = 'source-over'; } }
+      else if (it.type === 'load') { drawCarrier(x - 30, cy - 40, q, 0, 0, t, d); if (q > 0.02) glowAt(x + 40, cy - 280, 200, 0.35 * q * (1 - ss(it.at + 0.4, it.at + 1.4, t))); }
+      const rr = t - it.at; if (rr > 0 && rr < 0.7) { const k = rr / 0.7; ctx.strokeStyle = `rgba(255,214,140,${(1 - k) * 0.8})`; ctx.lineWidth = 6 * (1 - k) + 1; ctx.beginPath(); ctx.arc(x, cy - 150, 30 + k * 300, 0, 6.3); ctx.stroke(); } }
   } else if (PROP === 'sapling') {
     const g = carry * 0.42 + 0.58 * ss(rAt, rAt + 6, t) * (carry >= 1 ? 1 : 0), sx = pX - 18, sy = GY + 86;
     reachTo = [sx + 6, sy - 26];
@@ -464,6 +480,7 @@ function render(t) {
     ctx.globalCompositeOperation = 'source-over'; }
 
   drawFg(D, d);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   // vignette + top scrim for text
   const tg = ctx.createLinearGradient(0, 0, 0, 900); tg.addColorStop(0, `rgba(4,6,26,${0.55 - d * 0.1})`); tg.addColorStop(1, 'rgba(4,6,26,0)'); ctx.fillStyle = tg; ctx.fillRect(0, 0, W, 900);
   const vg = ctx.createRadialGradient(W / 2, H * 0.55, 500, W / 2, H * 0.55, 1250); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,10,.5)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
@@ -473,7 +490,8 @@ function render(t) {
 
   // text overlays
   for (const c of cueEls) { const out = 1 - ss(c.t1 - 0.35, c.t1, t); let any = 0;
-    for (const l of c.lines) { const k = ss(c.t0 + l.at, c.t0 + l.at + 0.45, t), o = k * out; any = Math.max(any, o); l.el.style.opacity = o; l.el.style.transform = `translateY(${(1 - k) * 26}px)`; }
+    for (const l of c.lines) { const k = ss(c.t0 + l.at, c.t0 + l.at + 0.45, t), o = k * out; any = Math.max(any, o); l.el.style.opacity = o; l.el.style.transform = `translateY(${(1 - k) * 26}px)`;
+      if (/\bpop\b/.test(l.cls)) { const kp = ss(c.t0 + l.at, c.t0 + l.at + 0.16, t), b = Math.max(0, 1 - (t - c.t0 - l.at) / 0.3); l.el.style.opacity = kp * out; l.el.style.transform = `scale(${(/\bnum\b/.test(l.cls) ? 1.5 : 1.16) - (/\bnum\b/.test(l.cls) ? 0.5 : 0.16) * kp + 0.03 * b})`; } }
     c.el.style.visibility = any > 0.001 ? 'visible' : 'hidden';
     if (c.card) { const k = ss(c.t0, c.t0 + 0.5, t) * out; c.el.style.opacity = k; c.el.style.transform = `translateY(${(1 - ss(c.t0, c.t0 + 0.5, t)) * 30}px)`; } }
   for (const s of subEls) { const o = ss(s.t0, s.t0 + 0.18, t) * (1 - ss(s.t1 - 0.16, s.t1, t)); s.el.style.opacity = o; s.el.style.visibility = o > 0.001 ? 'visible' : 'hidden'; }
