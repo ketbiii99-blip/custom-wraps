@@ -1,0 +1,203 @@
+{
+ "id": "ep14",
+ "title": "كما يُرزق الطير",
+ "sources": "Jami' at-Tirmidhi 2344 (authenticated by al-Albani), Ibn Majah 4164 · Qur'an 65:3, first part (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "birds",
+  "sound": "none",
+  "dawnMax": 0.62
+ },
+ "action": {
+  "stopAt": "hook:end-0.2",
+  "actAt": "out:start-0.95",
+  "actHold": 3.0,
+  "bendAmt": 0,
+  "outAt": "out:start+0.1",
+  "backAt": "back:start-0.5",
+  "resumeAt": "lesson:0.4",
+  "rewardAt": "h1:0.57",
+  "dawnFrom": "out:start-0.9",
+  "dawnTo": "back:end"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 1100,
+   "voice": "الطَّيرُ لا يملِكُ شيئًا... ولا ينامُ جائعًا.",
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "big",
+     "html": "الطَّيرُ لا يملِكُ شيئًا…"
+    },
+    {
+     "f": 0.58,
+     "cls": "big gold",
+     "html": "ولا ينامُ جائعًا"
+    }
+   ],
+   "subs": [
+    {
+     "text": "A bird owns nothing…",
+     "f1": 0.58
+    },
+    {
+     "text": "…yet it never sleeps hungry.",
+     "f0": 0.58
+    }
+   ]
+  },
+  {
+   "id": "out",
+   "clip": 1101,
+   "voice": "يخرُجُ معَ الفجرِ وبطنُهُ خاوٍ، لا يدري أينَ رزقُه.",
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "يخرُجُ معَ الفجرِ <span class=\"gold\">وبطنُهُ خاوٍ</span>"
+    },
+    {
+     "f": 0.62,
+     "cls": "small",
+     "html": "لا يدري أينَ رزقُه"
+    }
+   ],
+   "subs": [
+    {
+     "text": "It leaves at dawn on an empty stomach, not knowing where its provision is."
+    }
+   ]
+  },
+  {
+   "id": "back",
+   "clip": 1102,
+   "voice": "ويعودُ في المساءِ، وقد شبِع.",
+   "gap": 1.9,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "ويعودُ في المساءِ…"
+    },
+    {
+     "f": 0.62,
+     "cls": "mid gold",
+     "html": "وقد شَبِع"
+    }
+   ],
+   "subs": [
+    {
+     "text": "And it returns in the evening, full."
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 1103,
+   "voice": "",
+   "card": true,
+   "gap": 0.8,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.26,
+     "cls": "hadith",
+     "html": "«لَوْ أَنَّكُمْ كُنْتُمْ تَوَكَّلُونَ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ، <span class=\"gold\">لَرُزِقْتُمْ كَمَا يُرْزَقُ الطَّيْرُ</span>، تَغْدُو خِمَاصًا وَتَرُوحُ بِطَانًا»"
+    },
+    {
+     "f": 0.5,
+     "cls": "source",
+     "html": "رواه الترمذي (٢٣٤٤) · صحّحه الألباني"
+    }
+   ],
+   "subs": [
+    {
+     "text": "The Messenger of Allah ﷺ said:",
+     "f1": 0.26
+    },
+    {
+     "text": "“If you relied on Allah as He deserves to be relied upon, you would be provided for as the birds are: they leave hungry in the morning and return full in the evening.”<small>Tirmidhi 2344 · authenticated by al-Albani</small>",
+     "f0": 0.26
+    }
+   ]
+  },
+  {
+   "id": "lesson",
+   "clip": 1104,
+   "voice": "لم يبقَ في عُشِّه ينتظر... سعى، وقلبُهُ مُطمئنّ. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "لم يبقَ في عُشِّهِ ينتظر…"
+    },
+    {
+     "f": 0.4,
+     "cls": "mid gold",
+     "html": "سعى، وقلبُهُ مُطمئنّ"
+    }
+   ],
+   "subs": [
+    {
+     "text": "It didn’t stay in its nest waiting. It went out, with a heart at peace.",
+     "f1": 0.78
+    },
+    {
+     "text": "Allah, the Most High, says:",
+     "f0": 0.78
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q65_3_qatami",
+   "recitation": "Qur'an 65:3 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿وَيَرۡزُقۡهُ مِنۡ حَيۡثُ لَا يَحۡتَسِبُۚ وَمَن يَتَوَكَّلۡ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُۥ﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة الطلاق · من الآية ٣ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“And He will provide for him from where he does not expect. Whoever relies on Allah, He is sufficient for him.”<small>Qur’an 65:3 (part) · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 1105,
+   "voice": "اسعَ، وتوكَّلْ على الله... ورزقُكَ آتٍ.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "اسعَ، وتوكَّلْ على الله…"
+    },
+    {
+     "f": 0.55,
+     "cls": "big gold",
+     "html": "ورزقُكَ آتٍ"
+    },
+    {
+     "f": 0.85,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Strive, rely on Allah… and your provision will come."
+    }
+   ]
+  }
+ ]
+}
