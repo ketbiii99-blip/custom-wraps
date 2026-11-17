@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:"Messiri";font-weight:500;src:url(../fonts/el-messiri-arabic-500-normal.woff2)}
+@font-face{font-family:"Messiri";font-weight:700;src:url(../fonts/el-messiri-arabic-700-normal.woff2)}
+@font-face{font-family:"Amiri";font-weight:400;src:url(../fonts/amiri-arabic-400-normal.woff2)}
+@font-face{font-family:"Amiri";font-weight:700;src:url(../fonts/amiri-arabic-700-normal.woff2)}
+@font-face{font-family:"Plex";font-weight:400;src:url(../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2)}
+@font-face{font-family:"Plex";font-weight:500;src:url(../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2)}
+@font-face{font-family:"Outfit";font-weight:400;src:url(../fonts/outfit-latin-400-normal.woff2)}
+@font-face{font-family:"Outfit";font-weight:500;src:url(../fonts/outfit-latin-500-normal.woff2)}
+:root{--gold:#F7C56B;--cream:#FFF4DC}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#070A24}
+canvas{position:absolute;inset:0}
+#brand{position:absolute;top:212px;left:0;right:0;direction:ltr;color:var(--cream);opacity:.78;display:flex;gap:16px;justify-content:center;align-items:center}
+#brand .ar{font:700 40px "Messiri";color:var(--gold)}
+#brand .en{font:500 19px "Outfit";letter-spacing:.42em;margin-top:6px}
+#brand .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:6px}
+.cap{position:absolute;left:70px;right:70px;top:1268px;text-align:center;color:var(--cream)}
+.cap .ar{font:700 64px/1.5 "Messiri";text-shadow:0 3px 22px rgba(4,6,24,.85)}
+.cap .ar .g{color:var(--gold)}
+.cap .ar .p{font-family:"Amiri";font-weight:400}
+.cap .en{direction:ltr;font:500 36px/1.4 "Outfit";opacity:.86;margin-top:14px}
+.cap .src{font:400 30px/1.5 "Plex";opacity:.8;margin-top:16px}
+.cap .cta{display:inline-block;font:500 40px/1.4 "Plex";margin-top:6px;padding:14px 40px;border-radius:99px;border:2px solid rgba(247,197,107,.7);background:rgba(9,12,40,.55)}
+.cap .cta b{font-family:"Messiri";color:var(--gold)}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="brand"><span class="en"></span><span class="dot"></span><span class="ar"></span></div>
+<div id="caps"></div>
+<script>
+const params = new URLSearchParams(location.search);
+const sc = document.createElement('script'); sc.src = '../episodes/' + (params.get('ep') || 'ep09') + '.js'; sc.onload = init; document.head.appendChild(sc);
+const W = 1080, H = 1920, cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let EP, K, capEls = [];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ss = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+const lerp = (a, b, t) => a + (b - a) * t;
+const out = x => 1 - Math.pow(1 - clamp(x), 3);
+const spring = x => x <= 0 ? 0 : 1 - Math.exp(-6.5 * x) * Math.cos(11 * x);
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const R = rng(11), stars = Array.from({ length: 70 }, () => ({ x: R() * W, y: R() * 1150, r: 0.7 + R() * 1.8, p: R() * 6.3, s: 0.5 + R() * 1.6 }));
+const LINE = '#FFF1D2', GOLD = '#F7C56B';
+
+function glow(x, y, r, a) { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(255,214,140,${a})`); g.addColorStop(0.3, `rgba(255,190,105,${a * 0.4})`); g.addColorStop(1, 'rgba(255,170,90,0)'); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2); ctx.globalCompositeOperation = 'source-over'; }
+// stroke a path progressively (p: 0..1), as if drawn by hand
+function draw(p, fn, len = 1400) { if (p <= 0) return; ctx.save(); ctx.setLineDash([len, len]); ctx.lineDashOffset = len * (1 - clamp(p)); ctx.beginPath(); fn(); ctx.stroke(); ctx.restore(); }
+function style(a = 1, w = 7, col = LINE) { ctx.globalAlpha = a; ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; }
+
+// seated man in line art, with the Athar lantern beside him
+function figure(x, y, p, a) { if (a <= 0) return; ctx.save(); ctx.translate(x, y);
+  style(a);
+  draw(ss(0, 0.35, p), () => ctx.arc(0, -262, 46, -Math.PI / 2, Math.PI * 1.5), 320);
+  draw(ss(0.2, 0.5, p), () => { ctx.moveTo(-40, -286); ctx.quadraticCurveTo(0, -304, 40, -286); }, 120);
+  draw(ss(0.25, 0.7, p), () => { ctx.moveTo(-44, -250); ctx.quadraticCurveTo(-78, -210, -84, -168); ctx.quadraticCurveTo(-112, -90, -96, -22); ctx.moveTo(44, -250); ctx.quadraticCurveTo(78, -210, 84, -168); ctx.quadraticCurveTo(112, -90, 96, -22); }, 620);
+  draw(ss(0.5, 1, p), () => { ctx.moveTo(-96, -22); ctx.quadraticCurveTo(-190, -30, -176, 2); ctx.quadraticCurveTo(0, 26, 176, 2); ctx.quadraticCurveTo(190, -30, 96, -22); }, 820);
+  draw(ss(0.55, 1, p), () => { ctx.moveTo(-70, -150); ctx.quadraticCurveTo(-104, -84, -62, -40); ctx.moveTo(70, -150); ctx.quadraticCurveTo(104, -84, 62, -40); }, 320);
+  // lantern
+  const lx = 268, ly = -150, q = ss(0.6, 1, p);
+  if (q > 0) { glow(lx, ly + 76, 210, 0.42 * q * a); style(a * q, 6, GOLD);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx, ly + 24); ctx.moveTo(lx - 22, ly + 50); ctx.lineTo(lx, ly + 28); ctx.lineTo(lx + 22, ly + 50); ctx.closePath();
+    ctx.moveTo(lx - 18, ly + 50); ctx.lineTo(lx - 24, ly + 84); ctx.lineTo(lx - 17, ly + 118); ctx.lineTo(lx + 17, ly + 118); ctx.lineTo(lx + 24, ly + 84); ctx.lineTo(lx + 18, ly + 50); ctx.moveTo(lx - 22, ly + 126); ctx.lineTo(lx + 22, ly + 126); ctx.stroke();
+    ctx.globalAlpha = a * q; ctx.fillStyle = 'rgba(255,224,150,.9)'; ctx.beginPath(); ctx.ellipse(lx, ly + 86, 6, 15, 0, 0, 6.3); ctx.fill(); }
+  ctx.restore(); ctx.globalAlpha = 1; }
+
+function scale(x, y, p, th, a) { if (a <= 0 || p <= 0) return null; ctx.save(); ctx.translate(x, y); style(a);
+  draw(ss(0, 0.5, p), () => { ctx.moveTo(-130, 150); ctx.lineTo(130, 150); ctx.moveTo(0, 150); ctx.lineTo(0, -230); }, 700);
+  draw(ss(0.2, 0.6, p), () => ctx.arc(0, -246, 16, 0, 6.3), 110);
+  const L = 250, c = Math.cos(th), s = Math.sin(th), ends = [[-L * c, -230 - L * s * -1 * -1], [L * c, -230 + L * s]]; ends[0][1] = -230 - L * s;
+  draw(ss(0.35, 0.8, p), () => { ctx.moveTo(ends[0][0], ends[0][1]); ctx.lineTo(ends[1][0], ends[1][1]); }, 520);
+  const pans = ends.map(([ex, ey]) => { const py = ey + 190; draw(ss(0.55, 1, p), () => { ctx.moveTo(ex, ey); ctx.lineTo(ex - 86, py); ctx.moveTo(ex, ey); ctx.lineTo(ex + 86, py); ctx.moveTo(ex - 96, py); ctx.quadraticCurveTo(ex, py + 62, ex + 96, py); ctx.closePath(); }, 900); return [x + ex, y + py]; });
+  ctx.restore(); ctx.globalAlpha = 1; return pans; }
+
+function orb(x, y, r, a) { if (a <= 0) return; glow(x, y, r * 5.5, 0.5 * a); ctx.globalAlpha = a; ctx.fillStyle = '#FFE9B8'; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.3); ctx.fill(); ctx.strokeStyle = GOLD; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(x, y, r + 9, 0, 6.3); ctx.stroke(); ctx.globalAlpha = 1; }
+
+function render(t) {
+  const v = K.voiceAt, T = k => v + K[k];
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const bg = ctx.createRadialGradient(W / 2, 860, 60, W / 2, 860, 1300); bg.addColorStop(0, '#171D52'); bg.addColorStop(0.45, '#0C1036'); bg.addColorStop(1, '#04061C'); ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  for (const s of stars) { ctx.globalAlpha = (0.35 + 0.3 * Math.sin(t * s.s + s.p)) * (1 - s.y / 1300); ctx.fillStyle = '#FFF4DC'; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.3); ctx.fill(); } ctx.globalAlpha = 1;
+  // camera: a small punch on each beat, and a shake when the words land in the scale
+  let z = 1; for (const k of ['kalimatan', 'thaqilatan', 'habibatan', 'sub1', 'sub2']) { const u = t - T(k); if (u > 0 && u < 0.7) z += 0.04 * Math.exp(-u * 7) * Math.min(1, u * 30); }
+  const dropT = T('mizan') + 0.18, sh = t - dropT, shake = sh > 0 && sh < 0.5 ? Math.exp(-sh * 9) * 14 : 0;
+  ctx.setTransform(z, 0, 0, z, W / 2 * (1 - z) + Math.sin(t * 90) * shake, 860 * (1 - z) + Math.cos(t * 77) * shake);
+
+  const CXc = 540, figY = 1060, scY = 900;
+  // 1 · the man, drawn on; fades as the scale takes over
+  const figA = 1 - ss(T('thaqilatan') - 0.25, T('thaqilatan') + 0.1, t);
+  figure(CXc - 60, figY, ss(0.1, 1.5, t), figA);
+  // 2 · the scale
+  const scP = ss(T('thaqilatan') - 0.1, T('thaqilatan') + 0.7, t), scA = 1 - 0.75 * ss(T('sub1') - 0.2, T('sub1') + 0.3, t) - 0.25 * ss(K.end - 0.4, K.end, t);
+  const th = 0.34 * spring((t - dropT) / 0.9);
+  const pans = scale(CXc, scY, scP, th, Math.max(0, scA));
+  // 3 · rays of light from above
+  const rayA = ss(T('habibatan') - 0.05, T('habibatan') + 0.6, t) * (1 - 0.6 * ss(T('sub1'), T('sub1') + 0.5, t));
+  if (rayA > 0) { const tx = pans ? pans[1][0] : CXc, ty = pans ? pans[1][1] - 20 : 800; ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 13; i++) { const f = (i - 6) / 6, len = ss(T('habibatan') - 0.05 + Math.abs(f) * 0.25, T('habibatan') + 0.5 + Math.abs(f) * 0.25, t);
+      ctx.strokeStyle = `rgba(247,197,107,${0.5 * rayA * (1 - Math.abs(f) * 0.45)})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(tx + f * 60 - 40, 330); ctx.lineTo(lerp(tx + f * 60 - 40, tx + f * 250, len), lerp(330, ty + 40 - Math.abs(f) * 30, len)); ctx.stroke(); }
+    ctx.restore(); glow(tx - 40, 330, 300, 0.28 * rayA); glow(tx, ty, 260, 0.35 * rayA); }
+  // 4 · the two words: light as they rise, heavy when they land
+  const mouth = [CXc - 60, figY - 250];
+  [0, 1].forEach(i => {
+    const born = T('kalimatan') + i * 0.28, a0 = ss(born, born + 0.25, t); if (a0 <= 0) return;
+    const hover = [CXc - 90 + i * 180, 640 + Math.sin(t * 2.2 + i * 2) * 14];
+    const rise = out((t - born) / 0.7), floatUp = ss(T('khafifatan'), T('lisanEnd'), t);
+    let x = lerp(mouth[0], hover[0], rise) + Math.sin(t * 1.7 + i * 3) * 26 * floatUp, y = lerp(mouth[1], hover[1], rise) - floatUp * 150 + Math.sin(t * 2.6 + i) * 10 * floatUp;
+    // gather above the right pan, then drop
+    const g = ss(T('thaqilatan') + 0.15, T('mizan') - 0.05, t), panNow = pans ? pans[1] : [CXc + 240, scY - 40];
+    x = lerp(x, panNow[0] - 32 + i * 64, g); y = lerp(y, scY - 470, g);
+    const fall = clamp((t - (T('mizan') + i * 0.07)) / 0.2); if (fall > 0) y = lerp(scY - 470, panNow[1] - 18, fall * fall);
+    // finally each word becomes its phrase
+    const key = i ? 'sub2' : 'sub1', m = ss(T(key) - 0.1, T(key) + 0.3, t), ty = 700 + i * 170;
+    x = lerp(x, CXc, m); y = lerp(y, ty, m);
+    orb(x, y, 20 + 6 * Math.sin(t * 5 + i), a0 * (1 - m));
+    if (fall >= 1 && t - T('mizan') < 0.6 && i === 0) { const u = (t - T('mizan') - 0.2) / 0.4; if (u > 0 && u < 1) { style(1 - u, 5, GOLD); for (const d of [-1, 1]) { ctx.beginPath(); ctx.moveTo(panNow[0] + d * 110, panNow[1] + 20); ctx.lineTo(panNow[0] + d * (110 + 50 * u), panNow[1] + 20 - 30 * u); ctx.stroke(); } ctx.globalAlpha = 1; } }
+    if (m > 0) { const txt = i ? 'سُبْحَانَ اللهِ الْعَظِيمِ' : 'سُبْحَانَ اللهِ وَبِحَمْدِهِ', k = out((t - T(key) + 0.1) / 0.45), endA = 1;
+      glow(CXc, ty - 20, 460, 0.22 * m); ctx.save(); ctx.translate(CXc, ty); ctx.scale(0.7 + 0.3 * k, 0.7 + 0.3 * k); ctx.globalAlpha = m * endA; ctx.font = '700 112px Amiri'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.direction = 'rtl';
+      ctx.shadowColor = 'rgba(247,197,107,.75)'; ctx.shadowBlur = 34; ctx.fillStyle = '#FFE3A3'; ctx.fillText(txt, 0, 0); ctx.restore(); ctx.globalAlpha = 1; }
+  });
+  // rising motes once both phrases are up
+  const mt = t - T('sub2'); if (mt > 0) { ctx.globalCompositeOperation = 'lighter'; const r2 = rng(5);
+    for (let i = 0; i < 34; i++) { const x0 = 200 + r2() * 680, sp = 60 + r2() * 120, dl = r2() * 2.5, sz = 2 + r2() * 4, lt = (mt - dl) % 3.4; if (mt < dl) continue;
+      ctx.fillStyle = `rgba(255,220,150,${Math.sin(clamp(lt / 3.4) * Math.PI) * 0.7})`; ctx.beginPath(); ctx.arc(x0 + Math.sin(lt * 2 + i) * 14, 1060 - lt * sp, sz, 0, 6.3); ctx.fill(); }
+    ctx.globalCompositeOperation = 'source-over'; }
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const vg = ctx.createRadialGradient(W / 2, 900, 520, W / 2, 900, 1250); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,10,.55)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  const f = 1 - ss(0, 0.3, t) + ss(EP.duration - 0.4, EP.duration, t); if (f > 0) { ctx.fillStyle = `rgba(4,6,28,${f})`; ctx.fillRect(0, 0, W, H); }
+  for (const c of capEls) { const o = ss(c.t0, c.t0 + 0.16, t) * (1 - ss(c.t1 - 0.14, c.t1, t)); c.el.style.opacity = o; c.el.style.visibility = o > 0.001 ? 'visible' : 'hidden'; c.el.style.transform = `translateY(${(1 - ss(c.t0, c.t0 + 0.2, t)) * 14}px)`; }
+  document.getElementById('brand').style.opacity = 0.78 * (1 - f);
+}
+
+async function init() {
+  EP = window.EPISODE; K = EP.keys;
+  document.querySelector('#brand .ar').textContent = EP.brand.ar; document.querySelector('#brand .en').textContent = EP.brand.en;
+  const caps = document.getElementById('caps');
+  for (const c of EP.caps) { const el = document.createElement('div'); el.className = 'cap'; el.innerHTML = c.html; caps.appendChild(el); capEls.push({ ...c, el }); }
+  await document.fonts.ready; await Promise.all([...document.fonts].map(f => f.load().catch(() => {})));
+  window.renderAt = render; window.READY = true;
+  if (params.has('play')) { const t0 = performance.now(); (function loop() { render(((performance.now() - t0) / 1000) % EP.duration); requestAnimationFrame(loop); })(); } else render(parseFloat(params.get('t') || '0'));
+}
+</script>
+</body>
+</html>

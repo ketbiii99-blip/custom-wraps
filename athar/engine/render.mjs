@@ -16,7 +16,9 @@ const FPS = 30;
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
-await page.goto(pathToFileURL(path.join(root, 'engine/scene.html')).href + '?ep=' + ep);
+const pageArg = process.argv.indexOf('--page');
+const pageFile = pageArg > -1 ? process.argv[pageArg + 1] : 'scene.html';
+await page.goto(pathToFileURL(path.join(root, 'engine', pageFile)).href + '?ep=' + ep);
 await page.waitForFunction('window.READY === true');
 const duration = await page.evaluate('window.EPISODE.duration');
 
