@@ -1,0 +1,209 @@
+{
+ "id": "ep15",
+ "title": "ركعتا الفجر",
+ "sources": "Sahih Muslim 725 · Qur'an 17:78 (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "pray",
+  "sound": "none",
+  "dawnMax": 0.7
+ },
+ "action": {
+  "stopAt": "two:0.1",
+  "worldAt": "world:start",
+  "twoAt": "two:0.2",
+  "actAt": "h1:start-1.5",
+  "actHold": 0.3,
+  "bendAmt": 0.85,
+  "sujudAt": "h1:0.5",
+  "riseAt": "lesson:0.28",
+  "resumeAt": "lesson:0.62",
+  "scaleOut": "h1:start-0.4",
+  "rewardAt": "h1:0.62",
+  "dawnFrom": "h1:0.45",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 1500,
+   "voice": "دقيقتانِ... خيرٌ منَ الدُّنيا وما فيها.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "دقيقتان…"
+    },
+    {
+     "f": 0.4,
+     "cls": "big gold",
+     "html": "خيرٌ منَ الدُّنيا وما فيها"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Two minutes…",
+     "f1": 0.4
+    },
+    {
+     "text": "…better than the world and everything in it.",
+     "f0": 0.4
+    }
+   ]
+  },
+  {
+   "id": "world",
+   "clip": 1501,
+   "voice": "كلُّ ما تراهُ عيناك... مالُها، وقصورُها، وزينتُها.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "كلُّ ما تراهُ عيناك…"
+    },
+    {
+     "f": 0.45,
+     "cls": "small",
+     "html": "مالُها، وقصورُها، وزينتُها"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Everything your eyes can see: its wealth, its palaces, its beauty."
+    }
+   ]
+  },
+  {
+   "id": "two",
+   "clip": 1502,
+   "voice": "ركعتانِ خفيفتانِ قبلَ صلاةِ الفجر... أثمنُ من ذلكَ كلِّه.",
+   "gap": 2.0,
+   "lines": [
+    {
+     "cls": "mid gold",
+     "html": "ركعتانِ خفيفتان"
+    },
+    {
+     "f": 0.22,
+     "cls": "small",
+     "html": "قبلَ صلاةِ الفجر"
+    },
+    {
+     "f": 0.62,
+     "cls": "mid",
+     "html": "أثمنُ من ذلكَ كلِّه"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Two light rak‘ahs before the Fajr prayer are worth more than all of it."
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 1503,
+   "voice": "",
+   "card": true,
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.42,
+     "cls": "hadith",
+     "html": "«رَكْعَتَا الْفَجْرِ <span class=\"gold\">خَيْرٌ مِنَ الدُّنْيَا وَمَا فِيهَا</span>»"
+    },
+    {
+     "f": 0.6,
+     "cls": "source",
+     "html": "رواه مسلم (٧٢٥)"
+    }
+   ],
+   "subs": [
+    {
+     "text": "The Messenger of Allah ﷺ said:",
+     "f1": 0.42
+    },
+    {
+     "text": "“The two rak‘ahs of Fajr are better than the world and everything in it.”<small>Sahih Muslim 725 · the two sunnah rak‘ahs before Fajr</small>",
+     "f0": 0.42
+    }
+   ]
+  },
+  {
+   "id": "lesson",
+   "clip": 1504,
+   "voice": "والنّاسُ نيام... قُمْ أنتَ، وخُذْ نصيبَك. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "والنّاسُ نيام…"
+    },
+    {
+     "f": 0.3,
+     "cls": "mid gold",
+     "html": "قُمْ أنتَ، وخُذْ نصيبَك"
+    }
+   ],
+   "subs": [
+    {
+     "text": "While people sleep, rise and take your share.",
+     "f1": 0.72
+    },
+    {
+     "text": "Allah, the Most High, says:",
+     "f0": 0.72
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q17_78_qatami",
+   "recitation": "Qur'an 17:78 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿أَقِمِ ٱلصَّلَوٰةَ لِدُلُوكِ ٱلشَّمۡسِ إِلَىٰ غَسَقِ ٱلَّيۡلِ وَقُرۡءَانَ ٱلۡفَجۡرِۖ إِنَّ قُرۡءَانَ ٱلۡفَجۡرِ كَانَ مَشۡهُودࣰا﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة الإسراء · الآية ٧٨ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“Establish prayer from the sun’s decline until the darkness of night, and the recitation of dawn. Indeed, the recitation of dawn is ever witnessed.”<small>Qur’an 17:78 · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 1505,
+   "voice": "لا تُفوِّتْها غدًا. أرسِلْها لمن يُوقِظُكَ للفجر.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "لا تُفوِّتْها <span class=\"gold\">غدًا</span>"
+    },
+    {
+     "f": 0.45,
+     "cls": "small",
+     "html": "أرسِلها لمن يُوقِظُك للفجر"
+    },
+    {
+     "f": 0.85,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Don’t miss it tomorrow. Send this to the one who wakes you for Fajr."
+    }
+   ]
+  }
+ ]
+}

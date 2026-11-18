@@ -202,7 +202,7 @@ function glowAt(x, y, radius, a, warm = 1) {
   ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2); ctx.globalCompositeOperation = 'source-over';
 }
 // Traveler faces LEFT. Local coords: feet at (0,0), y up is negative. Returns lantern light position (stage coords).
-function drawTraveler(x, y, S, ph, mv, bend, reach, glow, t) {
+function drawTraveler(x, y, S, ph, mv, bend, reach, glow, t, pray) {
   const bob = Math.abs(Math.sin(ph)) * 7 * mv, crouch = bend * 34;
   ctx.save(); ctx.translate(x, y); ctx.scale(S, S);
   // shadow
@@ -235,13 +235,14 @@ function drawTraveler(x, y, S, ph, mv, bend, reach, glow, t) {
   ctx.fillStyle = COL.ghutra; ctx.beginPath(); ctx.moveTo(-36, -276); ctx.quadraticCurveTo(-30, -306, -2, -304); ctx.quadraticCurveTo(30, -302, 34, -268); ctx.quadraticCurveTo(40, -232, 48, -206); ctx.quadraticCurveTo(24, -202, 4, -220); ctx.quadraticCurveTo(-2, -252, -14, -272); ctx.quadraticCurveTo(-24, -280, -36, -276); ctx.fill();
   ctx.strokeStyle = COL.agal; ctx.lineWidth = 8; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-31, -287); ctx.quadraticCurveTo(0, -300, 30, -284); ctx.stroke();
   // front arm with lantern
-  const swing = Math.sin(ph) * 7 * mv, SH = [-10, -222], HAND = [-70 + swing, -168 + Math.abs(swing) * 0.3];
+  const swing = Math.sin(ph) * 7 * mv, SH = [-10, -222], HAND = pray ? [-34, -184] : [-70 + swing, -168 + Math.abs(swing) * 0.3];
   ctx.strokeStyle = COL.thobe; ctx.lineWidth = 25; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(SH[0], SH[1]); ctx.quadraticCurveTo(-22, -176, HAND[0], HAND[1]); ctx.stroke();
   ctx.strokeStyle = COL.thobeSh; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(SH[0] + 8, SH[1] + 14); ctx.quadraticCurveTo(-14, -168, HAND[0] + 6, HAND[1] + 11); ctx.stroke();
   ctx.fillStyle = COL.skin; ctx.beginPath(); ctx.arc(HAND[0] - 2, HAND[1], 11, 0, 6.3); ctx.fill();
   ctx.restore();
   // lantern hangs straight down from the (rotated) hand
   const [hx, hy] = rot(HAND[0] - 2, HAND[1], HIP[0], HIP[1], a);
+  if (pray) { ctx.restore(); return null; }   // hands folded, lantern set down beside the mat
   const [lx, ly] = drawLantern(hx, hy + 6, glow, t, Math.sin(ph + 0.6) * 0.09 * mv + Math.sin(t * 1.7) * 0.02);
   ctx.restore();
   return [x + lx * S, y + (ly + crouch - bob) * S];
@@ -366,6 +367,49 @@ function drawFg(D, d) {
 }
 
 /* ---------- frame ---------- */
+const clamp01 = x => Math.min(1, Math.max(0, x));
+function drawSujud(x, y, S) {   // prostrating, facing left; knees near (0,0)
+  ctx.save(); ctx.translate(x, y); ctx.scale(S, S);
+  ctx.fillStyle = 'rgba(2,3,14,.45)'; ctx.beginPath(); ctx.ellipse(-14, 4, 112, 11, 0, 0, 6.3); ctx.fill();
+  ctx.fillStyle = COL.shoe; ctx.beginPath(); ctx.ellipse(74, -7, 19, 8, 0.2, 0, 6.3); ctx.fill();
+  ctx.fillStyle = COL.thobe; ctx.beginPath(); ctx.moveTo(86, -2); ctx.quadraticCurveTo(84, -62, 44, -92); ctx.quadraticCurveTo(-6, -92, -58, -52); ctx.quadraticCurveTo(-84, -34, -96, -4); ctx.lineTo(-40, -2); ctx.quadraticCurveTo(-10, -30, 14, -2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = COL.thobeSh; ctx.beginPath(); ctx.moveTo(86, -2); ctx.quadraticCurveTo(84, -62, 44, -92); ctx.quadraticCurveTo(62, -50, 52, -2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = COL.cloak; ctx.beginPath(); ctx.moveTo(52, -90); ctx.quadraticCurveTo(0, -94, -44, -62); ctx.quadraticCurveTo(-20, -56, -2, -62); ctx.quadraticCurveTo(26, -72, 60, -70); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = COL.thobe; ctx.lineWidth = 22; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-50, -50); ctx.quadraticCurveTo(-72, -30, -118, -10); ctx.stroke();
+  ctx.fillStyle = COL.skin; ctx.beginPath(); ctx.arc(-128, -8, 10, 0, 6.3); ctx.fill();
+  ctx.beginPath(); ctx.arc(-92, -24, 25, 0, 6.3); ctx.fill();
+  ctx.fillStyle = COL.ghutra; ctx.beginPath(); ctx.moveTo(-112, -40); ctx.quadraticCurveTo(-100, -62, -72, -56); ctx.quadraticCurveTo(-46, -56, -34, -40); ctx.quadraticCurveTo(-50, -26, -64, -8); ctx.quadraticCurveTo(-78, -30, -112, -40); ctx.fill();
+  ctx.strokeStyle = COL.agal; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(-108, -44); ctx.quadraticCurveTo(-92, -58, -70, -52); ctx.stroke();
+  ctx.restore();
+}
+// A balance of light in the sky: the whole world on one side, two rak'ahs on the other.
+function drawScale(t, A, d) {
+  const al = ss(A.worldAt - 0.2, A.worldAt + 0.6, t) * (1 - ss(A.scaleOut, A.scaleOut + 0.9, t)); if (al <= 0) return;
+  const px = 470, py = 800, L = 240, w = ss(A.worldAt + 0.9, A.worldAt + 2.0, t), r = ss(A.twoAt + 1.3, A.twoAt + 2.3, t);
+  const wob = Math.sin((t - A.twoAt - 1.3) * 5) * 0.07 * Math.exp(-Math.max(0, t - A.twoAt - 1.3) * 1.1) * (t > A.twoAt + 1.3 ? 1 : 0) + Math.sin((t - A.worldAt - 0.9) * 5) * 0.05 * Math.exp(-Math.max(0, t - A.worldAt - 0.9) * 1.2) * (t > A.worldAt + 0.9 ? 1 : 0);
+  const th = -0.2 * w * (1 - r) + 0.3 * r + wob;      // negative: the world's side (left) is down; positive: the two rak'ahs win
+  const gold = a => `rgba(249,207,122,${a * al})`, ex = Math.cos(th) * L, ey = Math.sin(th) * L, Lp = [px - ex, py - ey], Rp = [px + ex, py + ey], drop = 170;
+  ctx.save(); ctx.lineCap = 'round'; ctx.shadowColor = `rgba(255,200,110,${0.8 * al})`; ctx.shadowBlur = 18;
+  ctx.strokeStyle = gold(0.95); ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(Lp[0], Lp[1]); ctx.lineTo(Rp[0], Rp[1]); ctx.stroke();
+  ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(px, py - 34); ctx.lineTo(px, py + 60); ctx.stroke();
+  ctx.fillStyle = gold(1); ctx.beginPath(); ctx.moveTo(px, py - 54); ctx.lineTo(px + 13, py - 34); ctx.lineTo(px, py - 14); ctx.lineTo(px - 13, py - 34); ctx.fill();
+  for (const [P, side] of [[Lp, -1], [Rp, 1]]) { ctx.strokeStyle = gold(0.7); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(P[0], P[1]); ctx.lineTo(P[0] - 78, P[1] + drop); ctx.moveTo(P[0], P[1]); ctx.lineTo(P[0] + 78, P[1] + drop); ctx.stroke();
+    ctx.strokeStyle = gold(0.95); ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(P[0] - 84, P[1] + drop); ctx.quadraticCurveTo(P[0], P[1] + drop + 46, P[0] + 84, P[1] + drop); ctx.stroke();
+    ctx.fillStyle = gold(1); ctx.beginPath(); ctx.arc(P[0], P[1], 7, 0, 6.3); ctx.fill(); }
+  ctx.shadowBlur = 0;
+  // the world: palace and coins dropping into the left pan
+  { const bx = Lp[0], by = Lp[1] + drop + 8, k = ss(A.worldAt + 0.3, A.worldAt + 1.0, t); ctx.globalAlpha = k * al; ctx.fillStyle = '#E9B45A';
+    ctx.fillRect(bx - 46, by - 46, 50, 46); ctx.beginPath(); ctx.arc(bx - 21, by - 46, 21, Math.PI, 0); ctx.fill(); ctx.fillRect(bx + 8, by - 70, 12, 70); ctx.beginPath(); ctx.moveTo(bx + 4, by - 70); ctx.lineTo(bx + 14, by - 88); ctx.lineTo(bx + 24, by - 70); ctx.fill();
+    ctx.globalAlpha = al; for (let i = 0; i < 7; i++) { const c0 = A.worldAt + 0.5 + i * 0.16, u = clamp01((t - c0) / 0.5); if (u <= 0) continue; const cx2 = bx + 30 + (i % 3) * 16 - (i > 3 ? 62 : 0), cyy = by - 8 - Math.floor(i / 3) * 9 - (1 - u * u) * 240;
+      ctx.fillStyle = '#F7C56B'; ctx.beginPath(); ctx.ellipse(cx2, cyy, 11, 5.5, 0, 0, 6.3); ctx.fill(); ctx.strokeStyle = '#B9822F'; ctx.lineWidth = 1.5; ctx.stroke(); } ctx.globalAlpha = 1; }
+  // two rak'ahs: two lights rising from him into the right pan
+  for (let i = 0; i < 2; i++) { const o0 = A.twoAt + 0.2 + i * 0.5, u = clamp01((t - o0) / 1.1); if (u <= 0) continue; const e = u * u * (3 - 2 * u), tx2 = Rp[0] - 24 + i * 48, ty2 = Rp[1] + drop + 2;
+    const x = lerp(CX - 40, tx2, e), y = lerp(GY - 300, ty2, e) - Math.sin(e * Math.PI) * 120; glowAt(x, y, 110, 0.75 * al); ctx.fillStyle = `rgba(255,248,226,${al})`; ctx.beginPath(); ctx.arc(x, y, 13, 0, 6.3); ctx.fill(); }
+  ctx.font = '700 42px Messiri'; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 12;
+  ctx.fillStyle = `rgba(255,244,220,${0.9 * al * ss(A.worldAt + 0.4, A.worldAt + 1, t)})`; ctx.fillText('الدُّنيا', Lp[0], Lp[1] - 26);
+  ctx.fillStyle = gold(ss(A.twoAt + 0.4, A.twoAt + 1, t)); ctx.fillText('ركعتان', Rp[0], Rp[1] - 26);
+  ctx.restore();
+}
 function render(t) {
   const A = EP.action, D = dist(t), d = ss(A.dawnFrom, A.dawnTo, t) * ((EP.scene && EP.scene.dawnMax) ?? 1);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, H);
@@ -461,6 +505,10 @@ function render(t) {
         else if (ub > 0 && ub < 1) { const e = ub * ub * (3 - 2 * ub), [x, y] = bez(far, [P[0] - 260, P[1] - 300 + i * 10], P, e); bird(x, y + Math.sin(t * 5 + i) * 6 - 14 * e, 0.75 + 0.3 * e, 1, t * 15 + i * 1.3, 1, 1, 0); }
         else if (ub >= 1) { const hop = Math.max(0, Math.sin(t * 2.2 + i * 1.9)) ** 8 * 7; bird(P[0], P[1] - 14 - hop, 1.05, i % 2 ? 1 : -1, null, 1, 0.75 * (1 - ss(b0 + FL + 3, b0 + FL + 7, t)), 0); } }
       if (reward > 0) glowAt(tx, ty - 430, 340, 0.2 * reward * (1 - ss(rAt + 4, rAt + 9, t))); };
+  } else if (PROP === 'pray') {
+    drawScale(t, A, d);
+    // the prayer mat, unrolled where he stops
+    const mk = ss(as + 0.1, as + 0.9, t), mx = pX + 150; if (mk > 0) { const w = 330 * mk; ctx.fillStyle = '#6E2F45'; ctx.beginPath(); ctx.roundRect(mx - 190, cy - 4, w, 20, 6); ctx.fill(); ctx.strokeStyle = 'rgba(247,197,107,.85)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.roundRect(mx - 182, cy + 1, Math.max(0, w - 16), 10, 4); ctx.stroke(); }
   } else if (PROP === 'person') {
     const q = ss(a1 + 0.2, a2 + 0.4, t), sx = pX - 170, sy = GY + 30;
     const head = drawSitter(sx, sy, q, t, d);
@@ -523,7 +571,13 @@ function render(t) {
 
   const reachOn = reachTo ? ss(as + 0.35, a1, t) - (holdReach ? (reachEnd ? ss(reachEnd, reachEnd + 0.7, t) : 0) : ss(a2, a2 + 0.55, t)) : 0;
   const reach = reachOn > 0.02 ? [lerp(34, (reachTo[0] - CX) / S + 30, reachOn), lerp(-150, (reachTo[1] - cy) / S, reachOn)] : null;
-  const [LX, LY] = drawTraveler(CX, cy, S, ph, mv, bend, reach, glow, t);
+  let LX, LY;
+  if (PROP === 'pray' && t >= a1 && t < A.resumeAt - 0.35) {
+    ctx.save(); ctx.translate(CX - 196, cy); ctx.scale(S, S); const g = drawLantern(0, -104, glow, t, 0); ctx.restore(); LX = CX - 196 + g[0] * S; LY = cy + g[1] * S;
+    const sj = ss(A.sujudAt, A.sujudAt + 0.45, t) - ss(A.riseAt, A.riseAt + 0.45, t);
+    if (sj < 1) { ctx.globalAlpha = 1 - sj; drawTraveler(CX, cy, S, ph, mv, bend + sj * 0.6, null, glow, t, true); ctx.globalAlpha = 1; }
+    if (sj > 0) { ctx.globalAlpha = sj; drawSujud(CX - 6, cy, S); ctx.globalAlpha = 1; }
+  } else [LX, LY] = drawTraveler(CX, cy, S, ph, mv, bend, reach, glow, t);
   if (propFront) propFront();
   glowAt(LX, LY - 20, 120 + 90 * reward, (0.5 + 0.35 * reward) * fl);
 
