@@ -1,0 +1,201 @@
+{
+ "id": "ep16",
+ "title": "لا تغضب",
+ "sources": "Sahih al-Bukhari 6116 · Qur'an 42:37 (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "storm",
+  "sound": "none",
+  "dawnMax": 0.7
+ },
+ "action": {
+  "stopAt": "storm:0.3",
+  "windAt": "storm:start-0.5",
+  "calmAt": "calm:0.3",
+  "actAt": "storm:0.15",
+  "actHold": 1.0,
+  "bendAmt": 0.12,
+  "resumeAt": "calm:0.82",
+  "rewardAt": "calm:0.55",
+  "dawnFrom": "calm:0.45",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 1700,
+   "voice": "رجلٌ طلبَ وصيّةً واحدة... فجاءَهُ الجوابُ في كلمتَين.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "رجلٌ طلبَ وصيّةً واحدة…"
+    },
+    {
+     "f": 0.5,
+     "cls": "big gold",
+     "html": "فجاءَهُ الجوابُ في كلمتَين"
+    }
+   ],
+   "subs": [
+    {
+     "text": "A man asked for one piece of advice…",
+     "f1": 0.5
+    },
+    {
+     "text": "…and the answer came in two words.",
+     "f0": 0.5
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 1701,
+   "voice": "",
+   "card": true,
+   "gap": 0.8,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "عن أبي هريرة رضي الله عنه"
+    },
+    {
+     "f": 0.05,
+     "cls": "hadith",
+     "html": "أَنَّ رَجُلًا قَالَ لِلنَّبِيِّ <span class=\"pbuh\">ﷺ</span>: أَوْصِنِي، قَالَ: <span class=\"gold\">«لَا تَغْضَبْ»</span>، فَرَدَّدَ مِرَارًا، قَالَ: <span class=\"gold\">«لَا تَغْضَبْ»</span>"
+    },
+    {
+     "f": 0.5,
+     "cls": "source",
+     "html": "رواه البخاري (٦١١٦)"
+    }
+   ],
+   "subs": [
+    {
+     "text": "A man said to the Prophet ﷺ: “Advise me.” He said: “Do not get angry.”",
+     "f1": 0.62
+    },
+    {
+     "text": "He asked again and again, and each time he said: “Do not get angry.”<small>Sahih al-Bukhari 6116</small>",
+     "f0": 0.62
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "clip": 1702,
+   "voice": "كلمتانِ فقط... لأنَّ الغضبَ بابُ كلِّ شرّ.",
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "كلمتانِ فقط…"
+    },
+    {
+     "f": 0.35,
+     "cls": "mid gold",
+     "html": "لأنَّ الغضبَ بابُ كلِّ شرّ"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Just two words, because anger is the door to every harm."
+    }
+   ]
+  },
+  {
+   "id": "storm",
+   "clip": 1703,
+   "voice": "الغضبُ ريحٌ عاصفة... تكادُ تُطفِئُ نورَ قلبِك.",
+   "gap": 1.4,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "الغضبُ <span class=\"gold\">ريحٌ عاصفة</span>…"
+    },
+    {
+     "f": 0.45,
+     "cls": "mid",
+     "html": "تكادُ تُطفِئُ نورَ قلبِك"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Anger is a storm wind that nearly blows out the light of your heart."
+    }
+   ]
+  },
+  {
+   "id": "calm",
+   "clip": 1704,
+   "voice": "فإذا غضِبتَ... فاسكُتْ، حتّى تهدأَ العاصفة. قالَ اللهُ تعالى:",
+   "gap": 0.6,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "فإذا غضِبتَ… <span class=\"gold\">فاسكُتْ</span>"
+    },
+    {
+     "f": 0.4,
+     "cls": "small",
+     "html": "حتّى تهدأَ العاصفة"
+    }
+   ],
+   "subs": [
+    {
+     "text": "So when you are angry, stay silent until the storm passes.",
+     "f1": 0.74
+    },
+    {
+     "text": "Allah, the Most High, says:",
+     "f0": 0.74
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q42_37_qatami",
+   "recitation": "Qur'an 42:37 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿وَٱلَّذِينَ يَجۡتَنِبُونَ كَبَـٰٓئِرَ ٱلۡإِثۡمِ وَٱلۡفَوَٰحِشَ وَإِذَا مَا غَضِبُواْ هُمۡ يَغۡفِرُونَ﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة الشورى · الآية ٣٧ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“And those who avoid the major sins and immoralities, and when they are angry, they forgive.”<small>Qur’an 42:37 · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 1705,
+   "voice": "أمسِكْ غضبَكَ اليوم. أرسِلْها لمن تُحبّ.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "أمسِكْ <span class=\"gold\">غضبَك</span> اليوم"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "أرسِلها لمن تُحبّ"
+    },
+    {
+     "f": 0.85,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Hold back your anger today. Send this to someone you love."
+    }
+   ]
+  }
+ ]
+}
