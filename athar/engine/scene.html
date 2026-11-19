@@ -525,6 +525,33 @@ function render(t) {
         ctx.fillStyle = `rgba(232,210,172,${(0.45 + (i % 3) * 0.18) * wv})`; ctx.beginPath(); ctx.ellipse(x, y, 7 + (i % 3) * 3, 2.6, 0, 0, 6.3); ctx.fill(); }
       for (let i = 0; i < 9; i++) { const sp = 620 + (i * 71 % 380), x = mod(t * sp + i * 409, W + 300) - 150, y = 880 + (i * 157 % 420) + Math.sin(t * 3 + i * 2) * 60; ctx.save(); ctx.translate(x, y); ctx.rotate(t * (5 + i % 4) + i); ctx.fillStyle = `rgba(20,26,66,${0.9 * wv})`; ctx.beginPath(); ctx.moveTo(-26, 0); ctx.quadraticCurveTo(0, -11, 26, 0); ctx.quadraticCurveTo(0, 11, -26, 0); ctx.fill(); ctx.restore(); }
       ctx.restore(); };
+  } else if (PROP === 'kahf') {
+    // Surat al-Kahf on Friday: an open book in his hand, and light running along the week from one Friday to the next.
+    const HX = CX - 122, HY = cy - 246, days = ['الجمعة', 'السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'], N = 8;
+    reachTo = [HX - 36, HY]; holdReach = true; reachEnd = A.resumeAt - 0.3;
+    const open = ss(a1 - 0.2, a1 + 0.6, t) * (1 - ss(A.resumeAt - 0.5, A.resumeAt + 0.1, t));
+    const wk = ss(A.weekAt - 0.9, A.weekAt - 0.1, t) * (1 - ss(A.weekOut, A.weekOut + 0.8, t)), prog = clamp01((t - A.weekAt) / 3.6) * (N - 1);
+    const pt = k => { const u = k / (N - 1); return [800 - u * 690, 935 - Math.sin(u * Math.PI) * 125]; };
+    if (wk > 0) { ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.strokeStyle = `rgba(249,207,122,${0.3 * wk})`; ctx.lineWidth = 3; ctx.setLineDash([3, 13]); ctx.beginPath(); for (let k = 0; k <= N - 1 + 1e-6; k += 0.05) { const [x, y] = pt(k); k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); ctx.setLineDash([]);
+      if (prog > 0) { ctx.strokeStyle = `rgba(255,222,152,${0.95 * wk})`; ctx.lineWidth = 8; ctx.shadowColor = 'rgba(255,200,110,.95)'; ctx.shadowBlur = 24; ctx.beginPath(); for (let k = 0; k <= prog + 1e-6; k += 0.04) { const [x, y] = pt(k); k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); ctx.shadowBlur = 0;
+        const [hx2, hy2] = pt(prog); if (prog < N - 1) glowAt(hx2, hy2, 120, 0.7 * wk); }
+      for (let k = 0; k < N; k++) { const [x, y] = pt(k), lit = k === 0 ? 1 : clamp01((prog - k + 0.15) / 0.3), end = k === 0 || k === N - 1, r = end ? 17 : 10;
+        if (lit > 0) glowAt(x, y, (end ? 130 : 80) * lit, 0.55 * lit * wk);
+        ctx.fillStyle = `rgba(${Math.round(lerp(90, 255, lit))},${Math.round(lerp(96, 226, lit))},${Math.round(lerp(150, 160, lit))},${wk})`; ctx.beginPath(); ctx.arc(x, y, r + 3 * lit, 0, 6.3); ctx.fill();
+        ctx.font = `700 ${end ? 42 : 31}px Messiri`; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.95)'; ctx.shadowBlur = 12;
+        ctx.fillStyle = end ? `rgba(249,207,122,${wk})` : `rgba(255,244,220,${(0.5 + 0.5 * lit) * wk})`; ctx.fillText(days[k], x, y + (k % 2 ? 60 : -30) + (end && k === 0 ? -8 : 0)); ctx.shadowBlur = 0; }
+      ctx.restore(); }
+    propFront = () => { if (open <= 0.01) return;
+      // light rising from the page to the first Friday
+      const u = clamp01((t - (A.weekAt - 1.0)) / 0.9); if (u > 0 && u < 1) { const [x1, y1] = pt(0), e = u * u * (3 - 2 * u), x = lerp(HX, x1, e), y = lerp(HY - 30, y1, e) - Math.sin(e * Math.PI) * 60; glowAt(x, y, 100, 0.7); ctx.fillStyle = '#FFF7E2'; ctx.beginPath(); ctx.arc(x, y, 9, 0, 6.3); ctx.fill(); }
+      glowAt(HX, HY - 26, 170, 0.5 * open * (0.9 + 0.1 * Math.sin(t * 4)));
+      ctx.save(); ctx.translate(HX, HY + 4); ctx.scale(open, open); ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#6E2F45'; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-54, -8); ctx.lineTo(0, 6); ctx.lineTo(54, -8); ctx.stroke();
+      for (const sgn of [-1, 1]) { ctx.fillStyle = sgn < 0 ? '#FFF6DE' : '#F3E6C4'; ctx.beginPath(); ctx.moveTo(0, 2); ctx.quadraticCurveTo(sgn * 24, -14, sgn * 52, -10); ctx.lineTo(sgn * 52, -44); ctx.quadraticCurveTo(sgn * 24, -50, 0, -32); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = 'rgba(150,120,70,.55)'; ctx.lineWidth = 1.6; for (let j = 0; j < 3; j++) { ctx.beginPath(); ctx.moveTo(sgn * 9, -24 + j * 8); ctx.quadraticCurveTo(sgn * 26, -36 + j * 8, sgn * 45, -34 + j * 8); ctx.stroke(); } }
+      ctx.strokeStyle = 'rgba(150,120,70,.7)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, 2); ctx.lineTo(0, -32); ctx.stroke();
+      ctx.restore(); };
   } else if (PROP === 'person') {
     const q = ss(a1 + 0.2, a2 + 0.4, t), sx = pX - 170, sy = GY + 30;
     const head = drawSitter(sx, sy, q, t, d);

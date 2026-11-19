@@ -1,0 +1,197 @@
+{
+ "id": "ep17",
+ "title": "نورٌ بين الجمعتين",
+ "sources": "al-Bayhaqi 6209, al-Hakim 3392 (authenticated by al-Albani, Sahih al-Jami' 6470) · Qur'an 18:1 (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "kahf",
+  "sound": "none",
+  "dawnMax": 0.7
+ },
+ "action": {
+  "stopAt": "time:0.55",
+  "actAt": "time:0.45",
+  "actHold": 1.0,
+  "bendAmt": 0,
+  "weekAt": "h1:0.62",
+  "weekOut": "ayah:start-0.5",
+  "resumeAt": "open:0.35",
+  "rewardAt": "h1:0.62",
+  "dawnFrom": "light:0.3",
+  "dawnTo": "cta:start"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 1900,
+   "voice": "سورةٌ واحدة... تُضيءُ لكَ أسبوعًا كاملًا.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "سورةٌ واحدة…"
+    },
+    {
+     "f": 0.4,
+     "cls": "big gold",
+     "html": "تُضيءُ لكَ أسبوعًا كاملًا"
+    }
+   ],
+   "subs": [
+    {
+     "text": "One surah…",
+     "f1": 0.4
+    },
+    {
+     "text": "…lights up your whole week.",
+     "f0": 0.4
+    }
+   ]
+  },
+  {
+   "id": "time",
+   "clip": 1901,
+   "voice": "تقرؤُها يومَ الجمعة، في أقلَّ من نصفِ ساعة.",
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "تقرؤُها <span class=\"gold\">يومَ الجمعة</span>"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "في أقلَّ من نصفِ ساعة"
+    }
+   ],
+   "subs": [
+    {
+     "text": "You read it on Friday, in less than half an hour."
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 1902,
+   "voice": "",
+   "card": true,
+   "gap": 0.9,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
+    },
+    {
+     "f": 0.3,
+     "cls": "hadith",
+     "html": "«مَنْ قَرَأَ سُورَةَ الْكَهْفِ فِي يَوْمِ الْجُمُعَةِ، <span class=\"gold\">أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ</span>»"
+    },
+    {
+     "f": 0.5,
+     "cls": "source",
+     "html": "رواه الحاكم والبيهقي · صحّحه الألباني"
+    }
+   ],
+   "subs": [
+    {
+     "text": "The Messenger of Allah ﷺ said:",
+     "f1": 0.3
+    },
+    {
+     "text": "“Whoever reads Surat al-Kahf on Friday, light will shine for him between the two Fridays.”<small>al-Hakim, al-Bayhaqi · authenticated by al-Albani</small>",
+     "f0": 0.3
+    }
+   ]
+  },
+  {
+   "id": "light",
+   "clip": 1903,
+   "voice": "نورٌ يمشي معكَ... من جمعةٍ إلى جمعة.",
+   "gap": 0.8,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "نورٌ يمشي معك…"
+    },
+    {
+     "f": 0.45,
+     "cls": "mid gold",
+     "html": "من جمعةٍ إلى جمعة"
+    }
+   ],
+   "subs": [
+    {
+     "text": "A light that walks with you, from one Friday to the next."
+    }
+   ]
+  },
+  {
+   "id": "open",
+   "clip": 1904,
+   "voice": "وهكذا تبدأُ السورة. قالَ اللهُ تعالى:",
+   "gap": 0.5,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "وهكذا تبدأُ السورة…"
+    }
+   ],
+   "subs": [
+    {
+     "text": "And this is how the surah begins.",
+     "f1": 0.55
+    },
+    {
+     "text": "Allah, the Most High, says:",
+     "f0": 0.55
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q18_1_qatami",
+   "recitation": "Qur'an 18:1 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِيٓ أَنزَلَ عَلَىٰ عَبۡدِهِ ٱلۡكِتَٰبَ وَلَمۡ يَجۡعَل لَّهُۥ عِوَجَاۜ﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة الكهف · الآية ١ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“Praise be to Allah, who sent down the Book to His servant and made in it no crookedness.”<small>Qur’an 18:1 · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 1905,
+   "voice": "لا تنسَها هذهِ الجمعة. أرسِلْها لمن تُحبّ.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "لا تنسَها <span class=\"gold\">هذهِ الجمعة</span>"
+    },
+    {
+     "f": 0.5,
+     "cls": "small",
+     "html": "أرسِلها لمن تُحبّ"
+    },
+    {
+     "f": 0.85,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Don’t forget it this Friday. Send this to someone you love."
+    }
+   ]
+  }
+ ]
+}
