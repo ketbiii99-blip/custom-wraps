@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <style>
+@font-face{font-family:"Thmanyah";font-weight:300;src:url(../fonts/local/thmanyah-serif-text-light.otf)}
+@font-face{font-family:"Thmanyah";font-weight:400;src:url(../fonts/local/thmanyah-serif-text-regular.otf)}
+@font-face{font-family:"Thmanyah";font-weight:500;src:url(../fonts/local/thmanyah-serif-text-medium.otf)}
+@font-face{font-family:"Thmanyah";font-weight:700;src:url(../fonts/local/thmanyah-serif-text-bold.otf)}
+@font-face{font-family:"Thmanyah";font-weight:900;src:url(../fonts/local/thmanyah-serif-text-black.otf)}
 @font-face{font-family:"Messiri";font-weight:500;src:url(../fonts/el-messiri-arabic-500-normal.woff2)}
 @font-face{font-family:"Messiri";font-weight:700;src:url(../fonts/el-messiri-arabic-700-normal.woff2)}
 @font-face{font-family:"Amiri";font-weight:400;src:url(../fonts/amiri-arabic-400-normal.woff2)}
@@ -20,7 +25,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#070B24}
 canvas{position:absolute;inset:0}
 #brand{position:absolute;top:212px;left:0;right:0;text-align:center;direction:ltr;
   color:var(--cream);opacity:.78;display:flex;gap:16px;justify-content:center;align-items:center}
-#brand .ar{font:700 40px "Messiri";color:var(--gold)}
+#brand .ar{font:700 40px "Thmanyah","Messiri";color:var(--gold)}
 #brand .en{font:500 19px "Outfit";letter-spacing:.42em;margin-top:6px}
 #brand .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:6px}
 .cue{position:absolute;top:320px;left:70px;right:70px;text-align:center;color:var(--cream);
@@ -33,19 +38,19 @@ canvas{position:absolute;inset:0}
 .cue.card::after{content:"";position:absolute;top:-17px;left:50%;width:30px;height:30px;margin-left:-15px;background:var(--gold)}
 .line{will-change:transform,opacity}
 .gold{color:var(--gold)}
-.big{font:700 92px/1.42 "Messiri";margin-bottom:14px}
-.mid{font:700 76px/1.45 "Messiri";margin-bottom:16px}
-.small{font:500 50px/1.6 "Plex";opacity:.95;margin-top:10px}
-.label{font:700 44px/1.5 "Messiri";color:var(--gold);margin-bottom:14px}
+.big{font:700 90px/1.5 "Thmanyah","Messiri";margin-bottom:14px}
+.mid{font:700 74px/1.52 "Thmanyah","Messiri";margin-bottom:16px}
+.small{font:500 50px/1.65 "Thmanyah","Plex";opacity:.95;margin-top:10px}
+.label{font:700 44px/1.6 "Thmanyah","Messiri";color:var(--gold);margin-bottom:14px}
 .pbuh{font-family:"Amiri";font-weight:400;font-size:1.15em}
-.hadith{font:700 61px/1.78 "Amiri"}
+.hadith{font:500 56px/1.85 "Thmanyah","Amiri"}
 .ayah{font:400 68px/2.05 "AmiriQuran";color:var(--gold);margin-top:8px}
-.source{font:400 32px/1.5 "Plex";opacity:.82;margin-top:20px;letter-spacing:.01em}
-.follow{font:500 38px/1.5 "Plex";margin-top:44px;display:inline-block;padding:14px 38px;border-radius:99px;
+.source{font:400 32px/1.6 "Thmanyah","Plex";opacity:.82;margin-top:20px;letter-spacing:.01em}
+.follow{font:500 38px/1.6 "Thmanyah","Plex";margin-top:44px;display:inline-block;padding:14px 38px;border-radius:99px;
   border:2px solid rgba(247,197,107,.7);background:rgba(9,12,40,.55);text-shadow:none}
-.follow b{font-family:"Messiri";color:var(--gold)}
-.num{font:700 250px/1.05 "Messiri";color:var(--gold);text-shadow:0 6px 40px rgba(247,197,107,.45),0 3px 22px rgba(4,6,24,.85)}
-.key{font:700 92px/1.35 "Messiri"}
+.follow b{font-family:"Thmanyah","Messiri";color:var(--gold)}
+.num{font:700 250px/1.15 "Thmanyah","Messiri";color:var(--gold);text-shadow:0 6px 40px rgba(247,197,107,.45),0 3px 22px rgba(4,6,24,.85)}
+.key{font:700 90px/1.45 "Thmanyah","Messiri"}
 .pop{transform-origin:50% 60%}
 .sub{position:absolute;top:1506px;left:90px;right:90px;text-align:center;direction:ltr;
   font:500 41px/1.34 "Outfit";color:#fff;text-shadow:0 2px 14px rgba(3,4,16,.95),0 0 3px rgba(3,4,16,.9)}
@@ -406,7 +411,7 @@ function drawScale(t, A, d) {
   // two rak'ahs: two lights rising from him into the right pan
   for (let i = 0; i < 2; i++) { const o0 = A.twoAt + 0.2 + i * 0.5, u = clamp01((t - o0) / 1.1); if (u <= 0) continue; const e = u * u * (3 - 2 * u), tx2 = Rp[0] - 24 + i * 48, ty2 = Rp[1] + drop + 2;
     const x = lerp(CX - 40, tx2, e), y = lerp(GY - 300, ty2, e) - Math.sin(e * Math.PI) * 120; glowAt(x, y, 110, 0.75 * al); ctx.fillStyle = `rgba(255,248,226,${al})`; ctx.beginPath(); ctx.arc(x, y, 13, 0, 6.3); ctx.fill(); }
-  ctx.font = '700 42px Messiri'; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 12;
+  ctx.font = '700 42px Thmanyah, Messiri'; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 12;
   ctx.fillStyle = `rgba(255,244,220,${0.9 * al * ss(A.worldAt + 0.4, A.worldAt + 1, t)})`; ctx.fillText('الدُّنيا', Lp[0], Lp[1] - 26);
   ctx.fillStyle = gold(ss(A.twoAt + 0.4, A.twoAt + 1, t)); ctx.fillText('ركعتان', Rp[0], Rp[1] - 26);
   ctx.restore();
@@ -474,7 +479,7 @@ function render(t) {
         if (j % 6 === 3) { ctx.fillStyle = `rgba(255,240,205,${0.8 * (1 - j / 40)})`; ctx.beginPath(); ctx.arc(x + Math.sin(j * 2.3 + seed + t * 3) * 26, y + Math.cos(j * 1.7 + seed + t * 2) * 26, 3, 0, 6.3); ctx.fill(); } }
       ctx.globalCompositeOperation = 'source-over';
       if (head) { glowAt(head[0], head[1], big ? 170 : 130, 0.7); ctx.fillStyle = '#FFF7E2'; ctx.beginPath(); ctx.arc(head[0], head[1], big ? 10 : 8, 0, 6.3); ctx.fill();
-        if (label) { const la = Math.sin(Math.min(1, head[2] * 1.25) * Math.PI); ctx.save(); ctx.globalAlpha = la; ctx.font = '700 46px Messiri'; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 14; ctx.fillStyle = '#F9D58A'; ctx.fillText(label, head[0], head[1] - 40); ctx.restore(); } } };
+        if (label) { const la = Math.sin(Math.min(1, head[2] * 1.25) * Math.PI); ctx.save(); ctx.globalAlpha = la; ctx.font = '700 46px Thmanyah, Messiri'; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 14; ctx.fillStyle = '#F9D58A'; ctx.fillText(label, head[0], head[1] - 40); ctx.restore(); } } };
     propFront = () => {
       const cup = ss(as + 0.6, a1, t) * (1 - ss(a2 + 0.2, a2 + 1.0, t)) + ss(rAt + 0.9, rAt + 1.7, t) * (1 - ss(rAt + 2.8, rAt + 3.6, t));
       if (cup > 0) glowAt(HX, HY - 14, 90, 0.6 * cup);
@@ -539,7 +544,7 @@ function render(t) {
       for (let k = 0; k < N; k++) { const [x, y] = pt(k), lit = k === 0 ? 1 : clamp01((prog - k + 0.15) / 0.3), end = k === 0 || k === N - 1, r = end ? 17 : 10;
         if (lit > 0) glowAt(x, y, (end ? 130 : 80) * lit, 0.55 * lit * wk);
         ctx.fillStyle = `rgba(${Math.round(lerp(90, 255, lit))},${Math.round(lerp(96, 226, lit))},${Math.round(lerp(150, 160, lit))},${wk})`; ctx.beginPath(); ctx.arc(x, y, r + 3 * lit, 0, 6.3); ctx.fill();
-        ctx.font = `700 ${end ? 42 : 31}px Messiri`; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.95)'; ctx.shadowBlur = 12;
+        ctx.font = `700 ${end ? 42 : 31}px Thmanyah, Messiri`; ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.shadowColor = 'rgba(5,8,33,.95)'; ctx.shadowBlur = 12;
         ctx.fillStyle = end ? `rgba(249,207,122,${wk})` : `rgba(255,244,220,${(0.5 + 0.5 * lit) * wk})`; ctx.fillText(days[k], x, y + (k % 2 ? 60 : -30) + (end && k === 0 ? -8 : 0)); ctx.shadowBlur = 0; }
       ctx.restore(); }
     propFront = () => { if (open <= 0.01) return;
@@ -551,6 +556,26 @@ function render(t) {
       for (const sgn of [-1, 1]) { ctx.fillStyle = sgn < 0 ? '#FFF6DE' : '#F3E6C4'; ctx.beginPath(); ctx.moveTo(0, 2); ctx.quadraticCurveTo(sgn * 24, -14, sgn * 52, -10); ctx.lineTo(sgn * 52, -44); ctx.quadraticCurveTo(sgn * 24, -50, 0, -32); ctx.closePath(); ctx.fill();
         ctx.strokeStyle = 'rgba(150,120,70,.55)'; ctx.lineWidth = 1.6; for (let j = 0; j < 3; j++) { ctx.beginPath(); ctx.moveTo(sgn * 9, -24 + j * 8); ctx.quadraticCurveTo(sgn * 26, -36 + j * 8, sgn * 45, -34 + j * 8); ctx.stroke(); } }
       ctx.strokeStyle = 'rgba(150,120,70,.7)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, 2); ctx.lineTo(0, -32); ctx.stroke();
+      ctx.restore(); };
+  } else if (PROP === 'visit') {
+    // Visiting the sick: a friend's home with a warm window; at the hadith a count races to 70,000 and a multitude of lights gathers around him.
+    const hx = pX - 270, hy = GY - 26, col = mix('#080B2A', '#4A3260', d), vis = ss(a1, a2, t);
+    ctx.save(); ctx.translate(hx, hy); ctx.scale(1.75, 1.75); ctx.fillStyle = col; ctx.fillRect(-70, -84, 140, 90); ctx.beginPath(); ctx.arc(-22, -84, 34, Math.PI, 0); ctx.fill(); ctx.fillRect(40, -120, 22, 40); ctx.beginPath(); ctx.arc(51, -120, 11, Math.PI, 0); ctx.fill();
+    ctx.fillStyle = `rgba(255,208,128,${0.55 + 0.45 * vis})`; ctx.beginPath(); ctx.roundRect(-52, -62, 34, 40, [17, 17, 3, 3]); ctx.fill();                         // window
+    ctx.fillStyle = `rgba(255,190,110,${0.18 + 0.5 * vis})`; ctx.beginPath(); ctx.roundRect(16, -56, 34, 62, [17, 17, 0, 0]); ctx.fill(); ctx.restore();             // door, opening with light
+    glowAt(hx - 62, hy - 74, 120 + 140 * vis, (0.3 + 0.35 * vis) * (1 - d * 0.5)); if (vis > 0) glowAt(hx + 58, hy - 50, 170, 0.4 * vis * (1 - d * 0.5));
+    reachTo = [hx + 150, cy - 210];
+    const cAt = A.countAt, cu = clamp01((t - cAt) / 2.6), n = Math.round(70000 * (1 - Math.pow(1 - cu, 3))), cal = ss(cAt - 0.35, cAt + 0.25, t) * (1 - ss(A.countOut, A.countOut + 0.8, t));
+    if (cal > 0) { ctx.save(); ctx.textAlign = 'center'; ctx.direction = 'rtl'; const pulse = 1 + 0.05 * Math.exp(-Math.max(0, t - cAt - 2.6) * 4) * (cu >= 1 ? 1 : 0);
+      glowAt(540, 800, 420, 0.22 * cal); ctx.translate(540, 850); ctx.scale(pulse, pulse);
+      ctx.font = '900 190px Thmanyah, Messiri'; ctx.shadowColor = 'rgba(255,196,104,.75)'; ctx.shadowBlur = 44; ctx.fillStyle = `rgba(249,207,122,${cal})`; ctx.fillText(n.toLocaleString('ar-EG'), 0, 0);
+      ctx.shadowColor = 'rgba(5,8,33,.9)'; ctx.shadowBlur = 14; ctx.font = '700 62px Thmanyah, Messiri'; ctx.fillStyle = `rgba(255,244,220,${cal})`; ctx.fillText('مَلَكٍ يُصلّونَ عليك', 0, 96); ctx.restore(); }
+    propFront = () => { const so = 1 - ss(A.swarmOut, A.swarmOut + 1.5, t); if (t < cAt || so <= 0) return; ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 340; i++) { const ap = cAt + (i / 340) * 2.6, k = ss(ap, ap + 1.3, t); if (k <= 0) continue;
+        const ang = i * 2.399 + t * (0.22 + (i % 7) * 0.035) * (i % 2 ? 1 : -1), rx = 130 + (i * 37 % 360), ry = rx * 0.66, x = CX - 10 + Math.cos(ang) * rx, y = cy - 190 + Math.sin(ang) * ry - (1 - k) * (700 + (i % 5) * 60);
+        const tw = 0.55 + 0.45 * Math.sin(t * (2 + i % 5) + i), al = k * so * tw * (0.35 + (i % 4) * 0.16), r = 1.6 + (i % 4) * 0.9;
+        ctx.fillStyle = `rgba(255,${226 + (i % 3) * 8},${170 + (i % 5) * 14},${al})`; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.3); ctx.fill();
+        if (i % 9 === 0) { const g = ctx.createRadialGradient(x, y, 0, x, y, 16); g.addColorStop(0, `rgba(255,224,160,${al * 0.5})`); g.addColorStop(1, 'rgba(255,224,160,0)'); ctx.fillStyle = g; ctx.fillRect(x - 16, y - 16, 32, 32); } }
       ctx.restore(); };
   } else if (PROP === 'person') {
     const q = ss(a1 + 0.2, a2 + 0.4, t), sx = pX - 170, sy = GY + 30;

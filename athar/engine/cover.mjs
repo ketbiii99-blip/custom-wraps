@@ -20,10 +20,10 @@ await page.evaluate(([t, l1, l2, l3]) => {
   const d = document.createElement('div');
   d.style.cssText = 'position:absolute;left:0;right:0;top:0;height:1920px;direction:rtl;text-align:center;pointer-events:none';
   d.innerHTML = `<div style="position:absolute;left:0;right:0;top:0;height:560px;background:linear-gradient(#0A0C2B 0,#0A0C2B 236px,rgba(10,12,43,0) 100%)"></div><div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 30% at 50% 39%,rgba(5,8,33,.72),rgba(5,8,33,0) 100%)"></div>
-    <div style="position:absolute;left:60px;right:60px;top:580px;font:700 104px/1.35 Messiri;color:#FFF4DC;text-shadow:0 6px 40px rgba(5,8,33,.9)">${l1}</div>
-    <div style="position:absolute;left:60px;right:60px;top:730px;font:700 124px/1.35 Messiri;color:#F7C56B;text-shadow:0 6px 40px rgba(5,8,33,.9)">${l2}</div>
+    <div style="position:absolute;left:60px;right:60px;top:580px;font:700 104px/1.45 Thmanyah,Messiri;color:#FFF4DC;text-shadow:0 6px 40px rgba(5,8,33,.9)">${l1}</div>
+    <div style="position:absolute;left:60px;right:60px;top:730px;font:700 124px/1.45 Thmanyah,Messiri;color:#F7C56B;text-shadow:0 6px 40px rgba(5,8,33,.9)">${l2}</div>
     <div style="position:absolute;left:50%;top:925px;width:150px;margin-left:-75px;height:3px;background:linear-gradient(90deg,transparent,#F7C56B,transparent)"></div>
-    <div style="position:absolute;left:60px;right:60px;top:950px;font:500 44px/1.5 Plex;color:#FFF4DC;opacity:.92;text-shadow:0 3px 20px rgba(5,8,33,.9)">${l3}</div>`;
+    <div style="position:absolute;left:60px;right:60px;top:950px;font:500 44px/1.6 Thmanyah,Plex;color:#FFF4DC;opacity:.92;text-shadow:0 3px 20px rgba(5,8,33,.9)">${l3}</div>`;
   document.getElementById('stage').appendChild(d);
 }, [parseFloat(time), l1, l2, l3 || '']);
 await page.screenshot({ path: path.join(root, `post-kit/${ep}/cover.jpg`), type: 'jpeg', quality: 93 });

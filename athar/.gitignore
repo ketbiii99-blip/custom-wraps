@@ -2,3 +2,4 @@ out/*.wav
 out/a.jpg
 out/b.jpg
 out/_*/
+fonts/local/

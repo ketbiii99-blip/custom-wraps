@@ -103,3 +103,14 @@ python3 engine/audio.py out/epNN.wav <duration> <stopAt> <resumeAt> <rewardAt>  
 node engine/render.mjs epNN            -> out/epNN.mp4 (1080×1920, 30 fps)
 node engine/render.mjs epNN --stills 2,10,20   preview frames
 ```
+
+
+## House font (from episode 18 onward)
+
+All Arabic on-screen text uses **Thmanyah Serif Text** (the owner supplied it and asked for it as the standard look).
+Qur'an verses stay in Amiri Quran, which carries the Uthmani marks.
+
+- The font files live in `fonts/local/` and are **not committed**: the licence allows free use but not
+  reproduction, and this repository is public. A fresh checkout needs the five `.otf` files copied there again
+  (`thmanyah-serif-text-{light,regular,medium,bold,black}.otf`).
+- If they are missing, `scene.html` and `cover.mjs` fall back to El Messiri, so renders still work but look different.
