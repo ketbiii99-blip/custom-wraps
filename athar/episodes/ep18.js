@@ -2,8 +2,8 @@
 window.EPISODE = {
  "id": "ep18",
  "title": "سبعون ألف ملك",
- "sources": "Jami' at-Tirmidhi 969 (authenticated by al-Albani, Sahih al-Jami' 5767) · Qur'an 26:80 (recited by Nasser Al-Qatami, everyayah.com)",
- "duration": 48.8,
+ "sources": "Jami' at-Tirmidhi 969 (authenticated by al-Albani, Sahih al-Jami' 5767) · Qur'an 90:17 (recited by Nasser Al-Qatami, everyayah.com)",
+ "duration": 52.1,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -20,11 +20,11 @@ window.EPISODE = {
   "bendAmt": 0,
   "countAt": 26.83,
   "countOut": 31.4,
-  "swarmOut": 46.69,
+  "swarmOut": 49.93,
   "resumeAt": 30.72,
   "rewardAt": 26.83,
   "dawnFrom": 32.42,
-  "dawnTo": 43.23
+  "dawnTo": 46.46
  },
  "cues": [
   {
@@ -119,24 +119,24 @@ window.EPISODE = {
   },
   {
    "t0": 37.25,
-   "t1": 42.83,
+   "t1": 46.06,
    "card": false,
    "lines": [
     {
      "at": 0.1,
      "cls": "ayah",
-     "html": "﴿وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ﴾"
+     "html": "﴿ثُمَّ كَانَ مِنَ ٱلَّذِينَ ءَامَنُواْ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ وَتَوَاصَوۡاْ بِٱلۡمَرۡحَمَةِ﴾"
     },
     {
-     "at": 0.31,
+     "at": 0.44,
      "cls": "source",
-     "html": "سورة الشعراء · الآية ٨٠ · بصوت ناصر القطامي"
+     "html": "سورة البلد · الآية ١٧ · بصوت ناصر القطامي"
     }
    ]
   },
   {
-   "t0": 43.13,
-   "t1": 49.5,
+   "t0": 46.36,
+   "t1": 52.800000000000004,
    "card": false,
    "lines": [
     {
@@ -145,12 +145,12 @@ window.EPISODE = {
      "html": "زُرْ <span class=\"gold\">مريضًا</span> اليوم"
     },
     {
-     "at": 1.83,
+     "at": 1.84,
      "cls": "small",
      "html": "وأرسِلها لمن تُحبّ"
     },
     {
-     "at": 3.04,
+     "at": 3.05,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -200,12 +200,12 @@ window.EPISODE = {
   },
   {
    "t0": 37.25,
-   "t1": 42.83,
-   "text": "“And when I am ill, it is He who heals me.”<small>Qur’an 26:80 · the words of Ibrahim, peace be upon him · recited by Nasser Al-Qatami</small>"
+   "t1": 46.06,
+   "text": "“Then he is among those who believe, and urge one another to patience, and urge one another to compassion.”<small>Qur’an 90:17 · recited by Nasser Al-Qatami</small>"
   },
   {
-   "t0": 43.13,
-   "t1": 49.5,
+   "t0": 46.36,
+   "t1": 52.800000000000004,
    "text": "Visit someone who is ill today. And send this to someone you love."
   }
  ],
@@ -237,13 +237,13 @@ window.EPISODE = {
   },
   {
    "at": 37.35,
-   "clip": "q26_80_qatami",
+   "clip": "q90_17_qatami",
    "text": "",
-   "recitation": "Qur'an 26:80 — Nasser Al-Qatami",
-   "end": 42.53
+   "recitation": "Qur'an 90:17 — Nasser Al-Qatami",
+   "end": 45.76
   },
   {
-   "at": 43.23,
+   "at": 46.46,
    "clip": 2005,
    "text": "زُرْ مريضًا اليوم. وأرسِلْها لمن تُحبّ."
   }

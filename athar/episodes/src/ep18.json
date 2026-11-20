@@ -1,7 +1,7 @@
 {
  "id": "ep18",
  "title": "سبعون ألف ملك",
- "sources": "Jami' at-Tirmidhi 969 (authenticated by al-Albani, Sahih al-Jami' 5767) · Qur'an 26:80 (recited by Nasser Al-Qatami, everyayah.com)",
+ "sources": "Jami' at-Tirmidhi 969 (authenticated by al-Albani, Sahih al-Jami' 5767) · Qur'an 90:17 (recited by Nasser Al-Qatami, everyayah.com)",
  "scene": {
   "prop": "visit",
   "sound": "none",
@@ -152,23 +152,23 @@
   },
   {
    "id": "ayah",
-   "clip": "q26_80_qatami",
-   "recitation": "Qur'an 26:80 — Nasser Al-Qatami",
+   "clip": "q90_17_qatami",
+   "recitation": "Qur'an 90:17 — Nasser Al-Qatami",
    "gap": 0.7,
    "lines": [
     {
      "cls": "ayah",
-     "html": "﴿وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ﴾"
+     "html": "﴿ثُمَّ كَانَ مِنَ ٱلَّذِينَ ءَامَنُواْ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ وَتَوَاصَوۡاْ بِٱلۡمَرۡحَمَةِ﴾"
     },
     {
      "f": 0.04,
      "cls": "source",
-     "html": "سورة الشعراء · الآية ٨٠ · بصوت ناصر القطامي"
+     "html": "سورة البلد · الآية ١٧ · بصوت ناصر القطامي"
     }
    ],
    "subs": [
     {
-     "text": "“And when I am ill, it is He who heals me.”<small>Qur’an 26:80 · the words of Ibrahim, peace be upon him · recited by Nasser Al-Qatami</small>"
+     "text": "“Then he is among those who believe, and urge one another to patience, and urge one another to compassion.”<small>Qur’an 90:17 · recited by Nasser Al-Qatami</small>"
     }
    ]
   },
