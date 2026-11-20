@@ -3,7 +3,7 @@ window.EPISODE = {
  "id": "ep18",
  "title": "سبعون ألف ملك",
  "sources": "Jami' at-Tirmidhi 969 (authenticated by al-Albani, Sahih al-Jami' 5767) · Qur'an 90:17 (recited by Nasser Al-Qatami, everyayah.com)",
- "duration": 52.1,
+ "duration": 46.2,
  "brand": {
   "ar": "أثَر",
   "en": "ATHAR"
@@ -14,17 +14,19 @@ window.EPISODE = {
   "dawnMax": 0.7
  },
  "action": {
-  "stopAt": 11.3,
-  "actAt": 11.49,
-  "actHold": 2.2,
+  "stopAt": 6.63,
+  "actAt": 6.45,
+  "actHold": 2.0,
   "bendAmt": 0,
-  "countAt": 26.83,
-  "countOut": 31.4,
-  "swarmOut": 49.93,
-  "resumeAt": 30.72,
-  "rewardAt": 26.83,
-  "dawnFrom": 32.42,
-  "dawnTo": 46.46
+  "countAt": 21.31,
+  "countOut": 25.47,
+  "swarmOut": 44.01,
+  "resumeAt": 24.79,
+  "rewardAt": 21.31,
+  "dawnFrom": 26.5,
+  "dawnTo": 40.55,
+  "introAt": 0.45,
+  "introOut": 5.03
  },
  "cues": [
   {
@@ -40,30 +42,13 @@ window.EPISODE = {
     {
      "at": 1.77,
      "cls": "big gold",
-     "html": "يُصلّي عليكَ بها<br>سبعونَ ألفَ مَلَك"
+     "html": "يُصلّي عليكَ بها"
     }
    ]
   },
   {
    "t0": 5.98,
-   "t1": 11.05,
-   "card": false,
-   "lines": [
-    {
-     "at": 0.1,
-     "cls": "mid",
-     "html": "<span class=\"gold\">مريضٌ</span> تعرفُه…"
-    },
-    {
-     "at": 2.06,
-     "cls": "small",
-     "html": "قريبٌ، أو صديقٌ، أو جار"
-    }
-   ]
-  },
-  {
-   "t0": 11.2,
-   "t1": 15.31,
+   "t1": 10.08,
    "card": false,
    "lines": [
     {
@@ -79,8 +64,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 15.91,
-   "t1": 26.73,
+   "t0": 10.38,
+   "t1": 21.21,
    "card": true,
    "lines": [
     {
@@ -89,7 +74,7 @@ window.EPISODE = {
      "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span>"
     },
     {
-     "at": 3.22,
+     "at": 3.23,
      "cls": "hadith",
      "html": "«مَا مِنْ مُسْلِمٍ يَعُودُ مُسْلِمًا غُدْوَةً، إِلَّا صَلَّى عَلَيْهِ <span class=\"gold\">سَبْعُونَ أَلْفَ مَلَكٍ</span> حَتَّى يُمْسِيَ…»"
     },
@@ -101,8 +86,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 29.93,
-   "t1": 37.15,
+   "t0": 24.01,
+   "t1": 31.24,
    "card": false,
    "lines": [
     {
@@ -118,8 +103,8 @@ window.EPISODE = {
    ]
   },
   {
-   "t0": 37.25,
-   "t1": 46.06,
+   "t0": 31.34,
+   "t1": 40.15,
    "card": false,
    "lines": [
     {
@@ -128,15 +113,15 @@ window.EPISODE = {
      "html": "﴿ثُمَّ كَانَ مِنَ ٱلَّذِينَ ءَامَنُواْ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ وَتَوَاصَوۡاْ بِٱلۡمَرۡحَمَةِ﴾"
     },
     {
-     "at": 0.44,
+     "at": 0.43,
      "cls": "source",
      "html": "سورة البلد · الآية ١٧ · بصوت ناصر القطامي"
     }
    ]
   },
   {
-   "t0": 46.36,
-   "t1": 52.800000000000004,
+   "t0": 40.45,
+   "t1": 46.900000000000006,
    "card": false,
    "lines": [
     {
@@ -145,12 +130,12 @@ window.EPISODE = {
      "html": "زُرْ <span class=\"gold\">مريضًا</span> اليوم"
     },
     {
-     "at": 1.84,
+     "at": 1.83,
      "cls": "small",
      "html": "وأرسِلها لمن تُحبّ"
     },
     {
-     "at": 3.05,
+     "at": 3.04,
      "cls": "follow",
      "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
     }
@@ -170,42 +155,37 @@ window.EPISODE = {
   },
   {
    "t0": 5.98,
-   "t1": 11.05,
-   "text": "Someone you know who is ill: a relative, a friend, a neighbour."
-  },
-  {
-   "t0": 11.2,
-   "t1": 15.31,
+   "t1": 10.08,
    "text": "You sit with him for a few minutes and pray for his recovery."
   },
   {
-   "t0": 15.91,
-   "t1": 19.13,
+   "t0": 10.38,
+   "t1": 13.61,
    "text": "The Messenger of Allah ﷺ said:"
   },
   {
-   "t0": 19.13,
-   "t1": 26.73,
+   "t0": 13.61,
+   "t1": 21.21,
    "text": "“No Muslim visits a sick Muslim in the morning except that seventy thousand angels pray for him until evening…”<small>Tirmidhi 969 · authenticated by al-Albani</small>"
   },
   {
-   "t0": 29.93,
-   "t1": 35.08,
+   "t0": 24.01,
+   "t1": 29.16,
    "text": "And if you visit him in the evening, the angels pray for you until morning."
   },
   {
-   "t0": 35.08,
-   "t1": 37.15,
-   "text": "And in the Noble Qur’an:"
+   "t0": 29.16,
+   "t1": 31.24,
+   "text": "Allah, the Most High, says:"
   },
   {
-   "t0": 37.25,
-   "t1": 46.06,
+   "t0": 31.34,
+   "t1": 40.15,
    "text": "“Then he is among those who believe, and urge one another to patience, and urge one another to compassion.”<small>Qur’an 90:17 · recited by Nasser Al-Qatami</small>"
   },
   {
-   "t0": 46.36,
-   "t1": 52.800000000000004,
+   "t0": 40.45,
+   "t1": 46.900000000000006,
    "text": "Visit someone who is ill today. And send this to someone you love."
   }
  ],
@@ -217,33 +197,28 @@ window.EPISODE = {
   },
   {
    "at": 6.08,
-   "clip": 2001,
-   "text": "مريضٌ تعرفُه... قريبٌ، أو صديقٌ، أو جار."
-  },
-  {
-   "at": 11.3,
    "clip": 2002,
    "text": "تجلسُ عندَهُ دقائق، وتدعو لهُ بالشفاء."
   },
   {
-   "at": 16.01,
+   "at": 10.48,
    "clip": 2003,
    "text": ""
   },
   {
-   "at": 30.03,
-   "clip": 2104,
-   "text": "وإن زُرتَهُ مساءً... صلَّتْ عليكَ الملائكةُ حتّى تُصبِح. وفي القرآنِ الكريم:"
+   "at": 24.11,
+   "clip": 2204,
+   "text": "وإن زُرتَهُ مساءً... صلَّتْ عليكَ الملائكةُ حتّى تُصبِح. قالَ اللهُ تعالى:"
   },
   {
-   "at": 37.35,
+   "at": 31.44,
    "clip": "q90_17_qatami",
    "text": "",
    "recitation": "Qur'an 90:17 — Nasser Al-Qatami",
-   "end": 45.76
+   "end": 39.85
   },
   {
-   "at": 46.46,
+   "at": 40.55,
    "clip": 2005,
    "text": "زُرْ مريضًا اليوم. وأرسِلْها لمن تُحبّ."
   }

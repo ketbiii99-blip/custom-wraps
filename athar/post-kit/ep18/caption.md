@@ -1,4 +1,4 @@
-# Episode — سبعون ألف ملك
+# Episode — سبعون ألف ملك (46 seconds)
 
 Files: `athar_ep18.mp4` · `cover.jpg`.
 

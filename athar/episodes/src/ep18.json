@@ -8,9 +8,9 @@
   "dawnMax": 0.7
  },
  "action": {
-  "stopAt": "sit:start",
-  "actAt": "sit:0.05",
-  "actHold": 2.2,
+  "stopAt": "sit:0.15",
+  "actAt": "sit:0.1",
+  "actHold": 2.0,
   "bendAmt": 0,
   "countAt": "h1:end+0.4",
   "countOut": "more:0.2",
@@ -18,7 +18,9 @@
   "resumeAt": "more:0.1",
   "rewardAt": "h1:end+0.4",
   "dawnFrom": "more:0.35",
-  "dawnTo": "cta:start"
+  "dawnTo": "cta:start",
+  "introAt": 0.45,
+  "introOut": "hook:end-0.5"
  },
  "beats": [
   {
@@ -33,7 +35,7 @@
     {
      "f": 0.32,
      "cls": "big gold",
-     "html": "يُصلّي عليكَ بها<br>سبعونَ ألفَ مَلَك"
+     "html": "يُصلّي عليكَ بها"
     }
    ],
    "subs": [
@@ -48,31 +50,10 @@
    ]
   },
   {
-   "id": "who",
-   "clip": 2001,
-   "voice": "مريضٌ تعرفُه... قريبٌ، أو صديقٌ، أو جار.",
-   "lines": [
-    {
-     "cls": "mid",
-     "html": "<span class=\"gold\">مريضٌ</span> تعرفُه…"
-    },
-    {
-     "f": 0.42,
-     "cls": "small",
-     "html": "قريبٌ، أو صديقٌ، أو جار"
-    }
-   ],
-   "subs": [
-    {
-     "text": "Someone you know who is ill: a relative, a friend, a neighbour."
-    }
-   ]
-  },
-  {
    "id": "sit",
    "clip": 2002,
    "voice": "تجلسُ عندَهُ دقائق، وتدعو لهُ بالشفاء.",
-   "gap": 1.0,
+   "gap": 0.7,
    "lines": [
     {
      "cls": "mid",
@@ -95,7 +76,7 @@
    "clip": 2003,
    "voice": "",
    "card": true,
-   "gap": 3.6,
+   "gap": 3.2,
    "lines": [
     {
      "cls": "label",
@@ -125,8 +106,8 @@
   },
   {
    "id": "more",
-   "clip": 2104,
-   "voice": "وإن زُرتَهُ مساءً... صلَّتْ عليكَ الملائكةُ حتّى تُصبِح. وفي القرآنِ الكريم:",
+   "clip": 2204,
+   "voice": "وإن زُرتَهُ مساءً... صلَّتْ عليكَ الملائكةُ حتّى تُصبِح. قالَ اللهُ تعالى:",
    "gap": 0.5,
    "lines": [
     {
@@ -145,7 +126,7 @@
      "f1": 0.74
     },
     {
-     "text": "And in the Noble Qur’an:",
+     "text": "Allah, the Most High, says:",
      "f0": 0.74
     }
    ]
