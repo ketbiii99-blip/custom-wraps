@@ -1,0 +1,183 @@
+{
+ "id": "ep19",
+ "title": "كنزٌ من كنوز الجنة",
+ "sources": "Sahih al-Bukhari and Sahih Muslim (Muslim 2704), from Abu Musa al-Ash'ari · Qur'an 18:39, first part (recited by Nasser Al-Qatami, everyayah.com)",
+ "scene": {
+  "prop": "treasure",
+  "sound": "none",
+  "dawnMax": 0.7
+ },
+ "action": {
+  "stopAt": "say:0.35",
+  "actAt": "say:0.4",
+  "actHold": 0.5,
+  "bendAmt": 0,
+  "hideFrom": "h1:start",
+  "hideTo": "h1:end",
+  "openAt": "h1:end+0.5",
+  "chestOut": "lesson:0.18",
+  "resumeAt": "lesson:0.5",
+  "rewardAt": "lesson:0.35",
+  "dawnFrom": "lesson:0.3",
+  "dawnTo": "cta:start",
+  "wordOut": "lesson:start-0.15"
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "clip": 2300,
+   "voice": "كلمةٌ واحدة... كنزٌ من كنوزِ الجنّة.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "كلمةٌ واحدة…"
+    },
+    {
+     "f": 0.42,
+     "cls": "big gold",
+     "html": "كنزٌ من كنوزِ الجنّة"
+    }
+   ],
+   "subs": [
+    {
+     "text": "One phrase…",
+     "f1": 0.42
+    },
+    {
+     "text": "…a treasure from the treasures of Paradise.",
+     "f0": 0.42
+    }
+   ]
+  },
+  {
+   "id": "say",
+   "clip": 2301,
+   "voice": "تقولُها في ثانيتَين... وأجرُها مُخبّأٌ لكَ في الجنّة.",
+   "gap": 0.8,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "تقولُها في ثانيتَين…"
+    },
+    {
+     "f": 0.45,
+     "cls": "mid gold",
+     "html": "وأجرُها مُخبّأٌ لكَ في الجنّة"
+    }
+   ],
+   "subs": [
+    {
+     "text": "You say it in two seconds, and its reward is stored for you in Paradise."
+    }
+   ]
+  },
+  {
+   "id": "h1",
+   "clip": 2302,
+   "voice": "",
+   "card": true,
+   "gap": 3.4,
+   "lines": [
+    {
+     "cls": "label",
+     "html": "قال رسولُ الله <span class=\"pbuh\">ﷺ</span> لأبي موسى"
+    },
+    {
+     "f": 0.3,
+     "cls": "hadith",
+     "html": "«أَلَا أَدُلُّكَ عَلَى كَنْزٍ مِنْ كُنُوزِ الْجَنَّةِ؟<br>قُلْ: <span class=\"gold\">لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</span>»"
+    },
+    {
+     "f": 0.5,
+     "cls": "source",
+     "html": "متفق عليه · صحيح مسلم (٢٧٠٤)"
+    }
+   ],
+   "subs": [
+    {
+     "text": "The Messenger of Allah ﷺ said to Abu Musa:",
+     "f1": 0.3
+    },
+    {
+     "text": "“Shall I not guide you to a treasure from the treasures of Paradise? Say: there is no power and no strength except by Allah.”<small>Bukhari and Muslim · Muslim 2704</small>",
+     "f0": 0.3
+    }
+   ]
+  },
+  {
+   "id": "lesson",
+   "clip": 2303,
+   "voice": "حينَ تقولُها... تتبرّأُ من حولِكَ وقوّتِك، وتتّكلُ على الله. قالَ اللهُ تعالى:",
+   "gap": 0.6,
+   "lines": [
+    {
+     "cls": "mid",
+     "html": "حينَ تقولُها…"
+    },
+    {
+     "f": 0.25,
+     "cls": "mid gold",
+     "html": "تتبرّأُ من حولِكَ وقوّتِك<br>وتتّكلُ على الله"
+    }
+   ],
+   "subs": [
+    {
+     "text": "When you say it, you let go of your own power and strength, and rely on Allah.",
+     "f1": 0.8
+    },
+    {
+     "text": "Allah, the Most High, says:",
+     "f0": 0.8
+    }
+   ]
+  },
+  {
+   "id": "ayah",
+   "clip": "q18_39_qatami",
+   "recitation": "Qur'an 18:39 — Nasser Al-Qatami",
+   "gap": 0.7,
+   "lines": [
+    {
+     "cls": "ayah",
+     "html": "﴿وَلَوۡلَآ إِذۡ دَخَلۡتَ جَنَّتَكَ قُلۡتَ مَا شَآءَ ٱللَّهُ لَا قُوَّةَ إِلَّا بِٱللَّهِ…﴾"
+    },
+    {
+     "f": 0.04,
+     "cls": "source",
+     "html": "سورة الكهف · من الآية ٣٩ · بصوت ناصر القطامي"
+    }
+   ],
+   "subs": [
+    {
+     "text": "“And why, when you entered your garden, did you not say: What Allah wills; there is no power except by Allah?”<small>Qur’an 18:39 (part) · recited by Nasser Al-Qatami</small>"
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "clip": 2305,
+   "voice": "قُلْها الآن... واكتُبْها في التعليقات.",
+   "lines": [
+    {
+     "cls": "big",
+     "html": "قُلْها <span class=\"gold\">الآن</span>…"
+    },
+    {
+     "f": 0.45,
+     "cls": "small",
+     "html": "واكتبْها في التعليقات"
+    },
+    {
+     "f": 0.85,
+     "cls": "follow",
+     "html": "تابِع <b>أثَر</b> · درسٌ جديد كلَّ يوم"
+    }
+   ],
+   "subs": [
+    {
+     "text": "Say it now, and write it in the comments."
+    }
+   ]
+  }
+ ]
+}

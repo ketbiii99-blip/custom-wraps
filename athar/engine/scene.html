@@ -579,6 +579,55 @@ function render(t) {
         if (i % 9 === 0) { const g = ctx.createRadialGradient(x, y, 0, x, y, 16); g.addColorStop(0, `rgba(255,224,160,${al * 0.5})`); g.addColorStop(1, 'rgba(255,224,160,0)'); ctx.fillStyle = g; ctx.fillRect(x - 16, y - 16, 32, 32); } }
       ctx.restore(); };
     propFront = () => { if (A.introAt != null) swarm(A.introAt, A.introOut, 2.0); swarm(A.countAt, A.swarmOut, 2.6); };
+  } else if (PROP === 'treasure') {
+    // A treasure of Paradise: a locked chest hangs in the night sky; at «قُل: لا حولَ ولا قوّةَ إلا بالله» it opens, light pours out
+    // and the phrase itself rises out of it in gold, then the light comes down into his lantern.
+    const X = 540, Y = 720, op = ss(A.openAt, A.openAt + 0.9, t), show = ss(0.1, 0.9, t) * (1 - ss(A.chestOut, A.chestOut + 1.0, t)) * (1 - ss(A.hideFrom - 0.6, A.hideFrom, t) * (1 - ss(A.hideTo, A.hideTo + 0.5, t))), bob = Math.sin(t * 1.4) * 10;
+    const pulse = 0.5 + 0.5 * Math.sin(t * 3.2);
+    if (show > 0) {
+      // rays
+      if (op > 0) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.translate(X, Y - 40 + bob);
+        for (let i = 0; i < 14; i++) { const a = -Math.PI / 2 + (i - 6.5) * 0.15 + Math.sin(t * 0.7 + i) * 0.03, L = (380 + (i * 53 % 260)) * op;
+          const g = ctx.createLinearGradient(0, 0, Math.cos(a) * L, Math.sin(a) * L); g.addColorStop(0, `rgba(255,226,160,${0.38 * op * show})`); g.addColorStop(1, 'rgba(255,226,160,0)');
+          ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-14, 0); ctx.lineTo(Math.cos(a - 0.05) * L, Math.sin(a - 0.05) * L); ctx.lineTo(Math.cos(a + 0.05) * L, Math.sin(a + 0.05) * L); ctx.lineTo(14, 0); ctx.closePath(); ctx.fill(); }
+        ctx.restore(); }
+      glowAt(X, Y + bob, 260 + 160 * op, (0.22 + 0.1 * pulse * (1 - op) + 0.4 * op) * show);
+      ctx.save(); ctx.globalAlpha = show; ctx.translate(X, Y + bob); ctx.scale(1.22, 1.22); ctx.lineJoin = 'round';
+      // inside of the lid, swung back when open
+      if (op > 0) { const h = 128 * op; ctx.fillStyle = '#3A1B12'; ctx.beginPath(); ctx.moveTo(-150, 0); ctx.lineTo(-138, -h); ctx.quadraticCurveTo(0, -h - 40 * op, 138, -h); ctx.lineTo(150, 0); ctx.closePath(); ctx.fill(); ctx.strokeStyle = '#E9B45A'; ctx.lineWidth = 10; ctx.beginPath(); ctx.moveTo(-138, -h); ctx.quadraticCurveTo(0, -h - 40 * op, 138, -h); ctx.stroke(); }
+      // body
+      const wood = ctx.createLinearGradient(0, -10, 0, 110); wood.addColorStop(0, '#7A3E2C'); wood.addColorStop(1, '#4A2219');
+      ctx.fillStyle = wood; ctx.beginPath(); ctx.roundRect(-150, 0, 300, 110, 12); ctx.fill();
+      ctx.fillStyle = '#E9B45A'; for (const bx of [-118, 98]) { ctx.fillRect(bx, 0, 20, 110); }
+      ctx.fillRect(-150, 0, 300, 12); ctx.fillRect(-150, 98, 300, 12);
+      // inner glow when open
+      if (op > 0) { const ig = ctx.createLinearGradient(0, -6, 0, 30); ig.addColorStop(0, `rgba(255,246,214,${op})`); ig.addColorStop(1, 'rgba(255,214,140,0)'); ctx.fillStyle = ig; ctx.fillRect(-140, -4, 280, 34); }
+      // lid (hinged at the back edge, rotates up)
+      ctx.save(); ctx.globalAlpha = show * (1 - ss(0, 0.35, op)); ctx.scale(1, 1 - op);
+      const lid = ctx.createLinearGradient(0, -80, 0, 0); lid.addColorStop(0, '#8A4632'); lid.addColorStop(1, '#5A2A1E');
+      ctx.fillStyle = lid; ctx.beginPath(); ctx.moveTo(-150, 0); ctx.lineTo(-150, -34); ctx.quadraticCurveTo(0, -96, 150, -34); ctx.lineTo(150, 0); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = '#E9B45A'; ctx.lineWidth = 12; ctx.beginPath(); ctx.moveTo(-150, -34); ctx.quadraticCurveTo(0, -96, 150, -34); ctx.stroke();
+      ctx.fillStyle = '#E9B45A'; for (const bx of [-118, 98]) { ctx.beginPath(); ctx.moveTo(bx, 0); ctx.lineTo(bx, -50 - (bx < 0 ? 0 : 0)); ctx.lineTo(bx + 20, -54); ctx.lineTo(bx + 20, 0); ctx.fill(); }
+      ctx.restore();
+      // lock
+      const lk = 1 - op; if (lk > 0.02) { ctx.globalAlpha = show * lk; ctx.fillStyle = '#F7C56B'; ctx.beginPath(); ctx.roundRect(-26, -6, 52, 54, 8); ctx.fill(); ctx.strokeStyle = '#F7C56B'; ctx.lineWidth = 9; ctx.beginPath(); ctx.arc(0, -8, 18, Math.PI, 0); ctx.stroke();
+        ctx.fillStyle = '#3A1B12'; ctx.beginPath(); ctx.arc(0, 16, 7, 0, 6.3); ctx.fill(); ctx.fillRect(-3, 18, 6, 16);
+        glowAt(0, 18, 60, 0.5 * pulse * lk * show); }
+      ctx.restore(); ctx.globalAlpha = 1;
+      // the words rising out of the chest
+      const wk = ss(A.openAt + 0.4, A.openAt + 1.6, t) * (1 - ss(A.wordOut - 0.6, A.wordOut, t));
+      if (wk > 0) { ctx.save(); ctx.textAlign = 'center'; ctx.direction = 'rtl'; ctx.font = '900 80px Thmanyah, Messiri'; ctx.shadowColor = 'rgba(255,196,104,.9)'; ctx.shadowBlur = 36;
+        ctx.fillStyle = `rgba(255,232,170,${wk})`; ctx.fillText('لا حولَ ولا قوّةَ إلّا بالله', X, Y - 250 - 40 * wk + bob); ctx.restore(); }
+      // coins and sparks spilling out
+      if (op > 0) { ctx.save(); ctx.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < 90; i++) { const born = A.openAt + 0.2 + (i % 30) * 0.05 + Math.floor(i / 30) * 0.9, u = (t - born) / 2.4; if (u <= 0 || u >= 1) continue;
+          const dir = ((i * 73) % 100) / 100 - 0.5, x = X + dir * 520 * u + Math.sin(i + t * 3) * 6, y = Y - 20 + bob - Math.sin(u * Math.PI) * (260 + (i % 5) * 50) + u * u * 420;
+          const al = (1 - u) * show; if (i % 3) { ctx.fillStyle = `rgba(255,238,190,${al})`; ctx.beginPath(); ctx.arc(x, y, 2.2 + (i % 3), 0, 6.3); ctx.fill(); }
+          else { ctx.save(); ctx.translate(x, y); ctx.scale(Math.cos(t * 8 + i), 1); ctx.fillStyle = `rgba(247,197,107,${al})`; ctx.beginPath(); ctx.arc(0, 0, 10, 0, 6.3); ctx.fill(); ctx.restore(); } }
+        ctx.restore(); }
+    }
+    // the light descends into his lantern
+    const dk = clamp01((t - A.chestOut + 0.4) / 1.3); if (dk > 0 && dk < 1) { const e = dk * dk * (3 - 2 * dk), x = lerp(X, CX - 107, e), y = lerp(Y + bob, cy - 70, e); glowAt(x, y, 140, 0.8 * (1 - dk * 0.5)); ctx.fillStyle = '#FFF7E2'; ctx.beginPath(); ctx.arc(x, y, 12, 0, 6.3); ctx.fill(); }
   } else if (PROP === 'person') {
     const q = ss(a1 + 0.2, a2 + 0.4, t), sx = pX - 170, sy = GY + 30;
     const head = drawSitter(sx, sy, q, t, d);
